@@ -42,7 +42,7 @@ namespace ProjectThief
         private void Awake()
         {
             m_goMainCamera.transform.position = transform.position;
-            m_vDefaultPosition = transform.position;
+            m_vDefaultPosition = transform.localPosition;
             m_fCurrentDistance = Vector3.Distance(transform.position, transform.parent.position);
         }        
 
@@ -54,6 +54,10 @@ namespace ProjectThief
                 if (Input.GetMouseButton(1))
                 {                    
                     ControlCamera();
+                }
+                if (Input.GetKey(KeyCode.R))
+                {
+                    ResetCameraPosition();
                 }
 
                 if (!m_bBlocked)
@@ -224,9 +228,14 @@ namespace ProjectThief
         /// <summary>
         /// Resets camera position.
         /// </summary>
-        private void ResetCameraPosition()
+        public void ResetCameraPosition()
         {
-            transform.position = m_vDefaultPosition;
+            transform.localPosition = m_vDefaultPosition;
+            m_fAngle = 0;
+            m_fX = 0;
+            m_fZ = 0;
+            m_fCurrentDistance = 3;
+            AvoidBlocked();
         }
     }
 }
