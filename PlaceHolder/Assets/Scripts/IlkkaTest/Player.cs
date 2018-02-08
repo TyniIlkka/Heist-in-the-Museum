@@ -9,6 +9,9 @@ namespace ProjectThief {
         //Testing different movements boolean
         public bool m_bRotateWithKeyboard;
 
+
+        [SerializeField]
+        private string m_sMouseAxisX = "Mouse X";
         [SerializeField]
         private string m_sHorizontalAxis = "Horizontal";
         [SerializeField]
