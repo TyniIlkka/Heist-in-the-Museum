@@ -2,34 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Node
-{
-
-    public bool m_bIsBlocked;
-    public Vector3 m_vPosition;
-
-    public int m_iGridX;
-    public int m_iGridY;
-
-    public int m_iGCost;
-    public int m_iHCost;
-
-    public Node m_nParent;
-    public bool m_bIsPath;
-
-    public int m_ifCost
+namespace ProjectThief.PathFinding {
+    public class Node
     {
-        get { return m_iGCost + m_iHCost; }
+
+        public bool m_bIsBlocked;
+        public Vector3 m_vPosition;
+
+        public int m_iGridX;
+        public int m_iGridY;
+
+        public int m_iGCost;
+        public int m_iHCost;
+
+        public Node m_nParent;
+        public bool m_bIsPath;
+
+        public int m_ifCost
+        {
+            get { return m_iGCost + m_iHCost; }
+        }
+
+        public Node(bool bIsBlocked, Vector3 vPos, int x, int y, bool _bIsPath)
+        {
+            m_bIsBlocked = bIsBlocked;
+            m_vPosition = vPos;
+            m_iGridX = x;
+            m_iGridY = y;
+            m_bIsPath = _bIsPath;
+        }
+
     }
-
-    public Node(bool bIsBlocked, Vector3 vPos, int x, int y, bool _bIsPath)
-    {
-        m_bIsBlocked = bIsBlocked;
-        m_vPosition = vPos;
-        m_iGridX = x;
-        m_iGridY = y;
-        m_bIsPath = _bIsPath;
-    }
-
-
 }

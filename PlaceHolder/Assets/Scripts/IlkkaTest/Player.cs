@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ProjectThief.PathFinding;
 
 namespace ProjectThief {
     public class Player : CharacterBase
@@ -22,32 +23,35 @@ namespace ProjectThief {
         [SerializeField]
         private float m_fTurnSpeed;
 
+        [SerializeField]
+        private Transform target;
+
+        [SerializeField]
+        private PathGridManager m_Grid;
+        private List<Node> m_lPath;
+
+        private void Awake()
+        {
+            m_lPath = m_Grid.Path;
+        }
 
         // Update is called once per frame
         void Update()
         {
-            var input = ReadInput();
-            if (m_bRotateWithKeyboard)
-            {
-                Turn(input.z);
-            }
-            else
-            {
-                MoveLeftRight(input.z);
-            }
-            Move(input.x);
-
+            m_lPath = m_Grid.Path;
+            
+            Move(m_lPath);
         }
 
         /// <summary>
         /// Move method to 
         /// </summary>
-        public override void Move(float amount)
+        public override void Move(List<Node>_lPathToFollow)
         {
-            Vector3 position = transform.position;
-            Vector3 movement = transform.forward * amount * m_fMovementSpeed * Time.deltaTime;
-            position += movement;
-            transform.position = position;
+            for (int i = 0; i <= _lPathToFollow.Count; i++)
+            {
+                
+            }
         }
 
 
@@ -73,17 +77,5 @@ namespace ProjectThief {
             position += movement;
             transform.position = position;
         }
-
-        /// <summary>
-        /// Input from player
-        /// </summary>
-        /// <returns>Vector3</returns>
-        private Vector3 ReadInput()
-        {
-            float movement = Input.GetAxis(m_sHorizontalAxis);
-            float turn = Input.GetAxis(m_sVerticalAxis);
-            return new Vector3(turn, 0, movement);
-        }
-
     }
 }

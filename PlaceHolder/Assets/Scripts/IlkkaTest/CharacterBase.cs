@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ProjectThief.PathFinding;
 
 namespace ProjectThief
 {
@@ -11,7 +12,7 @@ namespace ProjectThief
         /// <summary>
         /// Forces to every character to have Move Method();
         /// </summary>
-        public abstract void Move(float amount);
+        public abstract void Move(List<Node> list);
 
 
         public void Init()
