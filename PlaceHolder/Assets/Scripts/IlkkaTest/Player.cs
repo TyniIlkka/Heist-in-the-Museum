@@ -6,76 +6,69 @@ using ProjectThief.PathFinding;
 namespace ProjectThief {
     public class Player : CharacterBase
     {
-
-        //Testing different movements boolean
-        public bool m_bRotateWithKeyboard;
-
-
-        [SerializeField]
-        private string m_sMouseAxisX = "Mouse X";
-        [SerializeField]
-        private string m_sHorizontalAxis = "Horizontal";
-        [SerializeField]
-        private string m_sVerticalAxis = "Vertical";
-
         [SerializeField]
         private float m_fMovementSpeed;
         [SerializeField]
         private float m_fTurnSpeed;
-
         [SerializeField]
-        private Transform target;
-
+        private GameObject m_gMoveHere;
         [SerializeField]
-        private PathGridManager m_Grid;
-        private List<Node> m_lPath;
+        private PathGridManager m_pgmGrid;
+
+        private Vector3 m_vTargetPosition;
 
         private void Awake()
         {
-            m_lPath = m_Grid.Path;
+            if (m_gMoveHere == null)
+            {
+                Debug.Log("Your Target point is Missing!");
+            }
         }
 
         // Update is called once per frame
         void Update()
         {
-            m_lPath = m_Grid.Path;
-            
-            Move(m_lPath);
+            m_vTargetPosition = m_pgmGrid.CurrentWaypoint.m_vPosition;
+        }
+
+        private Node GetWaypoint()
+        {
+            Node result = m_pgmGrid.CurrentWaypoint;
+            Vector3 toWaypointVector = m_pgmGrid.CurrentWaypoint.m_vPosition - transform.position;
+            float toWaypointSqr = toWaypointVector.sqrMagnitude;
+            float sqrArriveDistance = _arriveDistance * _arriveDistance;
+            if (toWaypointSqr <= sqrArriveDistance)
+            {
+                result = _path.GetNextWaypoint(CurrentWaypoint, ref _direction);
+            }
+
+            return result;
         }
 
         /// <summary>
         /// Move method to 
         /// </summary>
-        public override void Move(List<Node>_lPathToFollow)
+        public override void Move(Vector3 direction)
         {
-            for (int i = 0; i <= _lPathToFollow.Count; i++)
-            {
-                
-            }
+            direction = direction.normalized;
+            Vector3 position = transform.position + direction * m_fMovementSpeed * Time.deltaTime;
+            transform.position = position;
         }
-
 
         /// <summary>
         /// Turn method
         /// </summary>
-        public void Turn(float amount)
+        public override void Turn(Vector3 target)
         {
-            Vector3 rotation = transform.localEulerAngles;
-            rotation.y += amount * m_fTurnSpeed * Time.deltaTime;
-            transform.localEulerAngles = rotation;
+            Vector3 direction = target - transform.position;
+            direction.y = transform.position.y;
+            direction = direction.normalized;
+            float turnSpeedRad = Mathf.Deg2Rad * m_fTurnSpeed * Time.deltaTime;
+            Vector3 rotation = Vector3.RotateTowards(transform.forward,
+                direction, turnSpeedRad, 0f);
+            transform.rotation = Quaternion.LookRotation(rotation, transform.up);
         }
 
-
-
-        /// <summary>
-        /// Move left or right depending from test boolean
-        /// </summary>
-        public void MoveLeftRight(float amount)
-        {
-            Vector3 position = transform.position;
-            Vector3 movement = transform.right * amount * m_fMovementSpeed * Time.deltaTime;
-            position += movement;
-            transform.position = position;
-        }
+        
     }
 }

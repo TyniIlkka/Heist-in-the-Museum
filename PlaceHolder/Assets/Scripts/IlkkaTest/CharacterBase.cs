@@ -12,7 +12,8 @@ namespace ProjectThief
         /// <summary>
         /// Forces to every character to have Move Method();
         /// </summary>
-        public abstract void Move(List<Node> list);
+        public abstract void Move(Vector3 direction);
+        public abstract void Turn(Vector3 amount);
 
 
         public void Init()

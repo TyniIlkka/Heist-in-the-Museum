@@ -11,13 +11,16 @@ namespace ProjectThief.PathFinding
         private Transform myTransform;              // this transform
         private Vector3 destinationPosition;        // The destination Point
         private float destinationDistance;          // The distance between myTransform and destinationPosition
+        private Vector3 positionToMove;
 
         public float moveSpeed;                         // The Speed the character will move
 
+        private PathGridManager gridSomething;
 
 
         void Start()
         {
+            gridSomething = GetComponentInParent<PathGridManager>();
             myTransform = transform;                            // sets myTransform to this GameObject.transform
             destinationPosition = myTransform.position;         // prevents myTransform reset
         }
@@ -48,8 +51,12 @@ namespace ProjectThief.PathFinding
 
                 if (playerPlane.Raycast(ray, out hitdist))
                 {
-                    destinationPosition = ray.GetPoint(hitdist);
-                    myTransform.position = destinationPosition;
+                    
+                    if (!gridSomething.NodeFromWorldPos(ray.GetPoint(hitdist)).m_bIsBlocked)
+                    {
+                        positionToMove = ray.GetPoint(hitdist);
+                        MoveToCursorClickPoint(positionToMove);
+                    }
                 }
             }
 
@@ -63,10 +70,19 @@ namespace ProjectThief.PathFinding
 
                 if (playerPlane.Raycast(ray, out hitdist))
                 {
-                    myTransform.position = ray.GetPoint(hitdist);
+                    
+                    if (!gridSomething.NodeFromWorldPos(ray.GetPoint(hitdist)).m_bIsBlocked)
+                    {
+                        positionToMove = ray.GetPoint(hitdist);
+                        MoveToCursorClickPoint(positionToMove);
+                    }
                 }
-
             }
+        }
+
+        public void MoveToCursorClickPoint(Vector3 transform)
+        {
+            myTransform.position = transform;
         }
     }
 }

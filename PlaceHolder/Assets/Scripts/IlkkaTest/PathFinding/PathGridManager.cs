@@ -12,12 +12,16 @@ namespace ProjectThief.PathFinding
         public Vector2 m_vGridSize;
         public float m_fHalfNodeWidth;
 
+        [SerializeField]
+        private float m_fArriveDistance;
+
         Node[,] m_aGrid;
 
         Node m_nCurrentNode;
-        //List<Node> m_lNeighbours;
         List<Node> m_aPath;
         List<Node> m_aPathOld;
+
+        public Node CurrentWaypoint { get; private set; }
 
         public List<Node> Path
         {
@@ -40,8 +44,8 @@ namespace ProjectThief.PathFinding
 
         }
         private void Update()
-        {
-            //PathCheck();
+            {
+            
         }
 
         void CreateGrid()
@@ -160,6 +164,46 @@ namespace ProjectThief.PathFinding
                     Gizmos.DrawWireCube(node.m_vPosition, Vector3.one * (m_fNodeWidth - .1f));
                 }
             }
+        }
+
+        public Node GetNextWaypoint(Node currentWaypoint)
+        {
+
+            Node nextWaypoint = null;
+            for (int i = 0; i < Path.Count; i++)
+            {
+                if (Path[i] == currentWaypoint)
+                {
+                    nextWaypoint = Path[i + 1];
+                    if (i + 1 == Path.Count)
+                    {
+                        nextWaypoint = Path[Path.Count];
+                    }
+                }
+            }
+            return nextWaypoint;
+        }
+
+        public Node GetFirstNodeOnPath()
+        {
+            Node result = null;
+            result = Path[0];
+                
+            return result;
+        }
+
+        private Node GetNextPointOnPath()
+        {
+            Node result = CurrentWaypoint;
+            Vector3 toWaypointVector = CurrentWaypoint.m_vPosition;
+            float toWaypointSqr = toWaypointVector.sqrMagnitude;
+            float sqrArriveDistance = m_fArriveDistance * m_fArriveDistance;
+            if (toWaypointSqr <= sqrArriveDistance)
+            {
+                result = GetNextWaypoint(CurrentWaypoint);
+            }
+
+            return result;
         }
     }
 }
