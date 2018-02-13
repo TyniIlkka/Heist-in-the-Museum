@@ -21,7 +21,7 @@ namespace ProjectThief.PathFinding
         List<Node> m_aPath;
         List<Node> m_aPathOld;
 
-        public Node CurrentWaypoint { get; private set; }
+        public Node CurrentWaypoint { get; set; }
 
         public List<Node> Path
         {
@@ -40,11 +40,15 @@ namespace ProjectThief.PathFinding
             m_iNumNodesX = Mathf.RoundToInt(m_vGridSize.x / m_fNodeWidth);
             m_iNumNodesY = Mathf.RoundToInt(m_vGridSize.y / m_fNodeWidth);
 
-            CreateGrid();
+            if (m_aGrid == null)
+            {
+                CreateGrid();
+            }
+            
 
         }
         private void Update()
-            {
+        {
             
         }
 
@@ -187,8 +191,13 @@ namespace ProjectThief.PathFinding
         public Node GetFirstNodeOnPath()
         {
             Node result = null;
-            result = Path[0];
-                
+            if (Path != null || Path.Count > 0)
+            {
+                result = Path[0];
+            } else
+            {
+                CreateGrid();
+            }
             return result;
         }
 
