@@ -15,6 +15,7 @@ namespace ProjectThief {
         [SerializeField]
         private PathGridManager m_pgmGrid;
 
+        private Node currentNode;
         private Vector3 m_vTargetPosition;
 
         private void Awake()
@@ -39,7 +40,7 @@ namespace ProjectThief {
             float sqrArriveDistance = _arriveDistance * _arriveDistance;
             if (toWaypointSqr <= sqrArriveDistance)
             {
-                result = _path.GetNextWaypoint(CurrentWaypoint, ref _direction);
+                result = m_pgmGrid.Path.GetNextWaypoint(CurrentWaypoint, ref _direction);
             }
 
             return result;
