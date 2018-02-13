@@ -13,11 +13,15 @@ namespace ProjectThief
         [SerializeField, Tooltip("Cameras movement speed")]
         private float m_fMoveSpeed = 5;
         [SerializeField, Tooltip("Distance from player")]
-        private float m_fDistance = 10;        
+        private float m_fDistance = 10;
+        [SerializeField, Tooltip("Reset Camera speed")]
+        private float m_fResetspeed = 5;
         [SerializeField, Tooltip("Player transform")]
         private Transform m_tPlayerTransform;       
 
         private float m_fAngle;
+        private bool m_bReset;
+        private Quaternion m_qOrginalRotation;
 
         /// <summary>
         /// Awake method for setting initial position & rotation.
@@ -28,6 +32,7 @@ namespace ProjectThief
             transform.rotation = Quaternion.Euler(m_fVerticalAngle, m_fHorizontalAngle, 0);
             transform.position -= transform.forward * m_fDistance;
             m_fAngle = m_fHorizontalAngle;
+            m_qOrginalRotation = transform.rotation;
         }
 
         /// <summary>
@@ -35,18 +40,15 @@ namespace ProjectThief
         /// </summary>
         private void LateUpdate()
         {
-            if (Input.GetMouseButton(1))
-            {
+            if (Input.GetMouseButton(1) && !m_bReset)            
                 ControlCamera();
-            }
+            
+            if (Input.GetKey(KeyCode.R))            
+                m_bReset = true;
+            
+            ResetPosition();
 
-            if (Input.GetKey(KeyCode.R))
-            {
-                ResetPosition();
-            }           
-
-            transform.position = m_tPlayerTransform.position;
-            transform.rotation = Quaternion.Euler(m_fVerticalAngle, m_fAngle, 0);
+            transform.position = m_tPlayerTransform.position;            
             transform.position -= transform.forward * m_fDistance;
         }
 
@@ -55,10 +57,10 @@ namespace ProjectThief
         /// </summary>
         private void ControlCamera()
         {
-            if (Input.GetAxis("Mouse X") != 0)
-            {
+            if (Input.GetAxis("Mouse X") != 0)            
                 m_fAngle += (m_fMoveSpeed * Input.GetAxis("Mouse X")) * Time.deltaTime;
-            }            
+            
+            transform.rotation = Quaternion.Euler(m_fVerticalAngle, m_fAngle, 0);
         }
 
         /// <summary>
@@ -66,7 +68,15 @@ namespace ProjectThief
         /// </summary>
         private void ResetPosition()
         {
-            m_fAngle = m_fHorizontalAngle;
+            if (m_bReset)
+            {                
+                transform.rotation = Quaternion.Slerp(transform.rotation, m_qOrginalRotation, m_fResetspeed * Time.deltaTime);
+                if (transform.rotation == m_qOrginalRotation)                   
+                {
+                    m_fAngle = m_fHorizontalAngle;
+                    m_bReset = false;
+                }
+            }
         }
     }
 }
