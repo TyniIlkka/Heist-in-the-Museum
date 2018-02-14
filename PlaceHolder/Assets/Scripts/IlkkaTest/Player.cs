@@ -16,6 +16,7 @@ namespace ProjectThief {
         private PathGridManager m_pgmGrid;
         [SerializeField]
         private float _arriveDistance;
+        private float step;
 
         Player player;
         Coroutine MoveIE;
@@ -90,7 +91,9 @@ namespace ProjectThief {
         {
             for (int i = 0; i < pathList.Count; i++)
             {
+                step = 0f;
                 MoveIE = StartCoroutine(Moving(i));
+                
                 yield return MoveIE;
             }
         }
@@ -99,7 +102,8 @@ namespace ProjectThief {
         {
             while (player.transform.position != pathList[currentPosition].m_vPosition)
             {
-                player.transform.position = Vector3.MoveTowards(player.transform.position, pathList[currentPosition].m_vPosition, m_fMovementSpeed * Time.deltaTime);
+                step = m_fMovementSpeed * Time.deltaTime;
+                player.transform.position = Vector3.MoveTowards(player.transform.position, pathList[currentPosition].m_vPosition, step);
                 //Move(transform.forward);
                 Turn(pathList[currentPosition].m_vPosition);
                 yield return null;
