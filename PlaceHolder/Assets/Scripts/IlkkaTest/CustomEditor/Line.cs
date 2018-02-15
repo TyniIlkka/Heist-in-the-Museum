@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Line : MonoBehaviour {
-
-    public Vector3 p0, p1;
+namespace ProjectThief.Spline
+{
+    public class Line : MonoBehaviour
+    {
+        public Vector3 p0, p1;
+    }
 }

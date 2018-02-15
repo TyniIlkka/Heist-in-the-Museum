@@ -1,6 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using System;
+using ProjectThief.Spline;
 
 [CustomEditor(typeof(BezierSpline))]
 public class BezierSplineInspector : Editor
@@ -35,8 +36,8 @@ public class BezierSplineInspector : Editor
         for (int i = 1; i < spline.ControlPointCount; i += 3)
         {
             Vector3 p1 = ShowPoint(i);
-            Vector3 p2 = ShowPoint(i+1);
-            Vector3 p3 = ShowPoint(i+2);
+            Vector3 p2 = ShowPoint(i + 1);
+            Vector3 p3 = ShowPoint(i + 2);
 
             Handles.color = Color.gray;
             Handles.DrawLine(p0, p1);
@@ -46,7 +47,7 @@ public class BezierSplineInspector : Editor
             p0 = p3;
         }
         ShowDirections();
-        
+
     }
 
     private void ShowDirections()

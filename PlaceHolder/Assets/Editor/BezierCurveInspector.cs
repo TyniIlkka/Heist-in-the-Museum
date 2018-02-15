@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using ProjectThief.Spline;
+
 
 [CustomEditor(typeof(BezierCurve))]
-public class BezierCurveInspector : Editor {
+public class BezierCurveInspector : Editor
+{
 
     private BezierCurve curve;
     private Transform handleTransform;
@@ -48,7 +51,7 @@ public class BezierCurveInspector : Editor {
         }
 
     }
-        private Vector3 ShowPoint(int index)
+    private Vector3 ShowPoint(int index)
     {
         Vector3 point = handleTransform.TransformPoint(curve.points[index]);
         EditorGUI.BeginChangeCheck();
@@ -62,3 +65,4 @@ public class BezierCurveInspector : Editor {
         return point;
     }
 }
+

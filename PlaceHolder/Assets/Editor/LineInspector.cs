@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using ProjectThief.Spline;
 
 [CustomEditor (typeof(Line))]
 public class LineInspector : Editor {

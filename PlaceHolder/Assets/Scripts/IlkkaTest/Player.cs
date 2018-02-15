@@ -28,11 +28,6 @@ namespace ProjectThief {
         private void Start()
         {
             
-            //m_pgmGrid.CurrentWaypoint = m_pgmGrid.GetFirstNodeOnPath();
-            //if (m_pgmGrid.CurrentWaypoint == null)
-            //{
-                //Debug.Log("Your Target point is Missing!");
-            //}
         }
 
         // Update is called once per frame
@@ -41,8 +36,6 @@ namespace ProjectThief {
             player = GetComponent<Player>();
             pathList = m_pgmGrid.Path;
             StartCoroutine(moveObject());
-            //Move(transform.forward);
-            //Turn(currentNode.m_vPosition);
         }
 
         private Node GetWaypoint()

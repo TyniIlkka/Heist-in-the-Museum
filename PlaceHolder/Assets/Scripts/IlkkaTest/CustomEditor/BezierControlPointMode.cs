@@ -1,6 +1,9 @@
-﻿public enum BezierControlPointMode
+﻿namespace ProjectThief.Spline
 {
-    Free,
-    Aligned,
-    Mirrored
+    public enum BezierControlPointMode
+    {
+        Free,
+        Aligned,
+        Mirrored
+    }
 }
