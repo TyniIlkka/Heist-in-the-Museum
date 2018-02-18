@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33028135383327130}
   - component: {fileID: 65654362397476416}
   - component: {fileID: 23639113124454070}
+  - component: {fileID: 114253140473719650}
   m_Layer: 8
   m_Name: GreenCube
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1918608598157162}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 599.7981, y: 627.45465, z: -776.55133}
+  m_LocalPosition: {x: -2.4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -95,3 +96,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114253140473719650
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1918608598157162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a4cc581cedaa3e4aac52d42812038cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_tItemTexture: {fileID: 2800000, guid: 1f8e584323962224a9d071d603ac7555, type: 3}
+  m_iValue: 3
+  m_bIsActive: 0
