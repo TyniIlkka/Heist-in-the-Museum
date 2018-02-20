@@ -94,6 +94,7 @@ namespace ProjectThief {
         {
             while (player.transform.position != pathList[currentPosition].m_vPosition)
             {
+                //pathList[currentPosition].m_vPosition.y = 1;
                 step = m_fMovementSpeed * Time.deltaTime;
                 player.transform.position = Vector3.MoveTowards(player.transform.position, pathList[currentPosition].m_vPosition, step);
                 //Move(transform.forward);
