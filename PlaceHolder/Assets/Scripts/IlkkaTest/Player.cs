@@ -27,13 +27,12 @@ namespace ProjectThief {
 
         private void Start()
         {
-            
+            player = GetComponent<Player>();
         }
 
         // Update is called once per frame
         void Update()
         {
-            player = GetComponent<Player>();
             pathList = m_pgmGrid.Path;
             StartCoroutine(moveObject());
         }
