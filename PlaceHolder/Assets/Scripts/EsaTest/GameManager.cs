@@ -6,9 +6,7 @@ namespace ProjectThief
 {
     public class GameManager : MonoBehaviour
     {
-        public static GameManager instance;
-
-        public List<Item> itemList;
+        public static GameManager instance;        
 
         private void Awake()
         {
