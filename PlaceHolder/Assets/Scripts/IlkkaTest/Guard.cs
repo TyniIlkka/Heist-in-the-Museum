@@ -17,8 +17,10 @@ namespace ProjectThief {
 
         [SerializeField]
         Player player;
-        [SerializeField, Range(0, 100)]
+        [SerializeField, Range(0, 100), Tooltip("How far guard detect.")]
         private float m_fDetectionRange;
+        
+
 
         [SerializeField, Tooltip("if True, guard is moving, otherwise static")]
         private bool m_bMoving;
@@ -28,66 +30,81 @@ namespace ProjectThief {
         [SerializeField]
         private float m_fTurnSpeed;
 
-        private float step;
-
-        private Guard guard;
-        private Vector3 m_vTargetPosition;
-
+        #region Detecting variables.
         [SerializeField, Tooltip("Which Direction Guard is looking if not patrolling: ")]
         private MyDirections m_eDirection;
         private Vector3 m_vDirection;
-        private float m_fHeadingAngle;
+
+        [SerializeField]
+        private LayerMask m_lmDetectHitMask;
+
+        [SerializeField, Range(0, 90), Tooltip("FieldOfView of guard.")]
+        private float m_fFieldOfView;
 
         [SerializeField, Tooltip("Position for static guard.")]
         private Vector3 m_vPosition;
-
+        #endregion
 
         public void Start()
         {
-            guard = GetComponent<Guard>();
+            
             
         }
 
         private void Update()
         {
-            switch (m_eDirection)
+            if (!m_bMoving)
             {
-                case MyDirections.North:
-                    transform.forward = new Vector3(0f, 0f, 1f);
-                    break;
-                case MyDirections.East:
-                    transform.forward = new Vector3(1f, 0f, 0f);
-                    break;
-                case MyDirections.South:
-                    transform.forward = new Vector3(0f, 0f, -1f);
-                    break;
-                case MyDirections.West:
-                    transform.forward = new Vector3(-1f, 0f, 0f);
-                    break;
+                switch (m_eDirection)
+                {
+                    case MyDirections.North:
+                        transform.forward = new Vector3(0f, 0f, 1f);
+                        m_vDirection = new Vector3(0f, 0f, 1f);
+                        break;
+                    case MyDirections.East:
+                        transform.forward = new Vector3(1f, 0f, 0f);
+                        m_vDirection = new Vector3(1f, 0f, 0f);
+                        break;
+                    case MyDirections.South:
+                        transform.forward = new Vector3(0f, 0f, -1f);
+                        m_vDirection = new Vector3(0f, 0f, -1f);
+                        break;
+                    case MyDirections.West:
+                        transform.forward = new Vector3(-1f, 0f, 0f);
+                        m_vDirection = new Vector3(-1f, 0f, 0f);
+                        break;
+                }
             }
         }
 
         private void FixedUpdate()
         {
             CanSeePlayer();
+            Debug.DrawLine(transform.forward, m_vDirection * m_fDetectionRange);
+
         }
 
         public bool CanSeePlayer()
         {
             RaycastHit hit;
             Vector3 rayDirection = player.transform.position - transform.position;
-
-            if (Physics.Raycast (transform.position, rayDirection, out hit, m_fDetectionRange))
+            if ((Vector3.Angle(rayDirection, transform.forward)) <= m_fFieldOfView * 0.5f)
             {
-                if (hit.transform.tag == "Player")
+                if (Physics.Raycast(transform.position, rayDirection, out hit, m_fDetectionRange))
                 {
-                    Debug.DrawLine(transform.position, hit.point, Color.red);
-                    Debug.Log("Player is detected, but no end imported");
+                    if (hit.collider.gameObject.GetComponent<Player>() != null)
+                    {
+                        Debug.DrawLine(transform.position, hit.point, Color.red);
+                        Debug.Log(hit);
+                    }
+                    else
+                    {
+                        Debug.DrawLine(transform.position, hit.point, Color.green);
+                        Debug.Log(hit);
+                    }
+                    //TODo: To GameManager send player detected!
+
                 }
-                Debug.DrawLine(transform.position, hit.point, Color.red);
-                Debug.Log("Hit something");
-                //TODo: To GameManager send player detected!
-                
             }
 
             return true;
