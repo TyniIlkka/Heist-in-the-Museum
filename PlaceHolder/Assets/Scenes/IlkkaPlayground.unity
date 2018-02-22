@@ -129,9 +129,9 @@ GameObject:
   - component: {fileID: 119668368}
   - component: {fileID: 119668367}
   - component: {fileID: 119668366}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SphereGuard
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,10 +147,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ce2d6edfd61874e83189ecc0ea78ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1004667437}
+  m_fDetectionRange: 13
   m_bMoving: 0
   m_fMovementSpeed: 0
   m_fTurnSpeed: 180
-  m_iDirection: 0
+  m_eDirection: 1
+  m_lmDetectHitMask:
+    serializedVersion: 2
+    m_Bits: 768
+  m_fFieldOfView: 58
   m_vPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &119668367
 MeshRenderer:
@@ -366,11 +372,6 @@ Prefab:
       propertyPath: m_pgmGrid
       value: 
       objectReference: {fileID: 1395854905}
-    - target: {fileID: 23836576645319506, guid: 22658a40bc2cda546a9732dd75c68927,
-        type: 2}
-      propertyPath: m_DynamicOccludee
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 22658a40bc2cda546a9732dd75c68927, type: 2}
   m_IsPrefabParent: 0
@@ -425,6 +426,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1141378109479390, guid: 4e12ae93cd7316943a8c176458691532, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e12ae93cd7316943a8c176458691532, type: 2}
   m_IsPrefabParent: 0
@@ -433,6 +438,12 @@ GameObject:
   m_PrefabParentObject: {fileID: 1523435927869112, guid: b63cc373504292f45acdd9cc250dac18,
     type: 2}
   m_PrefabInternal: {fileID: 1143442822}
+--- !u!114 &1004667437 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114427353747206194, guid: 22658a40bc2cda546a9732dd75c68927,
+    type: 2}
+  m_PrefabInternal: {fileID: 603700076}
+  m_Script: {fileID: 11500000, guid: fa61e820937911046870a33ee59bb48c, type: 3}
 --- !u!1001 &1143442822
 Prefab:
   m_ObjectHideFlags: 0
@@ -572,7 +583,7 @@ GameObject:
   - component: {fileID: 2115174736}
   - component: {fileID: 2115174735}
   - component: {fileID: 2115174734}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
