@@ -18,6 +18,9 @@ namespace ProjectThief
         // Set is interactable privata when it can be activated by the players proximity.
         public bool m_bIsInteractable;
 
+        public bool IsActive { set { m_bIsActive = value; } }
+        public bool IsInteractable { set { m_bIsInteractable = value; } }
+
         private void Awake()
         {
             if (m_iInventory == null)
@@ -31,23 +34,25 @@ namespace ProjectThief
         {              
             if (m_bIsActive)
             {
-                // TODO Mouse animations                
-                if (m_bIsInteractable)
+                // TODO Mouse animations
+                if (m_itKeyItem.Collected)
                 {
-                    if (m_itKeyItem.Collected)
+                    if (Input.GetMouseButtonDown(0))
                     {
-                        // TODO Mouse animations  
-                        if (Input.GetMouseButtonDown(0))                        
-                            m_iInventory.RemoveItem(m_itKeyItem);                        
-                    }
-                    else
-                    {
-                        // TODO Mouse animations  
+                        if (m_bIsInteractable)
+                        {
+                            m_iInventory.RemoveItem(m_itKeyItem);
+                        }
+                        else
+                        {
+                            // TODO Move player to position to interact with object.
+                            // And interact with object?
+                        }
                     }
                 }
                 else
                 {
-                    // TODO Move player to position to interact with object.
+                    // TODO Mouse animations
                 }
             }
             else

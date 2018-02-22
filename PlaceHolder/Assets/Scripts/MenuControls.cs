@@ -1,5 +1,6 @@
 ﻿using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace ProjectThief
 {
@@ -28,7 +29,7 @@ namespace ProjectThief
 
         public void NewGame()
         {
-
+            SceneManager.LoadScene("Level");
         }
 
         public void Options()
@@ -56,7 +57,7 @@ namespace ProjectThief
             m_goShade.SetActive(true);
             m_goPauseMenu.SetActive(true);
             m_bPauseButton.interactable = false;
-            //view1 & 2?
+            // Animation
             Time.timeScale = 0f;
         }
 
@@ -65,7 +66,7 @@ namespace ProjectThief
             m_goShade.SetActive(false);
             m_goPauseMenu.SetActive(false);
             m_bPauseButton.interactable = true;
-            //view1 & 2?
+            // Animation
             Time.timeScale = 1f;
         }
 

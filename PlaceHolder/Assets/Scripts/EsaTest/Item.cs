@@ -21,6 +21,7 @@ namespace ProjectThief
         public Texture ItemImage { get { return m_tItemTexture; } }        
         public bool Collected { get { return m_bCollected; } set { m_bCollected = value; } }    
         public bool IsActive { set { m_bIsActive = value; } }
+        public bool IsInteractable { set { m_bIsInteractable = value; } }
         public int Slot { get { return m_iSlotPosition; } set { m_iSlotPosition = value; } }
 
         private void Awake()
@@ -38,20 +39,20 @@ namespace ProjectThief
             {
                 Debug.Log("Over object: " + this.gameObject.name);
                 // TODO Add Mouse Animation
-                if (m_bIsInteractable)
+                if (Input.GetMouseButtonDown(0)) 
                 {
                     // TODO Add Mouse Animation
-                    if (Input.GetMouseButtonDown(0))
+                    if (m_bIsInteractable)
                     {
                         m_bCollected = true;
                         m_iInventory.AddItem(this);
                         gameObject.SetActive(false);
                     }
-                }
-                else
-                {
-                    // TODO if player is not in interaction range move player to position close to object.
-                }
+                    else
+                    {
+                        // TODO if player is not in interaction range move player to position close to object.
+                    }
+                }                
             }
             else
             {
