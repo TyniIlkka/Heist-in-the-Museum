@@ -148,7 +148,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1004667437}
-  m_fDetectionRange: 13
   m_bMoving: 0
   m_fMovementSpeed: 0
   m_fTurnSpeed: 180
@@ -156,6 +155,8 @@ MonoBehaviour:
   m_lmDetectHitMask:
     serializedVersion: 2
     m_Bits: 768
+  m_fMaxDetectionRange: 5
+  m_fMinDetectionRange: 2
   m_fFieldOfView: 58
   m_vPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &119668367
@@ -589,7 +590,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2115174733
 Transform:
   m_ObjectHideFlags: 0

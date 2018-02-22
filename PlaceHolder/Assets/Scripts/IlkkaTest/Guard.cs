@@ -17,8 +17,7 @@ namespace ProjectThief {
 
         [SerializeField]
         Player player;
-        [SerializeField, Range(0, 100), Tooltip("How far guard detect.")]
-        private float m_fDetectionRange;
+        
         
 
 
@@ -31,12 +30,18 @@ namespace ProjectThief {
         private float m_fTurnSpeed;
 
         #region Detecting variables.
+
+
         [SerializeField, Tooltip("Which Direction Guard is looking if not patrolling: ")]
         private MyDirections m_eDirection;
         private Vector3 m_vDirection;
 
         [SerializeField]
         private LayerMask m_lmDetectHitMask;
+        [SerializeField, Range(0, 100), Tooltip("How far guard detect on facing direction.")]
+        private float m_fMaxDetectionRange;
+        [SerializeField, Range(0, 100), Tooltip("How close guard detect to every direction.")]
+        private float m_fMinDetectionRange;
 
         [SerializeField, Range(0, 90), Tooltip("FieldOfView of guard.")]
         private float m_fFieldOfView;
@@ -80,7 +85,12 @@ namespace ProjectThief {
         private void FixedUpdate()
         {
             CanSeePlayer();
-            Debug.DrawLine(transform.forward, m_vDirection * m_fDetectionRange);
+            if (CanSeePlayer())
+            {
+                Debug.Log("GameLost");
+                //GameManager.instance.GameOver();
+            }
+            Debug.DrawLine(transform.forward, m_vDirection * m_fMaxDetectionRange);
 
         }
 
@@ -88,26 +98,39 @@ namespace ProjectThief {
         {
             RaycastHit hit;
             Vector3 rayDirection = player.transform.position - transform.position;
+            if (Physics.Raycast(transform.position, rayDirection, out hit, m_fMaxDetectionRange))
+            {
+                if ((hit.collider.gameObject.GetComponent<Player>() != null) && (hit.distance <= m_fMinDetectionRange))
+                {
+                    Debug.Log("Player too close guard");
+                    return true;
+                }
+            }
+
             if ((Vector3.Angle(rayDirection, transform.forward)) <= m_fFieldOfView * 0.5f)
             {
-                if (Physics.Raycast(transform.position, rayDirection, out hit, m_fDetectionRange))
+                if (Physics.Raycast(transform.position, rayDirection, out hit, m_fMaxDetectionRange))
                 {
                     if (hit.collider.gameObject.GetComponent<Player>() != null)
                     {
+                        
                         Debug.DrawLine(transform.position, hit.point, Color.red);
                         Debug.Log(hit);
+                        return true;
                     }
                     else
                     {
                         Debug.DrawLine(transform.position, hit.point, Color.green);
                         Debug.Log(hit);
                     }
-                    //TODo: To GameManager send player detected!
+                    
 
                 }
             }
 
-            return true;
+            
+
+                return false;
         }
 
         /// <summary>

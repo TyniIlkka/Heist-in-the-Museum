@@ -102,5 +102,10 @@ namespace ProjectThief {
                 yield return null;
             }
         }
+
+        public void ResetPath()
+        {
+
+        }
     }
 }
