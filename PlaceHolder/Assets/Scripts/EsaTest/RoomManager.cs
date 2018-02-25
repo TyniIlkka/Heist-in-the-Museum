@@ -8,41 +8,26 @@ namespace ProjectThief
     {
         [SerializeField, Tooltip("Rooms items")]
         private List<Item> m_lItems;
-        [SerializeField, Tooltip("Start point")]
-        private Vector3 m_v3Point;
-        [SerializeField, Tooltip("Player")]
-        private GameObject m_goPlayer;
-
-        private bool[] m_bHasItem;
-        private bool m_bCleared;
-
-        private void Awake()
-        {
-            
-        }
-
-        /// <summary>
-        /// Room initialization method.
-        /// </summary>
-        public void Init()
-        {
-            m_goPlayer.transform.position = m_v3Point;
-
-            if (!m_bCleared)
-            {
-
-            }
-        }
+        [SerializeField, Tooltip("Door to room")]
+        private Door m_dDoor;
+        
+        private bool m_bCleared; 
 
         /// <summary>
         /// Called when room is resetted.
         /// </summary>
         public void ResetRoom()
         {
-            for (int i = 0; i < m_lItems.Count; i++)
-            {
-                m_lItems[i].Collected = false;
+            GameObject player = GameManager.instance.player;
+
+            if (!m_bCleared) {
+                for (int i = 0; i < m_lItems.Count; i++)
+                {
+                    m_lItems[i].Collected = false;
+                }
             }
+
+            player.transform.position = m_dDoor.RoomPos;
         }
     }
 }
