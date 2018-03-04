@@ -8,17 +8,38 @@ namespace ProjectThief
     {
         [SerializeField, Tooltip("Obstacle Animator")]
         private Animator m_aObstacleAnim;
+        [SerializeField, Tooltip("Door")]
+        private Door m_dDoor;
+        [SerializeField, Tooltip("Marks if lever is broken")]
+        private bool m_bBroken;
+        [SerializeField, Tooltip("Levers handle")]
+        private GameObject m_goHandle;
+        [SerializeField, Tooltip("Needed item")]
+        private Item m_itNeededItem;
 
         // Set private when done
-        public bool m_bBroken;
         public bool m_bInteractable;
         public bool m_bActive;
 
-        private Animator m_aLeverAnim;        
+        private Animator m_aLeverAnim;
+        private MouseController m_mcMouseController;
 
         private void Awake()
         {
-            m_aLeverAnim = GetComponentInChildren<Animator>();            
+            m_aLeverAnim = GetComponentInChildren<Animator>();
+            m_mcMouseController = GameManager.instance.mouseController;
+        }
+
+        private void Update()
+        {
+            if (m_bBroken)
+            {
+                m_goHandle.SetActive(false);
+            }
+            else
+            {
+                m_goHandle.SetActive(true);
+            }
         }
 
         /// <summary>
@@ -29,6 +50,7 @@ namespace ProjectThief
             Debug.Log("Lever");
             if (m_bActive)
             {
+                m_mcMouseController.Interact = true;
                 if (!m_bBroken)
                 {
                     if (Input.GetMouseButton(0))
@@ -38,6 +60,7 @@ namespace ProjectThief
                         {
                             m_aLeverAnim.SetBool("Activated", true);
                             m_aObstacleAnim.SetBool("Open", true);
+                            m_dDoor.Blocked = false;
                         }
                         else
                         {
@@ -47,12 +70,29 @@ namespace ProjectThief
                 }
                 else
                 {
-                    // Mouse animations?
+                    if (Input.GetMouseButton(0))
+                    {
+                        if (m_bInteractable)
+                        {
+                            if (m_itNeededItem.Collected)
+                            {
+                                m_bBroken = false;
+                            }
+                            else
+                            {
+                                Debug.Log("You don't have correct item for this.");
+                            }
+                        }
+                        else
+                        {
+                            // TODO Move player closer.
+                        }
+                    }
                 }
             }
             else
             {
-                // TODO mouse animations.
+                m_mcMouseController.Inspect = true;
             }
 
             if (Input.GetKey(KeyCode.R))
@@ -68,6 +108,12 @@ namespace ProjectThief
         {
             m_aLeverAnim.SetBool("Activated", false);
             m_aObstacleAnim.SetBool("Open", false);
+        }
+
+        private void OnMouseExit()
+        {
+            m_mcMouseController.Interact = false;
+            m_mcMouseController.Inspect = false;
         }
     }    
 }

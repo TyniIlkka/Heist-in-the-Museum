@@ -444,6 +444,67 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 828039731}
+--- !u!1 &954707106
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 954707109}
+  - component: {fileID: 954707108}
+  - component: {fileID: 954707107}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &954707107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 954707106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ec27867190bc1438dacccf8955b5f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_tDefaultIcon: {fileID: 2800000, guid: 23d5ff6a915bf03479919d0a2d07ead6, type: 3}
+  m_tMoveIcon: {fileID: 0}
+  m_tInspectIcon: {fileID: 0}
+  m_tEnterIcon: {fileID: 0}
+  m_tInteractIcon: {fileID: 0}
+--- !u!114 &954707108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 954707106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 531fc56108eff7d46bcf6db2e0058347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  mouseController: {fileID: 954707107}
+  lastPosition: {x: 0, y: 0, z: 0}
+  lobbyIsActive: 0
+--- !u!4 &954707109
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 954707106}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 131.60075, y: -122.04814, z: 41.60498}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1006319993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,6 +1071,9 @@ MonoBehaviour:
   m_goMenuView2: {fileID: 1369385620}
   m_sSfxVol: {fileID: 0}
   m_sMusicVol: {fileID: 0}
+  m_goPauseMenu: {fileID: 0}
+  m_goShade: {fileID: 0}
+  m_bPauseButton: {fileID: 0}
 --- !u!114 &2105646934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1074,7 +1138,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2105646932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 553.5, y: 339, z: 0}
+  m_LocalPosition: {x: 595.5, y: 335, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1006319994}

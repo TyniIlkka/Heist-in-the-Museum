@@ -13,9 +13,10 @@ namespace ProjectThief
         [SerializeField, Tooltip("Position close to object")]
         private Vector3 m_v3MoveToPos;
 
-        // Set is active private when it can be activated by the proximity to the player.
-        public bool m_bIsActive;
-        // Set is interactable privata when it can be activated by the players proximity.
+        private MouseController m_mcMouseController;
+
+        // Change to private when player can interact whit this.
+        public bool m_bIsActive;        
         public bool m_bIsInteractable;
 
         public bool IsActive { set { m_bIsActive = value; } }
@@ -25,6 +26,7 @@ namespace ProjectThief
         {
             if (m_iInventory == null)
                 m_iInventory = FindObjectOfType<Inventory>();
+            m_mcMouseController = GameManager.instance.mouseController;
         }
 
         /// <summary>
@@ -34,7 +36,7 @@ namespace ProjectThief
         {              
             if (m_bIsActive)
             {
-                // TODO Mouse animations
+                m_mcMouseController.Interact = true;
                 if (m_itKeyItem.Collected)
                 {
                     if (Input.GetMouseButtonDown(0))
@@ -52,13 +54,19 @@ namespace ProjectThief
                 }
                 else
                 {
-                    // TODO Mouse animations
+                    Debug.Log("You don't have correct item for this.");
                 }
             }
             else
             {
-                // TODO Mouse animations  
+                m_mcMouseController.Inspect = true;
             }
+        }
+
+        private void OnMouseExit()
+        {
+            m_mcMouseController.Interact = false;
+            m_mcMouseController.Inspect = false;
         }
 
     }

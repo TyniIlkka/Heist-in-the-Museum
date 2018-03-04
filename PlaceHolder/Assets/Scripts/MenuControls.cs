@@ -54,11 +54,12 @@ namespace ProjectThief
 
         public void Pause()
         {
-            m_goShade.SetActive(true);
-            m_goPauseMenu.SetActive(true);
-            m_bPauseButton.interactable = false;
-            // Animation
-            Time.timeScale = 0f;
+            //m_goShade.SetActive(true);
+            //m_goPauseMenu.SetActive(true);
+            //m_bPauseButton.interactable = false;
+            //// Animation
+            //Time.timeScale = 0f;
+            Debug.Log("Click");
         }
 
         public void Continue()

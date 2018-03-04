@@ -9,6 +9,7 @@ namespace ProjectThief
         public static GameManager instance;
 
         public GameObject player;
+        public MouseController mouseController;
         public Vector3 lastPosition;
         public bool lobbyIsActive;
 
