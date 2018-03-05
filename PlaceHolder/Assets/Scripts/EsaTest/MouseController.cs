@@ -15,40 +15,31 @@ namespace ProjectThief
         [SerializeField]
         private Texture2D m_tEnterIcon;
         [SerializeField]
-        private Texture2D m_tInteractIcon;
+        private Texture2D m_tInteractIcon;                
 
-        private bool m_bMove;
-        private bool m_bInspect;
-        private bool m_bEnter;
-        private bool m_bInteract;
-
-        public bool Moving { set { m_bMove = value; } }
-        public bool Inspect { set { m_bInspect = value; } }
-        public bool Enter { set { m_bEnter = value; } }
-        public bool Interact { set { m_bInteract = value; } }
-
-        // Update is called once per frame
-        void Update()
+        public void MoveCursor()
         {
-            UpdateMouseIcon();
+            Cursor.SetCursor(m_tMoveIcon, Vector2.zero, CursorMode.Auto);
         }
 
-        private void UpdateMouseIcon()
+        public void InspectCursor()
         {
-            Texture2D cursorTexture;
-
-            if (m_bMove)
-                cursorTexture = m_tMoveIcon;
-            if (m_bInspect)
-                cursorTexture = m_tInspectIcon;
-            if (m_bEnter)
-                cursorTexture = m_tEnterIcon;
-            if (m_bInteract)
-                cursorTexture = m_tInteractIcon;
-            else
-                cursorTexture = m_tDefaultIcon;
-
-            Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(m_tInspectIcon, Vector2.zero, CursorMode.Auto);
         }
+
+        public void EnterCursor()
+        {
+            Cursor.SetCursor(m_tEnterIcon, Vector2.zero, CursorMode.Auto);
+        }
+
+        public void InteractCursor()
+        {
+            Cursor.SetCursor(m_tInteractIcon, Vector2.zero, CursorMode.Auto);
+        }
+
+        public void DefaultCursor()
+        {
+            Cursor.SetCursor(m_tDefaultIcon, Vector2.zero, CursorMode.Auto);
+        }        
     }
 }

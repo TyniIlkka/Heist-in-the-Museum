@@ -50,7 +50,7 @@ namespace ProjectThief
             Debug.Log("Lever");
             if (m_bActive)
             {
-                m_mcMouseController.Interact = true;
+                m_mcMouseController.InteractCursor();
                 if (!m_bBroken)
                 {
                     if (Input.GetMouseButton(0))
@@ -92,7 +92,7 @@ namespace ProjectThief
             }
             else
             {
-                m_mcMouseController.Inspect = true;
+                m_mcMouseController.InspectCursor();
             }
 
             if (Input.GetKey(KeyCode.R))
@@ -112,8 +112,8 @@ namespace ProjectThief
 
         private void OnMouseExit()
         {
-            m_mcMouseController.Interact = false;
-            m_mcMouseController.Inspect = false;
+            m_mcMouseController.DefaultCursor();
+            
         }
     }    
 }

@@ -40,7 +40,7 @@ namespace ProjectThief
             if (m_bIsActive)
             {
                 Debug.Log("Over object: " + this.gameObject.name);
-                m_mcMouseController.Interact = true;
+                m_mcMouseController.InteractCursor();
                 if (Input.GetMouseButtonDown(0)) 
                 {                    
                     if (m_bIsInteractable)
@@ -48,6 +48,7 @@ namespace ProjectThief
                         m_bCollected = true;
                         m_iInventory.AddItem(this);
                         gameObject.SetActive(false);
+                        m_mcMouseController.DefaultCursor();
                     }
                     else
                     {
@@ -57,14 +58,13 @@ namespace ProjectThief
             }
             else
             {
-                m_mcMouseController.Inspect = true;
+                m_mcMouseController.InteractCursor();
             }
         }
 
         private void OnMouseExit()
         {
-            m_mcMouseController.Interact = false;
-            m_mcMouseController.Inspect = false;
+            m_mcMouseController.DefaultCursor();
         }
     }
 }

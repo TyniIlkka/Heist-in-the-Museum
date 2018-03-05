@@ -36,7 +36,7 @@ namespace ProjectThief
         {              
             if (m_bIsActive)
             {
-                m_mcMouseController.Interact = true;
+                m_mcMouseController.InteractCursor();
                 if (m_itKeyItem.Collected)
                 {
                     if (Input.GetMouseButtonDown(0))
@@ -59,14 +59,13 @@ namespace ProjectThief
             }
             else
             {
-                m_mcMouseController.Inspect = true;
+                m_mcMouseController.InspectCursor();
             }
         }
 
         private void OnMouseExit()
         {
-            m_mcMouseController.Interact = false;
-            m_mcMouseController.Inspect = false;
+            m_mcMouseController.DefaultCursor();
         }
 
     }

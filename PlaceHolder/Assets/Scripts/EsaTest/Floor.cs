@@ -15,12 +15,12 @@ namespace ProjectThief
 
         private void OnMouseOver()
         {
-            m_mcMouseController.Moving = true;
+            m_mcMouseController.MoveCursor();
         }
 
         private void OnMouseExit()
         {
-            m_mcMouseController.Moving = false;
+            m_mcMouseController.DefaultCursor();
         }
     }
 }

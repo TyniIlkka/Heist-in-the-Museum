@@ -22,8 +22,11 @@ namespace ProjectThief
         [SerializeField]
         private Button m_bPauseButton;
 
+        private MouseController m_mcController;
+
         private void Awake()
         {
+            m_mcController = GameManager.instance.mouseController;
             // TODO update volume
         }
 
@@ -53,7 +56,7 @@ namespace ProjectThief
         }
 
         public void Pause()
-        {
+        {            
             //m_goShade.SetActive(true);
             //m_goPauseMenu.SetActive(true);
             //m_bPauseButton.interactable = false;

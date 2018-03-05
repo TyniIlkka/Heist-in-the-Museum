@@ -29,7 +29,7 @@ namespace ProjectThief
         {
             m_bIsBlocked = true;
             m_mcMouseController = GameManager.instance.mouseController;
-        }
+        }        
 
         /// <summary>
         /// Detects if mouse is over an object.
@@ -38,12 +38,11 @@ namespace ProjectThief
         {            
             if (m_bIsActive)
             {
-                m_mcMouseController.Interact = true;
+                m_mcMouseController.InteractCursor();
 
                 if (!m_bIsBlocked)
                 {
-                    m_mcMouseController.Interact = false;
-                    m_mcMouseController.Enter = true;                    
+                    m_mcMouseController.EnterCursor();               
 
                     if (Input.GetMouseButton(0))
                     {
@@ -60,7 +59,7 @@ namespace ProjectThief
             } 
             else
             {
-                m_mcMouseController.Inspect = true;
+                m_mcMouseController.InspectCursor();
             }
         }
 
@@ -88,9 +87,7 @@ namespace ProjectThief
 
         private void OnMouseExit()
         {
-            m_mcMouseController.Interact = false;
-            m_mcMouseController.Inspect = false;
-            m_mcMouseController.Enter = false;
+            m_mcMouseController.DefaultCursor();
         }
     }
 }
