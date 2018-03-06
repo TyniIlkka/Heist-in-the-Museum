@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 4773c520ce216064182067b978546361
-timeCreated: 1520274790
+guid: d205b532b4a1759488c81a4bebe7c91b
+timeCreated: 1520357514
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -17,22 +17,27 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: BrassMaterial__Brass
-    second: {fileID: 2100000, guid: d55ad395f342d424b986d1b6561e0f3a, type: 2}
+    second: {fileID: 2100000, guid: 72a07ea8ca561584e9f32dc2833e26d6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: HeadMaterial
-    second: {fileID: 2100000, guid: 090938d142535cb48ac1adec6bdb323b, type: 2}
+      name: HeadMaterial__Purple
+    second: {fileID: 2100000, guid: 85586b17ef6d1bb4394f9d8cfef3ea2a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MetalMaterial__Brass
+    second: {fileID: 2100000, guid: 72a07ea8ca561584e9f32dc2833e26d6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: MetalMaterial__Iron
-    second: {fileID: 2100000, guid: bf3f3ba4b85d250459fb83c735c2d217, type: 2}
+    second: {fileID: 2100000, guid: ca728cba12fa509448833cf5664ffc57, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0

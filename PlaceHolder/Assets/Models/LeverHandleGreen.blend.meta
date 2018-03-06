@@ -1,50 +1,45 @@
 fileFormatVersion: 2
-guid: b067fdb49e8dbd54e8441907fc02de67
-timeCreated: 1520273725
+guid: 259612b408d0e06499058e66ea30392f
+timeCreated: 1520356867
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: L-Base
-    100002: L_Connect
-    100004: L_Shelter
-    100006: //RootNode
-    400000: L-Base
-    400002: L_Connect
-    400004: L_Shelter
-    400006: //RootNode
-    2300000: L-Base
-    2300002: L_Connect
-    2300004: L_Shelter
-    3300000: L-Base
-    3300002: L_Connect
-    3300004: L_Shelter
-    4300000: L_Shelter
-    4300002: L_Connect
-    4300004: L-Base
+    100000: //RootNode
+    400000: //RootNode
+    2100000: HeadMaterial__Purple
+    2100002: GreenMaterial__Purple
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: level
     7400000: Default Take
     9500000: //RootNode
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: BrassMaterial
+      name: BrassMaterial__Brass
     second: {fileID: 2100000, guid: 72a07ea8ca561584e9f32dc2833e26d6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Colormaterial_001
-    second: {fileID: 2100000, guid: 33fcae770bfece44791359bd69282e4f, type: 2}
+      name: GreenMaterial__Purple
+    second: {fileID: 2100000, guid: 4b8124f880f99a74f90ca6ee83f6dca1, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: IronMaterial
+      name: MetalMaterial__Brass
+    second: {fileID: 2100000, guid: 72a07ea8ca561584e9f32dc2833e26d6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MetalMaterial__Iron
     second: {fileID: 2100000, guid: ca728cba12fa509448833cf5664ffc57, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
