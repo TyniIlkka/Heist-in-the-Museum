@@ -12,7 +12,7 @@ namespace ProjectThief
         [SerializeField]
         private Texture m_tEmpty = null; 
 
-        private List<Item> m_lInventoryItems = new List<Item>();
+        private List<Item> m_lInventoryItems = new List<Item>();        
 
         // testing remove when not needed.
         public float delay;

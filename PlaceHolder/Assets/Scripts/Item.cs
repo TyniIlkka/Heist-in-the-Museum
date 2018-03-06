@@ -2,27 +2,21 @@
 
 namespace ProjectThief
 {
-    public class Item : MonoBehaviour
+    public class Item : ObjectBase
     {
         [SerializeField, Tooltip("Item's image")]
         private Texture m_tItemTexture;
         [SerializeField, Tooltip("Inventory object")]
         private Inventory m_iInventory;
         [SerializeField, Tooltip("Position close to object")]
-        private Vector3 m_v3MoveToPos;
-
-        // Change to private when able.
-        public bool m_bIsActive;        
-        public bool m_bIsInteractable;
+        private Vector3 m_v3MoveToPos;        
 
         private bool m_bCollected;
         private int m_iSlotPosition;
         private MouseController m_mcMouseController;
 
         public Texture ItemImage { get { return m_tItemTexture; } }        
-        public bool Collected { get { return m_bCollected; } set { m_bCollected = value; } }    
-        public bool IsActive { set { m_bIsActive = value; } }
-        public bool IsInteractable { set { m_bIsInteractable = value; } }
+        public bool Collected { get { return m_bCollected; } set { m_bCollected = value; } }         
         public int Slot { get { return m_iSlotPosition; } set { m_iSlotPosition = value; } }
 
         private void Awake()
@@ -35,15 +29,15 @@ namespace ProjectThief
         /// <summary>
         /// Detects if mouse is over an object.
         /// </summary>
-        private void OnMouseOver()
+        protected override void OnMouseOver()
         {            
-            if (m_bIsActive)
+            if (IsActive)
             {
                 Debug.Log("Over object: " + this.gameObject.name);
                 m_mcMouseController.InteractCursor();
                 if (Input.GetMouseButtonDown(0)) 
                 {                    
-                    if (m_bIsInteractable)
+                    if (IsInteractable)
                     {
                         m_bCollected = true;
                         m_iInventory.AddItem(this);
@@ -62,7 +56,7 @@ namespace ProjectThief
             }
         }
 
-        private void OnMouseExit()
+        protected override void OnMouseExit()
         {
             m_mcMouseController.DefaultCursor();
         }
