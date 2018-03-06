@@ -88,7 +88,7 @@ namespace ProjectThief {
             if (CanSeePlayer())
             {
                 Debug.Log("GameLost");
-                //GameManager.instance.GameOver();
+                GameManager.instance.levelController.PlayerFound();
             }
             Debug.DrawLine(transform.forward, m_vDirection * m_fMaxDetectionRange);
 
