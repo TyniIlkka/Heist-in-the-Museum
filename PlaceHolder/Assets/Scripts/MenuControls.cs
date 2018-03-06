@@ -5,28 +5,30 @@ using UnityEngine.SceneManagement;
 namespace ProjectThief
 {
     public class MenuControls : MonoBehaviour
-    {
-        [SerializeField]
-        private GameObject m_goMenuView1;
-        [SerializeField]
-        private GameObject m_goMenuView2;
+    {        
         [SerializeField]
         private Slider m_sSfxVol;
         [SerializeField]
         private Slider m_sMusicVol;
 
+        #region Pause controls
         [SerializeField]
         private GameObject m_goPauseMenu;
         [SerializeField]
         private GameObject m_goShade;
         [SerializeField]
         private Button m_bPauseButton;
+        [SerializeField]
+        private GameObject m_goMenuConfirm;
+        [SerializeField]
+        private GameObject m_goExitConfirm;
+        #endregion
 
-        private MouseController m_mcController;
+        [SerializeField]
+        private GameObject m_goPlan;
 
         private void Awake()
-        {
-            m_mcController = GameManager.instance.mouseController;
+        {            
             // TODO update volume
         }
 
@@ -37,7 +39,12 @@ namespace ProjectThief
 
         public void Options()
         {
+            m_goPauseMenu.SetActive(false);
+        }
 
+        public void Return()
+        {
+            m_goPauseMenu.SetActive(true);
         }
 
         public void ExitGame()
@@ -56,23 +63,58 @@ namespace ProjectThief
         }
 
         public void Pause()
-        {            
-            //m_goShade.SetActive(true);
-            //m_goPauseMenu.SetActive(true);
-            //m_bPauseButton.interactable = false;
-            //// Animation
-            //Time.timeScale = 0f;
-            Debug.Log("Click");
+        {
+            m_goShade.SetActive(true);
+            m_goPauseMenu.SetActive(true);
+            m_bPauseButton.interactable = false;
+            Time.timeScale = 0f;            
         }
 
         public void Continue()
         {
             m_goShade.SetActive(false);
             m_goPauseMenu.SetActive(false);
+            m_goPlan.SetActive(false);
             m_bPauseButton.interactable = true;
-            // Animation
             Time.timeScale = 1f;
         }
 
+        public void MainMenu()
+        {
+            m_goPauseMenu.SetActive(false);
+            m_goMenuConfirm.SetActive(true);
+        }
+
+        public void MenuYes()
+        {
+            m_goShade.SetActive(false);
+            m_goPauseMenu.SetActive(false);
+            m_bPauseButton.interactable = true;
+            Time.timeScale = 1f;
+            SceneManager.LoadScene("MainMenu");
+        }
+
+        public void MenuNo()
+        {
+            m_goMenuConfirm.SetActive(false);
+            m_goPauseMenu.SetActive(true);
+        }
+
+        public void PauseExit()
+        {
+            m_goPauseMenu.SetActive(false);
+            m_goExitConfirm.SetActive(true);
+        }
+
+        public void ExitYes()
+        {
+            ExitGame();
+        }
+
+        public void ExitNo()
+        {
+            m_goExitConfirm.SetActive(false);
+            m_goPauseMenu.SetActive(true);
+        }
     }
 }

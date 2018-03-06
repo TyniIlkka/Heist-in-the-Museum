@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ProjectThief
 {
-    public class InterActableObject : MonoBehaviour
+    public class InteractableObject : MonoBehaviour, IObject
     {
         [SerializeField, Tooltip("Key Item")]
         private Item m_itKeyItem;        
@@ -14,6 +14,7 @@ namespace ProjectThief
         private Vector3 m_v3MoveToPos;
 
         private MouseController m_mcMouseController;
+        private bool moving;
 
         // Change to private when player can interact whit this.
         public bool m_bIsActive;        
@@ -49,6 +50,9 @@ namespace ProjectThief
                         {
                             // TODO Move player to position to interact with object.
                             // And interact with object?
+                            moving = true;
+                            GameManager.instance.moveToObject = moving;
+                            GameManager.instance.targetObject = this;
                         }
                     }
                 }
@@ -68,5 +72,9 @@ namespace ProjectThief
             m_mcMouseController.DefaultCursor();
         }
 
+        public void MovingTo(bool move)
+        {
+            moving = move;
+        }
     }
 }

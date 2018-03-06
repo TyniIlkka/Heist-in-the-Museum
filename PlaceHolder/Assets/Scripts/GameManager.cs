@@ -10,8 +10,11 @@ namespace ProjectThief
 
         public GameObject player;
         public MouseController mouseController;
+        public LevelController levelController;
         public Vector3 lastPosition;
         public bool lobbyIsActive;
+        public bool moveToObject;
+        public IObject targetObject;
 
         private void Awake()
         {
@@ -24,6 +27,11 @@ namespace ProjectThief
             {
                 Destroy(gameObject);
             }
+        }
+
+        private void Update()
+        {
+            
         }
     }
 }
