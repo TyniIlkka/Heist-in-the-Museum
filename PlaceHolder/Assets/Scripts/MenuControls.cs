@@ -5,16 +5,13 @@ using UnityEngine.SceneManagement;
 namespace ProjectThief
 {
     public class MenuControls : MonoBehaviour
-    {
-        [SerializeField]
-        private GameObject m_goMenuView1;
-        [SerializeField]
-        private GameObject m_goMenuView2;
+    {        
         [SerializeField]
         private Slider m_sSfxVol;
         [SerializeField]
         private Slider m_sMusicVol;
 
+        #region Pause controls
         [SerializeField]
         private GameObject m_goPauseMenu;
         [SerializeField]
@@ -24,7 +21,11 @@ namespace ProjectThief
         [SerializeField]
         private GameObject m_goMenuConfirm;
         [SerializeField]
-        private GameObject m_goExitConfirm;        
+        private GameObject m_goExitConfirm;
+        #endregion
+
+        [SerializeField]
+        private GameObject m_goPlan;
 
         private void Awake()
         {            
@@ -73,6 +74,7 @@ namespace ProjectThief
         {
             m_goShade.SetActive(false);
             m_goPauseMenu.SetActive(false);
+            m_goPlan.SetActive(false);
             m_bPauseButton.interactable = true;
             Time.timeScale = 1f;
         }

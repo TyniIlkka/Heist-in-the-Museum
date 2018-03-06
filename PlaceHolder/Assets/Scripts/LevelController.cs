@@ -13,11 +13,17 @@ namespace ProjectThief
         private GameObject m_goDefeat;
         [SerializeField]
         private GameObject m_goVictory;
+        [SerializeField]
+        private GameObject m_goPlayer;
+        [SerializeField, Tooltip("Info screen")]
+        private GameObject m_goScreen;
 
         private void Awake()
         {
             GameManager.instance.levelController = this;
-            m_mcController = GameManager.instance.mouseController;            
+            GameManager.instance.player = m_goPlayer;
+            m_mcController = GameManager.instance.mouseController;
+            m_goScreen.SetActive(true);
         }
 
         // Update is called once per frame
