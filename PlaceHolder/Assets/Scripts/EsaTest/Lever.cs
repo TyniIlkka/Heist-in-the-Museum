@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ProjectThief
 {
-    public class Lever : MonoBehaviour
+    public class Lever : ObjectBase
     {
         [SerializeField, Tooltip("Obstacle Animator")]
         private Animator m_aObstacleAnim;
@@ -15,11 +15,7 @@ namespace ProjectThief
         [SerializeField, Tooltip("Levers handle")]
         private GameObject m_goHandle;
         [SerializeField, Tooltip("Needed item")]
-        private Item m_itNeededItem;
-
-        // Set private when done
-        public bool m_bInteractable;
-        public bool m_bActive;
+        private Item m_itNeededItem;        
 
         private Animator m_aLeverAnim;
         private MouseController m_mcMouseController;
@@ -45,10 +41,10 @@ namespace ProjectThief
         /// <summary>
         /// Detects if mouse is over an object.
         /// </summary>
-        private void OnMouseOver()
+        protected override void OnMouseOver()
         {
             Debug.Log("Lever");
-            if (m_bActive)
+            if (IsActive)
             {
                 m_mcMouseController.InteractCursor();
                 if (!m_bBroken)
@@ -56,7 +52,7 @@ namespace ProjectThief
                     if (Input.GetMouseButton(0))
                     {
                         Debug.Log("Activated");
-                        if (m_bInteractable)
+                        if (IsInteractable)
                         {
                             m_aLeverAnim.SetBool("Activated", true);
                             m_aObstacleAnim.SetBool("Open", true);
@@ -72,7 +68,7 @@ namespace ProjectThief
                 {
                     if (Input.GetMouseButton(0))
                     {
-                        if (m_bInteractable)
+                        if (IsInteractable)
                         {
                             if (m_itNeededItem.Collected)
                             {
@@ -110,7 +106,7 @@ namespace ProjectThief
             m_aObstacleAnim.SetBool("Open", false);
         }
 
-        private void OnMouseExit()
+        protected override void OnMouseExit()
         {
             m_mcMouseController.DefaultCursor();
             

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ProjectThief
 {
-    public class Door : MonoBehaviour
+    public class Door : ObjectBase
     {
         [SerializeField, Tooltip("Room's exit position in lobby area")]
         private Transform m_v3LobbyPos;
@@ -12,11 +12,7 @@ namespace ProjectThief
         private Transform m_v3RoomPosition;
 
         private bool m_bIsBlocked;
-        private MouseController m_mcMouseController;
-
-        // Change to private when player can interact with objects.
-        public bool m_bIsActive;
-        public bool m_bIsInteractable;
+        private MouseController m_mcMouseController;        
 
         public Vector3 LobbyPos { get { return m_v3LobbyPos.position; } }
         public Vector3 RoomPos { get { return m_v3RoomPosition.position; } }
@@ -29,14 +25,14 @@ namespace ProjectThief
         {
             m_bIsBlocked = true;
             m_mcMouseController = GameManager.instance.mouseController;
-        }        
+        }
 
         /// <summary>
         /// Detects if mouse is over an object.
         /// </summary>
-        private void OnMouseOver()
+        protected override void OnMouseOver()
         {            
-            if (m_bIsActive)
+            if (IsActive)
             {
                 m_mcMouseController.InteractCursor();
 
@@ -46,7 +42,7 @@ namespace ProjectThief
 
                     if (Input.GetMouseButton(0))
                     {
-                        if (m_bIsInteractable)
+                        if (IsInteractable)
                         {
                             TransportPlayer();
                         }
@@ -85,7 +81,7 @@ namespace ProjectThief
             player.transform.position = movePos;
         }
 
-        private void OnMouseExit()
+        protected override void OnMouseExit()
         {
             m_mcMouseController.DefaultCursor();
         }

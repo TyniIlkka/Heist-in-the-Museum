@@ -14,7 +14,7 @@ namespace ProjectThief
         public Vector3 lastPosition;
         public bool lobbyIsActive;
         public bool moveToObject;
-        public IObject targetObject;
+        public ObjectBase targetObject;
 
         private void Awake()
         {

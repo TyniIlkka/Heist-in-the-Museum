@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ProjectThief
 {
-    public class InteractableObject : MonoBehaviour, IObject
+    public class InteractableObject : ObjectBase
     {
         [SerializeField, Tooltip("Key Item")]
         private Item m_itKeyItem;        
@@ -17,11 +17,11 @@ namespace ProjectThief
         private bool moving;
 
         // Change to private when player can interact whit this.
-        public bool m_bIsActive;        
-        public bool m_bIsInteractable;
+        //public bool m_bIsActive;        
+        //public bool m_bIsInteractable;
 
-        public bool IsActive { set { m_bIsActive = value; } }
-        public bool IsInteractable { set { m_bIsInteractable = value; } }
+        //public bool IsActive { set { m_bIsActive = value; } }
+        //public bool IsInteractable { set { m_bIsInteractable = value; } }
 
         private void Awake()
         {
@@ -33,16 +33,16 @@ namespace ProjectThief
         /// <summary>
         /// Detects if mouse is over an object.
         /// </summary>
-        private void OnMouseOver()
+        protected override void OnMouseOver()
         {              
-            if (m_bIsActive)
+            if (IsActive)
             {
                 m_mcMouseController.InteractCursor();
                 if (m_itKeyItem.Collected)
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
-                        if (m_bIsInteractable)
+                        if (IsInteractable)
                         {
                             m_iInventory.RemoveItem(m_itKeyItem);
                         }
@@ -52,7 +52,7 @@ namespace ProjectThief
                             // And interact with object?
                             moving = true;
                             GameManager.instance.moveToObject = moving;
-                            GameManager.instance.targetObject = this;
+                            GameManager.instance.targetObject = null;
                         }
                     }
                 }
@@ -67,14 +67,9 @@ namespace ProjectThief
             }
         }
 
-        private void OnMouseExit()
+        protected override void OnMouseExit()
         {
             m_mcMouseController.DefaultCursor();
-        }
-
-        public void MovingTo(bool move)
-        {
-            moving = move;
-        }
+        }       
     }
 }
