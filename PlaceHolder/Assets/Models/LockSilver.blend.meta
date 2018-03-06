@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: 59c8b5d90710fa54ab60fa86bcd17339
-timeCreated: 1520273656
+guid: a9d6e50bed8d973418988f4815bcc849
+timeCreated: 1520358919
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: LOCKBase
-    100002: //RootNode
-    100004: LOCKRing
+    100002: LOCKRing
+    100004: //RootNode
     400000: LOCKBase
-    400002: //RootNode
-    400004: LOCKRing
+    400002: LOCKRing
+    400004: //RootNode
     2300000: LOCKBase
     2300002: LOCKRing
     3300000: LOCKBase
@@ -28,13 +28,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: MetalMaterial
-    second: {fileID: 2100000, guid: 9161e5af06050d34b97a34fa04f6c19b, type: 2}
+      name: Silver
+    second: {fileID: 2100000, guid: b159f9b5b1e23ff40805475746ef3d3d, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -67,7 +67,7 @@ ModelImporter:
     importCameras: 1
     importLights: 1
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
