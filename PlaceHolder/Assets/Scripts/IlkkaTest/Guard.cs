@@ -197,7 +197,7 @@ namespace ProjectThief {
                 Debug.Log("GameLost");
                 GameManager.instance.levelController.PlayerFound();
             }
-            Debug.DrawLine(transform.forward, m_vDirection * m_fMaxDetectionRange);
+            Debug.DrawLine(transform.forward, m_vDirection * m_fMaxDetectionRange, Color.blue);
 
         }
 
