@@ -30,23 +30,37 @@ namespace ProjectThief {
         StaticTurnTo turnToStatic;
 
         #endregion
-
-        #region Moving, turning, pathfinding
+        //
         [SerializeField, Header("Patrolling or Static"), Tooltip("if True, guard is moving, otherwise static")]
         private bool m_bMoving;
-
-        [SerializeField, Range(0, 40), Tooltip("How far can sounds distract guards:")]
-        private float m_fSoundDetectDistance;
-        [SerializeField, Range(0, 40), Tooltip("How far can sounds distract guards:")]
-        private float m_fLightDetectDistance;
+        #region Moving, turning, pathfinding
 
         [SerializeField]
+        private float m_fMovementSpeed;
+
+        [SerializeField]
+        private float m_fTurnSpeed;
+
+        #region StaticGuard
+        [Header("StaticGuard")]
+        [SerializeField, Range(0, 40), Tooltip("How far can sounds distract guards:")]
+        private float m_fLightDetectDistance;
+        [SerializeField]
         private LayerMask m_lmLightMask;
+
+
+        #endregion
+
+        #region Patrol
+        [Header("Patrol")]
+        [SerializeField, Range(0, 40), Tooltip("How far can sounds distract guards:")]
+        private float m_fSoundDetectDistance;
+        
         [SerializeField]
         private LayerMask m_lmSoundMask;
         //Set Path
         [SerializeField]
-        private Path _path;
+        private List<Path> _paths;
         //How smooth guards is going to corner.
         [SerializeField]
         private float _waypointArriveDistance;
@@ -54,14 +68,14 @@ namespace ProjectThief {
         [SerializeField]
         private Direction _direction;
 
-        [SerializeField]
-        private float m_fMovementSpeed;
-        [SerializeField]
-        private float m_fTurnSpeed;
-        #endregion
+        private int _currenPathNumber = 0;
 
+        
+        
+        #endregion
+        #endregion
         #region Detecting variables.
-      
+        [Header("Detecting Player")]
         [SerializeField, Tooltip("Which Direction Guard is looking if not patrolling: ")]
         private MyDirections m_eDirection;
         private Vector3 m_vDirection;
@@ -82,6 +96,11 @@ namespace ProjectThief {
 
         #region Constructors
         #region Distract
+
+        public float LightDetectDistance
+        {
+            get { return m_fLightDetectDistance; }
+        }
         public float SoundDetectDistance
         {
             get { return m_fSoundDetectDistance; }
@@ -114,8 +133,8 @@ namespace ProjectThief {
 
         public AIStateBase CurrentState { get; set; }
         // The player unit this enemy is trying to shoot at.
-        public GameObject TargetLight { get; set; }
-        public GameObject TargetSound { get; set; }
+        public DistractLight TargetLight { get; set; }
+        public DistractSound TargetSound { get; set; }
         #endregion
         #endregion
 
@@ -130,7 +149,7 @@ namespace ProjectThief {
 
         private void InitStates()
         {
-            patrol = new Patrol(this, _path, _direction, _waypointArriveDistance );
+            patrol = new Patrol(this, _paths, _direction, _waypointArriveDistance, _currenPathNumber );
             _states.Add(patrol);
 
             patrolMoveTo = new PatrolMoveTo(this);
@@ -178,7 +197,7 @@ namespace ProjectThief {
                 Debug.Log("GameLost");
                 GameManager.instance.levelController.PlayerFound();
             }
-            Debug.DrawLine(transform.forward, m_vDirection * m_fMaxDetectionRange);
+            Debug.DrawLine(transform.forward, m_vDirection * m_fMaxDetectionRange, Color.blue);
 
         }
 
@@ -277,6 +296,10 @@ namespace ProjectThief {
                 direction, turnSpeedRad, 0f);
             transform.rotation = Quaternion.LookRotation(rotation, transform.up);
         }
-
+        void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, LightDetectDistance);
+        }
     }
 }

@@ -17,6 +17,10 @@ namespace ProjectThief
         [SerializeField]
         private GameObject m_goShade;
         [SerializeField]
+        private GameObject m_goPausePlan;
+        [SerializeField]
+        private GameObject m_goPauseMenuBg;
+        [SerializeField]
         private Button m_bPauseButton;
         [SerializeField]
         private GameObject m_goMenuConfirm;
@@ -65,6 +69,8 @@ namespace ProjectThief
         public void Pause()
         {
             m_goShade.SetActive(true);
+            m_goPausePlan.SetActive(true);
+            m_goPauseMenuBg.SetActive(true);
             m_goPauseMenu.SetActive(true);
             m_bPauseButton.interactable = false;
             GameManager.instance.canMove = false;
@@ -74,8 +80,9 @@ namespace ProjectThief
         public void Continue()
         {
             m_goShade.SetActive(false);
-            m_goPauseMenu.SetActive(false);
-            m_goPlan.SetActive(false);
+            m_goPausePlan.SetActive(false);
+            m_goPauseMenuBg.SetActive(false);
+            m_goPauseMenu.SetActive(false);            
             m_bPauseButton.interactable = true;
             GameManager.instance.canMove = true;
             Time.timeScale = 1f;
@@ -105,7 +112,7 @@ namespace ProjectThief
         public void PauseExit()
         {
             m_goPauseMenu.SetActive(false);
-            m_goExitConfirm.SetActive(true);
+            m_goExitConfirm.SetActive(true);            
         }
 
         public void ExitYes()
@@ -117,6 +124,14 @@ namespace ProjectThief
         {
             m_goExitConfirm.SetActive(false);
             m_goPauseMenu.SetActive(true);
+        }
+
+        public void IntroContinue()
+        {
+            m_goPlan.SetActive(false);
+            m_bPauseButton.interactable = true;
+            GameManager.instance.canMove = true;
+            Time.timeScale = 1f;
         }
     }
 }

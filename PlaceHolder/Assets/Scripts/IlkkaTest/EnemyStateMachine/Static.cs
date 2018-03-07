@@ -14,7 +14,7 @@ namespace ProjectThief.AI
         {
             State = AIStateType.Static;
             Owner = owner;
-            AddTransition(AIStateType.PatrolMoveTo);
+            AddTransition(AIStateType.StaticTurnTo);
             m_eDirection = currentDirection;
 
         }
@@ -56,23 +56,32 @@ namespace ProjectThief.AI
 
         private bool ChangeState()
         {
-            int soundLayer = Owner.LightMask;
-
+            int lightLayer = Owner.LightMask;
+            
             Collider[] lights = Physics.OverlapSphere(Owner.transform.position,
-                Owner.SoundDetectDistance, soundLayer);
+                Owner.LightDetectDistance, lightLayer);
             if (lights.Length > 0)
             {
-                foreach (Collider light in lights)
+                Debug.Log("valoja on");
+
+                foreach (Collider item in lights)
                 {
-                    DistractLight lightSignal = light.GetComponent<DistractLight>();
-                    if (lightSignal.LightOn == true && lightSignal != null)
+                    DistractLight light =
+                        item.gameObject.GetComponentInHierarchy<DistractLight>();
+
+                    Debug.Log(light.LightOn);
+                    if (light.LightOn == true && light != null)
                     {
-                        return Owner.PerformTransition(AIStateType.StaticTurnTo);
+                        Owner.TargetLight = light;
+                        bool result = Owner.PerformTransition(AIStateType.StaticTurnTo);
+                        return result;
                     }
                 }
             }
             return false;
         }
+
+        
 
     }
 }

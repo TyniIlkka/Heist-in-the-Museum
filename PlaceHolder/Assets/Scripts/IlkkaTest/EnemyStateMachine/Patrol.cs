@@ -12,14 +12,14 @@ namespace ProjectThief.AI {
 
         public Waypoint CurrentWaypoint { get; private set; }
 
-        public Patrol(Guard owner, Path path,
-            Direction direction, float arriveDistance)
+        public Patrol(Guard owner, List<Path> path,
+            Direction direction, float arriveDistance, int currentPathNumber)
             : base()
         {
             State = AIStateType.Patrol;
             Owner = owner;
             AddTransition(AIStateType.PatrolMoveTo);
-            _path = path;
+            _path = path[currentPathNumber];
             _direction = direction;
             _arriveDistance = arriveDistance;
         }

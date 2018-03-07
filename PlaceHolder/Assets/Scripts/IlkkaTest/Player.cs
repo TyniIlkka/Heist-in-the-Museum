@@ -24,10 +24,12 @@ namespace ProjectThief {
 
         private Node currentNode;
         private Vector3 m_vTargetPosition;
+        private Animator m_aPlayerAnimator;
 
         public override void Init()
         {
             player = GetComponent<Player>();
+            m_aPlayerAnimator = GetComponent<Animator>();
         }
 
         // Update is called once per frame
@@ -35,6 +37,8 @@ namespace ProjectThief {
         {
             pathList = m_pgmGrid.Path;
             StartCoroutine(moveObject());
+            MoveAnimation();
+            transform.rotation = Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y, 0));
         }
 
         private Node GetWaypoint()
@@ -106,6 +110,20 @@ namespace ProjectThief {
         public void ResetPath()
         {
 
+        }
+
+        private void MoveAnimation()
+        {
+            if (pathList.Count > 0)
+            {
+                m_aPlayerAnimator.SetBool("Moving", true);
+                Debug.Log("Moving");
+            }
+            else
+            {
+                m_aPlayerAnimator.SetBool("Moving", false);
+                Debug.Log("Idle");
+            }         
         }
     }
 }
