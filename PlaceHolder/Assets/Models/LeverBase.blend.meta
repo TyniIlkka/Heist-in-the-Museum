@@ -1,45 +1,50 @@
 fileFormatVersion: 2
-guid: 259612b408d0e06499058e66ea30392f
-timeCreated: 1520356867
+guid: 759bb060a3c16f142b1f4c2822eda0a9
+timeCreated: 1520387830
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2100000: HeadMaterial__Purple
-    2100002: GreenMaterial__Purple
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: level
+    100000: L-Base
+    100002: L_Connect
+    100004: L_Shelter
+    100006: //RootNode
+    400000: L-Base
+    400002: L_Connect
+    400004: L_Shelter
+    400006: //RootNode
+    2300000: L-Base
+    2300002: L_Connect
+    2300004: L_Shelter
+    3300000: L-Base
+    3300002: L_Connect
+    3300004: L_Shelter
+    4300000: L_Shelter
+    4300002: L_Connect
+    4300004: L-Base
     7400000: Default Take
     9500000: //RootNode
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: BrassMaterial__Brass
+      name: BlueMaterial
+    second: {fileID: 2100000, guid: fb3b63000eff0d94cb7512231a88402e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BrassMaterial
     second: {fileID: 2100000, guid: 72a07ea8ca561584e9f32dc2833e26d6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: GreenMaterial__Purple
-    second: {fileID: 2100000, guid: 4b8124f880f99a74f90ca6ee83f6dca1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: MetalMaterial__Brass
-    second: {fileID: 2100000, guid: 72a07ea8ca561584e9f32dc2833e26d6, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: MetalMaterial__Iron
+      name: IronMaterial
     second: {fileID: 2100000, guid: ca728cba12fa509448833cf5664ffc57, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
