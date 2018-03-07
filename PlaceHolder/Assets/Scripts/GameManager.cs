@@ -16,6 +16,8 @@ namespace ProjectThief
         public bool moveToObject;
         public ObjectBase targetObject;
 
+        [SerializeField] List<Guard> guards;
+
         private void Awake()
         {
             if (instance == null)

@@ -15,8 +15,12 @@ namespace ProjectThief
         public abstract void Move(Vector3 direction);
         public abstract void Turn(Vector3 amount);
 
+        protected void Awake()
+        {
+            Init();
+        }
 
-        public void Init()
+        public virtual void Init()
         {
             anim = GetComponent<Animator>();
         }

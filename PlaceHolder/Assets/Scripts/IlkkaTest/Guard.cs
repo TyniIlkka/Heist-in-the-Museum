@@ -1,7 +1,12 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using ProjectThief.PathFinding;
+using System.Linq;
+using System.Text;
+using JetBrains.Annotations;
+using ProjectThief.AI;
+using ProjectThief.WaypointSystem;
 
 namespace ProjectThief {
 
@@ -16,31 +21,56 @@ namespace ProjectThief {
     public class Guard : CharacterBase {
 
         [SerializeField]
-        Player player;
-        
-        
+        private Player player;
 
+        #region States
+        Patrol patrol;
+        PatrolMoveTo patrolMoveTo;
+        Static guardStatic;
+        StaticTurnTo turnToStatic;
 
-        [SerializeField, Tooltip("if True, guard is moving, otherwise static")]
+        #endregion
+
+        #region Moving, turning, pathfinding
+        [SerializeField, Header("Patrolling?"), Tooltip("if True, guard is moving, otherwise static")]
         private bool m_bMoving;
+
+        [SerializeField, Range(0, 40), Tooltip("How far can sounds distract guards:")]
+        private float m_fSoundDetectDistance;
+        [SerializeField, Range(0, 40), Tooltip("How far can sounds distract guards:")]
+        private float m_fLightDetectDistance;
+
+        [SerializeField]
+        private LayerMask m_lmLightMask;
+        [SerializeField]
+        private LayerMask m_lmSoundMask;
+        //Set Path
+        [SerializeField]
+        private Path _path;
+        //How smooth guards is going to corner.
+        [SerializeField]
+        private float _waypointArriveDistance;
+        //Which way are we moving.
+        [SerializeField]
+        private Direction _direction;
 
         [SerializeField]
         private float m_fMovementSpeed;
         [SerializeField]
         private float m_fTurnSpeed;
+        #endregion
 
         #region Detecting variables.
-
-
+      
         [SerializeField, Tooltip("Which Direction Guard is looking if not patrolling: ")]
         private MyDirections m_eDirection;
         private Vector3 m_vDirection;
 
         [SerializeField]
         private LayerMask m_lmDetectHitMask;
-        [SerializeField, Range(0, 100), Tooltip("How far guard detect on facing direction.")]
+        [SerializeField, Range(0,20), Tooltip("How far guard detect on facing direction.")]
         private float m_fMaxDetectionRange;
-        [SerializeField, Range(0, 100), Tooltip("How close guard detect to every direction.")]
+        [SerializeField, Range(0, 10), Tooltip("How close guard detect to every direction.")]
         private float m_fMinDetectionRange;
 
         [SerializeField, Range(0, 90), Tooltip("FieldOfView of guard.")]
@@ -50,35 +80,93 @@ namespace ProjectThief {
         private Vector3 m_vPosition;
         #endregion
 
-        public void Start()
+        #region Constructors
+        #region Distract
+        public float SoundDetectDistance
         {
-            
-            
+            get { return m_fSoundDetectDistance; }
+        }
+        public LayerMask SoundMask
+        {
+            get { return m_lmSoundMask; }
+        }
+        public LayerMask LightMask
+        {
+            get { return m_lmLightMask; }
+        }
+        #endregion
+
+        #region StateMachine
+        //CurrentDirection
+        public MyDirections CurrentDirection
+        {
+            get { return m_eDirection; }
+            set { m_eDirection = value; }
+        }
+        // Vector Direction
+        public Vector3 Direction
+        {
+            get { return m_vDirection; }
+            set { m_vDirection = value; }
+        }
+        //List of states
+        private IList<AIStateBase> _states = new List<AIStateBase>();
+
+        public AIStateBase CurrentState { get; set; }
+        // The player unit this enemy is trying to shoot at.
+        public GameObject TargetLight { get; set; }
+        public GameObject TargetSound { get; set; }
+        #endregion
+        #endregion
+
+        public override void Init()
+        {
+            // Runs the base classes implementation of the Init method.
+            base.Init();
+
+            // Initializes the state system.
+            InitStates();
+        }
+
+        private void InitStates()
+        {
+            patrol = new Patrol(this, _path, _direction, _waypointArriveDistance );
+            _states.Add(patrol);
+
+            patrolMoveTo = new PatrolMoveTo(this);
+            _states.Add(patrolMoveTo);
+
+            guardStatic = new Static(this, CurrentDirection);
+            _states.Add(guardStatic);
+
+            turnToStatic = new StaticTurnTo(this);
+            _states.Add(turnToStatic);
+
+            CheckCurrentState();
+            CurrentState.StateActivated();
+
+            Debug.Log(CurrentState);
+        }
+
+        private void CheckCurrentState()
+        {
+            if (m_bMoving)
+            {
+                CurrentState = patrol;
+            }
+            else if (!m_bMoving)
+            {
+                CurrentState = guardStatic;
+            }
         }
 
         private void Update()
         {
+
+            CurrentState.Update();
             if (!m_bMoving)
             {
-                switch (m_eDirection)
-                {
-                    case MyDirections.North:
-                        transform.forward = new Vector3(0f, 0f, 1f);
-                        m_vDirection = new Vector3(0f, 0f, 1f);
-                        break;
-                    case MyDirections.East:
-                        transform.forward = new Vector3(1f, 0f, 0f);
-                        m_vDirection = new Vector3(1f, 0f, 0f);
-                        break;
-                    case MyDirections.South:
-                        transform.forward = new Vector3(0f, 0f, -1f);
-                        m_vDirection = new Vector3(0f, 0f, -1f);
-                        break;
-                    case MyDirections.West:
-                        transform.forward = new Vector3(-1f, 0f, 0f);
-                        m_vDirection = new Vector3(-1f, 0f, 0f);
-                        break;
-                }
+                
             }
         }
 
@@ -92,6 +180,44 @@ namespace ProjectThief {
             }
             Debug.DrawLine(transform.forward, m_vDirection * m_fMaxDetectionRange);
 
+        }
+
+        public bool PerformTransition(AIStateType targetState)
+        {
+            if (!CurrentState.CheckTransition(targetState))
+            {
+                return false;
+            }
+
+            bool result = false;
+
+            AIStateBase state = GetStateByType(targetState);
+            if (state != null)
+            {
+                CurrentState.StateDeactivating();
+                CurrentState = state;
+                CurrentState.StateActivated();
+                result = true;
+                Debug.Log(CurrentState);
+            }
+
+            return result;
+        }
+
+        private AIStateBase GetStateByType(AIStateType stateType)
+        {
+            // Returns the first object from the list _states which State property's value
+            // equals to stateType. If no object is found, returns null.
+            //return _states.FirstOrDefault(state => state.State == stateType);
+
+            foreach (AIStateBase state in _states)
+            {
+                if (state.State == stateType)
+                {
+                    return state;
+                }
+            }
+            return null;
         }
 
         public bool CanSeePlayer()
@@ -121,16 +247,10 @@ namespace ProjectThief {
                     else
                     {
                         Debug.DrawLine(transform.position, hit.point, Color.green);
-                        Debug.Log(hit);
                     }
-                    
-
                 }
             }
-
-            
-
-                return false;
+            return false;
         }
 
         /// <summary>
@@ -138,7 +258,9 @@ namespace ProjectThief {
         /// </summary>
         public override void Move(Vector3 direction)
         {
-            
+            direction = direction.normalized;
+            Vector3 position = transform.position + direction * m_fMovementSpeed * Time.deltaTime;
+            transform.position = position;
 
         }
 
