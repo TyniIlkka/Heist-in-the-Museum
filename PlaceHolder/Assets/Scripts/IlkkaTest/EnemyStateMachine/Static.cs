@@ -26,8 +26,6 @@ namespace ProjectThief.AI
 
         public override void Update()
         {
-            Debug.Log("Are We running this?" + State);
-
             // 1. Should we change the state?
             //   1.1 If yes, change state and return.
 

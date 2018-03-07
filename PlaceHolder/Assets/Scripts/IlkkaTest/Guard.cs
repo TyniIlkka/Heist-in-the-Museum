@@ -32,7 +32,7 @@ namespace ProjectThief {
         #endregion
 
         #region Moving, turning, pathfinding
-        [SerializeField, Header("Patrolling?"), Tooltip("if True, guard is moving, otherwise static")]
+        [SerializeField, Header("Patrolling or Static"), Tooltip("if True, guard is moving, otherwise static")]
         private bool m_bMoving;
 
         [SerializeField, Range(0, 40), Tooltip("How far can sounds distract guards:")]
