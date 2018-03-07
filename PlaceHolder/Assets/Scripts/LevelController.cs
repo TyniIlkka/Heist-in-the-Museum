@@ -25,16 +25,31 @@ namespace ProjectThief
             m_mcController = GameManager.instance.mouseController;
             m_goScreen.SetActive(true);
             GameManager.instance.lobbyIsActive = true;
+            GameManager.instance.canMove = false;
+            Time.timeScale = 0f;
         }
 
         // Update is called once per frame
         private void Update()
         {
+            MouseOverHudCheck();
+        }
+
+        /// <summary>
+        /// Checks if mouse is over hud.
+        /// </summary>
+        private void MouseOverHudCheck()
+        {
             if (EventSystem.current.IsPointerOverGameObject())
             {
                 m_mcController.DefaultCursor();
+                GameManager.instance.canMove = false;
             }
-        }        
+            else
+            {
+                GameManager.instance.canMove = true;
+            }
+        }
 
         /// <summary>
         /// If player is found call then 

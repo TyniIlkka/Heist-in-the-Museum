@@ -11,7 +11,7 @@ namespace ProjectThief
         [SerializeField, Tooltip("Cameras starting horizontal angle")]
         private float m_fHorizontalAngle;
         [SerializeField, Tooltip("Cameras movement speed")]
-        private float m_fMoveSpeed = 5;
+        private float m_fMoveSpeed = 90;
         [SerializeField, Tooltip("Distance from player")]
         private float m_fDistance = 10;
         [SerializeField, Tooltip("Reset Camera speed")]
@@ -28,11 +28,16 @@ namespace ProjectThief
         /// </summary>
         private void Awake()
         {
+            if (m_tPlayerTransform == null)
+                m_tPlayerTransform = GameManager.instance.player.transform;
+
             transform.position = m_tPlayerTransform.position;
+            m_fHorizontalAngle = m_tPlayerTransform.rotation.eulerAngles.y;
+            Debug.Log("angle: " + m_fHorizontalAngle);            
             transform.rotation = Quaternion.Euler(m_fVerticalAngle, m_fHorizontalAngle, 0);
             transform.position -= transform.forward * m_fDistance;
             m_fAngle = m_fHorizontalAngle;
-            m_qOrginalRotation = transform.rotation;
+            m_qOrginalRotation = transform.rotation;            
         }
 
         /// <summary>
@@ -43,15 +48,12 @@ namespace ProjectThief
             if (Input.GetMouseButton(1) && !m_bReset)            
                 ControlCamera();
             
-            if (Input.GetKey(KeyCode.R))            
+            else          
                 m_bReset = true;
             
             ResetPosition();
 
-            transform.position = m_tPlayerTransform.position;
-
-            if (!m_bReset)
-                transform.rotation = Quaternion.Euler(m_fVerticalAngle, m_fAngle, 0);
+            transform.position = m_tPlayerTransform.position;            
 
             transform.position -= transform.forward * m_fDistance;
         }
@@ -62,7 +64,10 @@ namespace ProjectThief
         private void ControlCamera()
         {
             if (Input.GetAxis("Mouse X") != 0)            
-                m_fAngle += (m_fMoveSpeed * Input.GetAxis("Mouse X")) * Time.deltaTime;            
+                m_fAngle += (m_fMoveSpeed * Input.GetAxis("Mouse X")) * Time.deltaTime;
+
+            Debug.Log("rotating");
+            transform.rotation = Quaternion.Euler(m_fVerticalAngle, m_fAngle, 0);
         }
 
         /// <summary>

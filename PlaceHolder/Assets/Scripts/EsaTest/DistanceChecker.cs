@@ -32,11 +32,9 @@ namespace ProjectThief
         }
 
         private void GetObjectsInRange()
-        {
-            int itemLayer = LayerMask.NameToLayer("InterActable");
+        {            
             Collider[] objects = Physics.OverlapSphere(transform.position, m_fActivate);
-
-            Debug.Log("objects: " + objects.Length);
+            
             if (objects.Length > 0)
             {
                 for (int i = 0; i < objects.Length; i++)
@@ -47,8 +45,7 @@ namespace ProjectThief
                         !m_lObjects.Contains(objects[i].GetComponent<ObjectBase>()))
                     {
                         objects[i].GetComponent<ObjectBase>().IsActive = true;
-                        m_lObjects.Add(objects[i].GetComponent<ObjectBase>());
-                        Debug.Log("object added");
+                        m_lObjects.Add(objects[i].GetComponent<ObjectBase>());                        
                     }                    
                 }
             }

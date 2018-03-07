@@ -67,6 +67,7 @@ namespace ProjectThief
             m_goShade.SetActive(true);
             m_goPauseMenu.SetActive(true);
             m_bPauseButton.interactable = false;
+            GameManager.instance.canMove = false;
             Time.timeScale = 0f;            
         }
 
@@ -76,6 +77,7 @@ namespace ProjectThief
             m_goPauseMenu.SetActive(false);
             m_goPlan.SetActive(false);
             m_bPauseButton.interactable = true;
+            GameManager.instance.canMove = true;
             Time.timeScale = 1f;
         }
 

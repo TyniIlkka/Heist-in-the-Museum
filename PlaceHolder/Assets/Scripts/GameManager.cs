@@ -15,6 +15,7 @@ namespace ProjectThief
         public bool lobbyIsActive;
         public bool moveToObject;
         public ObjectBase targetObject;
+        public bool canMove;
 
         [SerializeField] List<Guard> guards;
 

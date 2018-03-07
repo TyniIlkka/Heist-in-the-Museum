@@ -22,8 +22,8 @@ namespace ProjectThief.PathFinding
         {
             gridSomething = GetComponentInParent<PathGridManager>();
             myTransform = transform;                            // sets myTransform to this GameObject.transform
-            destinationPosition = myTransform.position;         // prevents myTransform reset
-            destinationPosition = GameManager.instance.player.transform.position;
+            myTransform.position = GameManager.instance.player.gameObject.transform.position;
+            destinationPosition = myTransform.position;         // prevents myTransform reset            
         }
 
         void Update()
@@ -41,41 +41,43 @@ namespace ProjectThief.PathFinding
                 moveSpeed = 3;
             }
 
-
-            // Moves the Player if the Left Mouse Button was clicked
-            if (Input.GetMouseButtonDown(0) && GUIUtility.hotControl == 0)
+            if (GameManager.instance.canMove)
             {
-
-                Plane playerPlane = new Plane(Vector3.up, myTransform.position);
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                float hitdist = 0.0f;
-
-                if (playerPlane.Raycast(ray, out hitdist))
+                // Moves the Player if the Left Mouse Button was clicked
+                if (Input.GetMouseButtonDown(0) && GUIUtility.hotControl == 0)
                 {
-                    
-                    if (!gridSomething.NodeFromWorldPos(ray.GetPoint(hitdist)).m_bIsBlocked)
+
+                    Plane playerPlane = new Plane(Vector3.up, myTransform.position);
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    float hitdist = 0.0f;
+
+                    if (playerPlane.Raycast(ray, out hitdist))
                     {
-                        positionToMove = ray.GetPoint(hitdist);
-                        MoveToCursorClickPoint(positionToMove);
+
+                        if (!gridSomething.NodeFromWorldPos(ray.GetPoint(hitdist)).m_bIsBlocked)
+                        {
+                            positionToMove = ray.GetPoint(hitdist);
+                            MoveToCursorClickPoint(positionToMove);
+                        }
                     }
                 }
-            }
 
-            // Moves the player if the mouse button is hold down
-            else if (Input.GetMouseButton(0) && GUIUtility.hotControl == 0)
-            {
-
-                Plane playerPlane = new Plane(Vector3.up, myTransform.position);
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                float hitdist = 0.0f;
-
-                if (playerPlane.Raycast(ray, out hitdist))
+                // Moves the player if the mouse button is hold down
+                else if (Input.GetMouseButton(0) && GUIUtility.hotControl == 0)
                 {
-                    
-                    if (!gridSomething.NodeFromWorldPos(ray.GetPoint(hitdist)).m_bIsBlocked)
+
+                    Plane playerPlane = new Plane(Vector3.up, myTransform.position);
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    float hitdist = 0.0f;
+
+                    if (playerPlane.Raycast(ray, out hitdist))
                     {
-                        positionToMove = ray.GetPoint(hitdist);
-                        MoveToCursorClickPoint(positionToMove);
+
+                        if (!gridSomething.NodeFromWorldPos(ray.GetPoint(hitdist)).m_bIsBlocked)
+                        {
+                            positionToMove = ray.GetPoint(hitdist);
+                            MoveToCursorClickPoint(positionToMove);
+                        }
                     }
                 }
             }
