@@ -6,6 +6,7 @@ namespace ProjectThief
 {
     public class DistractLight : MonoBehaviour
     {
+        [SerializeField]
         private bool m_bLightOn;
 
         public bool LightOn

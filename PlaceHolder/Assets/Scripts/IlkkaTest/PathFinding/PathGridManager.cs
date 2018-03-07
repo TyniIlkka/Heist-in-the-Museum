@@ -126,7 +126,7 @@ namespace ProjectThief.PathFinding
 
         private void OnDrawGizmos()
         {
-            Gizmos.DrawWireCube(transform.position, new Vector3(m_vGridSize.x, 1, m_vGridSize.y));
+            //Gizmos.DrawWireCube(transform.position, new Vector3(m_vGridSize.x, 1, m_vGridSize.y));
 
             if (Path != null)
             {
@@ -165,7 +165,7 @@ namespace ProjectThief.PathFinding
                     if (node.m_bIsPath == true) Gizmos.color = Color.blue;
                     if (node == playerNode) Gizmos.color = Color.black;
                     if (node == targetNode) Gizmos.color = Color.black;
-                    Gizmos.DrawWireCube(node.m_vPosition, Vector3.one * (m_fNodeWidth - .1f));
+                    //Gizmos.DrawWireCube(node.m_vPosition, Vector3.one * (m_fNodeWidth - .1f));
                 }
             }
         }

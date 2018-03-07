@@ -17,6 +17,7 @@ namespace ProjectThief.AI
         public override void StateActivated()
         {
             base.StateActivated();
+            Debug.Log("käytiinkö täällä");
 
         }
 
@@ -36,14 +37,18 @@ namespace ProjectThief.AI
 
         private bool ChangeState()
         {
-            //int mask = LayerMask.GetMask( "Player" );
-            int lightLayer = LayerMask.NameToLayer("SoundOutput");
+            int lightLayer = Owner.LightMask;
 
             Collider[] lights = Physics.OverlapSphere(Owner.transform.position,
-                Owner.SoundDetectDistance, lightLayer);
-            if (lights.Length <= 0)
+                Owner.LightDetectDistance, lightLayer);
+            foreach (Collider light in lights)
             {
-               
+                DistractLight lightSignal = light.GetComponent<DistractLight>();
+                if (lightSignal.LightOn == true && lightSignal != null)
+                {
+                    Owner.TargetLight = lightSignal;
+                    return Owner.PerformTransition(AIStateType.StaticTurnTo);
+                }
             }
             return false;
         }
