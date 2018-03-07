@@ -25,7 +25,7 @@ namespace ProjectThief {
         private Node currentNode;
         private Vector3 m_vTargetPosition;
 
-        private void Start()
+        public override void Init()
         {
             player = GetComponent<Player>();
         }

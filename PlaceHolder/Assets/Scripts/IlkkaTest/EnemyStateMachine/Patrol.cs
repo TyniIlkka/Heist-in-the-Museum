@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ProjectThief.WaypointSystem;
 
 namespace ProjectThief.AI {
     public class Patrol : AIStateBase
     {
-
         private Path _path;
         private Direction _direction;
         private float _arriveDistance;
@@ -37,13 +37,15 @@ namespace ProjectThief.AI {
 
             if (!ChangeState())
             {
+
                 // 2. Are we close enough the current waypoint?
                 //   2.1 If yes, get the next waypoint
                 CurrentWaypoint = GetWaypoint();
                 // 3. Move towards the current waypoint
-                Owner.Mover.Move(Owner.transform.forward);
+                Owner.Move(Owner.transform.forward);
                 // 4. Rotate towards the current waypoint
-                Owner.Mover.Turn(CurrentWaypoint.Position);
+                Owner.Turn(CurrentWaypoint.Position);
+
             }
         }
 
@@ -63,32 +65,23 @@ namespace ProjectThief.AI {
 
         private bool ChangeState()
         {
-            //int mask = LayerMask.GetMask( "Player" );
-            int soundLayer = LayerMask.NameToLayer("SoundOutput");
-            int mask = Flags.CreateMask(soundLayer);
+            int soundLayer = Owner.SoundMask;
 
-            Collider[] players = Physics.OverlapSphere(Owner.transform.position,
-                Owner.SoundDetectDistance, mask);
-            if (players.Length > 0)
+            Collider[] sounds = Physics.OverlapSphere(Owner.transform.position,
+                Owner.SoundDetectDistance, soundLayer);
+            if (sounds.Length > 0)
             {
-                PlayerUnit player =
-                    players[0].gameObject.GetComponentInHierarchy<PlayerUnit>();
-
-                if (player != null)
+                foreach (Collider sound in sounds)
                 {
-                    Owner.Target = player;
-                    float sqrDistanceToPlayer = Owner.ToTargetVector.Value.sqrMagnitude;
-                    if (sqrDistanceToPlayer <
-                         Owner.DetectEnemyDistance * Owner.DetectEnemyDistance)
-                    {
-                        return Owner.PerformTransition(AIStateType.FollowTarget);
-                    }
+                    DistractSound signal = sound.GetComponent<DistractSound>();
 
-                    Owner.Target = null;
-                }
+                    if (signal != null && signal.SoundOn == true)
+                    {
+                        return Owner.PerformTransition(AIStateType.PatrolMoveTo);  
+                    }  
+                }        
             }
             return false;
         }
-
     }
 }

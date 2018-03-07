@@ -6,29 +6,18 @@ namespace ProjectThief.AI
 {
     public class StaticTurnTo : AIStateBase
     {
-
-        private Path _path;
-        private Direction _direction;
-        private float _arriveDistance;
-
-        public Waypoint CurrentWaypoint { get; private set; }
-
-        public StaticTurnTo(Guard owner, Path path,
-            Direction direction, float arriveDistance)
+        public StaticTurnTo(Guard owner)
             : base()
         {
             State = AIStateType.Patrol;
             Owner = owner;
-            AddTransition(AIStateType.PatrolMoveTo);
-            _path = path;
-            _direction = direction;
-            _arriveDistance = arriveDistance;
+            AddTransition(AIStateType.Static);
         }
 
         public override void StateActivated()
         {
             base.StateActivated();
-            CurrentWaypoint = _path.GetClosestWaypoint(Owner.transform.position);
+
         }
 
         public override void Update()
@@ -38,55 +27,23 @@ namespace ProjectThief.AI
 
             if (!ChangeState())
             {
-                // 2. Are we close enough the current waypoint?
-                //   2.1 If yes, get the next waypoint
-                CurrentWaypoint = GetWaypoint();
-                // 3. Move towards the current waypoint
-                Owner.Mover.Move(Owner.transform.forward);
-                // 4. Rotate towards the current waypoint
-                Owner.Mover.Turn(CurrentWaypoint.Position);
+                // 2. Turn to Target light
+                Owner.Turn(Owner.TargetLight.transform.position);
             }
         }
 
-        private Waypoint GetWaypoint()
-        {
-            Waypoint result = CurrentWaypoint;
-            Vector3 toWaypointVector = CurrentWaypoint.Position - Owner.transform.position;
-            float toWaypointSqr = toWaypointVector.sqrMagnitude;
-            float sqrArriveDistance = _arriveDistance * _arriveDistance;
-            if (toWaypointSqr <= sqrArriveDistance)
-            {
-                result = _path.GetNextWaypoint(CurrentWaypoint, ref _direction);
-            }
-
-            return result;
-        }
+        
 
         private bool ChangeState()
         {
             //int mask = LayerMask.GetMask( "Player" );
             int lightLayer = LayerMask.NameToLayer("SoundOutput");
-            int mask = Flags.CreateMask(lightLayer);
 
-            Collider[] players = Physics.OverlapSphere(Owner.transform.position,
-                Owner.SoundDetectDistance, mask);
-            if (players.Length > 0)
+            Collider[] lights = Physics.OverlapSphere(Owner.transform.position,
+                Owner.SoundDetectDistance, lightLayer);
+            if (lights.Length <= 0)
             {
-                PlayerUnit player =
-                    players[0].gameObject.GetComponentInHierarchy<PlayerUnit>();
-
-                if (player != null)
-                {
-                    Owner.Target = player;
-                    float sqrDistanceToPlayer = Owner.ToTargetVector.Value.sqrMagnitude;
-                    if (sqrDistanceToPlayer <
-                         Owner.DetectEnemyDistance * Owner.DetectEnemyDistance)
-                    {
-                        return Owner.PerformTransition(AIStateType.FollowTarget);
-                    }
-
-                    Owner.Target = null;
-                }
+               
             }
             return false;
         }

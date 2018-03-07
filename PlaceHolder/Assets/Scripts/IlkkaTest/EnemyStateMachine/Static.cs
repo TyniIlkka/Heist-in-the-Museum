@@ -1,18 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ProjectThief.WaypointSystem;
 
 namespace ProjectThief.AI
 {
     public class Static : AIStateBase
     {
+        private MyDirections m_eDirection;
 
-        public Static(Guard owner)
+        public Static(Guard owner, MyDirections currentDirection)
             : base()
         {
             State = AIStateType.Static;
             Owner = owner;
             AddTransition(AIStateType.PatrolMoveTo);
+            m_eDirection = currentDirection;
 
         }
 
@@ -23,39 +26,51 @@ namespace ProjectThief.AI
 
         public override void Update()
         {
+            Debug.Log("Are We running this?" + State);
+
             // 1. Should we change the state?
             //   1.1 If yes, change state and return.
 
             if (!ChangeState())
             {
-                // 2. Are we close enough the current waypoint?
-                //   2.1 If yes, get the next waypoint
-                CurrentWaypoint = GetWaypoint();
-                // 3. Rotate towards normal.
-                Owner.Turn(target.Position);
+                // 2. Stay on place.
+                switch (m_eDirection)
+                {
+                    case MyDirections.North:
+                        Owner.transform.forward = new Vector3(0f, 0f, 1f);
+                        Owner.Direction = new Vector3(0f, 0f, 1f);
+                        break;
+                    case MyDirections.East:
+                        Owner.transform.forward = new Vector3(1f, 0f, 0f);
+                        Owner.Direction = new Vector3(1f, 0f, 0f);
+                        break;
+                    case MyDirections.South:
+                        Owner.transform.forward = new Vector3(0f, 0f, -1f);
+                        Owner.Direction = new Vector3(0f, 0f, -1f);
+                        break;
+                    case MyDirections.West:
+                        Owner.transform.forward = new Vector3(-1f, 0f, 0f);
+                        Owner.Direction = new Vector3(-1f, 0f, 0f);
+                        break;
+                }
             }
         }
 
         private bool ChangeState()
         {
-            //int mask = LayerMask.GetMask( "Player" );
-            int soundLayer = LayerMask.NameToLayer("SoundOutput");
+            int soundLayer = Owner.LightMask;
 
             Collider[] lights = Physics.OverlapSphere(Owner.transform.position,
                 Owner.SoundDetectDistance, soundLayer);
             if (lights.Length > 0)
             {
-                if (lights != null)
+                foreach (Collider light in lights)
                 {
-                    Owner.Target = player;
-                    float sqrDistanceToPlayer = Owner.ToTargetVector.Value.sqrMagnitude;
-                    if (sqrDistanceToPlayer <
-                         Owner.DetectEnemyDistance * Owner.DetectEnemyDistance)
+                    DistractLight lightSignal = light.GetComponent<DistractLight>();
+                    if (lightSignal.LightOn == true && lightSignal != null)
                     {
                         return Owner.PerformTransition(AIStateType.StaticTurnTo);
                     }
-
-                    Owner.Target = null;
                 }
             }
             return false;
