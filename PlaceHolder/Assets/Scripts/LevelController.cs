@@ -24,6 +24,7 @@ namespace ProjectThief
             GameManager.instance.player = m_goPlayer;
             m_mcController = GameManager.instance.mouseController;
             m_goScreen.SetActive(true);
+            GameManager.instance.lobbyIsActive = true;
         }
 
         // Update is called once per frame

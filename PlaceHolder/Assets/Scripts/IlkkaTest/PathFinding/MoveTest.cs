@@ -23,6 +23,7 @@ namespace ProjectThief.PathFinding
             gridSomething = GetComponentInParent<PathGridManager>();
             myTransform = transform;                            // sets myTransform to this GameObject.transform
             destinationPosition = myTransform.position;         // prevents myTransform reset
+            destinationPosition = GameManager.instance.player.transform.position;
         }
 
         void Update()

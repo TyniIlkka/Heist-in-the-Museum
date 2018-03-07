@@ -69,12 +69,14 @@ namespace ProjectThief
 
             if (GameManager.instance.lobbyIsActive)
             {
-                 movePos = RoomPos;                
+                 movePos = RoomPos;
+                GameManager.instance.lobbyIsActive = false;
             }
             else
             {
                 movePos = LobbyPos;
                 GameManager.instance.lastPosition = LobbyPos;
+                GameManager.instance.lobbyIsActive = true;
             }
 
             // TODO Fade in and fade out effect.
