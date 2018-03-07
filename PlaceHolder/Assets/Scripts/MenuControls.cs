@@ -13,7 +13,9 @@ namespace ProjectThief
 
         #region Pause controls
         [SerializeField]
-        private GameObject m_goPauseMenu;        
+        private GameObject m_goPauseMenu;
+        [SerializeField]
+        private GameObject m_goShade;
         [SerializeField]
         private GameObject m_goPausePlan;
         [SerializeField]
