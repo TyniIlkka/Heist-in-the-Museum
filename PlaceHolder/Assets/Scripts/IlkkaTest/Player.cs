@@ -38,6 +38,7 @@ namespace ProjectThief {
             pathList = m_pgmGrid.Path;
             StartCoroutine(moveObject());
             MoveAnimation();
+            transform.rotation = Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y, 0));
         }
 
         private Node GetWaypoint()
@@ -113,13 +114,16 @@ namespace ProjectThief {
 
         private void MoveAnimation()
         {
-            if (pathList.Count > 0)            
-                if (transform.position != pathList[pathList.Count - 1].m_vPosition)
-                    Debug.Log("Moving");
-            
+            if (pathList.Count > 0)
+            {
+                m_aPlayerAnimator.SetBool("Moving", true);
+                Debug.Log("Moving");
+            }
             else
+            {
+                m_aPlayerAnimator.SetBool("Moving", false);
                 Debug.Log("Idle");
-            
+            }         
         }
     }
 }

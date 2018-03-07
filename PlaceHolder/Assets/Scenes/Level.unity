@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427194, b: 0.5645252, a: 1}
+  m_IndirectSpecularColor: {r: 0.43667546, g: 0.48427135, b: 0.5645225, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -5723,6 +5723,11 @@ Prefab:
       propertyPath: m_tPlayerTransform
       value: 
       objectReference: {fileID: 427784190}
+    - target: {fileID: 114079180064372616, guid: b63cc373504292f45acdd9cc250dac18,
+        type: 2}
+      propertyPath: moveSpeed
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b63cc373504292f45acdd9cc250dac18, type: 2}
   m_IsPrefabParent: 0
@@ -7227,7 +7232,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4009664088249742, guid: 42d0e2a54dafe434db067074cdc342cd, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4009664088249742, guid: 42d0e2a54dafe434db067074cdc342cd, type: 2}
       propertyPath: m_LocalPosition.y
@@ -7267,6 +7272,11 @@ Prefab:
       propertyPath: m_pgmGrid
       value: 
       objectReference: {fileID: 349369931}
+    - target: {fileID: 95752486721607864, guid: 42d0e2a54dafe434db067074cdc342cd,
+        type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 722727dbb1648ff418929e62fa6a77b1, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 42d0e2a54dafe434db067074cdc342cd, type: 2}
   m_IsPrefabParent: 0
@@ -8614,12 +8624,12 @@ Prefab:
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 402
+      value: 602.5
       objectReference: {fileID: 0}
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 319
+      value: 339
       objectReference: {fileID: 0}
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
