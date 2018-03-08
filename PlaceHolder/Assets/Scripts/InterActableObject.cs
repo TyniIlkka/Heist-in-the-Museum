@@ -13,15 +13,7 @@ namespace ProjectThief
         [SerializeField, Tooltip("Position close to object")]
         private Vector3 m_v3MoveToPos;
 
-        private MouseController m_mcMouseController;
-        private bool moving;
-
-        // Change to private when player can interact whit this.
-        //public bool m_bIsActive;        
-        //public bool m_bIsInteractable;
-
-        //public bool IsActive { set { m_bIsActive = value; } }
-        //public bool IsInteractable { set { m_bIsInteractable = value; } }
+        private MouseController m_mcMouseController;           
 
         private void Awake()
         {
@@ -37,34 +29,19 @@ namespace ProjectThief
         {              
             if (IsActive)
             {
-                m_mcMouseController.InteractCursor();
-                if (m_itKeyItem.Collected)
+                m_mcMouseController.InspectCursor();
+                if (IsInteractable)
                 {
-                    if (Input.GetMouseButtonDown(0))
+                    if (m_itKeyItem.Collected)
                     {
-                        if (IsInteractable)
+                        m_mcMouseController.InteractCursor();
+                        if (Input.GetMouseButtonDown(0))
                         {
                             m_iInventory.RemoveItem(m_itKeyItem);
-                        }
-                        else
-                        {
-                            // TODO Move player to position to interact with object.
-                            // And interact with object?
-                            moving = true;
-                            GameManager.instance.moveToObject = moving;
-                            GameManager.instance.targetObject = null;
-                        }
+                        }                        
                     }
-                }
-                else
-                {
-                    Debug.Log("You don't have correct item for this.");
-                }
-            }
-            else
-            {
-                m_mcMouseController.InspectCursor();
-            }
+                }                
+            }            
         }
 
         protected override void OnMouseExit()
