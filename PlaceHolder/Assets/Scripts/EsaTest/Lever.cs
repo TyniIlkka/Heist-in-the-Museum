@@ -17,17 +17,15 @@ namespace ProjectThief
         [SerializeField, Tooltip("Needed item")]
         private Item m_itNeededItem;        
 
-        private Animator m_aLeverAnim;
-        private MouseController m_mcMouseController;
+        private Animator m_aLeverAnim;        
 
         private void Awake()
         {
-            m_aLeverAnim = GetComponentInChildren<Animator>();
-            m_mcMouseController = GameManager.instance.mouseController;
-        }
+            m_aLeverAnim = GetComponentInChildren<Animator>();            
+        }        
 
         private void Update()
-        {
+        {           
             if (m_bBroken)
             {
                 m_goHandle.SetActive(false);
@@ -35,7 +33,7 @@ namespace ProjectThief
             else
             {
                 m_goHandle.SetActive(true);
-            }
+            }            
         }
 
         /// <summary>
@@ -45,12 +43,12 @@ namespace ProjectThief
         {            
             if (IsActive)
             {
-                m_mcMouseController.InspectCursor();
+                GetMouseController.InspectCursor();
                 if (!m_bBroken)
                 {
                     if (IsInteractable)
                     {
-                        m_mcMouseController.InteractCursor();
+                        GetMouseController.InteractCursor();
                         if (Input.GetMouseButton(0))
                         {
                             m_aLeverAnim.SetBool("Activated", true);
@@ -65,7 +63,7 @@ namespace ProjectThief
                     {                        
                         if (m_itNeededItem.Collected)
                         {
-                            m_mcMouseController.InteractCursor();
+                            GetMouseController.InteractCursor();
                             if (Input.GetMouseButton(0))
                             {
                                 m_bBroken = false;
@@ -87,7 +85,7 @@ namespace ProjectThief
 
         protected override void OnMouseExit()
         {
-            m_mcMouseController.DefaultCursor();            
+            GetMouseController.DefaultCursor();            
         }
     }    
 }

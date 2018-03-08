@@ -6,37 +6,31 @@ namespace ProjectThief
     public class LightSwitch : ObjectBase
     {
         [SerializeField, Tooltip("Connected lights")]
-        private List<LightDistraction> m_lLights = new List<LightDistraction>();
+        private List<LightDistraction> m_lLights = new List<LightDistraction>();        
 
-        private MouseController m_mcMouseController;
-
-        private void Awake()
+        protected override void OnMouseOver()
         {            
-            m_mcMouseController = GameManager.instance.mouseController;
-        }
-
-        protected override void OnMouseExit()
-        {
             if (IsActive)
             {
-                m_mcMouseController.InspectCursor();
+                GetMouseController.InspectCursor();
                 if (IsInteractable)
                 {
-                    m_mcMouseController.InteractCursor();
+                    GetMouseController.InteractCursor();
                     if (Input.GetMouseButton(0))
                     {
                         for (int i = 0; i < m_lLights.Count; i++)
                         {
                             m_lLights[i].Activated();
                         }
+
                     }
                 }
             }
         }
 
-        protected override void OnMouseOver()
+        protected override void OnMouseExit()
         {
-            m_mcMouseController.DefaultCursor();
+            GetMouseController.DefaultCursor();
         }
 
         public void ResetLights()
