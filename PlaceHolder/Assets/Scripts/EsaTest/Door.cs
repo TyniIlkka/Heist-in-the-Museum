@@ -10,7 +10,10 @@ namespace ProjectThief
         private Transform m_v3LobbyPos;
         [SerializeField, Tooltip("Room's entrance position")]
         private Transform m_v3RoomPosition;
+        [SerializeField, Tooltip("Connected room's scene name")]
+        private string m_sRoomName;
 
+        private string m_sLobbyName = "Lobby";
         private bool m_bIsBlocked;
         private MouseController m_mcMouseController;        
 
@@ -34,7 +37,7 @@ namespace ProjectThief
         {            
             if (IsActive)
             {
-                m_mcMouseController.InteractCursor();
+                m_mcMouseController.InspectCursor();
 
                 if (!m_bIsBlocked)
                 {
@@ -44,19 +47,12 @@ namespace ProjectThief
                     {
                         if (IsInteractable)
                         {
+                            // TODO Move player between scenes.
                             TransportPlayer();
-                        }
-                        else
-                        {
-                            // TODO Move player to interactable distance.
-                        }
+                        }                        
                     }
                 }
-            } 
-            else
-            {
-                m_mcMouseController.InspectCursor();
-            }
+            }             
         }
 
         /// <summary>

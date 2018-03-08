@@ -23,6 +23,7 @@ namespace ProjectThief
         {
             if (m_iInventory == null)
                 m_iInventory = FindObjectOfType<Inventory>();
+
             m_mcMouseController = GameManager.instance.mouseController;
         }
 
@@ -33,27 +34,19 @@ namespace ProjectThief
         {            
             if (IsActive)
             {
-                Debug.Log("Over object: " + this.gameObject.name);
-                m_mcMouseController.InteractCursor();
-                if (Input.GetMouseButtonDown(0)) 
-                {                    
-                    if (IsInteractable)
-                    {
+                m_mcMouseController.InspectCursor();
+                if (IsInteractable) 
+                {
+                    m_mcMouseController.InteractCursor();
+                    if (Input.GetMouseButtonDown(0))
+                    {                        
                         m_bCollected = true;
                         m_iInventory.AddItem(this);
                         gameObject.SetActive(false);
                         m_mcMouseController.DefaultCursor();
-                    }
-                    else
-                    {
-                        // TODO if player is not in interaction range move player to position close to object.
-                    }
+                    }                    
                 }                
-            }
-            else
-            {
-                m_mcMouseController.InteractCursor();
-            }
+            }           
         }
 
         protected override void OnMouseExit()
