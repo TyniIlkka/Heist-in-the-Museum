@@ -37,7 +37,7 @@ namespace ProjectThief {
         {
             pathList = m_pgmGrid.Path;
             StartCoroutine(moveObject());
-            MoveAnimation();
+            
             transform.rotation = Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y, 0));
         }
 
@@ -87,6 +87,7 @@ namespace ProjectThief {
         {
             for (int i = 0; i < pathList.Count; i++)
             {
+                MoveAnimation();
                 step = 0f;
                 MoveIE = StartCoroutine(Moving(i));
                 
