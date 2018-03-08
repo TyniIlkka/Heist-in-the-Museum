@@ -62,24 +62,24 @@ namespace ProjectThief.PathFinding
                     }
                 }
 
-                // Moves the player if the mouse button is hold down
-                else if (Input.GetMouseButton(0) && GUIUtility.hotControl == 0)
-                {
+                //// Moves the player if the mouse button is hold down
+                //else if (Input.GetMouseButton(0) && GUIUtility.hotControl == 0)
+                //{
 
-                    Plane playerPlane = new Plane(Vector3.up, myTransform.position);
-                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                    float hitdist = 0.0f;
+                //    Plane playerPlane = new Plane(Vector3.up, myTransform.position);
+                //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                //    float hitdist = 0.0f;
 
-                    if (playerPlane.Raycast(ray, out hitdist))
-                    {
+                //    if (playerPlane.Raycast(ray, out hitdist))
+                //    {
 
-                        if (!gridSomething.NodeFromWorldPos(ray.GetPoint(hitdist)).m_bIsBlocked)
-                        {
-                            positionToMove = ray.GetPoint(hitdist);
-                            MoveToCursorClickPoint(positionToMove);
-                        }
-                    }
-                }
+                //        if (!gridSomething.NodeFromWorldPos(ray.GetPoint(hitdist)).m_bIsBlocked)
+                //        {
+                //            positionToMove = ray.GetPoint(hitdist);
+                //            MoveToCursorClickPoint(positionToMove);
+                //        }
+                //    }
+                //}
             }
         }
 
