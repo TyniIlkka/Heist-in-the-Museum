@@ -76,7 +76,10 @@ namespace ProjectThief
         private void ResetPosition()
         {
             if (m_bReset)
-            {                
+            {
+                m_fHorizontalAngle = m_tPlayerTransform.rotation.eulerAngles.y;
+                m_qOrginalRotation = Quaternion.Euler(m_fVerticalAngle, m_fHorizontalAngle, 0);
+
                 transform.rotation = Quaternion.Slerp(transform.rotation, m_qOrginalRotation, m_fResetspeed * Time.deltaTime);
                 if (transform.rotation == m_qOrginalRotation)                   
                 {
