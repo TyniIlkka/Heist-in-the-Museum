@@ -1,35 +1,40 @@
 fileFormatVersion: 2
-guid: e011ee38a262dfe408482ad5530c2007
-timeCreated: 1520360228
+guid: a42079a7356133543aa0024e682dd4b7
+timeCreated: 1520857685
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: LOCKBase
+    100000: Base
     100002: //RootNode
-    100004: LOCKRing
-    400000: LOCKBase
+    100004: Swicth
+    400000: Base
     400002: //RootNode
-    400004: LOCKRing
-    2300000: LOCKBase
-    2300002: LOCKRing
-    3300000: LOCKBase
-    3300002: LOCKRing
-    4300000: LOCKRing
-    4300002: LOCKBase
+    400004: Swicth
+    2300000: Base
+    2300002: Swicth
+    3300000: Base
+    3300002: Swicth
+    4300000: Swicth
+    4300002: Base
     7400000: Default Take
     9500000: //RootNode
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Bronze
-    second: {fileID: 2100000, guid: fbdeaacf0325eca40ad8cbf30b1416ab, type: 2}
+      name: Iron
+    second: {fileID: 2100000, guid: ca728cba12fa509448833cf5664ffc57, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: IronMaterial
-    second: {fileID: 2100000, guid: ca728cba12fa509448833cf5664ffc57, type: 2}
+      name: Iron__LightSwicthTexture
+    second: {fileID: 2100000, guid: fd524497fd33cd44082b721fea67cbe6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TextureMaterial__LightSwicthTexture
+    second: {fileID: 2100000, guid: 501e7e8b77672f142be55d6457ff8ab2, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

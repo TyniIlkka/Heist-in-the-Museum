@@ -17,17 +17,15 @@ namespace ProjectThief
         [SerializeField, Tooltip("Needed item")]
         private Item m_itNeededItem;        
 
-        private Animator m_aLeverAnim;
-        private MouseController m_mcMouseController;
+        private Animator m_aLeverAnim;        
 
         private void Awake()
         {
-            m_aLeverAnim = GetComponentInChildren<Animator>();
-            m_mcMouseController = GameManager.instance.mouseController;
-        }
+            m_aLeverAnim = GetComponentInChildren<Animator>();            
+        }        
 
         private void Update()
-        {
+        {           
             if (m_bBroken)
             {
                 m_goHandle.SetActive(false);
@@ -35,66 +33,45 @@ namespace ProjectThief
             else
             {
                 m_goHandle.SetActive(true);
-            }
+            }            
         }
 
         /// <summary>
         /// Detects if mouse is over an object.
         /// </summary>
         protected override void OnMouseOver()
-        {
-            Debug.Log("Lever");
+        {            
             if (IsActive)
             {
-                m_mcMouseController.InteractCursor();
+                GetMouseController.InspectCursor();
                 if (!m_bBroken)
                 {
-                    if (Input.GetMouseButton(0))
+                    if (IsInteractable)
                     {
-                        Debug.Log("Activated");
-                        if (IsInteractable)
+                        GetMouseController.InteractCursor();
+                        if (Input.GetMouseButton(0))
                         {
                             m_aLeverAnim.SetBool("Activated", true);
                             m_aObstacleAnim.SetBool("Open", true);
                             m_dDoor.Blocked = false;
-                        }
-                        else
-                        {
-                            // TODO Move player closer.
-                        }
+                        }                        
                     }
                 }
                 else
                 {
-                    if (Input.GetMouseButton(0))
-                    {
-                        if (IsInteractable)
+                    if (IsInteractable)
+                    {                        
+                        if (m_itNeededItem.Collected)
                         {
-                            if (m_itNeededItem.Collected)
+                            GetMouseController.InteractCursor();
+                            if (Input.GetMouseButton(0))
                             {
                                 m_bBroken = false;
-                            }
-                            else
-                            {
-                                Debug.Log("You don't have correct item for this.");
-                            }
-                        }
-                        else
-                        {
-                            // TODO Move player closer.
-                        }
+                            }                            
+                        }                        
                     }
                 }
-            }
-            else
-            {
-                m_mcMouseController.InspectCursor();
-            }
-
-            if (Input.GetKey(KeyCode.R))
-            {
-                ResetLever();
-            }
+            } 
         }
 
         /// <summary>
@@ -108,8 +85,7 @@ namespace ProjectThief
 
         protected override void OnMouseExit()
         {
-            m_mcMouseController.DefaultCursor();
-            
+            GetMouseController.DefaultCursor();            
         }
     }    
 }

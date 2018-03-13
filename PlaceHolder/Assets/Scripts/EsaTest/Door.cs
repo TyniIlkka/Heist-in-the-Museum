@@ -10,9 +10,11 @@ namespace ProjectThief
         private Transform m_v3LobbyPos;
         [SerializeField, Tooltip("Room's entrance position")]
         private Transform m_v3RoomPosition;
+        [SerializeField, Tooltip("Connected room's scene name")]
+        private string m_sRoomName;
 
-        private bool m_bIsBlocked;
-        private MouseController m_mcMouseController;        
+        private string m_sLobbyName = "Lobby";
+        private bool m_bIsBlocked;                
 
         public Vector3 LobbyPos { get { return m_v3LobbyPos.position; } }
         public Vector3 RoomPos { get { return m_v3RoomPosition.position; } }
@@ -23,9 +25,8 @@ namespace ProjectThief
         /// </summary>
         private void Awake()
         {
-            m_bIsBlocked = true;
-            m_mcMouseController = GameManager.instance.mouseController;
-        }
+            m_bIsBlocked = true;            
+        }        
 
         /// <summary>
         /// Detects if mouse is over an object.
@@ -34,29 +35,22 @@ namespace ProjectThief
         {            
             if (IsActive)
             {
-                m_mcMouseController.InteractCursor();
+                GetMouseController.InspectCursor();
 
                 if (!m_bIsBlocked)
                 {
-                    m_mcMouseController.EnterCursor();               
+                    GetMouseController.EnterCursor();               
 
                     if (Input.GetMouseButton(0))
                     {
                         if (IsInteractable)
                         {
+                            // TODO Move player between scenes.
                             TransportPlayer();
-                        }
-                        else
-                        {
-                            // TODO Move player to interactable distance.
-                        }
+                        }                        
                     }
                 }
-            } 
-            else
-            {
-                m_mcMouseController.InspectCursor();
-            }
+            }             
         }
 
         /// <summary>
@@ -85,7 +79,7 @@ namespace ProjectThief
 
         protected override void OnMouseExit()
         {
-            m_mcMouseController.DefaultCursor();
+            GetMouseController.DefaultCursor();
         }
     }
 }

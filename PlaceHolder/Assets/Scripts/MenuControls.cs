@@ -67,8 +67,7 @@ namespace ProjectThief
         }
 
         public void Pause()
-        {
-            m_goShade.SetActive(true);
+        {            
             m_goPausePlan.SetActive(true);
             m_goPauseMenuBg.SetActive(true);
             m_goPauseMenu.SetActive(true);
@@ -78,8 +77,7 @@ namespace ProjectThief
         }
 
         public void Continue()
-        {
-            m_goShade.SetActive(false);
+        {            
             m_goPausePlan.SetActive(false);
             m_goPauseMenuBg.SetActive(false);
             m_goPauseMenu.SetActive(false);            
@@ -95,8 +93,7 @@ namespace ProjectThief
         }
 
         public void MenuYes()
-        {
-            m_goShade.SetActive(false);
+        {            
             m_goPauseMenu.SetActive(false);
             m_bPauseButton.interactable = true;
             Time.timeScale = 1f;

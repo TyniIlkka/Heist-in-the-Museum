@@ -12,8 +12,7 @@ namespace ProjectThief
         private Vector3 m_v3MoveToPos;        
 
         private bool m_bCollected;
-        private int m_iSlotPosition;
-        private MouseController m_mcMouseController;
+        private int m_iSlotPosition;        
 
         public Texture ItemImage { get { return m_tItemTexture; } }        
         public bool Collected { get { return m_bCollected; } set { m_bCollected = value; } }         
@@ -22,9 +21,8 @@ namespace ProjectThief
         private void Awake()
         {
             if (m_iInventory == null)
-                m_iInventory = FindObjectOfType<Inventory>();
-            m_mcMouseController = GameManager.instance.mouseController;
-        }
+                m_iInventory = FindObjectOfType<Inventory>();            
+        }        
 
         /// <summary>
         /// Detects if mouse is over an object.
@@ -33,32 +31,24 @@ namespace ProjectThief
         {            
             if (IsActive)
             {
-                Debug.Log("Over object: " + this.gameObject.name);
-                m_mcMouseController.InteractCursor();
-                if (Input.GetMouseButtonDown(0)) 
-                {                    
-                    if (IsInteractable)
-                    {
+                GetMouseController.InspectCursor();
+                if (IsInteractable) 
+                {
+                    GetMouseController.InteractCursor();
+                    if (Input.GetMouseButtonDown(0))
+                    {                        
                         m_bCollected = true;
                         m_iInventory.AddItem(this);
                         gameObject.SetActive(false);
-                        m_mcMouseController.DefaultCursor();
-                    }
-                    else
-                    {
-                        // TODO if player is not in interaction range move player to position close to object.
-                    }
+                        GetMouseController.DefaultCursor();
+                    }                    
                 }                
-            }
-            else
-            {
-                m_mcMouseController.InteractCursor();
-            }
+            }           
         }
 
         protected override void OnMouseExit()
         {
-            m_mcMouseController.DefaultCursor();
+            GetMouseController.DefaultCursor();
         }
     }
 }
