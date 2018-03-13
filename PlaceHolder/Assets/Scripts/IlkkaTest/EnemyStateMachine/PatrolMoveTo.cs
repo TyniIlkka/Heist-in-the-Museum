@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using ProjectThief.PathFinding;
+//using ProjectThief.PathFinding;
 using UnityEngine;
 using System;
 
@@ -8,7 +8,7 @@ namespace ProjectThief.AI
 {
     public class PatrolMoveTo : AIStateBase
     {
-        public Node DistractNode { get; private set; }
+        //public Nodes DistractNode { get; private set; }
 
         public PatrolMoveTo(Guard owner)
             : base()
@@ -36,10 +36,10 @@ namespace ProjectThief.AI
             }
         }
 
-        private Node GetDistractionNode()
-        {
-            return null;
-        }
+        //private Nodes GetDistractionNode()
+        //{
+        //    return null;
+        //}
 
         private bool ChangeState()
         {
