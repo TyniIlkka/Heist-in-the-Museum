@@ -44,12 +44,12 @@ namespace ProjectThief.PathFinding
             {
                 CreateGrid();
             }
-            
+
 
         }
         private void Update()
         {
-            
+
         }
 
         void CreateGrid()
@@ -194,7 +194,8 @@ namespace ProjectThief.PathFinding
             if (Path != null || Path.Count > 0)
             {
                 result = Path[0];
-            } else
+            }
+            else
             {
                 CreateGrid();
             }
@@ -213,6 +214,11 @@ namespace ProjectThief.PathFinding
             }
 
             return result;
+        }
+
+        public void FindPath(Vector3 startPosition, Vector3 endPosition)
+        {
+            //Pathfinder.Instance.InsertInQueue(startPosition, endPosition, SetList);
         }
     }
 }
