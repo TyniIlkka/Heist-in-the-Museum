@@ -71,6 +71,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4679113087179276}
   - component: {fileID: 95210162501814522}
+  - component: {fileID: 114582696754814920}
   m_Layer: 0
   m_Name: LeverPurple
   m_TagString: Untagged
@@ -276,3 +277,20 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114582696754814920
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1991254185362126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2289db238ca0c3c4284b1a3c7df354e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_aObstacleAnim: {fileID: 0}
+  m_dDoor: {fileID: 0}
+  m_bBroken: 0
+  m_goHandle: {fileID: 0}
+  m_itNeededItem: {fileID: 114317372279428544, guid: 903c2cfd5d0582f4b8136a7518926d03,
+    type: 2}

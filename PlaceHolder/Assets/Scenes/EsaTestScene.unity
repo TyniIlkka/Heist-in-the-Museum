@@ -913,9 +913,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d690c92267e56546b9954eea2466342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_itKeyItem: {fileID: 1160395962}
-  m_iInventory: {fileID: 0}
+  m_itKeyItem: {fileID: 837186631}
+  m_iInventory: {fileID: 261702626}
   m_v3MoveToPos: {x: 0, y: 0, z: 0}
+--- !u!114 &261702626 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114333223546213190, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
+    type: 2}
+  m_PrefabInternal: {fileID: 1924117798}
+  m_Script: {fileID: 11500000, guid: ab28b214c003c1e4e92f2a7819f99a0e, type: 3}
 --- !u!1 &311852789
 GameObject:
   m_ObjectHideFlags: 0
@@ -2267,8 +2273,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d690c92267e56546b9954eea2466342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_itKeyItem: {fileID: 837186631}
-  m_iInventory: {fileID: 0}
+  m_itKeyItem: {fileID: 1160395962}
+  m_iInventory: {fileID: 261702626}
   m_v3MoveToPos: {x: 0, y: 0, z: 0}
 --- !u!23 &1327618441
 MeshRenderer:
@@ -2680,11 +2686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa61e820937911046870a33ee59bb48c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_fMovementSpeed: 0
-  m_fTurnSpeed: 0
-  m_gMoveHere: {fileID: 0}
-  m_pgmGrid: {fileID: 0}
-  _arriveDistance: 0
+  Path: []
 --- !u!1 &1732972725
 GameObject:
   m_ObjectHideFlags: 0
@@ -3029,7 +3031,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_itKeyItem: {fileID: 1402119386}
-  m_iInventory: {fileID: 0}
+  m_iInventory: {fileID: 261702626}
   m_v3MoveToPos: {x: 0, y: 0, z: 0}
 --- !u!23 &1919183569
 MeshRenderer:

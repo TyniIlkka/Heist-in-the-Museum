@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33008322266189224}
   - component: {fileID: 23311484240388352}
   - component: {fileID: 95203578178858556}
+  - component: {fileID: 114317372279428544}
   m_Layer: 0
   m_Name: LeverHandlePurple
   m_TagString: Untagged
@@ -103,3 +104,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114317372279428544
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1940964724259218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a4cc581cedaa3e4aac52d42812038cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_tItemTexture: {fileID: 2800000, guid: 565b5f9e5cd7a1b459038d4b548254da, type: 3}
+  m_iInventory: {fileID: 0}
+  m_v3MoveToPos: {x: 0, y: 0, z: 0}

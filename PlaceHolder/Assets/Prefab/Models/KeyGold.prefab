@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33517090391189928}
   - component: {fileID: 23335233435434334}
   - component: {fileID: 95954385153087636}
+  - component: {fileID: 114078803486980758}
   m_Layer: 0
   m_Name: KeyGold
   m_TagString: Untagged
@@ -100,3 +101,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114078803486980758
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1114679074242628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a4cc581cedaa3e4aac52d42812038cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_tItemTexture: {fileID: 2800000, guid: fab8065960198f74893a8a63f209f699, type: 3}
+  m_iInventory: {fileID: 0}
+  m_v3MoveToPos: {x: 0, y: 0, z: 0}

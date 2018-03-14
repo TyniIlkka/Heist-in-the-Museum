@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33829804976749810}
   - component: {fileID: 23341531082467738}
   - component: {fileID: 95733056537881238}
+  - component: {fileID: 114597843314888408}
   m_Layer: 0
   m_Name: KeyPlatinum
   m_TagString: Untagged
@@ -100,3 +101,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114597843314888408
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1040472540074498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a4cc581cedaa3e4aac52d42812038cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_tItemTexture: {fileID: 2800000, guid: fc38a560f82065942916e2e66757c875, type: 3}
+  m_iInventory: {fileID: 0}
+  m_v3MoveToPos: {x: 0, y: 0, z: 0}
