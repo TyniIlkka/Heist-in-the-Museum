@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using ProjectThief.PathFinding;
+//using ProjectThief.PathFinding;
 using UnityEngine;
 using System;
 
@@ -8,7 +8,7 @@ namespace ProjectThief.AI
 {
     public class PatrolMoveTo : AIStateBase
     {
-        public Node CurrentWaypoint { get; private set; }
+        //public Nodes DistractNode { get; private set; }
 
         public PatrolMoveTo(Guard owner)
             : base()
@@ -20,8 +20,7 @@ namespace ProjectThief.AI
 
         public override void StateActivated()
         {
-            base.StateActivated();
-            //CurrentWaypoint = _path.GetClosestWaypoint(Owner.transform.position);
+            base.StateActivated();            
         }
 
         public override void Update()
@@ -31,20 +30,16 @@ namespace ProjectThief.AI
 
             if (!ChangeState())
             {
-                // 2. Are we close enough the current waypoint?
-                //   2.1 If yes, get the next waypoint
-                //CurrentWaypoint = GetWaypoint();
-                // 3. Move towards the current waypoint
-                Owner.Move(Owner.transform.forward);
-                // 4. Rotate towards the current waypoint
-                //Owner.Turn();
+               
+                
+
             }
         }
 
-        private Node GetDistractionNode()
-        {
-            return null;
-        }
+        //private Nodes GetDistractionNode()
+        //{
+        //    return null;
+        //}
 
         private bool ChangeState()
         {

@@ -1125,7 +1125,7 @@ GameObject:
   - component: {fileID: 4637435550963412}
   m_Layer: 0
   m_Name: Walls
-  m_TagString: Untagged
+  m_TagString: Obstacles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8918,8 +8918,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1141378109479390}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4877945981340424}
@@ -28019,6 +28019,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_v3LobbyPos: {fileID: 4420890066339240}
   m_v3RoomPosition: {fileID: 4224674836250134}
+  m_sRoomName: 
 --- !u!114 &114253381130048494
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -28081,6 +28082,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_v3LobbyPos: {fileID: 4566492677684688}
   m_v3RoomPosition: {fileID: 4455578554740940}
+  m_sRoomName: 
 --- !u!114 &114483046695346032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -28258,6 +28260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_v3LobbyPos: {fileID: 4420890066339240}
   m_v3RoomPosition: {fileID: 4224674836250134}
+  m_sRoomName: 
 --- !u!114 &114826898372209964
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -28282,6 +28285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_v3LobbyPos: {fileID: 4287216904022032}
   m_v3RoomPosition: {fileID: 4203692961110628}
+  m_sRoomName: 
 --- !u!114 &114892341846880728
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -28333,6 +28337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_v3LobbyPos: {fileID: 4863530079371268}
   m_v3RoomPosition: {fileID: 4601616425921772}
+  m_sRoomName: 
 --- !u!114 &114977826960175140
 MonoBehaviour:
   m_ObjectHideFlags: 1

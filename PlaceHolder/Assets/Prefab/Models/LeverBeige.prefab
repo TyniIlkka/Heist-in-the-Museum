@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4779642451104512}
   - component: {fileID: 95218213293447206}
+  - component: {fileID: 114609671937567616}
   m_Layer: 0
   m_Name: LeverBeige
   m_TagString: Untagged
@@ -276,3 +277,20 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114609671937567616
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1420837268329766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2289db238ca0c3c4284b1a3c7df354e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_aObstacleAnim: {fileID: 0}
+  m_dDoor: {fileID: 0}
+  m_bBroken: 0
+  m_goHandle: {fileID: 0}
+  m_itNeededItem: {fileID: 114868823079148236, guid: 3aaa6b47572c8764b9ad7bba00f7b973,
+    type: 2}

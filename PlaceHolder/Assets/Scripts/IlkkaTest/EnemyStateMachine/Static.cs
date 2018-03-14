@@ -62,14 +62,14 @@ namespace ProjectThief.AI
                 Owner.LightDetectDistance, lightLayer);
             if (lights.Length > 0)
             {
-                Debug.Log("valoja on");
+                //Debug.Log("valoja on");
 
                 foreach (Collider item in lights)
                 {
                     DistractLight light =
                         item.gameObject.GetComponentInHierarchy<DistractLight>();
 
-                    Debug.Log(light.LightOn);
+                    //Debug.Log(light.LightOn);
                     if (light.LightOn == true && light != null)
                     {
                         Owner.TargetLight = light;

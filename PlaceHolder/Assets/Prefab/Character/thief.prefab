@@ -324,9 +324,10 @@ GameObject:
   - component: {fileID: 136933481961609090}
   - component: {fileID: 114024072632004520}
   - component: {fileID: 114805785803039982}
+  - component: {fileID: 114042296867840906}
   m_Layer: 8
   m_Name: thief
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -458,8 +459,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1748604186681942}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 28}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.4935868, y: -1, z: 39.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4912575973362774}
@@ -885,11 +886,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa61e820937911046870a33ee59bb48c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_fMovementSpeed: 2
-  m_fTurnSpeed: 180
-  m_gMoveHere: {fileID: 0}
-  m_pgmGrid: {fileID: 0}
-  _arriveDistance: 0.5
+  Path: []
+  m_pgmPathFindingGrid: {fileID: 0}
+--- !u!114 &114042296867840906
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1748604186681942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d71cf9f7d98c5ea4aac33005fa260b81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: []
+  PathType: 0
+  JS: 0
+  playerCam: {fileID: 0}
+  minimapCam: {fileID: 0}
 --- !u!114 &114805785803039982
 MonoBehaviour:
   m_ObjectHideFlags: 1

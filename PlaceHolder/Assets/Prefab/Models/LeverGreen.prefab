@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4156245925490014}
   - component: {fileID: 95878392577398886}
+  - component: {fileID: 114984336375773730}
   m_Layer: 0
   m_Name: LeverGreen
   m_TagString: Untagged
@@ -276,3 +277,20 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114984336375773730
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1186905950339222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2289db238ca0c3c4284b1a3c7df354e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_aObstacleAnim: {fileID: 0}
+  m_dDoor: {fileID: 0}
+  m_bBroken: 0
+  m_goHandle: {fileID: 0}
+  m_itNeededItem: {fileID: 114620377678367772, guid: f36c06b516160634e9e99de18d4b7535,
+    type: 2}
