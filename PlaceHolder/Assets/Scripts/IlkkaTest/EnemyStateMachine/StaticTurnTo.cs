@@ -17,8 +17,6 @@ namespace ProjectThief.AI
         public override void StateActivated()
         {
             base.StateActivated();
-            Debug.Log("käytiinkö täällä");
-
         }
 
         public override void Update()
@@ -37,7 +35,7 @@ namespace ProjectThief.AI
 
         private bool ChangeState()
         {
-            if (Owner.Distracted)
+            if (!Owner.Distracted)
             {
                 Debug.Log("Hämätty");
                 bool result = Owner.PerformTransition(AIStateType.StaticTurnTo);

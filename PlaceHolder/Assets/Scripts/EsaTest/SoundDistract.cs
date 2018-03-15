@@ -15,6 +15,9 @@ namespace ProjectThief
 
         public bool trigger;
 
+        Guard guard;
+
+
         private void Update()
         {
             if (trigger)
@@ -38,10 +41,10 @@ namespace ProjectThief
             {
                 foreach (Collider item in objects)
                 {
-                    Guard guard = item.GetComponent<Guard>();
+                    guard = item.GetComponent<Guard>();
                     if (guard != null)
                     {
-                        guard.Distract(true, this);
+                        guard.Distract(this, true);
                     }
                 }
             }
@@ -50,6 +53,8 @@ namespace ProjectThief
         public void ResetLight()
         {
             m_goSound.SetActive(false);
+            guard.Distract(this, false);
+            
         }
     }
 }

@@ -12,6 +12,7 @@ namespace ProjectThief
         private float m_fRange = 10f;
 
         public bool trigger;
+        Guard guard;
 
         private void Update()
         {
@@ -36,10 +37,10 @@ namespace ProjectThief
             {
                 foreach (Collider item in objects)
                 {
-                    Guard guard = item.GetComponent<Guard>(); 
+                    guard = item.GetComponent<Guard>(); 
                     if (guard != null)
                     {
-                        guard.Distract(true, this);
+                        guard.Distract(this, true);
                     }
                 }
 
@@ -56,6 +57,7 @@ namespace ProjectThief
         public void ResetLight()
         {
             m_goLight.SetActive(false);
+            guard.Distract(this, false);
         }
     }
 }

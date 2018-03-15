@@ -459,8 +459,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1748604186681942}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4935868, y: -1, z: 39.91}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4912575973362774}
@@ -867,7 +867,7 @@ Animator:
   m_GameObject: {fileID: 1748604186681942}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 6c41cd2affc8ab148909dd82d5cd5afc, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 722727dbb1648ff418929e62fa6a77b1, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -887,7 +887,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: []
-  m_pgmPathFindingGrid: {fileID: 0}
 --- !u!114 &114042296867840906
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -901,9 +900,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: []
   PathType: 0
-  JS: 0
   playerCam: {fileID: 0}
   minimapCam: {fileID: 0}
+  m_fMoveSpeed: 5
+  m_fTurnSpeed: 6
+  player: {fileID: 0}
 --- !u!114 &114805785803039982
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -916,7 +917,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_fActivate: 10
-  m_fInteract: 3
+  m_fInteract: 5
 --- !u!136 &136933481961609090
 CapsuleCollider:
   m_ObjectHideFlags: 1
