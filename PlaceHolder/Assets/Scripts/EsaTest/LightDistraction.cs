@@ -21,20 +21,35 @@ namespace ProjectThief
             }
         }
 
-        public void Activated()
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, m_fRange);
+        }
+
+            public void Activated()
         {            
             m_goLight.SetActive(true);
             Collider[] objects = Physics.OverlapSphere(transform.position, m_fRange);
 
             if (objects.Length > 0)
             {
-                for (int i = 0; i < objects.Length; i++)
+                foreach (Collider item in objects)
                 {
-                    if (objects[i].GetComponent<Guard>() != null)
+                    Guard guard = item.GetComponent<Guard>(); 
+                    if (guard != null)
                     {
-                        objects[i].GetComponent<Guard>().Distract(true, this); 
+                        guard.Distract(true, this);
                     }
                 }
+
+                //for (int i = 0; i < objects.Length; i++)
+                //{
+                //    if (objects[i].GetComponent<Guard>() != null)
+                //    {
+                //        objects[i].GetComponent<Guard>().Distract(true, this); 
+                //    }
+                //}
             }
         }
 

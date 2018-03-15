@@ -27,7 +27,7 @@ namespace ProjectThief {
         Patrol patrol;
         PatrolMoveTo patrolMoveTo;
         Static guardStatic;
-        StaticTurnTo turnToStatic;
+        StaticTurnTo staticTurnTo;
 
         #endregion
         //
@@ -141,7 +141,7 @@ namespace ProjectThief {
         public AIStateBase CurrentState { get; set; }
         // The player unit this enemy is trying to shoot at.
         public LightDistraction TargetLight { get; set; }
-        public DistractSound TargetSound { get; set; }
+        public SoundDistraction TargetSound { get; set; }
         #endregion
         #endregion
 
@@ -165,8 +165,8 @@ namespace ProjectThief {
             guardStatic = new Static(this, CurrentDirection);
             _states.Add(guardStatic);
 
-            turnToStatic = new StaticTurnTo(this);
-            _states.Add(turnToStatic);
+            staticTurnTo = new StaticTurnTo(this);
+            _states.Add(staticTurnTo);
 
             CheckCurrentState();
             CurrentState.StateActivated();
@@ -185,36 +185,6 @@ namespace ProjectThief {
                 CurrentState = guardStatic;
             }
         }
-
-        private void Update()
-        {
-
-            CurrentState.Update();
-            if (!m_bMoving)
-            {
-                
-            }
-        }
-
-        private void FixedUpdate()
-        {
-            CanSeePlayer();
-            if (CanSeePlayer())
-            {
-                Debug.Log("GameLost");
-                GameManager.instance.levelController.PlayerFound();
-            }
-            Debug.DrawLine(transform.forward, m_vDirection * m_fMaxDetectionRange, Color.blue);
-
-        }
-
-        public void Distract(bool result, LightDistraction targetLight)
-        {
-            TargetLight = targetLight;
-             m_bDistracted = result; 
-
-        }
-
 
         public bool PerformTransition(AIStateType targetState)
         {
@@ -236,6 +206,37 @@ namespace ProjectThief {
             }
 
             return result;
+        }
+
+        private void Update()
+        {
+            CurrentState.Update();
+        }
+
+        private void FixedUpdate()
+        {
+            CanSeePlayer();
+            if (CanSeePlayer())
+            {
+                Debug.Log("GameLost");
+                GameManager.instance.levelController.PlayerFound();
+            }
+            Debug.DrawLine(transform.forward, m_vDirection * m_fMaxDetectionRange, Color.blue);
+
+        }
+
+        public void Distract(bool result, LightDistraction targetLight)
+        {
+            Debug.Log("Hämäytetään! ");
+            TargetLight = targetLight;
+             m_bDistracted = result; 
+        }
+
+        public void Distract(bool result, SoundDistraction targetSound)
+        {
+            Debug.Log("Hämäytetään! ");
+            TargetSound = targetSound;
+            m_bDistracted = result;
         }
 
         private AIStateBase GetStateByType(AIStateType stateType)

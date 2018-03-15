@@ -13,9 +13,9 @@ namespace ProjectThief.AI
         public PatrolMoveTo(Guard owner)
             : base()
         {
-            State = AIStateType.Patrol;
+            State = AIStateType.PatrolMoveTo;
             Owner = owner;
-            AddTransition(AIStateType.PatrolMoveTo);
+            AddTransition(AIStateType.Patrol);
         }
 
         public override void StateActivated()
