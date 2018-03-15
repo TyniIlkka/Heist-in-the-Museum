@@ -46,7 +46,7 @@ namespace ProjectThief.AI
                 DistractLight lightSignal = light.GetComponent<DistractLight>();
                 if (lightSignal.LightOn == true && lightSignal != null)
                 {
-                    Owner.TargetLight = lightSignal;
+                    
                     return Owner.PerformTransition(AIStateType.StaticTurnTo);
                 }
             }

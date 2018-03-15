@@ -48,6 +48,8 @@ namespace ProjectThief {
         [SerializeField]
         private LayerMask m_lmLightMask;
 
+        private bool m_bDistracted;
+
 
         #endregion
 
@@ -113,6 +115,11 @@ namespace ProjectThief {
         {
             get { return m_lmLightMask; }
         }
+        public bool Distracted
+        {
+            get { return m_bDistracted; }
+            set { m_bDistracted = value; }
+        }
         #endregion
 
         #region StateMachine
@@ -133,7 +140,7 @@ namespace ProjectThief {
 
         public AIStateBase CurrentState { get; set; }
         // The player unit this enemy is trying to shoot at.
-        public DistractLight TargetLight { get; set; }
+        public LightDistraction TargetLight { get; set; }
         public DistractSound TargetSound { get; set; }
         #endregion
         #endregion
@@ -200,6 +207,14 @@ namespace ProjectThief {
             Debug.DrawLine(transform.forward, m_vDirection * m_fMaxDetectionRange, Color.blue);
 
         }
+
+        public void Distract(bool result, LightDistraction targetLight)
+        {
+            TargetLight = targetLight;
+             m_bDistracted = result; 
+
+        }
+
 
         public bool PerformTransition(AIStateType targetState)
         {
