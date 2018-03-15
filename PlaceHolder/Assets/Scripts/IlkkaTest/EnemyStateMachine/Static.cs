@@ -53,30 +53,14 @@ namespace ProjectThief.AI
                 }
             }
         }
+        
 
         private bool ChangeState()
         {
-            int lightLayer = Owner.LightMask;
-            
-            Collider[] lights = Physics.OverlapSphere(Owner.transform.position,
-                Owner.LightDetectDistance, lightLayer);
-            if (lights.Length > 0)
+            if (Owner.Distracted)
             {
-                //Debug.Log("valoja on");
-
-                foreach (Collider item in lights)
-                {
-                    DistractLight light =
-                        item.gameObject.GetComponentInHierarchy<DistractLight>();
-
-                    //Debug.Log(light.LightOn);
-                    if (light.LightOn == true && light != null)
-                    {
-                        Owner.TargetLight = light;
-                        bool result = Owner.PerformTransition(AIStateType.StaticTurnTo);
-                        return result;
-                    }
-                }
+                bool result = Owner.PerformTransition(AIStateType.StaticTurnTo);
+                return result;
             }
             return false;
         }

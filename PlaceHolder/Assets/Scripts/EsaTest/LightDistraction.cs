@@ -11,6 +11,16 @@ namespace ProjectThief
         [SerializeField, Tooltip("Distraction range")]
         private float m_fRange = 10f;
 
+        public bool trigger;
+
+        private void Update()
+        {
+            if (trigger)
+            {
+                Activated();
+            }
+        }
+
         public void Activated()
         {            
             m_goLight.SetActive(true);
@@ -22,7 +32,7 @@ namespace ProjectThief
                 {
                     if (objects[i].GetComponent<Guard>() != null)
                     {
-                        //objects[i].GetComponent<Guard>().Distracted(); ?
+                        objects[i].GetComponent<Guard>().Distract(true, this); 
                     }
                 }
             }
