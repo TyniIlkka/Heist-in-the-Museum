@@ -58,7 +58,11 @@ namespace ProjectThief.PlayerPathFinding
 
                 float step = m_fTurnSpeed * Time.deltaTime;
                 Vector3 newDir = Vector3.RotateTowards(transform.forward, direction, step, 0.0F);
+                newDir.y = 0;
+                //newDir.z = 0;
                 transform.rotation = Quaternion.LookRotation(newDir);
+                //transform.LookAt(newDir);
+
                 transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, Time.deltaTime * m_fMoveSpeed);
                 if (transform.position.x < Path[0].x + 0.4F && transform.position.x > Path[0].x - 0.4F && transform.position.z > Path[0].z - 0.4F && transform.position.z < Path[0].z + 0.4F)
                 {

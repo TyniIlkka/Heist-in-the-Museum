@@ -51,11 +51,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b746a5ff167fbc1418a97140c2ad1a84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tilesize: 0.5
-  MaxFalldownHeight: 1
-  ClimbLimit: 1
-  HeuristicAggression: 3
-  HighestPoint: 5
+  Tilesize: 0.7
+  MaxFalldownHeight: 0.1
+  ClimbLimit: 0.1
+  HeuristicAggression: 0
+  HighestPoint: 10
   LowestPoint: -1
   MapStartPosition: {x: -45, y: -45}
   MapEndPosition: {x: 67, y: 73}
@@ -64,6 +64,7 @@ MonoBehaviour:
   IgnoreTags:
   - Player
   - Guard
+  - Interactable
   MoveDiagonal: 1
   DrawMapInEditor: 1
   CheckFullTileSize: 0

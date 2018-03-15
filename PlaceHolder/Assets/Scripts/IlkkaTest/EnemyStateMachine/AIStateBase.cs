@@ -9,8 +9,9 @@ namespace ProjectThief.AI
         Error = 0,
         Patrol = 1,
         PatrolMoveTo = 2,
-        Static = 3,
-        StaticTurnTo = 4
+        PatrolMoveFrom = 3,
+        Static = 4,
+        StaticTurnTo = 5
     }
 
     public abstract class AIStateBase

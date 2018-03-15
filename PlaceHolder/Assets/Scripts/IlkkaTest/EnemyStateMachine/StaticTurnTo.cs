@@ -9,7 +9,7 @@ namespace ProjectThief.AI
         public StaticTurnTo(Guard owner)
             : base()
         {
-            State = AIStateType.Patrol;
+            State = AIStateType.StaticTurnTo;
             Owner = owner;
             AddTransition(AIStateType.Static);
         }
@@ -17,8 +17,6 @@ namespace ProjectThief.AI
         public override void StateActivated()
         {
             base.StateActivated();
-            Debug.Log("käytiinkö täällä");
-
         }
 
         public override void Update()
@@ -37,18 +35,11 @@ namespace ProjectThief.AI
 
         private bool ChangeState()
         {
-            int lightLayer = Owner.LightMask;
-
-            Collider[] lights = Physics.OverlapSphere(Owner.transform.position,
-                Owner.LightDetectDistance, lightLayer);
-            foreach (Collider light in lights)
+            if (!Owner.Distracted)
             {
-                DistractLight lightSignal = light.GetComponent<DistractLight>();
-                if (lightSignal.LightOn == true && lightSignal != null)
-                {
-                    
-                    return Owner.PerformTransition(AIStateType.StaticTurnTo);
-                }
+                Debug.Log("Hämätty");
+                bool result = Owner.PerformTransition(AIStateType.StaticTurnTo);
+                return result;
             }
             return false;
         }

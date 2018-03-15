@@ -13,9 +13,9 @@ namespace ProjectThief.AI
         public PatrolMoveTo(Guard owner)
             : base()
         {
-            State = AIStateType.Patrol;
+            State = AIStateType.PatrolMoveTo;
             Owner = owner;
-            AddTransition(AIStateType.PatrolMoveTo);
+            AddTransition(AIStateType.PatrolMoveFrom);
         }
 
         public override void StateActivated()
@@ -30,8 +30,9 @@ namespace ProjectThief.AI
 
             if (!ChangeState())
             {
-               
-                
+
+                Owner.Move(Owner.transform.forward);
+                Owner.Turn(Owner.TargetSound.transform.position);
 
             }
         }
@@ -43,14 +44,11 @@ namespace ProjectThief.AI
 
         private bool ChangeState()
         {
-            //int mask = LayerMask.GetMask( "Player" );
-            int soundLayer = LayerMask.NameToLayer("SoundOutput");
-
-            Collider[] players = Physics.OverlapSphere(Owner.transform.position,
-                Owner.SoundDetectDistance, soundLayer);
-            if (players.Length > 0)
+            if (!Owner.Distracted)
             {
-                
+                Debug.Log("Hämättyliikkuvaa");
+                bool result = Owner.PerformTransition(AIStateType.PatrolMoveFrom);
+                return result;
             }
             return false;
         }

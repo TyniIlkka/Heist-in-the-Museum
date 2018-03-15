@@ -26,8 +26,9 @@ namespace ProjectThief {
         #region States
         Patrol patrol;
         PatrolMoveTo patrolMoveTo;
+        PatrolMoveFrom patrolMoveFrom;
         Static guardStatic;
-        StaticTurnTo turnToStatic;
+        StaticTurnTo staticTurnTo;
 
         #endregion
         //
@@ -141,7 +142,7 @@ namespace ProjectThief {
         public AIStateBase CurrentState { get; set; }
         // The player unit this enemy is trying to shoot at.
         public LightDistraction TargetLight { get; set; }
-        public DistractSound TargetSound { get; set; }
+        public SoundDistraction TargetSound { get; set; }
         #endregion
         #endregion
 
@@ -162,11 +163,14 @@ namespace ProjectThief {
             patrolMoveTo = new PatrolMoveTo(this);
             _states.Add(patrolMoveTo);
 
+            patrolMoveFrom = new PatrolMoveFrom(this);
+            _states.Add(patrolMoveFrom);
+
             guardStatic = new Static(this, CurrentDirection);
             _states.Add(guardStatic);
 
-            turnToStatic = new StaticTurnTo(this);
-            _states.Add(turnToStatic);
+            staticTurnTo = new StaticTurnTo(this);
+            _states.Add(staticTurnTo);
 
             CheckCurrentState();
             CurrentState.StateActivated();
@@ -185,36 +189,6 @@ namespace ProjectThief {
                 CurrentState = guardStatic;
             }
         }
-
-        private void Update()
-        {
-
-            CurrentState.Update();
-            if (!m_bMoving)
-            {
-                
-            }
-        }
-
-        private void FixedUpdate()
-        {
-            CanSeePlayer();
-            if (CanSeePlayer())
-            {
-                Debug.Log("GameLost");
-                GameManager.instance.levelController.PlayerFound();
-            }
-            Debug.DrawLine(transform.forward, m_vDirection * m_fMaxDetectionRange, Color.blue);
-
-        }
-
-        public void Distract(bool result, LightDistraction targetLight)
-        {
-            TargetLight = targetLight;
-             m_bDistracted = result; 
-
-        }
-
 
         public bool PerformTransition(AIStateType targetState)
         {
@@ -236,6 +210,53 @@ namespace ProjectThief {
             }
 
             return result;
+        }
+
+        private void Update()
+        {
+            CurrentState.Update();
+        }
+
+        private void FixedUpdate()
+        {
+            CanSeePlayer();
+            if (CanSeePlayer())
+            {
+                Debug.Log("GameLost");
+                GameManager.instance.levelController.PlayerFound();
+            }
+            Debug.DrawLine(transform.forward, m_vDirection * m_fMaxDetectionRange, Color.blue);
+
+        }
+
+        public void Distract(LightDistraction targetLight, bool result)
+        {
+            if (result)
+            {
+                Debug.Log("Hämäytetään! ");
+                TargetLight = targetLight;
+                m_bDistracted = result;
+            }
+            else
+            {
+                m_bDistracted = result;
+                TargetLight = null;
+            }
+        }
+
+        public void Distract(SoundDistraction targetSound, bool result)
+        {
+            if (result)
+            {
+                Debug.Log("Hämäytetään! ");
+                TargetSound = targetSound;
+                m_bDistracted = result;
+            }
+            else
+            {
+                m_bDistracted = result;
+                TargetSound = null;
+            }
         }
 
         private AIStateBase GetStateByType(AIStateType stateType)
