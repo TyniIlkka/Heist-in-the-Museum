@@ -60,7 +60,8 @@ namespace ProjectThief
                 else
                 {
                     if (IsInteractable)
-                    {                        
+                    {     
+                        // Show ghost image.
                         if (m_itNeededItem.Collected)
                         {
                             GetMouseController.InteractCursor();
