@@ -11,12 +11,18 @@ namespace ProjectThief
         [SerializeField, Tooltip("Inventory object")]
         private Inventory m_iInventory;
         [SerializeField, Tooltip("Position close to object")]
-        private Vector3 m_v3MoveToPos;         
+        private Vector3 m_v3MoveToPos;
+        [SerializeField, Tooltip("Lock")]
+        private GameObject m_goLock;
+
+        private Animator m_aAnimator;
 
         private void Awake()
         {
             if (m_iInventory == null)
-                m_iInventory = FindObjectOfType<Inventory>();            
+                m_iInventory = FindObjectOfType<Inventory>();
+
+            m_aAnimator = GetComponent<Animator>();
         }        
 
         /// <summary>
@@ -35,6 +41,8 @@ namespace ProjectThief
                         if (Input.GetMouseButtonDown(0))
                         {
                             m_iInventory.RemoveItem(m_itKeyItem);
+                            m_goLock.SetActive(false);
+                            //m_aAnimator.SetTrigger(1);
                         }                        
                     }
                 }                

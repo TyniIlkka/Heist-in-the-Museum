@@ -38,12 +38,11 @@ namespace ProjectThief
                 GetMouseController.InspectCursor();
 
                 if (!m_bIsBlocked)
-                {
-                    GetMouseController.EnterCursor();               
-
-                    if (Input.GetMouseButton(0))
+                { 
+                    if (IsInteractable)
                     {
-                        if (IsInteractable)
+                        GetMouseController.EnterCursor();
+                        if (Input.GetMouseButton(0))
                         {
                             // TODO Move player between scenes.
                             TransportPlayer();
