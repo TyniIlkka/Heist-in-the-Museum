@@ -36,5 +36,10 @@ namespace ProjectThief
         {
             
         }
+
+        public void Reset()
+        {
+            
+        }
     }
 }

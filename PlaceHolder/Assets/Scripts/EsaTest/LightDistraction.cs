@@ -42,15 +42,7 @@ namespace ProjectThief
                     {
                         guard.Distract(this, true);
                     }
-                }
-
-                //for (int i = 0; i < objects.Length; i++)
-                //{
-                //    if (objects[i].GetComponent<Guard>() != null)
-                //    {
-                //        objects[i].GetComponent<Guard>().Distract(true, this); 
-                //    }
-                //}
+                }                
             }
         }
 
