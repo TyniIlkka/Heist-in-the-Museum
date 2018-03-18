@@ -1050,8 +1050,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_sSfxVol: {fileID: 0}
   m_sMusicVol: {fileID: 0}
+  _nextState: 1
+  _menuState: 0
   m_goPauseMenu: {fileID: 0}
   m_goShade: {fileID: 0}
+  m_goPausePlan: {fileID: 0}
+  m_goPauseMenuBg: {fileID: 0}
   m_bPauseButton: {fileID: 0}
   m_goMenuConfirm: {fileID: 0}
   m_goExitConfirm: {fileID: 0}
@@ -1120,7 +1124,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2105646932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 587.5, y: 330.5, z: 0}
+  m_LocalPosition: {x: 536, y: 301.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1006319994}

@@ -9,13 +9,12 @@ namespace ProjectThief
         public static GameManager instance;
 
         public GameObject player;
+        public GameObject playerPrefab;
         public MouseController mouseController;
-        public LevelController levelController;
-        public Vector3 lastPosition;
-        public bool lobbyIsActive;
-        public bool moveToObject;
-        public ObjectBase targetObject;
+        public LevelController levelController;        
         public bool canMove;
+        public bool infoShown;
+        public bool firstSpawn;
 
         [SerializeField] List<Guard> guards;
 

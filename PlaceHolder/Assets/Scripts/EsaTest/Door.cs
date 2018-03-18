@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using ProjectThief.States;
 using UnityEngine;
 
 namespace ProjectThief
@@ -10,10 +9,9 @@ namespace ProjectThief
         private Transform m_v3LobbyPos;
         [SerializeField, Tooltip("Room's entrance position")]
         private Transform m_v3RoomPosition;
-        [SerializeField, Tooltip("Connected room's scene name")]
-        private string m_sRoomName;
-
-        private string m_sLobbyName = "Lobby";
+        [SerializeField, Tooltip("Next scene")]
+        private GameStateType _nextState;
+        
         private bool m_bIsBlocked;                
 
         public Vector3 LobbyPos { get { return m_v3LobbyPos.position; } }
@@ -44,36 +42,11 @@ namespace ProjectThief
                         GetMouseController.EnterCursor();
                         if (Input.GetMouseButton(0))
                         {
-                            // TODO Move player between scenes.
-                            TransportPlayer();
+                            GameStateController.PerformTransition(_nextState);
                         }                        
                     }
                 }
             }             
-        }
-
-        /// <summary>
-        /// Moves player to next position.
-        /// </summary>
-        private void TransportPlayer()
-        {
-            GameObject player = GameManager.instance.player;
-            Vector3 movePos;
-
-            if (GameManager.instance.lobbyIsActive)
-            {
-                 movePos = RoomPos;
-                GameManager.instance.lobbyIsActive = false;
-            }
-            else
-            {
-                movePos = LobbyPos;
-                GameManager.instance.lastPosition = LobbyPos;
-                GameManager.instance.lobbyIsActive = true;
-            }
-
-            // TODO Fade in and fade out effect.
-            player.transform.position = movePos;
         }
 
         protected override void OnMouseExit()

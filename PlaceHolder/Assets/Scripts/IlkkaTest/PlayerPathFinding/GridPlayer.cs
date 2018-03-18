@@ -18,6 +18,7 @@ namespace ProjectThief.PlayerPathFinding
         private void Start()
         {
             player = GetComponent<Player>();
+            playerCam = Camera.main;
             if (m_fMoveSpeed <= 0) m_fMoveSpeed = 1;
         }
 

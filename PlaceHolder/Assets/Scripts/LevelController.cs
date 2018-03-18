@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace ProjectThief
@@ -12,21 +10,22 @@ namespace ProjectThief
         [SerializeField]
         private GameObject m_goDefeat;
         [SerializeField]
-        private GameObject m_goVictory;
-        [SerializeField]
-        private GameObject m_goPlayer;
+        private GameObject m_goVictory;        
         [SerializeField, Tooltip("Info screen")]
         private GameObject m_goScreen;
+        [SerializeField, Tooltip("Player spawn position")]
+        private Vector3 m_v3SpawnPosition;
+        [SerializeField, Tooltip("Player spawn rotation")]
+        private Quaternion m_qSpawnRotation;
 
         private void Awake()
         {
-            GameManager.instance.levelController = this;
-            GameManager.instance.player = m_goPlayer;
+            GameManager.instance.levelController = this;            
             m_mcController = GameManager.instance.mouseController;
-            m_goScreen.SetActive(true);
-            GameManager.instance.lobbyIsActive = true;
-            GameManager.instance.canMove = false;
-            Time.timeScale = 0f;
+            GameManager.instance.player = SpawnPlayer();
+
+            if (!GameManager.instance.infoShown)
+                Intro();            
         }
 
         // Update is called once per frame
@@ -69,6 +68,19 @@ namespace ProjectThief
             m_goVictory.SetActive(true);
         }
         
-        
+        private void Intro()
+        {
+            m_goScreen.SetActive(true);
+            GameManager.instance.canMove = false;
+            Time.timeScale = 0f;
+            GameManager.instance.infoShown = true;
+        }
+
+        private GameObject SpawnPlayer()
+        {
+            GameObject player = GameManager.instance.playerPrefab;
+
+            return Instantiate(player, m_v3SpawnPosition, m_qSpawnRotation);
+        }
     }
 }

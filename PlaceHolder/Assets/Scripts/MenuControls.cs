@@ -1,6 +1,6 @@
 ﻿using UnityEngine.UI;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using ProjectThief.States;
 
 namespace ProjectThief
 {
@@ -10,6 +10,10 @@ namespace ProjectThief
         private Slider m_sSfxVol;
         [SerializeField]
         private Slider m_sMusicVol;
+        [SerializeField]
+        private GameStateType _nextState;
+        [SerializeField]
+        private GameStateType _menuState;
 
         #region Pause controls
         [SerializeField]
@@ -38,7 +42,9 @@ namespace ProjectThief
 
         public void NewGame()
         {
-            SceneManager.LoadScene("Level");
+            GameManager.instance.infoShown = false;
+            GameManager.instance.firstSpawn = true;
+            GameStateController.PerformTransition(_nextState);
         }
 
         public void Options()
@@ -97,7 +103,7 @@ namespace ProjectThief
             m_goPauseMenu.SetActive(false);
             m_bPauseButton.interactable = true;
             Time.timeScale = 1f;
-            SceneManager.LoadScene("MainMenu");
+            GameStateController.PerformTransition(_menuState);
         }
 
         public void MenuNo()
