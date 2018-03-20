@@ -10,7 +10,6 @@ namespace ProjectThief.AI {
         private Direction _direction;
         private float _arriveDistance;
 
-        public Waypoint CurrentWaypoint { get; private set; }
 
         public Patrol(Guard owner, List<Path> path,
             Direction direction, float arriveDistance, int currentPathNumber)
@@ -27,7 +26,7 @@ namespace ProjectThief.AI {
         public override void StateActivated()
         {
             base.StateActivated();
-            CurrentWaypoint = _path.GetClosestWaypoint(Owner.transform.position);
+            Owner.CurrentWaypoint = _path.GetClosestWaypoint(Owner.transform.position);
         }
 
         public override void Update()
@@ -40,24 +39,24 @@ namespace ProjectThief.AI {
 
                 // 2. Are we close enough the current waypoint?
                 //   2.1 If yes, get the next waypoint
-                CurrentWaypoint = GetWaypoint();
+                Owner.CurrentWaypoint = GetWaypoint();
                 // 3. Move towards the current waypoint
                 Owner.Move(Owner.transform.forward);
                 // 4. Rotate towards the current waypoint
-                Owner.Turn(CurrentWaypoint.Position);
+                Owner.Turn(Owner.CurrentWaypoint.Position);
 
             }
         }
 
         private Waypoint GetWaypoint()
         {
-            Waypoint result = CurrentWaypoint;
-            Vector3 toWaypointVector = CurrentWaypoint.Position - Owner.transform.position;
+            Waypoint result = Owner.CurrentWaypoint;
+            Vector3 toWaypointVector = Owner.CurrentWaypoint.Position - Owner.transform.position;
             float toWaypointSqr = toWaypointVector.sqrMagnitude;
             float sqrArriveDistance = _arriveDistance * _arriveDistance;
             if (toWaypointSqr <= sqrArriveDistance)
             {
-                result = _path.GetNextWaypoint(CurrentWaypoint, ref _direction);
+                result = _path.GetNextWaypoint(Owner.CurrentWaypoint, ref _direction);
             }
 
             return result;

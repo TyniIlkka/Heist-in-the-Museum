@@ -30,10 +30,19 @@ namespace ProjectThief.AI
 
             if (!ChangeState())
             {
+                //2. Find the way to the current way point
 
-                Owner.Move(Owner.transform.forward);
-                Owner.Turn(Owner.TargetSound.transform.position);
+                Pathing.FindPath(Owner.transform.position, Owner.CurrentWaypoint.transform.position);
 
+
+                //3. Move the finded way
+
+                //TODO: add animation trigger
+                //Owner.MoveAnimation(Path);
+                if (Path.Count > 0)
+                {
+                    MoveMethod();
+                }
             }
         }
 

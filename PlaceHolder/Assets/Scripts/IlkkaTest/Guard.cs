@@ -42,6 +42,9 @@ namespace ProjectThief {
         [SerializeField]
         private float m_fTurnSpeed;
 
+        [SerializeField]
+        private float m_fWaitTime;
+
         #region StaticGuard
         [Header("StaticGuard")]
         [SerializeField, Range(0, 40), Tooltip("How far can sounds distract guards:")]
@@ -98,6 +101,33 @@ namespace ProjectThief {
         #endregion
 
         #region Constructors
+        public float TurnSpeed
+        {
+            get { return m_fTurnSpeed; }
+            set {m_fTurnSpeed = value; }
+        }
+        public float MoveSpeed
+        {
+            get { return m_fMovementSpeed; }
+            set { m_fMovementSpeed = value; }
+        }
+        public float WaitTime
+        {
+            get { return m_fWaitTime; }
+            set { m_fWaitTime = value; }
+        }
+        public float FieldOfView
+        {
+            get { return m_fFieldOfView; }
+            private set { } 
+        }
+        public float DetectionRange
+        {
+            get { return m_fFieldOfView; }
+            private set { }
+        }
+        public Waypoint CurrentWaypoint { get; set; }
+
         #region Distract
 
         public float LightDetectDistance
@@ -233,7 +263,7 @@ namespace ProjectThief {
         {
             if (result)
             {
-                Debug.Log("Hämäytetään! ");
+                Debug.Log("Hämäytetään Valolla! ");
                 TargetLight = targetLight;
                 m_bDistracted = result;
             }
@@ -248,7 +278,7 @@ namespace ProjectThief {
         {
             if (result)
             {
-                Debug.Log("Hämäytetään! ");
+                Debug.Log("Hämäytetään Äänellä! ");
                 TargetSound = targetSound;
                 m_bDistracted = result;
             }
