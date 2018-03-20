@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 
-namespace ProjectThief.PlayerPathFinding
+namespace ProjectThief.PathFinding
 {
     public class Pathfinder : MonoBehaviour
     {

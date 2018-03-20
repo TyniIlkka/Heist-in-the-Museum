@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ProjectThief.PathFinding;
 
 namespace ProjectThief.AI
 {
@@ -22,6 +23,10 @@ namespace ProjectThief.AI
         public IList<AIStateType> TargetStates { get; protected set; }
         // The owner Unit of this state (Unit is the state controller class)
         public Guard Owner { get; protected set; }
+
+        public Pathfinding Pathing { get; set; }
+
+        public List<Vector3> Path = new List<Vector3>();
 
         protected AIStateBase()
         {
@@ -90,7 +95,40 @@ namespace ProjectThief.AI
         /// </summary>
         public abstract void Update();
 
+        public void MoveMethod()
+        {
+            if (Path.Count > 0)
+            {
+                Vector3 direction = (Path[0] - Owner.transform.position).normalized;
 
+                float step = Owner.TurnSpeed * Time.deltaTime;
+                Vector3 newDir = Vector3.RotateTowards(Owner.transform.forward, direction, step, 0.0F);
+                newDir.y = 0;
+                //newDir.z = 0;
+                Owner.transform.rotation = Quaternion.LookRotation(newDir);
+                //transform.LookAt(newDir);
+
+                Owner.transform.position = Vector3.MoveTowards(Owner.transform.position, Owner.transform.position + direction, Time.deltaTime * Owner.MoveSpeed);
+                if (Owner.transform.position.x < Path[0].x + 0.4F && Owner.transform.position.x > Path[0].x - 0.4F && Owner.transform.position.z > Path[0].z - 0.4F && Owner.transform.position.z < Path[0].z + 0.4F)
+                {
+                    Path.RemoveAt(0);
+                }
+
+                RaycastHit[] hit = Physics.RaycastAll(Owner.transform.position + (Vector3.up * 20F), Vector3.down, 100);
+                float maxY = -Mathf.Infinity;
+                foreach (RaycastHit h in hit)
+                {
+                    if (h.transform.tag == "Untagged")
+                    {
+                        if (maxY < h.point.y)
+                        {
+                            maxY = h.point.y;
+                        }
+                    }
+                }
+                Owner.transform.position = new Vector3(Owner.transform.position.x, maxY, Owner.transform.position.z);
+            }
+        }
     }
 }
 

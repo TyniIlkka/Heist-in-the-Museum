@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ProjectThief.PlayerPathFinding
+namespace ProjectThief.PathFinding
 {
     public class GridPlayer : Pathfinding
     {

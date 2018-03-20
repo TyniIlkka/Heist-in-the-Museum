@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ProjectThief.PlayerPathFinding
+namespace ProjectThief.PathFinding
 {
     public class NodeSearch : IComparable<NodeSearch>
     {
