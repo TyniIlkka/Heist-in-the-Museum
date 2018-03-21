@@ -34,7 +34,7 @@ namespace ProjectThief
 
         public void Activated()
         {
-            m_goSound.SetActive(true);
+            //m_goSound.SetActive(true);
             Collider[] objects = Physics.OverlapSphere(transform.position, m_fRange);
 
             if (objects.Length > 0)

@@ -3,22 +3,24 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using System;
+using ProjectThief.PathFinding;
 
 namespace ProjectThief.AI
 {
     public class PatrolMoveTo : AIStateBase
     {
-        public PatrolMoveTo(Guard owner)
+        public PatrolMoveTo(Guard owner, GuardMover mover)
             : base()
         {
             State = AIStateType.PatrolMoveTo;
             Owner = owner;
-            AddTransition(AIStateType.PatrolMoveFrom);
+            Mover = mover;
+            AddTransition(AIStateType.Patrol);
         }
 
         public override void StateActivated()
         {
-            base.StateActivated();            
+            base.StateActivated();
         }
 
         public override void Update()
@@ -30,16 +32,23 @@ namespace ProjectThief.AI
             {
                 //2. Find the way to the current way point
 
-                Pathing.FindPath(Owner.transform.position, Owner.TargetSound.transform.position);
+                Mover.FindPath(Owner.transform.position, Owner.TargetSound.transform.position);
 
 
                 //3. Move the finded way
 
                 //TODO: add animation trigger
                 //Owner.MoveAnimation(Path);
-                if (Path.Count > 0)
+                if (Mover.Path.Count > 0)
                 {
                     MoveMethod();
+                    if (Mover.Path.Count == 1 && Owner.Distracted)
+                    {
+                        WaitTillMoveBack();
+                        Owner.Distracted = false;
+                        Mover.FindPath(Owner.transform.position, Owner.CurrentWaypoint.Position);
+                    }
+                    
                 }
             }
         }
@@ -47,6 +56,7 @@ namespace ProjectThief.AI
         public IEnumerable WaitTillMoveBack()
         {
             yield return new WaitForSeconds(Owner.WaitTime);
+            Owner.TargetSound = null;
         }
 
         /// <summary>
@@ -55,10 +65,10 @@ namespace ProjectThief.AI
         /// <returns>Bool result</returns>
         private bool ChangeState()
         {
-            if (Owner.TargetSound == null)
+            if (Mover.Path.Count <= 0 && Owner.Distracted == false)
             {
                 Debug.Log("Liikutaan pois hämäyksestä");
-                bool result = Owner.PerformTransition(AIStateType.PatrolMoveFrom);
+                bool result = Owner.PerformTransition(AIStateType.Patrol);
                 return result;
             }
             return false;

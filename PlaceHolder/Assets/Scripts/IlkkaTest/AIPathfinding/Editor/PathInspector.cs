@@ -4,14 +4,14 @@ using UE = UnityEditor;
 
 namespace TankGame.Editor
 {
-	[UE.CustomEditor( typeof( Path ) )]
+	[UE.CustomEditor( typeof( PathPoints ) )]
 	public class PathInspector : UE.Editor
 	{
-		private Path _target;
+		private PathPoints _target;
 
 		protected void OnEnable()
 		{
-			_target = target as Path;
+			_target = target as PathPoints;
 		}
 
 		public override void OnInspectorGUI()

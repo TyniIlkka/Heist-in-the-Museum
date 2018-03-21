@@ -1,16 +1,113 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ProjectThief.PathFinding;
 
-public class GuardMover : MonoBehaviour {
+namespace ProjectThief.PathFinding
+{
+    public class GuardMover : Pathfinding
+    {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        public Guard owner;
+        private CharacterController controller;
+        private bool newPath = true;
+        private bool moving = false;
+
+
+        void Start()
+        {
+            owner = GetComponent<Guard>();
+        }
+
+        void Update()
+        {
+            if (Vector3.Distance(owner.transform.position, transform.position) < 25F && !moving)
+            {
+                if (newPath)
+                {
+                    StartCoroutine(NewPath());
+                }
+                moving = true;
+            }
+            else if (Vector3.Distance(owner.transform.position, transform.position) < 2F)
+            {
+                //Stop!
+            }
+            else if (Vector3.Distance(owner.transform.position, transform.position) < 35F && moving)
+            {
+                if (Path.Count > 0)
+                {
+                    if (Vector3.Distance(owner.transform.position, Path[Path.Count - 1]) > 5F)
+                    {
+                        StartCoroutine(NewPath());
+                    }
+                }
+                else
+                {
+                    if (newPath)
+                    {
+                        StartCoroutine(NewPath());
+                    }
+                }
+                //Move the ai towards the player
+                MoveMethod();
+            }
+            else
+            {
+                moving = false;
+            }
+        }
+
+        IEnumerator NewPath()
+        {
+            newPath = false;
+            FindPath(transform.position, owner.transform.position);
+            yield return new WaitForSeconds(1F);
+            newPath = true;
+        }
+
+
+        private void MoveMethod()
+        {
+            if (Path.Count > 0)
+            {
+                Vector3 direction = (Path[0] - transform.position).normalized;
+
+
+                if (Vector3.Distance(owner.transform.position, transform.position) < 1F)
+                {
+                    Vector3 dir = (transform.position - owner.transform.position).normalized;
+                    dir.Set(dir.x, 0, dir.z);
+                    direction += 0.2F * dir;
+                }
+                
+
+                direction.Normalize();
+
+
+                transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, Time.deltaTime * 12F);
+                if (transform.position.x < Path[0].x + 0.4F && transform.position.x > Path[0].x - 0.4F && transform.position.z > Path[0].z - 0.4F && transform.position.z < Path[0].z + 0.4F)
+                {
+                    Path.RemoveAt(0);
+                }
+
+                RaycastHit[] hit = Physics.RaycastAll(transform.position + (Vector3.up * 20F), Vector3.down, 100);
+                float maxY = -Mathf.Infinity;
+                foreach (RaycastHit h in hit)
+                {
+                    if (h.transform.tag == "Untagged")
+                    {
+                        if (maxY < h.point.y)
+                        {
+                            maxY = h.point.y;
+                        }
+                    }
+                }
+                if (maxY > -100)
+                {
+                    transform.position = new Vector3(transform.position.x, maxY + 1F, transform.position.z);
+                }
+            }
+        }
+    }
 }

@@ -40,7 +40,6 @@ namespace ProjectThief.PathFinding
 
             if (Input.GetButtonDown("Fire1"))
             {
-                //Call minimap
                 Ray ray = playerCam.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
                 RaycastHit hit;
 

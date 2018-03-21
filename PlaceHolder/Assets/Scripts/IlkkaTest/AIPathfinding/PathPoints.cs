@@ -16,7 +16,7 @@ namespace ProjectThief.WaypointSystem
 		Backward
 	}
 
-	public class Path : MonoBehaviour
+	public class PathPoints : MonoBehaviour
 	{
 		[SerializeField] private PathType _pathType;
 
