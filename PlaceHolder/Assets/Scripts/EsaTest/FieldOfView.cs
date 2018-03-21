@@ -12,13 +12,15 @@ namespace ProjectThief
         [SerializeField]
         private LayerMask m_lmObstacleMask;
         [SerializeField]
-        private float m_fMeshResolution;
+        private float m_fMeshResolution = 5;
         [SerializeField]
         private MeshFilter m_mfViewMeshFilter;
         [SerializeField]
-        private float m_fEdgeDistThreshold;
+        private float m_fEdgeDistThreshold = 0.5f;
         [SerializeField]
-        private int m_iEdgeResolveIters;
+        private int m_iEdgeResolveIters = 6;
+        [SerializeField, Tooltip("Light distance mult")]
+        private float m_fMult = 2;
 
         private Mesh m_mViewMesh;
 
@@ -28,6 +30,15 @@ namespace ProjectThief
 
         private void Awake()
         {
+            Init(); 
+
+            m_mViewMesh = new Mesh();
+            m_mViewMesh.name = "View Mesh";
+            m_mfViewMeshFilter.mesh = m_mViewMesh;
+        }
+
+        private void Init()
+        {
             if (GetComponent<Guard>() != null)
             {
                 m_fViewRad = GetComponent<Guard>().DetectionRange;
@@ -35,16 +46,24 @@ namespace ProjectThief
             }
             else
             {
-                Debug.LogError("404 Guard not found.");
+                Debug.LogError("ERROR: Guard not found.");
             }
 
-            m_mViewMesh = new Mesh();
-            m_mViewMesh.name = "View Mesh";
-            m_mfViewMeshFilter.mesh = m_mViewMesh;
+            if (GetComponentInChildren<Light>() != null)
+            {
+                Light lt = GetComponentInChildren<Light>();
+                lt.range = m_fViewRad * m_fMult;
+                lt.spotAngle = m_fViewAngle;
+            }
+            else
+            {
+                Debug.LogError("ERROR: Light not found.");
+            }
         }
 
         private void LateUpdate()
         {
+            Init();
             DrawFieldOfView();
         }
 

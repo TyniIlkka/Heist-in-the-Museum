@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using ProjectThief.States;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +14,8 @@ namespace ProjectThief
         public LevelController levelController;        
         public bool canMove;
         public bool infoShown;
-        public bool firstSpawn;
+        public Transform spawnPoint;
+        public GameStateBase previousState;
 
         [SerializeField] List<Guard> guards;
 
@@ -29,11 +30,13 @@ namespace ProjectThief
             {
                 Destroy(gameObject);
             }
+            
         }
 
         private void Update()
         {
-            
+            if (previousState != null)
+                Debug.Log("Previous State: " + previousState.SceneName);
         }
 
         public void Reset()

@@ -42,8 +42,7 @@ namespace ProjectThief
 
         public void NewGame()
         {
-            GameManager.instance.infoShown = false;
-            GameManager.instance.firstSpawn = true;
+            GameManager.instance.infoShown = false;            
             GameStateController.PerformTransition(_nextState);
         }
 

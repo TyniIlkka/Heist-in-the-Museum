@@ -5,17 +5,14 @@ namespace ProjectThief
 {
     public class Door : ObjectBase
     {
-        [SerializeField, Tooltip("Room's exit position in lobby area")]
-        private Transform m_v3LobbyPos;
-        [SerializeField, Tooltip("Room's entrance position")]
-        private Transform m_v3RoomPosition;
+        [SerializeField, Tooltip("Spawn Position")]
+        private Transform m_tSpawnPoint;
         [SerializeField, Tooltip("Next scene")]
         private GameStateType _nextState;
         
         private bool m_bIsBlocked;                
 
-        public Vector3 LobbyPos { get { return m_v3LobbyPos.position; } }
-        public Vector3 RoomPos { get { return m_v3RoomPosition.position; } }
+        public Transform SpawnPoint { get { return m_tSpawnPoint; } }
         public bool Blocked { set { m_bIsBlocked = value; } }
 
         /// <summary>
