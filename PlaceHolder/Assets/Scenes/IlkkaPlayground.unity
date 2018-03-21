@@ -9126,6 +9126,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca07641c17e8056448cf39d9e2842bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &559572970
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 559572971}
+  m_Layer: 11
+  m_Name: SoundSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &559572971
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 559572970}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 625592250}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &562667795
 GameObject:
   m_ObjectHideFlags: 0
@@ -10456,6 +10484,11 @@ MeshFilter:
   m_PrefabInternal: {fileID: 782361711}
   m_GameObject: {fileID: 623330759}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &625592250 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4789956276599296, guid: 258d00bdb09f0aa4f9ede9d172e3c232,
+    type: 2}
+  m_PrefabInternal: {fileID: 739793153}
 --- !u!1 &646080287
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using JetBrains.Annotations;
 using ProjectThief.AI;
+using ProjectThief.PathFinding;
 using ProjectThief.WaypointSystem;
 
 namespace ProjectThief {
@@ -31,9 +32,12 @@ namespace ProjectThief {
         StaticTurnTo staticTurnTo;
 
         #endregion
-        //
+        
+
         [SerializeField, Header("Patrolling or Static"), Tooltip("if True, guard is moving, otherwise static")]
         private bool m_bMoving;
+
+
         #region Moving, turning, pathfinding
 
         [SerializeField]
@@ -44,6 +48,8 @@ namespace ProjectThief {
 
         [SerializeField]
         private float m_fWaitTime;
+
+        private GuardMover guardMover;
 
         #region StaticGuard
         [Header("StaticGuard")]
@@ -66,7 +72,7 @@ namespace ProjectThief {
         private LayerMask m_lmSoundMask;
         //Set Path
         [SerializeField]
-        private List<Path> _paths;
+        private List<PathPoints> _paths;
         //How smooth guards is going to corner.
         [SerializeField]
         private float _waypointArriveDistance;
@@ -180,20 +186,23 @@ namespace ProjectThief {
         {
             // Runs the base classes implementation of the Init method.
             base.Init();
-
+            guardMover = GetComponent<GuardMover>();
             // Initializes the state system.
             InitStates();
         }
 
+        /// <summary>
+        /// Init States.
+        /// </summary>
         private void InitStates()
         {
             patrol = new Patrol(this, _paths, _direction, _waypointArriveDistance, _currenPathNumber );
             _states.Add(patrol);
 
-            patrolMoveTo = new PatrolMoveTo(this);
+            patrolMoveTo = new PatrolMoveTo(this, guardMover);
             _states.Add(patrolMoveTo);
 
-            patrolMoveFrom = new PatrolMoveFrom(this);
+            patrolMoveFrom = new PatrolMoveFrom(this,guardMover);
             _states.Add(patrolMoveFrom);
 
             guardStatic = new Static(this, CurrentDirection);
@@ -208,6 +217,9 @@ namespace ProjectThief {
             Debug.Log(CurrentState);
         }
 
+        /// <summary>
+        /// Sets CurrentState.
+        /// </summary>
         private void CheckCurrentState()
         {
             if (m_bMoving)
@@ -219,7 +231,11 @@ namespace ProjectThief {
                 CurrentState = guardStatic;
             }
         }
-
+        /// <summary>
+        /// Change guards state to another.
+        /// </summary>
+        /// <param name="targetState"></param>
+        /// <returns></returns>
         public bool PerformTransition(AIStateType targetState)
         {
             if (!CurrentState.CheckTransition(targetState))
@@ -259,9 +275,14 @@ namespace ProjectThief {
 
         }
 
+        /// <summary>
+        /// Sets guard to distracted or if called from reset sets off.
+        /// </summary>
+        /// <param name="targetLight">TargetLight which player reacts to.</param>
+        /// <param name="result">Is guard set on/off.</param>
         public void Distract(LightDistraction targetLight, bool result)
         {
-            if (result)
+            if (result && !m_bMoving)
             {
                 Debug.Log("Hämäytetään Valolla! ");
                 TargetLight = targetLight;
@@ -273,12 +294,15 @@ namespace ProjectThief {
                 TargetLight = null;
             }
         }
-
+        /// <summary>
+        /// Sets guard to distracted or if called from reset sets off.
+        /// </summary>
+        /// <param name="targetSound">TargetSound which player interacts.</param>
+        /// <param name="result">Is guard set on/off.</param>
         public void Distract(SoundDistraction targetSound, bool result)
         {
-            if (result)
+            if (result && m_bMoving)
             {
-                Debug.Log("Hämäytetään Äänellä! ");
                 TargetSound = targetSound;
                 m_bDistracted = result;
             }
@@ -305,6 +329,10 @@ namespace ProjectThief {
             return null;
         }
 
+        /// <summary>
+        /// Checks if guard can see player on it's detection ranges.
+        /// </summary>
+        /// <returns>Returns true if player is seen, otherwise false.</returns>
         public bool CanSeePlayer()
         {
             RaycastHit hit;

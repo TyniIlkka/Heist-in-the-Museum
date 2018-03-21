@@ -6,12 +6,12 @@ using ProjectThief.WaypointSystem;
 namespace ProjectThief.AI {
     public class Patrol : AIStateBase
     {
-        private Path _path;
+        private PathPoints _path;
         private Direction _direction;
         private float _arriveDistance;
 
 
-        public Patrol(Guard owner, List<Path> path,
+        public Patrol(Guard owner, List<PathPoints> path,
             Direction direction, float arriveDistance, int currentPathNumber)
             : base()
         {
@@ -64,21 +64,11 @@ namespace ProjectThief.AI {
 
         private bool ChangeState()
         {
-            int soundLayer = Owner.SoundMask;
-
-            Collider[] sounds = Physics.OverlapSphere(Owner.transform.position,
-                Owner.SoundDetectDistance, soundLayer);
-            if (sounds.Length > 0)
+            if (Owner.Distracted)
             {
-                foreach (Collider sound in sounds)
-                {
-                    DistractSound signal = sound.GetComponent<DistractSound>();
-
-                    if (signal != null && signal.SoundOn == true)
-                    {
-                        return Owner.PerformTransition(AIStateType.PatrolMoveTo);  
-                    }  
-                }        
+                Debug.Log("Hämätty äänellä!");
+                bool result = Owner.PerformTransition(AIStateType.PatrolMoveTo);
+                return result;
             }
             return false;
         }

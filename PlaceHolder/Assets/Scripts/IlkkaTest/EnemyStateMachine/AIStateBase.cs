@@ -24,7 +24,7 @@ namespace ProjectThief.AI
         // The owner Unit of this state (Unit is the state controller class)
         public Guard Owner { get; protected set; }
 
-        public Pathfinding Pathing { get; set; }
+        public GuardMover Mover { get; set; }
 
         public List<Vector3> Path = new List<Vector3>();
 
@@ -81,6 +81,7 @@ namespace ProjectThief.AI
         /// </summary>
         public virtual void StateActivated()
         {
+            
         }
 
         /// <summary>
@@ -97,9 +98,9 @@ namespace ProjectThief.AI
 
         public void MoveMethod()
         {
-            if (Path.Count > 0)
+            if (Mover.Path.Count > 0)
             {
-                Vector3 direction = (Path[0] - Owner.transform.position).normalized;
+                Vector3 direction = (Mover.Path[0] - Owner.transform.position).normalized;
 
                 float step = Owner.TurnSpeed * Time.deltaTime;
                 Vector3 newDir = Vector3.RotateTowards(Owner.transform.forward, direction, step, 0.0F);
@@ -109,9 +110,9 @@ namespace ProjectThief.AI
                 //transform.LookAt(newDir);
 
                 Owner.transform.position = Vector3.MoveTowards(Owner.transform.position, Owner.transform.position + direction, Time.deltaTime * Owner.MoveSpeed);
-                if (Owner.transform.position.x < Path[0].x + 0.4F && Owner.transform.position.x > Path[0].x - 0.4F && Owner.transform.position.z > Path[0].z - 0.4F && Owner.transform.position.z < Path[0].z + 0.4F)
+                if (Owner.transform.position.x < Mover.Path[0].x + 0.4F && Owner.transform.position.x > Mover.Path[0].x - 0.4F && Owner.transform.position.z > Mover.Path[0].z - 0.4F && Owner.transform.position.z < Mover.Path[0].z + 0.4F)
                 {
-                    Path.RemoveAt(0);
+                    Mover.Path.RemoveAt(0);
                 }
 
                 RaycastHit[] hit = Physics.RaycastAll(Owner.transform.position + (Vector3.up * 20F), Vector3.down, 100);

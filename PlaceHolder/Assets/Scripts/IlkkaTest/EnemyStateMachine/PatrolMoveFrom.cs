@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-//using ProjectThief.PathFinding;
+using ProjectThief.PathFinding;
 using UnityEngine;
 using System;
 
@@ -10,11 +10,12 @@ namespace ProjectThief.AI
     {
         //public Nodes DistractNode { get; private set; }
 
-        public PatrolMoveFrom(Guard owner)
+        public PatrolMoveFrom(Guard owner, GuardMover mover)
             : base()
         {
             State = AIStateType.PatrolMoveFrom;
             Owner = owner;
+            Mover = mover;
             AddTransition(AIStateType.Patrol);
         }
 
@@ -32,14 +33,14 @@ namespace ProjectThief.AI
             {
                 //2. Find the way to the current way point
 
-                Pathing.FindPath(Owner.transform.position, Owner.CurrentWaypoint.transform.position);
+                Mover.FindPath(Owner.transform.position, Owner.CurrentWaypoint.transform.position);
 
 
                 //3. Move the finded way
 
                 //TODO: add animation trigger
                 //Owner.MoveAnimation(Path);
-                if (Path.Count > 0)
+                if (Mover.Path.Count > 0)
                 {
                     MoveMethod();
                 }
