@@ -4,19 +4,28 @@ using UnityEngine;
 
 namespace ProjectThief
 {
-    public class SoundDistraction : MonoBehaviour
+    public class SoundDistraction : ObjectBase
     {
 
         //TODO: Replace with sound source variable.
         [SerializeField, Tooltip("Sound's sound source")]
-        private GameObject m_goSound;
+        private AudioSource m_goSound;
         [SerializeField, Tooltip("Distraction range")]
         private float m_fRange = 10f;
+        [SerializeField, Tooltip("Audio clip")]
+        private AudioClip m_acSound;
 
         public bool trigger;
 
         Guard guard;
 
+        private void Awake()
+        {
+            m_goSound = GetComponent<AudioSource>();
+            m_goSound.clip = m_acSound;
+            m_goSound.loop = true;
+            //m_goSound.volume = GameManager.instance.sfxVolume;
+        }
 
         private void Update()
         {
@@ -32,9 +41,30 @@ namespace ProjectThief
             Gizmos.DrawWireSphere(transform.position, m_fRange);
         }
 
+        protected override void OnMouseOver()
+        {
+            if (IsActive)
+            {
+                GetMouseController.InspectCursor();
+                if (IsInteractable)
+                {
+                    GetMouseController.InteractCursor();
+                    if (Input.GetMouseButton(0))
+                    {
+                        Activated();
+                    }
+                }
+            }
+        }
+
+        protected override void OnMouseExit()
+        {
+            GetMouseController.DefaultCursor();
+        }
+
         public void Activated()
         {
-            //m_goSound.SetActive(true);
+            m_goSound.Play();;
             Collider[] objects = Physics.OverlapSphere(transform.position, m_fRange);
 
             if (objects.Length > 0)
@@ -52,7 +82,7 @@ namespace ProjectThief
 
         public void ResetLight()
         {
-            m_goSound.SetActive(false);
+            m_goSound.Stop();
             guard.Distract(this, false);
             
         }

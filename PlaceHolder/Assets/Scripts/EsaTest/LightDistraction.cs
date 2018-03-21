@@ -28,7 +28,7 @@ namespace ProjectThief
             Gizmos.DrawWireSphere(transform.position, m_fRange);
         }
 
-            public void Activated()
+        public void Activated()
         {            
             m_goLight.SetActive(true);
             Collider[] objects = Physics.OverlapSphere(transform.position, m_fRange);
