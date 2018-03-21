@@ -9,20 +9,12 @@ namespace ProjectThief
         private Transform m_tSpawnPoint;
         [SerializeField, Tooltip("Next scene")]
         private GameStateType _nextState;
-        
+        [SerializeField, Tooltip("Marks if door is blocked or not")]
         private bool m_bIsBlocked;                
 
         public Transform SpawnPoint { get { return m_tSpawnPoint; } }
         public bool Blocked { set { m_bIsBlocked = value; } }
-
-        /// <summary>
-        /// Door scripts initialization.
-        /// </summary>
-        private void Awake()
-        {
-            m_bIsBlocked = true;            
-        }        
-
+           
         /// <summary>
         /// Detects if mouse is over an object.
         /// </summary>

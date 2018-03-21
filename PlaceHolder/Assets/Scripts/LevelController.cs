@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace ProjectThief
@@ -13,9 +14,12 @@ namespace ProjectThief
         private GameObject m_goVictory;        
         [SerializeField, Tooltip("Info screen")]
         private GameObject m_goScreen;
-        [SerializeField, Tooltip("Player spawn position")]
-        private Vector3 m_v3SpawnPosition;
-        [SerializeField, Tooltip("Player spawn rotation")]
+        [SerializeField, Tooltip("Initial Spawn location")]
+        private Transform m_tInitialSpawn;
+        [SerializeField, Tooltip("Scenes Doors")]
+        private List<Door> m_lDoors;
+        
+        private Vector3 m_v3SpawnPosition;        
         private Quaternion m_qSpawnRotation;
 
         private void Awake()
@@ -80,7 +84,24 @@ namespace ProjectThief
         {
             GameObject player = GameManager.instance.playerPrefab;
 
-            return Instantiate(player, m_v3SpawnPosition, m_qSpawnRotation);
+            if (!GameManager.instance.firstSpawn)
+            {
+                // TODO update spawn position & rotation.
+
+                m_v3SpawnPosition = m_lDoors[0].SpawnPoint.position;
+                m_qSpawnRotation = m_lDoors[0].SpawnPoint.rotation;
+
+                return Instantiate(player, m_v3SpawnPosition, m_qSpawnRotation);
+            }
+
+            else
+            {
+                m_v3SpawnPosition = m_tInitialSpawn.position;
+                m_qSpawnRotation = m_tInitialSpawn.rotation;
+                GameManager.instance.firstSpawn = false;
+
+                return Instantiate(player, m_v3SpawnPosition, m_qSpawnRotation);
+            }
         }
     }
 }

@@ -14,7 +14,9 @@ namespace ProjectThief
         public LevelController levelController;        
         public bool canMove;
         public bool infoShown;
+        public bool firstSpawn;
         public Transform spawnPoint;
+        public Transform initialSpawn;
         public GameStateBase previousState;
 
         [SerializeField] List<Guard> guards;
