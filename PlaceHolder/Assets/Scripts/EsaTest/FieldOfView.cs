@@ -157,12 +157,14 @@ namespace ProjectThief
         {
             Vector3 dir = DirFromAngle(globalAngle, true);
             RaycastHit hit;
+            Vector3 raycastPoint = transform.position;
+            raycastPoint.y += 1.5f;            
 
-            if (Physics.Raycast(transform.position, dir, out hit, m_fViewRad, m_lmObstacleMask))
+            if (Physics.Raycast(raycastPoint, dir, out hit, m_fViewRad, m_lmObstacleMask))
                 return new ViewCastinfo(true, hit.point, hit.distance, globalAngle);
 
             else
-                return new ViewCastinfo(false, transform.position + dir * m_fViewRad, hit.distance, globalAngle);
+                return new ViewCastinfo(false, raycastPoint + dir * m_fViewRad, hit.distance, globalAngle);
         }
 
         public Vector3 DirFromAngle (float angleInDeg, bool globalAngle)
