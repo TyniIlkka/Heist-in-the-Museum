@@ -21,6 +21,8 @@ namespace ProjectThief
         private int m_iEdgeResolveIters = 6;
         [SerializeField, Tooltip("Light distance mult")]
         private float m_fMult = 2;
+        [SerializeField, Tooltip("Flashlight")]
+        private Light m_lLight;
 
         private Mesh m_mViewMesh;
 
@@ -35,25 +37,24 @@ namespace ProjectThief
             m_mViewMesh = new Mesh();
             m_mViewMesh.name = "View Mesh";
             m_mfViewMeshFilter.mesh = m_mViewMesh;
-        }
+        }               
 
         private void Init()
         {
-            if (GetComponent<Guard>() != null)
+            if (GetComponentInParent<Guard>() != null)
             {
-                m_fViewRad = GetComponent<Guard>().DetectionRange;
-                m_fViewAngle = GetComponent<Guard>().FieldOfView;
+                m_fViewRad = GetComponentInParent<Guard>().DetectionRange;
+                m_fViewAngle = GetComponentInParent<Guard>().FieldOfView;
             }
             else
             {
                 Debug.LogError("ERROR: Guard not found.");
             }
 
-            if (GetComponentInChildren<Light>() != null)
+            if (m_lLight != null)
             {
-                Light lt = GetComponentInChildren<Light>();
-                lt.range = m_fViewRad * m_fMult;
-                lt.spotAngle = m_fViewAngle;
+                m_lLight.range = m_fViewRad * m_fMult;
+                m_lLight.spotAngle = m_fViewAngle;
             }
             else
             {
@@ -106,8 +107,8 @@ namespace ProjectThief
 
             vertices[0] = Vector3.zero;
             for (int i = 0; i < vertexCount -1; i++)
-            {
-                vertices[i + 1] = transform.InverseTransformPoint(viewPoints[i]);
+            { 
+                vertices[i + 1] = transform.InverseTransformPoint(viewPoints[i]);                
 
                 if (i < vertexCount - 2)
                 {
@@ -156,15 +157,13 @@ namespace ProjectThief
         ViewCastinfo ViewCast (float globalAngle)
         {
             Vector3 dir = DirFromAngle(globalAngle, true);
-            RaycastHit hit;
-            Vector3 raycastPoint = transform.position;
-            raycastPoint.y += 1.5f;            
+            RaycastHit hit;                      
 
-            if (Physics.Raycast(raycastPoint, dir, out hit, m_fViewRad, m_lmObstacleMask))
+            if (Physics.Raycast(transform.position, dir, out hit, m_fViewRad, m_lmObstacleMask))
                 return new ViewCastinfo(true, hit.point, hit.distance, globalAngle);
 
             else
-                return new ViewCastinfo(false, raycastPoint + dir * m_fViewRad, hit.distance, globalAngle);
+                return new ViewCastinfo(false, transform.position + dir * m_fViewRad, hit.distance, globalAngle);
         }
 
         public Vector3 DirFromAngle (float angleInDeg, bool globalAngle)

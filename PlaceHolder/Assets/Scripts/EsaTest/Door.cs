@@ -10,11 +10,29 @@ namespace ProjectThief
         [SerializeField, Tooltip("Next scene")]
         private GameStateType _nextState;
         [SerializeField, Tooltip("Marks if door is blocked or not")]
-        private bool m_bIsBlocked;                
+        private bool m_bIsBlocked;
+        [SerializeField, Tooltip("Is open in previous scene")]
+        private bool m_bIsOpen;
+        [SerializeField, Tooltip("Door's obstacle")]
+        private GameObject m_goObstacle;
 
         public Transform SpawnPoint { get { return m_tSpawnPoint; } }
         public bool Blocked { set { m_bIsBlocked = value; } }
-           
+
+
+        private void Awake()
+        {
+            if (m_bIsOpen)
+            {
+                m_bIsBlocked = false;
+                m_goObstacle.SetActive(false);
+            }
+            else
+            {
+                // TODO Get status from game manager.
+                m_bIsBlocked = true;
+            }
+        }
         /// <summary>
         /// Detects if mouse is over an object.
         /// </summary>
