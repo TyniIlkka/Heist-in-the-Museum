@@ -18,6 +18,7 @@ namespace ProjectThief
         public Transform spawnPoint;
         public Transform initialSpawn;
         public GameStateBase previousState;
+        public List<>
 
         [SerializeField] List<Guard> guards;
 
