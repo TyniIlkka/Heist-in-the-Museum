@@ -129,7 +129,7 @@ namespace ProjectThief {
         }
         public float DetectionRange
         {
-            get { return m_fFieldOfView; }
+            get { return m_fMaxDetectionRange; }
             private set { }
         }
         public Waypoint CurrentWaypoint { get; set; }
