@@ -38,17 +38,33 @@ namespace ProjectThief.AI
                         Owner.transform.forward = new Vector3(0f, 0f, 1f);
                         Owner.Direction = new Vector3(0f, 0f, 1f);
                         break;
+                    case MyDirections.NorthEast:
+                        Owner.transform.forward = new Vector3(1f, 0f, 1f);
+                        Owner.Direction = new Vector3(1f, 0f, 1f);
+                        break;
                     case MyDirections.East:
                         Owner.transform.forward = new Vector3(1f, 0f, 0f);
                         Owner.Direction = new Vector3(1f, 0f, 0f);
+                        break;
+                    case MyDirections.SouthEast:
+                        Owner.transform.forward = new Vector3(1f, 0f, -1f);
+                        Owner.Direction = new Vector3(1f, 0f, -1f);
                         break;
                     case MyDirections.South:
                         Owner.transform.forward = new Vector3(0f, 0f, -1f);
                         Owner.Direction = new Vector3(0f, 0f, -1f);
                         break;
+                    case MyDirections.SouthWest:
+                        Owner.transform.forward = new Vector3(-1f, 0f, -1f);
+                        Owner.Direction = new Vector3(-1f, 0f, -1f);
+                        break;
                     case MyDirections.West:
                         Owner.transform.forward = new Vector3(-1f, 0f, 0f);
                         Owner.Direction = new Vector3(-1f, 0f, 0f);
+                        break;
+                    case MyDirections.NorthWest:
+                        Owner.transform.forward = new Vector3(-1f, 0f, 1f);
+                        Owner.Direction = new Vector3(-1f, 0f, 1f);
                         break;
                 }
             }
