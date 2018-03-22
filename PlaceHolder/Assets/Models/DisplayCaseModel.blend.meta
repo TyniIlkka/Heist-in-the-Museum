@@ -17,6 +17,7 @@ ModelImporter:
     400008: Door
     2100000: IronMaterial__Wood
     2100002: MetalMaterial__Wood
+    2100004: WoodMaterial__woodtexture_png
     2300000: Base
     2300002: Cover
     2300004: Joint
@@ -61,6 +62,11 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: WoodMaterial__Wood
+    second: {fileID: 2100000, guid: 60496c060b7b96f47afd0f76687fd80d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WoodMaterial__woodtexture_png
     second: {fileID: 2100000, guid: 60496c060b7b96f47afd0f76687fd80d, type: 2}
   materials:
     importMaterials: 1
