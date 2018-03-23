@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using ProjectThief.States;
 
 namespace ProjectThief
 {
@@ -18,15 +19,21 @@ namespace ProjectThief
         private Transform m_tInitialSpawn;
         [SerializeField, Tooltip("Scenes Doors")]
         private List<Door> m_lDoors;
+        [SerializeField, Tooltip("Room position in list (starts from 0)")]
+        private int m_iPos;
         
         private Vector3 m_v3SpawnPosition;        
         private Quaternion m_qSpawnRotation;
+        private bool m_bSaved;        
 
         private void Awake()
         {
+            Debug.Log("Current state: " + GameStateController.CurrentState);
+            m_bSaved = false;
+
             GameManager.instance.levelController = this;            
             m_mcController = GameManager.instance.mouseController;
-            GameManager.instance.player = SpawnPlayer();
+            GameManager.instance.player = SpawnPlayer();               
 
             if (!GameManager.instance.infoShown)
                 Intro();            
@@ -35,7 +42,7 @@ namespace ProjectThief
         // Update is called once per frame
         private void Update()
         {
-            MouseOverHudCheck();
+            MouseOverHudCheck();           
         }
 
         /// <summary>
@@ -102,6 +109,6 @@ namespace ProjectThief
 
                 return Instantiate(player, m_v3SpawnPosition, m_qSpawnRotation);
             }
-        }
+        }     
     }
 }

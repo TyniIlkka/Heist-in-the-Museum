@@ -23,7 +23,7 @@
         public override void Activate()
         {
             base.Activate();
-            GameManager.instance.Reset();
+            GameManager.instance.ResetGame();
         }
     }
 }

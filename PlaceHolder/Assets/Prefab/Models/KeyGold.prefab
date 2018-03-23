@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4535190934880114}
   - component: {fileID: 33517090391189928}
   - component: {fileID: 23335233435434334}
-  - component: {fileID: 95954385153087636}
   - component: {fileID: 114078803486980758}
+  - component: {fileID: 65123690603637662}
   m_Layer: 0
   m_Name: KeyGold
   m_TagString: Untagged
@@ -84,23 +84,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1114679074242628}
   m_Mesh: {fileID: 4300000, guid: 2b52d71ffc425c54989adc53e5d8e37d, type: 3}
---- !u!95 &95954385153087636
-Animator:
-  serializedVersion: 3
+--- !u!65 &65123690603637662
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1114679074242628}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 2b52d71ffc425c54989adc53e5d8e37d, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  serializedVersion: 2
+  m_Size: {x: 0.15, y: 0.03, z: 0.15}
+  m_Center: {x: -0.00016399939, y: 0, z: -0.018248001}
 --- !u!114 &114078803486980758
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -115,3 +110,5 @@ MonoBehaviour:
   m_tItemTexture: {fileID: 2800000, guid: fab8065960198f74893a8a63f209f699, type: 3}
   m_iInventory: {fileID: 0}
   m_v3MoveToPos: {x: 0, y: 0, z: 0}
+  m_iPosition: 2
+  m_iRefPos: 2

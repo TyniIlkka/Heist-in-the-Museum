@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ProjectThief
 {
-    public class InteractableObject : ObjectBase
+    public class InterActableObject : ObjectBase
     {
         [SerializeField, Tooltip("Key Item")]
         private Item m_itKeyItem;        
@@ -41,7 +41,8 @@ namespace ProjectThief
                         if (Input.GetMouseButtonDown(0))
                         {
                             m_iInventory.RemoveItem(m_itKeyItem);
-                            m_goLock.SetActive(false);
+                            Debug.Log("opened");
+                            //m_goLock.SetActive(false);
                             //m_aAnimator.SetTrigger(1);
                         }                        
                     }

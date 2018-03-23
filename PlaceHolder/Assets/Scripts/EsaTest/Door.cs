@@ -28,11 +28,11 @@ namespace ProjectThief
                 m_goObstacle.SetActive(false);
             }
             else
-            {
-                // TODO Get status from game manager.
+            {               
                 m_bIsBlocked = true;
             }
         }
+
         /// <summary>
         /// Detects if mouse is over an object.
         /// </summary>
@@ -48,7 +48,7 @@ namespace ProjectThief
                     {
                         GetMouseController.EnterCursor();
                         if (Input.GetMouseButton(0))
-                        {
+                        {                            
                             GameStateController.PerformTransition(_nextState);
                         }                        
                     }
