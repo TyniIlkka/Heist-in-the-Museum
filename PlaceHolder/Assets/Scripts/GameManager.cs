@@ -26,8 +26,7 @@ namespace ProjectThief
         public List<Item> inventory;
         public bool[] roomCleared;
         public bool[] collectedItems;
-        public bool[] usedlevers;
-        public bool[] openedDoors;
+        public bool[] usedlevers;        
         public bool[] openedVitrines;
         [SerializeField] List<Guard> guards;
         #endregion
@@ -46,8 +45,7 @@ namespace ProjectThief
 
             inventory = new List<Item>();
             collectedItems = new bool[12];
-            usedlevers = new bool[4];
-            openedDoors = new bool[4];
+            usedlevers = new bool[4];            
             openedVitrines = new bool[4];
             roomCleared = new bool[4];            
         }         
@@ -60,8 +58,7 @@ namespace ProjectThief
 
                 if (i < usedlevers.Length)
                 {
-                    usedlevers[i] = false;
-                    openedDoors[i] = false;
+                    usedlevers[i] = false;                   
                     openedVitrines[i] = false;
                     roomCleared[i] = false;
                 }   

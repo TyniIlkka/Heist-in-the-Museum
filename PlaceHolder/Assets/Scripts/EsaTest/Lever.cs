@@ -15,7 +15,9 @@ namespace ProjectThief
         [SerializeField, Tooltip("Levers handle")]
         private GameObject m_goHandle;
         [SerializeField, Tooltip("Needed item")]
-        private Item m_itNeededItem;        
+        private Item m_itNeededItem;
+        [SerializeField, Tooltip("Position in GM's bool list")]
+        private int m_iPos;
 
         private Animator m_aLeverAnim;        
 
@@ -26,14 +28,13 @@ namespace ProjectThief
 
         private void Update()
         {           
-            if (m_bBroken)
-            {
-                m_goHandle.SetActive(false);
-            }
-            else
+            if (GameManager.instance.usedlevers[m_iPos])
             {
                 m_goHandle.SetActive(true);
-            }            
+                m_aLeverAnim.SetBool("Activated", true);
+                m_aObstacleAnim.SetBool("Open", true);
+                m_dDoor.Blocked = false;
+            }  
         }
 
         /// <summary>
@@ -68,6 +69,7 @@ namespace ProjectThief
                             if (Input.GetMouseButton(0))
                             {
                                 m_bBroken = false;
+                                m_goHandle.SetActive(true);
                             }                            
                         }                        
                     }
