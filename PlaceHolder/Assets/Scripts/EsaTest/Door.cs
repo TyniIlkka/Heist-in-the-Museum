@@ -48,7 +48,8 @@ namespace ProjectThief
                     {
                         GetMouseController.EnterCursor();
                         if (Input.GetMouseButton(0))
-                        {                            
+                        {
+                            GameManager.instance.previousState = GameStateController.CurrentState;
                             GameStateController.PerformTransition(_nextState);
                         }                        
                     }

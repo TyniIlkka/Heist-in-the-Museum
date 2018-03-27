@@ -95,8 +95,8 @@ namespace ProjectThief
             {
                 // TODO update spawn position & rotation.
 
-                m_v3SpawnPosition = m_lDoors[0].SpawnPoint.position;
-                m_qSpawnRotation = m_lDoors[0].SpawnPoint.rotation;
+                m_v3SpawnPosition = SpawnPosition();
+                m_qSpawnRotation = SpawnRotation();
 
                 return Instantiate(player, m_v3SpawnPosition, m_qSpawnRotation);
             }
@@ -109,6 +109,76 @@ namespace ProjectThief
 
                 return Instantiate(player, m_v3SpawnPosition, m_qSpawnRotation);
             }
-        }     
+        } 
+        
+        private Vector3 SpawnPosition()
+        {
+            Vector3 result = Vector3.zero;
+
+            if (GameStateController.CurrentState.SceneName == "Lobby")
+            {
+                if (GameManager.instance.previousState.SceneName == "RoomVault")
+                    result = m_lDoors[0].SpawnPoint.position;
+
+                else if (GameManager.instance.previousState.SceneName == "Room1")
+                    result = m_lDoors[1].SpawnPoint.position;
+
+                else if (GameManager.instance.previousState.SceneName == "Room2")
+                    result = m_lDoors[2].SpawnPoint.position;
+
+                else
+                    Debug.LogError("ERROR Spawnpoint Not Found!");
+            }
+            else if (GameStateController.CurrentState.SceneName == "Room1")
+            {
+                if (GameManager.instance.previousState.SceneName == "Lobby")
+                    result = m_lDoors[0].SpawnPoint.position;
+
+                else if (GameManager.instance.previousState.SceneName == "Room3")
+                    result = m_lDoors[1].SpawnPoint.position;
+
+                else
+                    Debug.LogError("ERROR Spawnpoint Not Found!");
+            }
+            else
+                result = m_lDoors[0].SpawnPoint.position;
+
+            return result;
+        }
+
+        private Quaternion SpawnRotation()
+        {
+            Quaternion result = Quaternion.identity;
+
+            if (GameStateController.CurrentState.SceneName == "Lobby")
+            {
+                if (GameManager.instance.previousState.SceneName == "RoomVault")
+                    result = m_lDoors[0].SpawnPoint.rotation;
+
+                else if (GameManager.instance.previousState.SceneName == "Room1")
+                    result = m_lDoors[1].SpawnPoint.rotation;
+
+                else if (GameManager.instance.previousState.SceneName == "Room2")
+                    result = m_lDoors[2].SpawnPoint.rotation;
+
+                else
+                    Debug.LogError("ERROR Spawnpoint Not Found!");
+            }
+            else if (GameStateController.CurrentState.SceneName == "Room1")
+            {
+                if (GameManager.instance.previousState.SceneName == "Lobby")
+                    result = m_lDoors[0].SpawnPoint.rotation;
+
+                else if (GameManager.instance.previousState.SceneName == "Room3")
+                    result = m_lDoors[1].SpawnPoint.rotation;
+
+                else
+                    Debug.LogError("ERROR Spawnpoint Not Found!");
+            }
+            else
+                result = m_lDoors[0].SpawnPoint.rotation;
+
+            return result;
+        }
     }
 }
