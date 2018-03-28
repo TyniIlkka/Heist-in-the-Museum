@@ -25,14 +25,18 @@ namespace ProjectThief
         private CameraFollow m_sCameraScript;
         [SerializeField, Tooltip("Camera's distance from player")]
         private float m_fDist = 7f;
-        
+        [SerializeField, Tooltip("Camera's angle in room")]
+        private float m_fAngle = 0;
+
+
         private Vector3 m_v3SpawnPosition;        
         private Quaternion m_qSpawnRotation;              
 
         private void Awake()
         {
             Debug.Log("Current state: " + GameStateController.CurrentState);
-            m_sCameraScript.Distance = m_fDist;            
+            m_sCameraScript.Distance = m_fDist;
+            m_sCameraScript.Angle = m_fAngle;
 
             GameManager.instance.levelController = this;            
             m_mcController = GameManager.instance.mouseController;
