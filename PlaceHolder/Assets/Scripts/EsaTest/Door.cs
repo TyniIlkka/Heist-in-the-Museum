@@ -8,15 +8,16 @@ namespace ProjectThief
         [SerializeField, Tooltip("Spawn Position")]
         private Transform m_tSpawnPoint;
         [SerializeField, Tooltip("Next scene")]
-        private GameStateType _nextState;
-        [SerializeField, Tooltip("Marks if door is blocked or not")]
-        private bool m_bIsBlocked;
+        private GameStateType _nextState;        
         [SerializeField, Tooltip("Is open in previous scene")]
         private bool m_bIsOpen;
         [SerializeField, Tooltip("Door's obstacle")]
         private GameObject m_goObstacle;
 
+        private bool m_bIsBlocked;
+
         public Transform SpawnPoint { get { return m_tSpawnPoint; } }
+        public bool Open { set { m_bIsOpen = value; } }
         public bool Blocked { set { m_bIsBlocked = value; } }
 
 

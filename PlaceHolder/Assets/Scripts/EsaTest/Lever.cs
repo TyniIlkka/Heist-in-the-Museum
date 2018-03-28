@@ -8,6 +8,8 @@ namespace ProjectThief
     {
         [SerializeField, Tooltip("Obstacle Animator")]
         private Animator m_aObstacleAnim;
+        [SerializeField, Tooltip("Inventory object")]
+        private Inventory m_iInventory;
         [SerializeField, Tooltip("Door")]
         private Door m_dDoor;
         [SerializeField, Tooltip("Marks if lever is broken")]
@@ -23,18 +25,29 @@ namespace ProjectThief
 
         private void Awake()
         {
-            m_aLeverAnim = GetComponentInChildren<Animator>();            
+            if (m_iInventory == null)
+                m_iInventory = FindObjectOfType<Inventory>();
+
+            m_aLeverAnim = GetComponentInChildren<Animator>();
+            m_itNeededItem = GameManager.instance.refItems[m_itNeededItem.RefPos];
+
+            Init();
         }        
 
-        private void Update()
+        private void Init()
         {           
             if (GameManager.instance.usedlevers[m_iPos])
             {
                 m_goHandle.SetActive(true);
-                m_aLeverAnim.SetBool("Activated", true);
-                m_aObstacleAnim.SetBool("Open", true);
+                m_aLeverAnim.SetBool("Activated", true);                
+                m_dDoor.Open = true;
                 m_dDoor.Blocked = false;
-            }  
+            } 
+            else
+            {
+                m_goHandle.SetActive(false);
+                m_bBroken = true;
+            }
         }
 
         /// <summary>
@@ -50,11 +63,13 @@ namespace ProjectThief
                     if (IsInteractable)
                     {
                         GetMouseController.InteractCursor();
-                        if (Input.GetMouseButton(0))
-                        {
+                        if (Input.GetMouseButtonDown(0))
+                        {                            
                             m_aLeverAnim.SetBool("Activated", true);
                             m_aObstacleAnim.SetBool("Open", true);
+                            m_dDoor.Open = false;
                             m_dDoor.Blocked = false;
+                            GameManager.instance.usedlevers[m_iPos] = true;
                         }                        
                     }
                 }
@@ -67,9 +82,10 @@ namespace ProjectThief
                         {
                             GetMouseController.InteractCursor();
                             if (Input.GetMouseButton(0))
-                            {
-                                m_bBroken = false;
-                                m_goHandle.SetActive(true);
+                            {                                
+                                m_iInventory.RemoveItem(m_itNeededItem);
+                                m_goHandle.SetActive(true);                                
+                                m_bBroken = false;                                
                             }                            
                         }                        
                     }

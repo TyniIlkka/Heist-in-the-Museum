@@ -12,7 +12,7 @@ namespace ProjectThief
         [SerializeField]
         private GameObject m_goDefeat;
         [SerializeField]
-        private GameObject m_goVictory;        
+        private GameObject m_goVictory;
         [SerializeField, Tooltip("Info screen")]
         private GameObject m_goScreen;
         [SerializeField, Tooltip("Initial Spawn location")]
@@ -21,15 +21,18 @@ namespace ProjectThief
         private List<Door> m_lDoors;
         [SerializeField, Tooltip("Room position in list (starts from 0)")]
         private int m_iPos;
+        [SerializeField, Tooltip("Main Camera")]
+        private CameraFollow m_sCameraScript;
+        [SerializeField, Tooltip("Camera's distance from player")]
+        private float m_fDist = 7f;
         
         private Vector3 m_v3SpawnPosition;        
-        private Quaternion m_qSpawnRotation;
-        private bool m_bSaved;        
+        private Quaternion m_qSpawnRotation;              
 
         private void Awake()
         {
             Debug.Log("Current state: " + GameStateController.CurrentState);
-            m_bSaved = false;
+            m_sCameraScript.Distance = m_fDist;            
 
             GameManager.instance.levelController = this;            
             m_mcController = GameManager.instance.mouseController;

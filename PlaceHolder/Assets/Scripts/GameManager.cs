@@ -61,6 +61,8 @@ namespace ProjectThief
                     usedlevers[i] = false;                   
                     openedVitrines[i] = false;
                     roomCleared[i] = false;
+                    collectedItems[i] = false;
+                    refItems[i].Collected = false;
                 }   
             }
 

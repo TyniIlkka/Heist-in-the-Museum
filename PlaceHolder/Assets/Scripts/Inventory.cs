@@ -33,6 +33,7 @@ namespace ProjectThief
         {
             GameManager.instance.collectedItems[item.Position] = true;
             Item newItem = GameManager.instance.refItems[item.RefPos];
+            newItem.Collected = true;
             m_lInventoryItems.Add(newItem);            
             UpdateInventory();
         }

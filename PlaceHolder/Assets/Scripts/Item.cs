@@ -24,7 +24,6 @@ namespace ProjectThief
         public int Position { get { return m_iPosition; } }   
         public int RefPos { get { return m_iRefPos; } }
 
-
         private void Awake()
         {
             if (m_iInventory == null)
@@ -54,6 +53,7 @@ namespace ProjectThief
                         m_bCollected = true;
                         m_iInventory.AddItem(this);
                         gameObject.SetActive(false);
+                        GameManager.instance.collectedItems[Position] = true;
                         GetMouseController.DefaultCursor();
                     }                    
                 }                

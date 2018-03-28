@@ -13,7 +13,9 @@ namespace ProjectThief
         [SerializeField, Tooltip("Distance from player")]
         private float m_fDistance = 10;        
         [SerializeField, Tooltip("Player transform")]
-        private Transform m_tPlayerTransform;         
+        private Transform m_tPlayerTransform; 
+
+        public float Distance { get { return m_fDistance; } set { m_fDistance = value; } }
 
         /// <summary>
         /// Awake method for setting initial position & rotation.
