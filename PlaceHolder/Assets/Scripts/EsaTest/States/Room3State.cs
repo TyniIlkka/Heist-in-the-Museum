@@ -18,7 +18,7 @@
         public Room3State()
         {
             AddTargetState(GameStateType.MainMenu);
-            AddTargetState(GameStateType.Lobby);
+            AddTargetState(GameStateType.Room1);
             AddTargetState(GameStateType.Room3);
         }        
     }

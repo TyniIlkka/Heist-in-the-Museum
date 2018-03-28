@@ -11,7 +11,6 @@ namespace ProjectThief
 
         public MouseController GetMouseController { get { return GameManager.instance.mouseController; } }
         public bool IsActive { get; set; }
-        public bool IsInteractable { get; set; }
-        
+        public bool IsInteractable { get; set; }                
     }
 }

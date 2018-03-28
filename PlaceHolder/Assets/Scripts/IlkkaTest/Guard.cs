@@ -13,10 +13,15 @@ namespace ProjectThief {
 
     public enum MyDirections
     {
-        North = 0,
-        East = 1,
-        South = 2,
-        West = 3
+        Error = -1,
+        North ,
+        NorthEast,
+        East,
+        SouthEast,
+        South,
+        SouthWest,
+        West,
+        NorthWest
     }
 
     public class Guard : CharacterBase {
@@ -129,7 +134,7 @@ namespace ProjectThief {
         }
         public float DetectionRange
         {
-            get { return m_fFieldOfView; }
+            get { return m_fMaxDetectionRange; }
             private set { }
         }
         public Waypoint CurrentWaypoint { get; set; }

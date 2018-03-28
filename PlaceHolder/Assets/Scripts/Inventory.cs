@@ -12,19 +12,29 @@ namespace ProjectThief
         [SerializeField]
         private Texture m_tEmpty = null; 
 
-        private List<Item> m_lInventoryItems = new List<Item>();        
+        private List<Item> m_lInventoryItems;        
 
         // testing remove when not needed.
         public float delay;
         private bool start; 
         private float time;
-                
+
+        private void Start()
+        {
+            m_lInventoryItems = GameManager.instance.inventory;
+                       
+            UpdateInventory();
+        }
+
         /// <summary>
         /// Adds item into inventory.
         /// </summary>
         public void AddItem(Item item)
         {
-            m_lInventoryItems.Add(item);
+            GameManager.instance.collectedItems[item.Position] = true;
+            Item newItem = GameManager.instance.refItems[item.RefPos];
+            newItem.Collected = true;
+            m_lInventoryItems.Add(newItem);            
             UpdateInventory();
         }
 
@@ -33,7 +43,8 @@ namespace ProjectThief
         /// </summary>
         public void RemoveItem(Item item)
         {
-            m_lInventoryItems.Remove(item);
+            Item removeItem = GameManager.instance.refItems[item.RefPos];
+            m_lInventoryItems.Remove(removeItem);            
             m_lSlots[item.Slot].GetComponent<RawImage>().texture = m_tEmpty;
             // TODO Add use Animation and use animation to call updateInventory
             //UpdateInventory();
@@ -58,6 +69,8 @@ namespace ProjectThief
                     m_lInventoryItems[i].Slot = i;
                 }
             }
+
+            GameManager.instance.CheckInventory();
         }
 
         // Update method for testing delay.

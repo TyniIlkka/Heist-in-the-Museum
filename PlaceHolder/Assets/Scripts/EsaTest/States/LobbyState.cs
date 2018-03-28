@@ -21,7 +21,7 @@
             AddTargetState(GameStateType.Lobby);            
             AddTargetState(GameStateType.Vault);
             AddTargetState(GameStateType.Room1);
-            AddTargetState(GameStateType.Room3);
+            AddTargetState(GameStateType.Room2);
         }        
     }
 }

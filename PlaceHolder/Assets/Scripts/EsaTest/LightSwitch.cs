@@ -22,7 +22,6 @@ namespace ProjectThief
                         {
                             m_lLights[i].Activated();
                         }
-
                     }
                 }
             }
