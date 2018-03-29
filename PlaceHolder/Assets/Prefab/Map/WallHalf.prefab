@@ -22,9 +22,10 @@ GameObject:
   - component: {fileID: 33480547460330396}
   - component: {fileID: 23323662172541392}
   - component: {fileID: 95137337853480470}
-  m_Layer: 0
+  - component: {fileID: 65637612983333606}
+  m_Layer: 9
   m_Name: WallHalf
-  m_TagString: Untagged
+  m_TagString: Obstacles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,6 +84,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1716970379686006}
   m_Mesh: {fileID: 4300000, guid: 7db77a6c3aec322458604f4ce0860211, type: 3}
+--- !u!65 &65637612983333606
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1716970379686006}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.500002, y: 0.4000001, z: 1.0000002}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95137337853480470
 Animator:
   serializedVersion: 3
