@@ -24,6 +24,7 @@ namespace ProjectThief
         #region Lists
         [Header("Lists")]
         public List<Item> refItems;
+        public List<Item> keyItems;
         public List<Item> inventory;
         public bool[] roomCleared;
         public bool[] collectedItems;
