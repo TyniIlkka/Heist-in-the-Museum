@@ -11,6 +11,7 @@ ModelImporter:
     400000: Handle
     400002: //RootNode
     400004: Sphere
+    2100000: Porceline
     2300000: Handle
     2300002: Sphere
     3300000: Handle
@@ -25,6 +26,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Material
     second: {fileID: 2100000, guid: ca728cba12fa509448833cf5664ffc57, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Porceline
+    second: {fileID: 2100000, guid: fd524497fd33cd44082b721fea67cbe6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

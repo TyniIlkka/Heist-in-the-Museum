@@ -11,10 +11,14 @@ ModelImporter:
     400000: Base
     400002: //RootNode
     400004: Swicth
+    2100000: Porceline
+    2100002: Texture__LightSwicthTexture
     2300000: Base
     2300002: Swicth
+    2300004: //RootNode
     3300000: Base
     3300002: Swicth
+    3300004: //RootNode
     4300000: Swicth
     4300002: Base
     7400000: Default Take
@@ -24,7 +28,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Iron
-    second: {fileID: 2100000, guid: fd524497fd33cd44082b721fea67cbe6, type: 2}
+    second: {fileID: 2100000, guid: 019b31e9dc28f2e42a62f470a1fc0532, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -34,6 +38,11 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: TextureMaterial__LightSwicthTexture
+    second: {fileID: 2100000, guid: 501e7e8b77672f142be55d6457ff8ab2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Texture__LightSwicthTexture
     second: {fileID: 2100000, guid: 501e7e8b77672f142be55d6457ff8ab2, type: 2}
   materials:
     importMaterials: 1
