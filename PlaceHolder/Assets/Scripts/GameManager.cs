@@ -19,6 +19,7 @@ namespace ProjectThief
         public Transform spawnPoint;
         public Transform initialSpawn;
         public GameStateBase previousState;
+        public int currentPhase;
         #endregion
         #region Lists
         [Header("Lists")]
@@ -67,6 +68,7 @@ namespace ProjectThief
             }
 
             inventory.Clear();
+            currentPhase = 0;
         }    
         
         public void CheckInventory()
