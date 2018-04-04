@@ -22,6 +22,7 @@ namespace ProjectThief
         private void Awake()
         {
             m_goSound = GetComponent<AudioSource>();
+            m_goSound.volume = AudioManager.instance.SfxVol;
             m_goSound.clip = m_acSound;
             m_goSound.loop = true;
             //m_goSound.volume = GameManager.instance.sfxVolume;

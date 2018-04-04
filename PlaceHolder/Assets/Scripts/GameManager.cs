@@ -43,6 +43,7 @@ namespace ProjectThief
             else if (instance != this)
             {
                 Destroy(gameObject);
+                return;
             }
 
             inventory = new List<Item>();
