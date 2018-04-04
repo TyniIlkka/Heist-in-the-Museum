@@ -9,10 +9,8 @@ namespace ProjectThief
         [SerializeField, Tooltip("Inventory object")]
         private Inventory m_iInventory;
         [SerializeField, Tooltip("Position close to object")]
-        private Vector3 m_v3MoveToPos;
-        [SerializeField, Tooltip("Items position in GM's bool list")]
-        private int m_iPosition;
-        [SerializeField]
+        private Vector3 m_v3MoveToPos;        
+        [SerializeField, Tooltip("Items position in GM's ref list")]
         private int m_iRefPos;
 
         private bool m_bCollected;
@@ -20,8 +18,7 @@ namespace ProjectThief
 
         public Texture ItemImage { get { return m_tItemTexture; } }        
         public bool Collected { get { return m_bCollected; } set { m_bCollected = value; } }         
-        public int Slot { get { return m_iSlotPosition; } set { m_iSlotPosition = value; } }
-        public int Position { get { return m_iPosition; } }   
+        public int Slot { get { return m_iSlotPosition; } set { m_iSlotPosition = value; } }         
         public int RefPos { get { return m_iRefPos; } }
 
         private void Awake()
@@ -29,7 +26,7 @@ namespace ProjectThief
             if (m_iInventory == null)
                 m_iInventory = FindObjectOfType<Inventory>();
 
-            if (GameManager.instance.collectedItems[Position])
+            if (GameManager.instance.refItems[RefPos].Collected)
             {
                 Debug.Log("Item already Collected");
                 m_bCollected = true;
@@ -53,7 +50,7 @@ namespace ProjectThief
                         m_bCollected = true;
                         m_iInventory.AddItem(this);
                         gameObject.SetActive(false);
-                        GameManager.instance.collectedItems[Position] = true;
+                        GameManager.instance.refItems[RefPos].Collected = true;
                         GetMouseController.DefaultCursor();
                     }                    
                 }                

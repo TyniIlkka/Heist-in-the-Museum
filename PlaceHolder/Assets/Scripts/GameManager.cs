@@ -26,9 +26,7 @@ namespace ProjectThief
         [Header("Lists")]
         public List<Item> refItems;
         public List<Item> keyItems;
-        public List<Item> inventory;
-        public bool[] roomCleared;
-        public bool[] collectedItems;
+        public List<Item> inventory;                
         public bool[] usedlevers;        
         public bool[] openedVitrines;
         [SerializeField] List<Guard> guards;
@@ -47,27 +45,18 @@ namespace ProjectThief
                 return;
             }            
 
-            inventory = new List<Item>();
-            collectedItems = new bool[12];
+            inventory = new List<Item>();            
             usedlevers = new bool[4];            
-            openedVitrines = new bool[4];
-            roomCleared = new bool[4];            
+            openedVitrines = new bool[4];                       
         }         
 
         public void ResetGame()
         {
-            for (int i = 0; i < collectedItems.Length; i++)
-            {
-                collectedItems[i] = false;
-
-                if (i < usedlevers.Length)
-                {
-                    usedlevers[i] = false;                   
-                    openedVitrines[i] = false;
-                    roomCleared[i] = false;
-                    collectedItems[i] = false;
-                    refItems[i].Collected = false;
-                }   
+            for (int i = 0; i < usedlevers.Length; i++)
+            {                
+                usedlevers[i] = false;                   
+                openedVitrines[i] = false;                                   
+                refItems[i].Collected = false;
             }
 
             inventory.Clear();

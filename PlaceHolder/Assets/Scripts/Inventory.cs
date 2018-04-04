@@ -30,8 +30,7 @@ namespace ProjectThief
         /// Adds item into inventory.
         /// </summary>
         public void AddItem(Item item)
-        {
-            GameManager.instance.collectedItems[item.Position] = true;
+        {            
             Item newItem = GameManager.instance.refItems[item.RefPos];
             newItem.Collected = true;
             m_lInventoryItems.Add(newItem);            

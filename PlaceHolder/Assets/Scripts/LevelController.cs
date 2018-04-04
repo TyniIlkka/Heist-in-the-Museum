@@ -27,7 +27,8 @@ namespace ProjectThief
         private float m_fDist = 7f;
         [SerializeField, Tooltip("Camera's angle in room")]
         private float m_fAngle = 0;
-
+        [SerializeField, Tooltip("Items neede to collect to advance into next phase")]
+        private List<Item> m_lKeyItems;
 
         private Vector3 m_v3SpawnPosition;        
         private Quaternion m_qSpawnRotation;              
@@ -49,7 +50,8 @@ namespace ProjectThief
         // Update is called once per frame
         private void Update()
         {
-            MouseOverHudCheck();           
+            MouseOverHudCheck();
+            CheckKeyItems();
         }
 
         /// <summary>
@@ -65,6 +67,28 @@ namespace ProjectThief
             else
             {
                 GameManager.instance.canMove = true;
+            }
+        }
+
+        /// <summary>
+        /// Checks if key items needed to advance into 
+        /// next phase have been collected.
+        /// </summary>
+        private void CheckKeyItems()
+        {
+            bool result = true;
+
+            for (int i = 0; i < m_lKeyItems.Count; i++)
+            {
+                if (!m_lKeyItems[i].Collected)
+                {
+                    result = false;
+                }
+            }
+
+            if (result)
+            {
+                GameManager.instance.currentPhase++;
             }
         }
 
