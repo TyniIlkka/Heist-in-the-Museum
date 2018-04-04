@@ -9,11 +9,13 @@ namespace ProjectThief
         [SerializeField, Tooltip("Key Item")]
         private Item m_itKeyItem;        
         [SerializeField, Tooltip("Inventory object")]
-        private Inventory m_iInventory;
-        [SerializeField, Tooltip("Position close to object")]
-        private Vector3 m_v3MoveToPos;
+        private Inventory m_iInventory;        
         [SerializeField, Tooltip("Lock")]
         private GameObject m_goLock;
+        [SerializeField, Tooltip("position in key list")]
+        private int m_iPos;
+        [SerializeField, Tooltip("Item")]
+        private Item m_itKey;
 
         private Animator m_aAnimator;
 
@@ -42,8 +44,10 @@ namespace ProjectThief
                         {
                             m_iInventory.RemoveItem(m_itKeyItem);
                             Debug.Log("opened");
-                            //m_goLock.SetActive(false);
-                            //m_aAnimator.SetTrigger(1);
+                            m_goLock.SetActive(false);
+                            m_aAnimator.SetBool("Open", true);
+                            m_iInventory.AddItem(m_itKey);
+                            GameManager.instance.keyItems[m_iPos].Collected = true;
                         }                        
                     }
                 }                

@@ -73,7 +73,9 @@ namespace ProjectThief
         /// this method is called.
         /// </summary>
         public void PlayerFound()
-        {            
+        {
+            GameManager.instance.canMove = false;
+            Time.timeScale = 0f;
             m_goDefeat.SetActive(true);            
         }
 
@@ -83,6 +85,8 @@ namespace ProjectThief
         /// </summary>
         public void PlayerEscaped()
         {
+            GameManager.instance.canMove = false;
+            Time.timeScale = 0f;
             m_goVictory.SetActive(true);
         }
         

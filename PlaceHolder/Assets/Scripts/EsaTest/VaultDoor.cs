@@ -4,13 +4,17 @@ using UnityEngine;
 namespace ProjectThief
 {
     public class VaultDoor : ObjectBase
-    {
-        [SerializeField, Tooltip("Vault doors animator")]
-        private Animator m_aAnimator;
+    {        
         [SerializeField, Tooltip("Key Pieces")]
         private List<GameObject> m_lPieces;
-
+                
+        private Animator m_aAnimator;
         private bool m_bIsLocked;
+
+        private void Awake()
+        {
+            m_aAnimator = GetComponent<Animator>();
+        }
 
         protected override void OnMouseOver()
         {
