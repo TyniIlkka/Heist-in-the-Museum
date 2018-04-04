@@ -12,6 +12,7 @@ namespace ProjectThief
         public GameObject player;
         public GameObject playerPrefab;
         public MouseController mouseController;
+        public AudioManager audioManager;
         public LevelController levelController;        
         public bool canMove;
         public bool infoShown;
@@ -44,7 +45,7 @@ namespace ProjectThief
             {
                 Destroy(gameObject);
                 return;
-            }
+            }            
 
             inventory = new List<Item>();
             collectedItems = new bool[12];

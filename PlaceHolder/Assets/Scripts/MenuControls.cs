@@ -14,10 +14,16 @@ namespace ProjectThief
         private GameStateType _nextState;
         [SerializeField]
         private GameStateType _menuState;
+        [SerializeField]
+        private GameObject m_goView1;
+        [SerializeField]
+        private GameObject m_goView2;        
 
         #region Pause controls
         [SerializeField]
         private GameObject m_goPauseMenu;
+        [SerializeField]
+        private GameObject m_goPauseOptions;
         [SerializeField]
         private GameObject m_goShade;
         [SerializeField]
@@ -35,10 +41,15 @@ namespace ProjectThief
         [SerializeField]
         private GameObject m_goPlan;
 
+        private AudioManager m_amAudioManager;
+
         private void Awake()
-        {            
-            // TODO update volume
-        }
+        {
+            m_amAudioManager = GameManager.instance.audioManager;
+            
+            m_sSfxVol.value = (int)(m_amAudioManager.SfxVol * 100);
+            m_sMusicVol.value = (int)(m_amAudioManager.MusicVol * 100);  
+        }        
 
         public void NewGame()
         {
@@ -49,12 +60,28 @@ namespace ProjectThief
 
         public void Options()
         {
+            m_goView1.SetActive(false);
+            m_goView2.SetActive(true);
+        }
+
+        public void Back()
+        {
+            m_goView2.SetActive(false);
+            m_goView1.SetActive(true);   
+            // TODO Save volume?
+        }
+
+        public void PauseMenu()
+        {
             m_goPauseMenu.SetActive(false);
+            m_goPauseOptions.SetActive(true);
         }
 
         public void Return()
         {
+            m_goPauseOptions.SetActive(false);
             m_goPauseMenu.SetActive(true);
+            // TODO Save volume?
         }
 
         public void ExitGame()
@@ -64,12 +91,12 @@ namespace ProjectThief
 
         public void MusicVol()
         {
-
+            m_amAudioManager.MusicVol = (m_sMusicVol.value / 100);
         }
 
         public void SFXVol()
         {
-
+            m_amAudioManager.SfxVol = (m_sSfxVol.value / 100);
         }
 
         public void Pause()
