@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ProjectThief.States;
+using ProjectThief.WaypointSystem;
 
 namespace ProjectThief
 {
@@ -11,8 +12,8 @@ namespace ProjectThief
         private GameStateBase m_sCurrentState;
         [SerializeField, Tooltip("Guard prefab")]
         private GameObject m_oGuard;
-        //[SerializeField, Tooltip("Patrol routes")]
-        //private ? 
+        [SerializeField, Tooltip("Patrol routes")]
+        private List<PathPoints> pathList;
         
 
         private int m_iCurrentPhase;
@@ -31,6 +32,9 @@ namespace ProjectThief
                 // TODO Lobby scenarios
                 switch (m_iCurrentPhase)
                 {
+                    case 0:
+                        break;
+
                     case 1:
                         break;
 
@@ -40,15 +44,15 @@ namespace ProjectThief
                     case 5:
                         break;
 
-                    case 7:
+                    case 8:
                         break;
 
-                    case 11:
+                    case 9:
                         break;
 
-                    case 13:
+                    default:
+                        Debug.LogError("Not valid Phase for current Room!");
                         break;
-
                 }
 
             }
@@ -57,15 +61,18 @@ namespace ProjectThief
                 // TODO Room 1 scenarios
                 switch (m_iCurrentPhase)
                 {
-                    case 4:
+                    case 2:
                         break;
 
-                    case 8:
+                    case 6:
                         break;
 
-                    case 10:
+                    case 7:
                         break;
 
+                    default:
+                        Debug.LogError("Not valid Phase for current Room!");
+                        break;
                 }
 
             }
@@ -74,30 +81,11 @@ namespace ProjectThief
                 // TODO Room 2 scenarios
                 switch (m_iCurrentPhase)
                 {
-                    case 6:
+                    case 4:
                         break;
 
-                }
-            }
-            else if (m_sCurrentState.SceneName == "Room3")
-            {
-                // TODO Room 3 scenarios
-                switch (m_iCurrentPhase)
-                {
-                    case 9:
-                        break;
-
-                }
-            }
-            else if (m_sCurrentState.SceneName == "Vault")
-            {
-                // TODO Vault scenarios
-                switch (m_iCurrentPhase)
-                {
-                    case 2:
-                        break;
-
-                    case 12:
+                    default:
+                        Debug.LogError("Not valid Phase for current Room!");
                         break;
                 }
             }
