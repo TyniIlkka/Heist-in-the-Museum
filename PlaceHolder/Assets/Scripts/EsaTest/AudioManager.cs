@@ -24,6 +24,7 @@ namespace ProjectThief
         private float m_fWaitStartTime;
 
         private float m_fDefaultVol = 0.5f;
+        private float m_fMasterVol;
         private float m_fAudioVol;
         private float m_fSfxVol;
 
@@ -37,6 +38,22 @@ namespace ProjectThief
         {
             get { return m_fSfxVol; }
             set { m_fSfxVol = value; }
+        }
+
+        public float MasterVol
+        {
+            get { return m_fMasterVol; }
+            set { m_fMasterVol = value; }
+        }
+
+        public float SFXPlayVol
+        {
+            get { return (m_fSfxVol * m_fMasterVol); }
+        }
+
+        public float MusicPlayVol
+        {
+            get { return (m_fAudioVol * m_fMasterVol); }
         }
 
         private void Awake()
@@ -62,10 +79,11 @@ namespace ProjectThief
 
             // TODO Load volume from save file?
             // Else use default value.
+            m_fMasterVol = m_fDefaultVol;
             m_fAudioVol = m_fDefaultVol;
             m_fSfxVol = m_fDefaultVol;
 
-            m_asAudioSource.volume = m_fAudioVol;
+            m_asAudioSource.volume = MusicPlayVol;
 
             if (m_fDelay < 0)
                 m_fDelay = 0;
@@ -86,7 +104,7 @@ namespace ProjectThief
                 UpdateBetweenTracks();
             
 
-            m_asAudioSource.volume = m_fAudioVol;            
+            m_asAudioSource.volume = MusicPlayVol;            
         }
 
         /// <summary>

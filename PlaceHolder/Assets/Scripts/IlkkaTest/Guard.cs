@@ -265,11 +265,7 @@ namespace ProjectThief {
 
         private void Update()
         {
-            CurrentState.Update();
-            if (Pat)
-            {
-
-            }
+            CurrentState.Update();           
         }
 
         private void FixedUpdate()
