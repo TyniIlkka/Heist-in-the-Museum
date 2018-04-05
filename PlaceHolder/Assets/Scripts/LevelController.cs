@@ -31,10 +31,14 @@ namespace ProjectThief
         private List<Item> m_lKeyItems;
 
         private Vector3 m_v3SpawnPosition;        
-        private Quaternion m_qSpawnRotation;              
+        private Quaternion m_qSpawnRotation;
+        private bool m_bJustCleared;
+
+        public bool JustCleared { get { return m_bJustCleared; } }
 
         private void Awake()
         {
+            m_bJustCleared = false;
             Debug.Log("Current state: " + GameStateController.CurrentState);
             m_sCameraScript.Distance = m_fDist;
             m_sCameraScript.Angle = m_fAngle;
@@ -88,6 +92,7 @@ namespace ProjectThief
 
             if (result)
             {
+                m_bJustCleared = true;
                 GameManager.instance.currentPhase++;
             }
         }
