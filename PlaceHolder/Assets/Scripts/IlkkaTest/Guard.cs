@@ -266,6 +266,10 @@ namespace ProjectThief {
         private void Update()
         {
             CurrentState.Update();
+            if (Pat)
+            {
+
+            }
         }
 
         private void FixedUpdate()
