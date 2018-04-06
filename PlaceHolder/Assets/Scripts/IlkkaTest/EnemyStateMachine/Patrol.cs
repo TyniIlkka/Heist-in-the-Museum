@@ -18,6 +18,7 @@ namespace ProjectThief.AI {
             State = AIStateType.Patrol;
             Owner = owner;
             AddTransition(AIStateType.PatrolMoveTo);
+            AddTransition(AIStateType.Static);
             _path = path[currentPathNumber];
             _direction = direction;
             _arriveDistance = arriveDistance;
@@ -69,6 +70,10 @@ namespace ProjectThief.AI {
                 Debug.Log("Hämätty äänellä!");
                 bool result = Owner.PerformTransition(AIStateType.PatrolMoveTo);
                 return result;
+            }
+            if (!Owner.Moving)
+            {
+                bool result = Owner.PerformTransition(AIStateType.Static);
             }
             return false;
         }
