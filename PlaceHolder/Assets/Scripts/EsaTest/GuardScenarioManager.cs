@@ -42,6 +42,8 @@ namespace ProjectThief
                         Guard guard1 = guard.GetComponent<Guard>();
                         guard = SpawnGuard(staticPoints[1].transform.position, Quaternion.identity);
                         Guard guard2 = guard.GetComponent<Guard>();
+                        guard1.enabled = true;
+                        guard2.enabled = true;
 
                         guard1.Moving = false;
                         guard2.Moving = false;

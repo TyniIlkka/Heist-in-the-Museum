@@ -65,7 +65,7 @@ namespace ProjectThief
                 IntroEnd();
                 m_fDelay += 0.025f;
             }
-            Debug.Log(m_fDelay);
+            //Debug.Log(m_fDelay);
 
             MouseOverHudCheck();
             CheckKeyItems();
