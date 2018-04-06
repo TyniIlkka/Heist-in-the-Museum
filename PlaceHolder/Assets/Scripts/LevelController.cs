@@ -38,7 +38,7 @@ namespace ProjectThief
         private Vector3 m_v3SpawnPosition;        
         private Quaternion m_qSpawnRotation;
         private bool m_bJustCleared;
-        private float m_fDelay;
+        private float m_fDelay = 0;
 
         public bool JustCleared { get { return m_bJustCleared; } }
 
@@ -63,8 +63,9 @@ namespace ProjectThief
             if (!GameManager.instance.infoShown)
             {
                 IntroEnd();
-                m_fDelay += Time.deltaTime;
+                m_fDelay += 0.025f;
             }
+            Debug.Log(m_fDelay);
 
             MouseOverHudCheck();
             CheckKeyItems();
