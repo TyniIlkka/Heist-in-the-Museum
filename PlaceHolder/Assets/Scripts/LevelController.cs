@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using ProjectThief.States;
+using UnityEngine.UI;
 
 namespace ProjectThief
 {
@@ -15,6 +16,10 @@ namespace ProjectThief
         private GameObject m_goVictory;
         [SerializeField, Tooltip("Info screen")]
         private GameObject m_goScreen;
+        [SerializeField]
+        private Button m_bPauseButton;
+        [SerializeField]
+        private GameObject m_goContinueText;
         [SerializeField, Tooltip("Initial Spawn location")]
         private Transform m_tInitialSpawn;
         [SerializeField, Tooltip("Scenes Doors")]
@@ -33,6 +38,7 @@ namespace ProjectThief
         private Vector3 m_v3SpawnPosition;        
         private Quaternion m_qSpawnRotation;
         private bool m_bJustCleared;
+        private float m_fDelay;
 
         public bool JustCleared { get { return m_bJustCleared; } }
 
@@ -54,6 +60,12 @@ namespace ProjectThief
         // Update is called once per frame
         private void Update()
         {
+            if (!GameManager.instance.infoShown)
+            {
+                IntroEnd();
+                m_fDelay += Time.deltaTime;
+            }
+
             MouseOverHudCheck();
             CheckKeyItems();
         }
@@ -123,8 +135,25 @@ namespace ProjectThief
         {
             m_goScreen.SetActive(true);
             GameManager.instance.canMove = false;
-            Time.timeScale = 0f;
-            GameManager.instance.infoShown = true;
+            Time.timeScale = 0f;            
+        }
+
+        private void IntroEnd()
+        {
+            if (m_fDelay >= 5f)
+            {
+                m_goContinueText.SetActive(true);
+
+                if (Input.anyKey)
+                {
+                    GameManager.instance.infoShown = true;
+                    m_goScreen.SetActive(false);
+                    m_bPauseButton.interactable = true;
+                    GameManager.instance.canMove = true;
+                    Time.timeScale = 1f;
+                    m_fDelay = 0;
+                }
+            }
         }
 
         private GameObject SpawnPlayer()

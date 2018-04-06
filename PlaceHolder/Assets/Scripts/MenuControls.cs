@@ -162,14 +162,6 @@ namespace ProjectThief
         {
             m_goExitConfirm.SetActive(false);
             m_goPauseMenu.SetActive(true);
-        }
-
-        public void IntroContinue()
-        {
-            m_goPlan.SetActive(false);
-            m_bPauseButton.interactable = true;
-            GameManager.instance.canMove = true;
-            Time.timeScale = 1f;
-        }
+        }        
     }
 }
