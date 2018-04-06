@@ -63,9 +63,8 @@ namespace ProjectThief
             if (!GameManager.instance.infoShown)
             {
                 IntroEnd();
-                m_fDelay += 0.025f;
-            }
-            //Debug.Log(m_fDelay);
+                m_fDelay += 0.02f;
+            }            
 
             MouseOverHudCheck();
             CheckKeyItems();
