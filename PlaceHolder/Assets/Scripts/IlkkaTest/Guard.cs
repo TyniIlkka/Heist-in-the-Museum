@@ -137,7 +137,14 @@ namespace ProjectThief {
             get { return m_fMaxDetectionRange; }
             private set { }
         }
+        public bool Moving
+        {
+            get { return m_bMoving; }
+            set { m_bMoving = value; }
+        }
         public Waypoint CurrentWaypoint { get; set; }
+
+
 
         #region Distract
 

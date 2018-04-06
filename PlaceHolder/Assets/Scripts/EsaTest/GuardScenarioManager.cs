@@ -12,8 +12,13 @@ namespace ProjectThief
         private GameStateBase m_sCurrentState;
         [SerializeField, Tooltip("Guard prefab")]
         private GameObject m_oGuard;
+
+        private GameObject guard;
+
         [SerializeField, Tooltip("Patrol routes")]
         private List<PathPoints> pathList;
+        [SerializeField, Tooltip("Potition where guard is placed.")]
+        private List<GameObject> staticPoints;
         
 
         private int m_iCurrentPhase;
@@ -21,7 +26,7 @@ namespace ProjectThief
         private void Awake()
         {
             m_iCurrentPhase = GameManager.instance.currentPhase;
-
+            m_sCurrentState = GameStateController.CurrentState;
             Init();
         }
 
@@ -33,21 +38,57 @@ namespace ProjectThief
                 switch (m_iCurrentPhase)
                 {
                     case 0:
+                        guard = SpawnGuard(staticPoints[0].transform.position, Quaternion.identity);
+                        Guard guard1 = guard.GetComponent<Guard>();
+                        guard = SpawnGuard(staticPoints[1].transform.position, Quaternion.identity);
+                        Guard guard2 = guard.GetComponent<Guard>();
+
+                        guard1.Moving = false;
+                        guard2.Moving = false;
+
+                        guard1.CurrentDirection = MyDirections.South;
+                        guard2.CurrentDirection = MyDirections.SouthWest;
+
                         break;
 
                     case 1:
+                        guard = SpawnGuard(staticPoints[0].transform.position, Quaternion.identity);
+                        Guard guard3 = guard.GetComponent<Guard>();
+                        guard = SpawnGuard(staticPoints[1].transform.position, Quaternion.identity);
+                        Guard guard4 = guard.GetComponent<Guard>();
+
                         break;
 
                     case 3:
+                        guard = SpawnGuard(staticPoints[0].transform.position, Quaternion.identity);
+                        Guard guard5 = guard.GetComponent<Guard>();
+                        guard = SpawnGuard(staticPoints[1].transform.position, Quaternion.identity);
+                        Guard guard6 = guard.GetComponent<Guard>();
+
                         break;
 
                     case 5:
+                        guard = SpawnGuard(staticPoints[0].transform.position, Quaternion.identity);
+                        Guard guard7 = guard.GetComponent<Guard>();
+                        guard = SpawnGuard(staticPoints[1].transform.position, Quaternion.identity);
+                        Guard guard8 = guard.GetComponent<Guard>();
                         break;
 
                     case 8:
+                        guard = SpawnGuard(staticPoints[0].transform.position, Quaternion.identity);
+                        Guard guard9 = guard.GetComponent<Guard>();
+                        guard = SpawnGuard(staticPoints[1].transform.position, Quaternion.identity);
+                        Guard guard10 = guard.GetComponent<Guard>();
+
                         break;
 
                     case 9:
+                        guard = SpawnGuard(staticPoints[0].transform.position, Quaternion.identity);
+                        Guard guard11 = guard.GetComponent<Guard>();
+                        guard = SpawnGuard(staticPoints[1].transform.position, Quaternion.identity);
+                        Guard guard12 = guard.GetComponent<Guard>();
+                        guard = SpawnGuard(staticPoints[1].transform.position, Quaternion.identity);
+                        Guard guard13 = guard.GetComponent<Guard>();
                         break;
 
                     default:
@@ -62,12 +103,18 @@ namespace ProjectThief
                 switch (m_iCurrentPhase)
                 {
                     case 2:
+                        guard = SpawnGuard(staticPoints[1].transform.position, Quaternion.identity);
+                        Guard guard1 = guard.GetComponent<Guard>();
                         break;
 
                     case 6:
+                        guard = SpawnGuard(staticPoints[1].transform.position, Quaternion.identity);
+                        Guard guard2 = guard.GetComponent<Guard>();
                         break;
 
                     case 7:
+                        guard = SpawnGuard(staticPoints[1].transform.position, Quaternion.identity);
+                        Guard guard3 = guard.GetComponent<Guard>();
                         break;
 
                     default:
@@ -82,6 +129,10 @@ namespace ProjectThief
                 switch (m_iCurrentPhase)
                 {
                     case 4:
+                        guard = SpawnGuard(staticPoints[1].transform.position, Quaternion.identity);
+                        Guard guard1 = guard.GetComponent<Guard>();
+                        guard = SpawnGuard(staticPoints[1].transform.position, Quaternion.identity);
+                        Guard guard2 = guard.GetComponent<Guard>();
                         break;
 
                     default:
