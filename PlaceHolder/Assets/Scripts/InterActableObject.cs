@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ProjectThief
 {
     public class InterActableObject : ObjectBase
     {
-        [SerializeField, Tooltip("Key Item")]
-        private Item m_itKeyItem;        
+        [SerializeField, Tooltip("Key Item ref list pos")]
+        private int m_itKeyItemPos;        
         [SerializeField, Tooltip("Inventory object")]
         private Inventory m_iInventory;        
         [SerializeField, Tooltip("Lock")]
@@ -37,12 +35,12 @@ namespace ProjectThief
                 GetMouseController.InspectCursor();
                 if (IsInteractable)
                 {
-                    if (m_itKeyItem.Collected)
+                    if (GameManager.instance.refItems[m_itKeyItemPos].Collected)
                     {
                         GetMouseController.InteractCursor();
                         if (Input.GetMouseButtonDown(0))
                         {
-                            m_iInventory.RemoveItem(m_itKeyItem);
+                            m_iInventory.RemoveItem(GameManager.instance.refItems[m_itKeyItemPos]);
                             Debug.Log("opened");
                             m_goLock.SetActive(false);
                             m_aAnimator.SetBool("Open", true);
