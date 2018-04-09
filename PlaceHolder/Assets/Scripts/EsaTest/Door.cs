@@ -13,6 +13,10 @@ namespace ProjectThief
         private bool m_bIsOpen;
         [SerializeField, Tooltip("Door's obstacle")]
         private GameObject m_goObstacle;
+        [SerializeField, Tooltip("Door opening sound")]
+        private AudioClip m_acOpen;
+        [SerializeField, Tooltip("Bars moving sound")]
+        private AudioClip m_acUnlock;
 
         private bool m_bIsBlocked;
 

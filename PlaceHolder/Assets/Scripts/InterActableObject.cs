@@ -14,8 +14,13 @@ namespace ProjectThief
         private int m_iPos;
         [SerializeField, Tooltip("Item")]
         private Item m_itKey;
+        [SerializeField, Tooltip("Vitrine opening sound")]
+        private AudioClip m_acOpen;
+        [SerializeField, Tooltip("Unlocking sound")]
+        private AudioClip m_acUnlock;
          
         private Animator m_aAnimator;
+        private bool m_bLocked;
 
         private void Awake()
         {            
@@ -35,18 +40,27 @@ namespace ProjectThief
                 GetMouseController.InspectCursor();
                 if (IsInteractable)
                 {
-                    if (GameManager.instance.refItems[m_itKeyItemPos].Collected)
+                    if (m_bLocked)
                     {
-                        GetMouseController.InteractCursor();
-                        if (Input.GetMouseButtonDown(0))
+                        if (GameManager.instance.refItems[m_itKeyItemPos].Collected)
                         {
-                            m_iInventory.RemoveItem(GameManager.instance.refItems[m_itKeyItemPos]);
-                            Debug.Log("opened");
-                            m_goLock.SetActive(false);
+                            GetMouseController.InteractCursor();
+                            if (Input.GetMouseButtonDown(0))
+                            {
+                                m_iInventory.RemoveItem(GameManager.instance.refItems[m_itKeyItemPos]);
+                                m_bLocked = false;
+                                m_goLock.SetActive(false);                                
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (Input.GetMouseButtonDown(0))
+                        {                             
                             m_aAnimator.SetBool("Open", true);
                             m_iInventory.AddItem(m_itKey);
                             GameManager.instance.keyItems[m_iPos].Collected = true;
-                        }                        
+                        }
                     }
                 }                
             }            
