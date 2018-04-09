@@ -18,7 +18,7 @@ namespace ProjectThief
         [SerializeField, Tooltip("Patrol routes")]
         private List<PathPoints> pathList;
         [SerializeField, Tooltip("Potition where guard is placed.")]
-        private List<GameObject> staticPoints;
+        private List<StaticPosition> staticPoints;
         
 
         private int m_iCurrentPhase;
@@ -48,8 +48,8 @@ namespace ProjectThief
                         guard1.Moving = false;
                         guard2.Moving = false;
 
-                        guard1.CurrentDirection = MyDirections.South;
-                        guard2.CurrentDirection = MyDirections.SouthWest;
+                        guard1.CurrentDirection = staticPoints[0].CurrentDir;
+                        guard2.CurrentDirection = staticPoints[1].CurrentDir;
 
                         break;
 
