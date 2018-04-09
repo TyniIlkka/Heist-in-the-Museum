@@ -22,6 +22,7 @@ namespace ProjectThief
             if (m_iInventory == null)
                 m_iInventory = FindObjectOfType<Inventory>();
 
+            Debug.Log("Merge testi");
             m_aAnimator = GetComponent<Animator>();
         }        
 
