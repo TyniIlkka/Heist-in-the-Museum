@@ -144,6 +144,12 @@ namespace ProjectThief {
         }
         public Waypoint CurrentWaypoint { get; set; }
 
+        public PathPoints Path
+        {
+            get { }
+            set { }
+        }
+
 
 
         #region Distract
