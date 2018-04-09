@@ -14,19 +14,14 @@ namespace ProjectThief
         private int m_iPos;
         [SerializeField, Tooltip("Item")]
         private Item m_itKey;
-
-        
-
+         
         private Animator m_aAnimator;
 
         private void Awake()
-        {
-
-            Debug.Log("Jee! Conflicti! Tykkään Mergetä!");
+        {            
             if (m_iInventory == null)
                 m_iInventory = FindObjectOfType<Inventory>();
 
-            Debug.Log("Merge testi");
             m_aAnimator = GetComponent<Animator>();
         }        
 
