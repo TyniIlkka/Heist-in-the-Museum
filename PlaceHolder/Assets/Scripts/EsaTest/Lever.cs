@@ -19,7 +19,7 @@ namespace ProjectThief
         [SerializeField, Tooltip("Needed item")]
         private Item m_itNeededItem;
         [SerializeField, Tooltip("Position in GM's bool list")]
-        private int m_iPos;
+        private int m_iPos;        
 
         private Animator m_aLeverAnim;        
 

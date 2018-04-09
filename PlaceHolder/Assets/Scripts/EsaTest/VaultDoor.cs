@@ -7,7 +7,9 @@ namespace ProjectThief
     {        
         [SerializeField, Tooltip("Key Pieces")]
         private List<GameObject> m_lPieces;
-                
+        [SerializeField]
+        private AudioClip m_acSFXEffect;
+
         private Animator m_aAnimator;
         private bool m_bIsLocked;
 
