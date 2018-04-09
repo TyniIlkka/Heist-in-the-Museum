@@ -34,6 +34,8 @@ namespace ProjectThief
         private float m_fAngle = 0;
         [SerializeField, Tooltip("Items neede to collect to advance into next phase")]
         private List<Item> m_lKeyItems;
+        [SerializeField]
+        private Inventory m_sInventory;
 
         private Vector3 m_v3SpawnPosition;        
         private Quaternion m_qSpawnRotation;
@@ -41,9 +43,13 @@ namespace ProjectThief
         private float m_fDelay = 0;
 
         public bool JustCleared { get { return m_bJustCleared; } }
+        public Inventory Inventory { get { return m_sInventory; } }
 
         private void Awake()
         {
+            if (m_sInventory == null)
+                m_sInventory = FindObjectOfType<Inventory>();
+
             m_bJustCleared = false;
             Debug.Log("Current state: " + GameStateController.CurrentState);
             m_sCameraScript.Distance = m_fDist;
