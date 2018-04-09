@@ -19,6 +19,8 @@ namespace ProjectThief
         private bool start; 
         private float time;
 
+        public List<Item> InventoryItems { get { return m_lInventoryItems; } }
+
         private void Start()
         {
             m_lInventoryItems = GameManager.instance.inventory;
