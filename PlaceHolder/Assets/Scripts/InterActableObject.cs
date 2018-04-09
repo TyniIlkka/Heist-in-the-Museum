@@ -15,10 +15,14 @@ namespace ProjectThief
         [SerializeField, Tooltip("Item")]
         private Item m_itKey;
 
+        
+
         private Animator m_aAnimator;
 
         private void Awake()
         {
+
+            Debug.Log("Jee! Conflicti! Tykkään Mergetä!");
             if (m_iInventory == null)
                 m_iInventory = FindObjectOfType<Inventory>();
 
