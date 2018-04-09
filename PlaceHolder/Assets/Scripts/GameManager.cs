@@ -29,6 +29,7 @@ namespace ProjectThief
         public List<Item> inventory;                
         public bool[] usedlevers;        
         public bool[] openedVitrines;
+        public bool[] clearedRooms;
         [SerializeField] List<Guard> guards;
         #endregion
 
@@ -47,7 +48,8 @@ namespace ProjectThief
 
             inventory = new List<Item>();            
             usedlevers = new bool[4];            
-            openedVitrines = new bool[4];                       
+            openedVitrines = new bool[4];
+            clearedRooms = new bool[4];
         }         
 
         public void ResetGame()
@@ -57,6 +59,7 @@ namespace ProjectThief
                 usedlevers[i] = false;                   
                 openedVitrines[i] = false;                                   
                 refItems[i].Collected = false;
+                clearedRooms[i] = false;
             }
 
             inventory.Clear();

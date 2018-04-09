@@ -9,9 +9,13 @@ namespace ProjectThief
         {
             GameStateBase currentState = GameStateController.CurrentState;
             Inventory inventory = GameManager.instance.levelController.Inventory;
+            int pos = GameManager.instance.levelController.ListPos;
 
             if (GameManager.instance.levelController.JustCleared)
+            {
                 GameManager.instance.currentPhase--;
+                GameManager.instance.clearedRooms[pos] = false;
+            }
 
             if (currentState.SceneName == "Lobby")
             {

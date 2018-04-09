@@ -52,11 +52,22 @@ namespace ProjectThief
                     if (IsInteractable)
                     {
                         GetMouseController.EnterCursor();
-                        if (Input.GetMouseButton(0))
+                        if (!m_bIsOpen)
                         {
-                            GameManager.instance.previousState = GameStateController.CurrentState;
-                            GameStateController.PerformTransition(_nextState);
-                        }                        
+                            if (Input.GetMouseButton(0))
+                            {
+                                GameManager.instance.previousState = GameStateController.CurrentState;
+                                GameStateController.PerformTransition(_nextState);
+                            }
+                        }
+                        else if (GameManager.instance.levelController.Cleared)
+                        {
+                            if (Input.GetMouseButton(0))
+                            {
+                                GameManager.instance.previousState = GameStateController.CurrentState;
+                                GameStateController.PerformTransition(_nextState);
+                            }
+                        }
                     }
                 }
             }             
