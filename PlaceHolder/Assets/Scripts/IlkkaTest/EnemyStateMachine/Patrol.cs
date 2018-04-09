@@ -11,15 +11,15 @@ namespace ProjectThief.AI {
         private float _arriveDistance;
 
 
-        public Patrol(Guard owner, List<PathPoints> path,
-            Direction direction, float arriveDistance, int currentPathNumber)
+        public Patrol(Guard owner, PathPoints path,
+            Direction direction, float arriveDistance)
             : base()
         {
             State = AIStateType.Patrol;
             Owner = owner;
             AddTransition(AIStateType.PatrolMoveTo);
             AddTransition(AIStateType.Static);
-            _path = path[currentPathNumber];
+            _path = path;
             _direction = direction;
             _arriveDistance = arriveDistance;
         }

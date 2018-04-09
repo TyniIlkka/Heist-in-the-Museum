@@ -36,6 +36,8 @@ namespace ProjectThief
             int i = 0;
             int j = 0;
             int k = 0;
+
+            Debug.Log(m_iCurrentPhase);
             if (m_sCurrentState.SceneName == "Lobby")
             {
                 // TODO Lobby scenarios
@@ -159,9 +161,12 @@ namespace ProjectThief
             }
             else if (m_sCurrentState.SceneName == "Room1")
             {
+
+                Debug.Log(m_iCurrentPhase);
                 // TODO Room 1 scenarios
                 switch (m_iCurrentPhase)
                 {
+                    
                     case 1:
                         i = 3;
                         guard = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity);

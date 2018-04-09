@@ -77,16 +77,13 @@ namespace ProjectThief {
         private LayerMask m_lmSoundMask;
         //Set Path
         [SerializeField]
-        private List<PathPoints> _paths;
+        private PathPoints _path;
         //How smooth guards is going to corner.
         [SerializeField]
         private float _waypointArriveDistance;
         //Which way are we moving.
         [SerializeField]
         private Direction _direction;
-
-        private int _currenPathNumber = 0;
-
         
         
         #endregion
@@ -146,8 +143,8 @@ namespace ProjectThief {
 
         public PathPoints Path
         {
-            get { }
-            set { }
+            get { return _path; }
+            set { _path = value; }
         }
 
 
@@ -214,7 +211,7 @@ namespace ProjectThief {
         /// </summary>
         private void InitStates()
         {
-            patrol = new Patrol(this, _paths, _direction, _waypointArriveDistance, _currenPathNumber );
+            patrol = new Patrol(this, _path, _direction, _waypointArriveDistance);
             _states.Add(patrol);
 
             patrolMoveTo = new PatrolMoveTo(this, guardMover);
