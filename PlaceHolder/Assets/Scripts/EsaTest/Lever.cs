@@ -67,6 +67,7 @@ namespace ProjectThief
                         {                            
                             m_aLeverAnim.SetBool("Activated", true);
                             m_aObstacleAnim.SetBool("Open", true);
+                            m_dDoor.ObstacleSound();
                             m_dDoor.Open = false;
                             m_dDoor.Blocked = false;
                             GameManager.instance.usedlevers[m_iPos] = true;

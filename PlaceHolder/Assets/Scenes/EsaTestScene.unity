@@ -2369,9 +2369,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25e2a3a2bed302e49aa5a4324b4a0c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_goSound: {fileID: 0}
+  m_aoSound: {fileID: 0}
   m_fRange: 10
   m_acSound: {fileID: 0}
+  m_acIdle: {fileID: 0}
+  m_bHasIdle: 0
   trigger: 0
 --- !u!23 &1214142178
 MeshRenderer:
@@ -3310,6 +3312,8 @@ MonoBehaviour:
   - {fileID: 1262130465}
   - {fileID: 176585459}
   - {fileID: 224802032}
+  m_aoSource: {fileID: 0}
+  m_acUseSFX: {fileID: 0}
 --- !u!23 &1857211430
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3434,12 +3438,12 @@ Prefab:
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 538
+      value: 215
       objectReference: {fileID: 0}
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 302.5
+      value: 493.5
       objectReference: {fileID: 0}
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
@@ -3551,6 +3555,10 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1646268083079582, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177, type: 2}
   m_IsPrefabParent: 0
@@ -3654,6 +3662,8 @@ MonoBehaviour:
   - {fileID: 5849578}
   - {fileID: 2130930543}
   - {fileID: 52766805}
+  m_aoSource: {fileID: 0}
+  m_acUseSFX: {fileID: 0}
 --- !u!23 &2019203788
 MeshRenderer:
   m_ObjectHideFlags: 0

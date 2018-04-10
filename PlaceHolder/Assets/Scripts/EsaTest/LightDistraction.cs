@@ -12,7 +12,10 @@ namespace ProjectThief
         private float m_fRange = 10f;
 
         public bool trigger;
+        private bool m_bIsActive;
         Guard guard;
+
+        public bool IsActive { get { return m_bIsActive; } set { m_bIsActive = value; } }
 
         private void Update()
         {
@@ -31,6 +34,7 @@ namespace ProjectThief
         public void Activated()
         {            
             m_goLight.SetActive(true);
+            m_bIsActive = true;
             Collider[] objects = Physics.OverlapSphere(transform.position, m_fRange);
 
             if (objects.Length > 0)
@@ -49,6 +53,7 @@ namespace ProjectThief
         public void ResetLight()
         {
             m_goLight.SetActive(false);
+            m_bIsActive = false;
             guard.Distract(this, false);
         }
     }

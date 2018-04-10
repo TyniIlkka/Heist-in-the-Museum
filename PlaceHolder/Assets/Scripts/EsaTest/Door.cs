@@ -17,16 +17,20 @@ namespace ProjectThief
         private AudioClip m_acOpen;
         [SerializeField, Tooltip("Bars moving sound")]
         private AudioClip m_acUnlock;
+        [SerializeField]
+        private AudioSource m_aoSource;
 
         private bool m_bIsBlocked;
 
         public Transform SpawnPoint { get { return m_tSpawnPoint; } }
         public bool Open { set { m_bIsOpen = value; } }
-        public bool Blocked { set { m_bIsBlocked = value; } }
-
+        public bool Blocked { set { m_bIsBlocked = value; } }  
 
         private void Awake()
         {
+            if (m_aoSource == null)
+                m_aoSource = GetComponent<AudioSource>();
+
             if (m_bIsOpen)
             {
                 m_bIsBlocked = false;
@@ -36,6 +40,8 @@ namespace ProjectThief
             {               
                 m_bIsBlocked = true;
             }
+
+            m_aoSource.volume = AudioManager.instance.SFXPlayVol;
         }
 
         /// <summary>
@@ -56,6 +62,7 @@ namespace ProjectThief
                         {
                             if (Input.GetMouseButton(0))
                             {
+                                DoorOpenSound();
                                 GameManager.instance.previousState = GameStateController.CurrentState;
                                 GameStateController.PerformTransition(_nextState);
                             }
@@ -64,6 +71,7 @@ namespace ProjectThief
                         {
                             if (Input.GetMouseButton(0))
                             {
+                                DoorOpenSound();
                                 GameManager.instance.previousState = GameStateController.CurrentState;
                                 GameStateController.PerformTransition(_nextState);
                             }
@@ -76,6 +84,16 @@ namespace ProjectThief
         protected override void OnMouseExit()
         {
             GetMouseController.DefaultCursor();
+        }
+
+        public void ObstacleSound()
+        {            
+            m_aoSource.PlayOneShot(m_acUnlock);
+        }
+
+        private void DoorOpenSound()
+        {
+            m_aoSource.PlayOneShot(m_acOpen);
         }
     }
 }

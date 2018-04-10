@@ -49,6 +49,7 @@ namespace ProjectThief
             m_lSlots[item.Slot].GetComponent<RawImage>().texture = m_tEmpty;
             // TODO Add use Animation and use animation to call updateInventory
             //UpdateInventory();
+            Debug.Log("Removed Item: " + item + " from slot: " + item.Slot);
             time = delay;
             start = true;            
         }
@@ -69,9 +70,7 @@ namespace ProjectThief
                     m_lSlots[i].GetComponent<RawImage>().texture = m_lInventoryItems[i].ItemImage;
                     m_lInventoryItems[i].Slot = i;
                 }
-            }
-
-            GameManager.instance.CheckInventory();
+            }            
         }
 
         // Update method for testing delay.
