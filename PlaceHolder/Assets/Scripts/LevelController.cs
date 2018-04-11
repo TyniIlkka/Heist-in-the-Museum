@@ -20,6 +20,8 @@ namespace ProjectThief
         private Button m_bPauseButton;
         [SerializeField]
         private GameObject m_goContinueText;
+        [SerializeField]
+        private RoomReset m_sRoomReset;
         [SerializeField, Tooltip("Initial Spawn location")]
         private Transform m_tInitialSpawn;
         [SerializeField, Tooltip("Scenes Doors")]
@@ -49,11 +51,14 @@ namespace ProjectThief
         public int ListPos { get { return m_iPos; } }
         public bool Cleared { get { return m_bIsCleared; } set { m_bIsCleared = value; } }
         public Inventory Inventory { get { return m_sInventory; } }
+        public RoomReset RoomReset { get { return m_sRoomReset; } }
 
         private void Awake()
         {
             if (m_sInventory == null)
                 m_sInventory = FindObjectOfType<Inventory>();
+            if (m_sRoomReset == null)
+                m_sRoomReset = GetComponent<RoomReset>();
 
             if (m_bCanBeCleared)
             {
