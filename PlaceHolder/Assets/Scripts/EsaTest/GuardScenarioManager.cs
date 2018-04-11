@@ -199,7 +199,6 @@ namespace ProjectThief
             guard.enabled = true;
             guard.InitStates();
 
-            
             return guard;
         }
     }
