@@ -12,8 +12,8 @@ namespace ProjectThief
         private GameStateBase m_sCurrentState;
         [SerializeField, Tooltip("Guard prefab")]
         private GameObject m_oGuard;
-
-        private GameObject guard;
+        [SerializeField]
+        private Player thief;
 
         [SerializeField, Tooltip("Patrol routes")]
         private List<PathPoints> pathList;
@@ -23,21 +23,27 @@ namespace ProjectThief
 
         private int m_iCurrentPhase;
 
-        private void Awake()
+        private void Start()
         {
             m_iCurrentPhase = GameManager.instance.currentPhase;
             m_sCurrentState = GameStateController.CurrentState;
+            GameObject player = GameManager.instance.player;
+            thief = player.GetComponent<Player>();
             Init();
         }
 
         private void Init()
         {
 
+
             int i = 0;
             int j = 0;
             int k = 0;
 
-            Debug.Log(m_iCurrentPhase);
+            int s = 8;  //Staticlist null position
+            int p = 10; //Pathlist null position
+
+            //Debug.Log(m_iCurrentPhase);
             if (m_sCurrentState.SceneName == "Lobby")
             {
                 // TODO Lobby scenarios
@@ -45,112 +51,78 @@ namespace ProjectThief
                 {
                     case 0:
                         i = 0; j = 1;
-                        guard = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity);
-                        Guard guard1 = guard.GetComponent<Guard>();
-                        guard = SpawnGuard(staticPoints[j].transform.position, Quaternion.identity);
-                        Guard guard2 = guard.GetComponent<Guard>();
-                        guard1.enabled = true;
-                        guard2.enabled = true;
 
-                        guard1.Moving = false;
-                        guard2.Moving = false;
+                        //-----Guard 1 Spawn and set-----//
+                        Guard guard1 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, p, i, false);
 
                         guard1.CurrentDirection = staticPoints[i].CurrentDir;
-                        guard2.CurrentDirection = staticPoints[j].CurrentDir;
+                        guard1.Path = pathList[10];
+                        
+                        guard1.InitStates();
+                        guard1.Thief = thief;
+                        guard1.Moving = false;
 
+                        guard1.enabled = true;
+
+                        //-----Guard 2 Spawn and set-----//
+                        Guard guard2 = SpawnGuard(staticPoints[j].transform.position, Quaternion.identity, p, j, false);
+
+                        Debug.Log("Case0 Lobby Guards spawned");
                         break;
 
                     case 1:
                         i = 2; j = 0;
-                        guard = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity);
-                        Guard guard3 = guard.GetComponent<Guard>();
-                        guard = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity);
-                        Guard guard4 = guard.GetComponent<Guard>();
 
-                        guard3.enabled = true;
-                        guard4.enabled = true;
+                        //-----Guard 3 Spawn and set-----//
+                        Guard guard3 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, p , i, false);
 
-                        guard3.Moving = false;
-                        guard4.Moving = true;
+                        //-----Guard 4 Spawn and set-----//
+                        Guard guard4 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
 
-                        guard3.CurrentDirection = staticPoints[i].CurrentDir;
-                        guard4.Path = pathList[j];
+                        //guard4.CurrentDirection = staticPoints[11].CurrentDir;
+                        //guard4.Path = pathList[j];
+                        //guard4.CurrentWaypoint = pathList[j].GetClosestWaypoint(guard4.transform.position);
+                        //guard4.Moving = true;
+       
+                        //guard4.enabled = true;
 
+                        Debug.Log("Case1 Lobby Guards spawned");
                         break;
 
                     case 2:
                         i = 4; j = 1;
-                        guard = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity);
-                        Guard guard5 = guard.GetComponent<Guard>();
-                        guard = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity);
-                        Guard guard6 = guard.GetComponent<Guard>();
 
-                        guard5.enabled = true;
-                        guard6.enabled = true;
+                        Guard guard5 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, p, i, false);
 
-                        guard5.Moving = false;
-                        guard6.Moving = true;
+                        Guard guard6 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
 
-                        guard5.CurrentDirection = staticPoints[i].CurrentDir;
-                        guard6.Path = pathList[j];
-
+                        Debug.Log("Case2 Lobby Guards spawned");
                         break;
 
                     case 3:
                         i = 5; j = 2;
-                        guard = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity);
-                        Guard guard7 = guard.GetComponent<Guard>();
-                        guard = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity);
-                        Guard guard8 = guard.GetComponent<Guard>();
+                        Guard guard7 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, p, i, false);
 
-                        guard7.enabled = true;
-                        guard8.enabled = true;
+                        Guard guard8 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
 
-                        guard7.Moving = false;
-                        guard8.Moving = true;
-
-                        guard7.CurrentDirection = staticPoints[i].CurrentDir;
-                        guard8.Path = pathList[j];
-
+                        Debug.Log("Case3 Lobby Guards spawned");
                         break;
 
                     case 4:
                         i = 7; j = 8;
-                        guard = SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity);
-                        Guard guard9 = guard.GetComponent<Guard>();
-                        guard = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity);
-                        Guard guard10 = guard.GetComponent<Guard>();
+                        Guard guard9 = SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
+                        Guard guard10 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
 
-                        guard9.enabled = true;
-                        guard10.enabled = true;
-
-                        guard9.Moving = true;
-                        guard10.Moving = true;
-
-                        guard9.Path = pathList[i];
-                        guard10.Path = pathList[j];
+                        Debug.Log("Case4 Lobby Guards spawned");
                         break;
 
                     case 5:
                         i = 9; j =10; k = 8;
-                        guard = SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity);
-                        Guard guard11 = guard.GetComponent<Guard>();
-                        guard = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity);
-                        Guard guard12 = guard.GetComponent<Guard>();
-                        guard = SpawnGuard(staticPoints[k].transform.position, Quaternion.identity);
-                        Guard guard13 = guard.GetComponent<Guard>();
 
-                        guard11.enabled = true;
-                        guard12.enabled = true;
-                        guard13.enabled = true;
+                        Guard guard11 = SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
+                        Guard guard12 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
+                        Guard guard13 = SpawnGuard(staticPoints[k].transform.position, Quaternion.identity, p, k, false);
 
-                        guard11.Moving = true;
-                        guard12.Moving = true;
-                        guard13.Moving = false;
-
-                        guard11.Path = pathList[i];
-                        guard12.Path = pathList[j];
-                        guard13.CurrentDirection = staticPoints[k].CurrentDir;
                         break;
 
                     default:
@@ -169,38 +141,20 @@ namespace ProjectThief
                     
                     case 1:
                         i = 3;
-                        guard = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity);
-                        Guard guard1 = guard.GetComponent<Guard>();
+                        Guard guard1 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, p, i, false);
 
-                        guard1.enabled = true;
-
-                        guard1.Moving = false;
-
-                        guard1.CurrentDirection = staticPoints[i].CurrentDir;
                         break;
 
                     case 3:
                         i = 4;
-                        guard = SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity);
-                        Guard guard2 = guard.GetComponent<Guard>();
+                        Guard guard2 = SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
 
-                        guard2.enabled = true;
-
-                        guard2.Moving = true;
-
-                        guard2.Path = pathList[i];
                         break;
 
                     case 4:
                         i = 5;
-                        guard = SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity);
-                        Guard guard3 = guard.GetComponent<Guard>();
+                        Guard guard3 = SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
 
-                        guard3.enabled = true;
-
-                        guard3.Moving = true;
-
-                        guard3.Path = pathList[i];
                         break;
 
                     default:
@@ -216,19 +170,9 @@ namespace ProjectThief
                 {
                     case 2:
                         i = 5; j = 2;
-                        guard = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity);
-                        Guard guard1 = guard.GetComponent<Guard>();
-                        guard = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity);
-                        Guard guard2 = guard.GetComponent<Guard>();
+                        Guard guard1 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, p, i, false);
+                        Guard guard2 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
 
-                        guard1.enabled = true;
-                        guard2.enabled = true;
-
-                        guard1.Moving = false;
-                        guard2.Moving = true;
-
-                        guard1.CurrentDirection = staticPoints[i].CurrentDir;
-                        guard2.Path = pathList[j];
                         break;
 
                     default:
@@ -242,9 +186,21 @@ namespace ProjectThief
             }
         }
 
-        private GameObject SpawnGuard(Vector3 pos, Quaternion rotation)
+        private Guard SpawnGuard(Vector3 pos, Quaternion rotation, int pathListPosition, int staticListPosition, bool moving)
         {
-            return Instantiate(m_oGuard, pos, rotation);
+            GameObject guardObject = Instantiate(m_oGuard, pos, rotation);
+            Guard guard = guardObject.GetComponent<Guard>();
+            guard.Path = pathList[pathListPosition];
+            guard.CurrentDirection = staticPoints[staticListPosition].CurrentDir;
+            guard.CurrentWaypoint = pathList[pathListPosition].Waypoints[0];
+            guard.Thief = GameManager.instance.player.GetComponent<Player>();
+            guard.Moving = moving;
+
+            guard.enabled = true;
+            guard.InitStates();
+
+            
+            return guard;
         }
     }
 }
