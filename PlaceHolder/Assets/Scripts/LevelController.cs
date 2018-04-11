@@ -97,7 +97,7 @@ namespace ProjectThief
             if (!m_bIsCleared && m_bCanBeCleared)
                 CheckKeyItems();
 
-            Debug.Log("phase: " + GameManager.instance.currentPhase);
+            //Debug.Log("phase: " + GameManager.instance.currentPhase);
         }
 
         /// <summary>
