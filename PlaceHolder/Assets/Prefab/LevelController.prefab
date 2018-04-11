@@ -65,6 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_oGuard: {fileID: 1288517433875154, guid: 258d00bdb09f0aa4f9ede9d172e3c232, type: 2}
+  thief: {fileID: 0}
   pathList:
   - {fileID: 114551474568650656, guid: ca705a487e68c654da32bfd02c7567fb, type: 2}
   - {fileID: 114655278364277614, guid: 0a477bf23091f77479522b5ecf577347, type: 2}
@@ -76,15 +77,17 @@ MonoBehaviour:
   - {fileID: 114882015569857920, guid: a968eed4bb26f9f4e83b7cbbcc6f5a40, type: 2}
   - {fileID: 114873046769908190, guid: 0df1d34ea383f9f44a11da14372133af, type: 2}
   - {fileID: 114217933911765804, guid: b830ec207b85d1b4eb741063650d929b, type: 2}
+  - {fileID: 114233606628783190, guid: 2e6e9ecb7ab38ff40a917643cf40a480, type: 2}
   staticPoints:
   - {fileID: 114274761572595586, guid: 4c3397cb87cc45e4883b1b7a5c506be3, type: 2}
   - {fileID: 114061986971901872, guid: ea8da66d118bf8e47bf017919bcdf66c, type: 2}
   - {fileID: 114676293745833948, guid: a8312fa805ddb7144b94526cb2b6450d, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 114607934499298728, guid: 12fb1ad3d9cf92d4d9e64905196c5834, type: 2}
+  - {fileID: 114939881305278988, guid: 48ab6acdce8143d4c9ffd9de8e2f9ef8, type: 2}
+  - {fileID: 114740451769255498, guid: 4ac353edd3a8a0548ae0570ab797fae9, type: 2}
+  - {fileID: 114655055121382650, guid: 0b37dc392b8796046920f83e7459ea1f, type: 2}
+  - {fileID: 114287259485247256, guid: 5d62d758123ca3d42a8e8f5583716eb6, type: 2}
+  - {fileID: 114682755608734536, guid: 18eee601ee17323428c7a9483f25a675, type: 2}
 --- !u!114 &114982444803844292
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -109,3 +112,5 @@ MonoBehaviour:
   m_fDist: 7
   m_fAngle: 55
   m_lKeyItems: []
+  m_sInventory: {fileID: 0}
+  m_bCanBeCleared: 0

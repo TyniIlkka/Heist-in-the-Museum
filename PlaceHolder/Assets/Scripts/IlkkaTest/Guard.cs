@@ -147,6 +147,12 @@ namespace ProjectThief {
             set { _path = value; }
         }
 
+        public Player Thief
+        {
+            get { return player; }
+            set { player = value; }
+        }
+
 
 
         #region Distract
@@ -199,17 +205,18 @@ namespace ProjectThief {
 
         public override void Init()
         {
+            Debug.Log("Init Guard");
             // Runs the base classes implementation of the Init method.
             base.Init();
             guardMover = GetComponent<GuardMover>();
             // Initializes the state system.
-            InitStates();
+            // InitStates();
         }
 
         /// <summary>
         /// Init States.
         /// </summary>
-        private void InitStates()
+        public void InitStates()
         {
             patrol = new Patrol(this, _path, _direction, _waypointArriveDistance);
             _states.Add(patrol);
@@ -275,7 +282,11 @@ namespace ProjectThief {
 
         private void Update()
         {
-            CurrentState.Update();           
+            if (CurrentState != null)
+            {
+                CurrentState.Update();
+            }
+                   
         }
 
         private void FixedUpdate()
@@ -351,7 +362,7 @@ namespace ProjectThief {
         public bool CanSeePlayer()
         {
             RaycastHit hit;
-            Vector3 rayDirection = player.transform.position - transform.position;
+            Vector3 rayDirection = transform.position;
             if (Physics.Raycast(transform.position, rayDirection, out hit, m_fMaxDetectionRange))
             {
                 if ((hit.collider.gameObject.GetComponent<Player>() != null) && (hit.distance <= m_fMinDetectionRange))
@@ -369,7 +380,7 @@ namespace ProjectThief {
                     {
                         
                         Debug.DrawLine(transform.position, hit.point, Color.red);
-                        Debug.Log(hit);
+                        Debug.Log("Player spotted: " + hit);
                         return true;
                     }
                     else
