@@ -1,47 +1,74 @@
 fileFormatVersion: 2
-guid: 1badf829d7b64024abe735689da08271
-timeCreated: 1522325243
+guid: 88b6da7ec6ecbe84d8cc2486f21e8414
+timeCreated: 1523384732
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
-    100002: CableCorner
-    100004: CableVertical
-    100006: CableVertical_001
     400000: //RootNode
-    400002: CableCorner
-    400004: CableVertical
-    400006: CableVertical_001
-    2300000: CableCorner
-    2300002: CableVertical
-    2300004: CableVertical_001
-    2300006: //RootNode
-    3300000: CableCorner
-    3300002: CableVertical
-    3300004: CableVertical_001
-    3300006: //RootNode
-    4300000: CableVertical_001
-    4300002: CableCorner
-    4300004: CableVertical
+    2100000: Wood__walltextureBeige_png
+    2100002: Panels__woodpaneltexture_png
+    2100004: Wood
+    2100006: Glass__walltextureBeige_png
+    2100008: Panels__woodlockerstexture_png
+    2100010: Glass
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Kehys
     7400000: Default Take
     9500000: //RootNode
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Cable_001__CableTexture_png
-    second: {fileID: 2100000, guid: c278a4373f73a424e981420704436e73, type: 2}
+      name: Glass
+    second: {fileID: 2100000, guid: 40b70645afa09554e8f7587467c10146, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Cable_002__CableTextureVertical_png
-    second: {fileID: 2100000, guid: 5240ae84be2278c43853d3c4b532ca42, type: 2}
+      name: Glass__walltextureBeige_png
+    second: {fileID: 2100000, guid: 40b70645afa09554e8f7587467c10146, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Cable__CableTextureVertical_png
-    second: {fileID: 2100000, guid: 5240ae84be2278c43853d3c4b532ca42, type: 2}
+      name: None__walltextureBeige_png
+    second: {fileID: 2100000, guid: b40dd9dca6f668a44b1dd62471a1b9fc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: None__woodlockerstexture_png
+    second: {fileID: 2100000, guid: 1bcd822481553044dad8db339a447c28, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: None__woodpaneltexture_png
+    second: {fileID: 2100000, guid: 9d1e35fb87e243544a2fc84877ad75dd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Panels__woodlockerstexture_png
+    second: {fileID: 2100000, guid: fa8a1ab2514d17f43a043ab083b91c18, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Panels__woodpaneltexture_png
+    second: {fileID: 2100000, guid: 60496c060b7b96f47afd0f76687fd80d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood
+    second: {fileID: 2100000, guid: fa8a1ab2514d17f43a043ab083b91c18, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood__walltextureBeige_png
+    second: {fileID: 2100000, guid: 60496c060b7b96f47afd0f76687fd80d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: unnamed
+    second: {fileID: 2100000, guid: c7398e964f10db04c92b567b3a20b2b4, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
