@@ -285,8 +285,7 @@ namespace ProjectThief {
             if (CurrentState != null)
             {
                 CurrentState.Update();
-            }
-                   
+            }                   
         }
 
         private void FixedUpdate()
