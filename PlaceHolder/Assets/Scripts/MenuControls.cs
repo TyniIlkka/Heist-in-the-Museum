@@ -57,7 +57,8 @@ namespace ProjectThief
         public void NewGame()
         {
             GameManager.instance.firstSpawn = true;
-            GameManager.instance.infoShown = false;            
+            GameManager.instance.infoShown = false;
+            GameManager.instance.previousState = GameStateController.CurrentState;
             GameStateController.PerformTransition(_nextState);
         }
 
@@ -165,9 +166,10 @@ namespace ProjectThief
         } 
         
         public void LoadCheckpoint()
-        {
+        {            
             GameManager.instance.levelController.RoomReset.ResetRoom();
-            GameStateController.PerformTransition(GameStateController.CurrentState.StateType);
+            GameStateType resetState = GameStateController.CurrentState.StateType;            
+            GameStateController.PerformTransition(resetState);
         }
     }
 }

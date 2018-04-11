@@ -18,9 +18,10 @@ namespace ProjectThief
         [SerializeField, Tooltip("Bars moving sound")]
         private AudioClip m_acUnlock;
         [SerializeField]
-        private AudioSource m_aoSource;
+        private AudioSource m_aoSource;        
 
         private bool m_bIsBlocked;
+        private bool m_bOpened;
 
         public Transform SpawnPoint { get { return m_tSpawnPoint; } }
         public bool Open { set { m_bIsOpen = value; } }
@@ -41,6 +42,7 @@ namespace ProjectThief
                 m_bIsBlocked = true;
             }
 
+            m_bOpened = false;
             m_aoSource.volume = AudioManager.instance.SFXPlayVol;
         }
 
@@ -60,25 +62,35 @@ namespace ProjectThief
                         GetMouseController.EnterCursor();
                         if (!m_bIsOpen)
                         {
-                            if (Input.GetMouseButton(0))
+                            if (Input.GetMouseButtonDown(0))
                             {
                                 DoorOpenSound();
-                                GameManager.instance.previousState = GameStateController.CurrentState;
-                                GameStateController.PerformTransition(_nextState);
+                                m_bOpened = true;                                
                             }
                         }
                         else if (GameManager.instance.levelController.Cleared)
                         {
-                            if (Input.GetMouseButton(0))
+                            if (Input.GetMouseButtonDown(0))
                             {
                                 DoorOpenSound();
-                                GameManager.instance.previousState = GameStateController.CurrentState;
-                                GameStateController.PerformTransition(_nextState);
+                                m_bOpened = true;                                
                             }
                         }
                     }
                 }
             }             
+        }
+
+        private void Update()
+        {
+            if (m_bOpened)
+            {
+                if (!m_aoSource.isPlaying)
+                {
+                    GameManager.instance.previousState = GameStateController.CurrentState;
+                    GameStateController.PerformTransition(_nextState);
+                }
+            }
         }
 
         protected override void OnMouseExit()
