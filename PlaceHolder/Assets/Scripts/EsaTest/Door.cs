@@ -62,7 +62,7 @@ namespace ProjectThief
                         GetMouseController.EnterCursor();
                         if (!m_bIsOpen)
                         {
-                            if (Input.GetMouseButtonDown(0))
+                            if (Input.GetMouseButtonDown(0) && !m_bOpened)
                             {
                                 DoorOpenSound();
                                 m_bOpened = true;                                
@@ -70,7 +70,7 @@ namespace ProjectThief
                         }
                         else if (GameManager.instance.levelController.Cleared)
                         {
-                            if (Input.GetMouseButtonDown(0))
+                            if (Input.GetMouseButtonDown(0) && !m_bOpened)
                             {
                                 DoorOpenSound();
                                 m_bOpened = true;                                
