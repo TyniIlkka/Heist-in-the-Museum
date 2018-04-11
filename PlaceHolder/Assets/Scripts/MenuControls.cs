@@ -162,6 +162,12 @@ namespace ProjectThief
         {
             m_goExitConfirm.SetActive(false);
             m_goPauseMenu.SetActive(true);
-        }        
+        } 
+        
+        public void LoadCheckpoint()
+        {
+            GameManager.instance.levelController.RoomReset.ResetRoom();
+            GameStateController.PerformTransition(GameStateController.CurrentState.StateType);
+        }
     }
 }
