@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 82030088272862482}
   m_Layer: 10
   m_Name: DisplayCase
-  m_TagString: Untagged
+  m_TagString: Obstacles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -403,7 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d690c92267e56546b9954eea2466342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_itKeyItemPos: 0
+  m_itKeyItem: {fileID: 0}
   m_iInventory: {fileID: 0}
   m_goLock: {fileID: 1649408918359888}
   m_iPos: 0
@@ -411,3 +411,4 @@ MonoBehaviour:
   m_acOpen: {fileID: 8300000, guid: abd95e009901ae54880d9d33ed062b2d, type: 3}
   m_acUnlock: {fileID: 8300000, guid: b68670e07afb8e147a4a5660e7d86557, type: 3}
   m_aoSource: {fileID: 82030088272862482}
+  m_iListPos: 0
