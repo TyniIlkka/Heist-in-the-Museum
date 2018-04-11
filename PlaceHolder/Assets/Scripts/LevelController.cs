@@ -70,8 +70,7 @@ namespace ProjectThief
                 m_bIsCleared = true;
             }
 
-            m_bJustCleared = false;
-            Debug.Log("Current state: " + GameStateController.CurrentState);
+            m_bJustCleared = false;            
             m_sCameraScript.Distance = m_fDist;
             m_sCameraScript.Angle = m_fAngle;
 
@@ -80,7 +79,13 @@ namespace ProjectThief
             GameManager.instance.player = SpawnPlayer();               
 
             if (!GameManager.instance.infoShown)
-                Intro();            
+                Intro();     
+            else
+            {
+                GameManager.instance.canMove = true;
+                Time.timeScale = 1f;
+                m_goDefeat.SetActive(false);
+            }
         }
 
         // Update is called once per frame
@@ -95,9 +100,7 @@ namespace ProjectThief
             MouseOverHudCheck();
 
             if (!m_bIsCleared && m_bCanBeCleared)
-                CheckKeyItems();
-
-            //Debug.Log("phase: " + GameManager.instance.currentPhase);
+                CheckKeyItems();            
         }
 
         /// <summary>
@@ -227,8 +230,11 @@ namespace ProjectThief
                 else if (GameManager.instance.previousState.SceneName == "Room2")
                     result = m_lDoors[2].SpawnPoint.position;
 
+                else if (GameManager.instance.previousState.SceneName == "MainMenu")
+                    result = m_tInitialSpawn.position;
+
                 else
-                    Debug.LogError("ERROR Spawnpoint Not Found!");
+                    Debug.LogError("ERROR Spawnpoint Not Found! ");                
             }
             else if (GameStateController.CurrentState.SceneName == "Room1")
             {
@@ -261,6 +267,9 @@ namespace ProjectThief
 
                 else if (GameManager.instance.previousState.SceneName == "Room2")
                     result = m_lDoors[2].SpawnPoint.rotation;
+
+                else if (GameManager.instance.previousState.SceneName == "MainMenu")
+                    result = m_tInitialSpawn.rotation;
 
                 else
                     Debug.LogError("ERROR Spawnpoint Not Found!");

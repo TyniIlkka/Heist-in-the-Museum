@@ -38,8 +38,7 @@ namespace ProjectThief.States
             {
                 return false;
             }
-
-            GameManager.instance.previousState = CurrentState;
+                        
             CurrentState.Deactivate();
             CurrentState = state;
             CurrentState.Activate();
