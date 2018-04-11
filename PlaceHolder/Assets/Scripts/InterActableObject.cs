@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ProjectThief
 {
     public class InterActableObject : ObjectBase
     {
-        [SerializeField, Tooltip("Key Item")]
+        [SerializeField, Tooltip("Vitrines key")]
         private Item m_itKeyItem;        
         [SerializeField, Tooltip("Inventory object")]
         private Inventory m_iInventory;        
@@ -16,47 +14,105 @@ namespace ProjectThief
         private int m_iPos;
         [SerializeField, Tooltip("Item")]
         private Item m_itKey;
-
+        [SerializeField, Tooltip("Vitrine opening sound")]
+        private AudioClip m_acOpen;
+        [SerializeField, Tooltip("Unlocking sound")]
+        private AudioClip m_acUnlock;
+        [SerializeField]
+        private AudioSource m_aoSource;
+        [SerializeField, Tooltip("Vitrines position in gm list")]
+        private int m_iListPos;
+         
         private Animator m_aAnimator;
+        private bool m_bLocked = true;
 
         private void Awake()
         {
+            if (m_aoSource == null)
+                m_aoSource = GetComponent<AudioSource>();
+
             if (m_iInventory == null)
                 m_iInventory = FindObjectOfType<Inventory>();
 
             m_aAnimator = GetComponent<Animator>();
+            m_aoSource.volume = AudioManager.instance.SFXPlayVol;
+
+            if (GameManager.instance.openedVitrines[m_iListPos])
+            {
+                m_aAnimator.SetBool("Open", true);
+                m_bLocked = false;
+                m_goLock.SetActive(false);
+                m_itKey.gameObject.SetActive(false);
+            }
+
+            Debug.Log("Vitrine used? " + m_bLocked);
         }        
 
         /// <summary>
         /// Detects if mouse is over an object.
         /// </summary>
         protected override void OnMouseOver()
-        {              
-            if (IsActive)
+        {
+            if (!GameManager.instance.openedVitrines[m_iListPos])
             {
-                GetMouseController.InspectCursor();
-                if (IsInteractable)
+                if (IsActive)
                 {
-                    if (m_itKeyItem.Collected)
+                    GetMouseController.InspectCursor();
+                    if (!m_bLocked)
                     {
-                        GetMouseController.InteractCursor();
-                        if (Input.GetMouseButtonDown(0))
+
+                        if (IsInteractable)
                         {
-                            m_iInventory.RemoveItem(m_itKeyItem);
-                            Debug.Log("opened");
-                            m_goLock.SetActive(false);
-                            m_aAnimator.SetBool("Open", true);
-                            m_iInventory.AddItem(m_itKey);
-                            GameManager.instance.keyItems[m_iPos].Collected = true;
-                        }                        
+                            GetMouseController.InteractCursor();
+                            if (Input.GetMouseButtonDown(0))
+                            {
+                                Debug.Log("Key taken");
+                                PlayAudio(m_acOpen);
+                                m_aAnimator.SetBool("Open", true);
+                                m_iInventory.AddItem(m_itKey);
+                                m_itKey.gameObject.SetActive(false);
+                                GameManager.instance.keyItems[m_iPos].Collected = true;
+                                GameManager.instance.openedVitrines[m_iListPos] = true;
+                            }
+                        }
                     }
-                }                
-            }            
+                    else
+                    {
+                        if (IsInteractable)
+                        {
+                            GetMouseController.InteractCursor();
+                            if (m_itKeyItem.Collected)
+                            {
+                                if (Input.GetMouseButtonDown(0))
+                                {
+                                    Debug.Log("Lock open");
+                                    m_iInventory.RemoveItem(m_itKeyItem);
+                                    PlayAudio(m_acUnlock);
+                                    m_bLocked = false;
+                                    m_goLock.SetActive(false);
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+            }
+            else
+            {
+                GetMouseController.DefaultCursor();
+            }
         }
 
         protected override void OnMouseExit()
         {
             GetMouseController.DefaultCursor();
-        }       
+        }   
+        
+        private void PlayAudio(AudioClip clip)
+        {
+            m_aoSource.clip = clip;
+            m_aoSource.volume = AudioManager.instance.SFXPlayVol;
+            m_aoSource.Play();
+        }
     }
 }

@@ -77,16 +77,13 @@ namespace ProjectThief {
         private LayerMask m_lmSoundMask;
         //Set Path
         [SerializeField]
-        private List<PathPoints> _paths;
+        private PathPoints _path;
         //How smooth guards is going to corner.
         [SerializeField]
         private float _waypointArriveDistance;
         //Which way are we moving.
         [SerializeField]
         private Direction _direction;
-
-        private int _currenPathNumber = 0;
-
         
         
         #endregion
@@ -137,7 +134,20 @@ namespace ProjectThief {
             get { return m_fMaxDetectionRange; }
             private set { }
         }
+        public bool Moving
+        {
+            get { return m_bMoving; }
+            set { m_bMoving = value; }
+        }
         public Waypoint CurrentWaypoint { get; set; }
+
+        public PathPoints Path
+        {
+            get { return _path; }
+            set { _path = value; }
+        }
+
+
 
         #region Distract
 
@@ -201,7 +211,7 @@ namespace ProjectThief {
         /// </summary>
         private void InitStates()
         {
-            patrol = new Patrol(this, _paths, _direction, _waypointArriveDistance, _currenPathNumber );
+            patrol = new Patrol(this, _path, _direction, _waypointArriveDistance);
             _states.Add(patrol);
 
             patrolMoveTo = new PatrolMoveTo(this, guardMover);
@@ -265,7 +275,7 @@ namespace ProjectThief {
 
         private void Update()
         {
-            CurrentState.Update();
+            CurrentState.Update();           
         }
 
         private void FixedUpdate()

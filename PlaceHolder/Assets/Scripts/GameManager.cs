@@ -29,6 +29,7 @@ namespace ProjectThief
         public List<Item> inventory;                
         public bool[] usedlevers;        
         public bool[] openedVitrines;
+        public bool[] clearedRooms;
         [SerializeField] List<Guard> guards;
         #endregion
 
@@ -47,32 +48,27 @@ namespace ProjectThief
 
             inventory = new List<Item>();            
             usedlevers = new bool[4];            
-            openedVitrines = new bool[4];                       
+            openedVitrines = new bool[4];
+            clearedRooms = new bool[4];
         }         
 
         public void ResetGame()
         {
-            for (int i = 0; i < usedlevers.Length; i++)
-            {                
-                usedlevers[i] = false;                   
-                openedVitrines[i] = false;                                   
+            for (int i = 0; i < refItems.Count; i++)
+            {
                 refItems[i].Collected = false;
+
+                if (i < usedlevers.Length)
+                {
+                    usedlevers[i] = false;
+                    keyItems[i].Collected = false;
+                    openedVitrines[i] = false;
+                    clearedRooms[i] = false;
+                }
             }
 
             inventory.Clear();
             currentPhase = 0;
-        }    
-        
-        public void CheckInventory()
-        {
-            Debug.Log("Inventory: " + inventory.Count);
-
-            for (int i = 0; i < inventory.Count; i++)
-            {
-                Debug.Log("Item " + i + " : " + inventory[i]);
-                if (inventory[i] == null)
-                    Debug.LogError("ERROR: ITEM REFERENCE IS NULL");
-            }
-        }
+        }            
     }
 }

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using ProjectThief.States;
+using UnityEngine.UI;
 
 namespace ProjectThief
 {
@@ -15,6 +16,10 @@ namespace ProjectThief
         private GameObject m_goVictory;
         [SerializeField, Tooltip("Info screen")]
         private GameObject m_goScreen;
+        [SerializeField]
+        private Button m_bPauseButton;
+        [SerializeField]
+        private GameObject m_goContinueText;
         [SerializeField, Tooltip("Initial Spawn location")]
         private Transform m_tInitialSpawn;
         [SerializeField, Tooltip("Scenes Doors")]
@@ -28,13 +33,39 @@ namespace ProjectThief
         [SerializeField, Tooltip("Camera's angle in room")]
         private float m_fAngle = 0;
         [SerializeField, Tooltip("Items neede to collect to advance into next phase")]
-        private List<Item> m_lKeyItems;
+        private List<Item> m_lKeyItems;        
+        [SerializeField]
+        private Inventory m_sInventory;
+        [SerializeField]
+        private bool m_bCanBeCleared;
 
         private Vector3 m_v3SpawnPosition;        
-        private Quaternion m_qSpawnRotation;              
+        private Quaternion m_qSpawnRotation;
+        private bool m_bJustCleared;
+        private bool m_bIsCleared;
+        private float m_fDelay = 0;
+
+        public bool JustCleared { get { return m_bJustCleared; } }
+        public int ListPos { get { return m_iPos; } }
+        public bool Cleared { get { return m_bIsCleared; } set { m_bIsCleared = value; } }
+        public Inventory Inventory { get { return m_sInventory; } }
 
         private void Awake()
         {
+            if (m_sInventory == null)
+                m_sInventory = FindObjectOfType<Inventory>();
+
+            if (m_bCanBeCleared)
+            {
+                if (GameManager.instance.clearedRooms[m_iPos])
+                    m_bIsCleared = true;
+            }
+            else
+            {
+                m_bIsCleared = true;
+            }
+
+            m_bJustCleared = false;
             Debug.Log("Current state: " + GameStateController.CurrentState);
             m_sCameraScript.Distance = m_fDist;
             m_sCameraScript.Angle = m_fAngle;
@@ -50,8 +81,18 @@ namespace ProjectThief
         // Update is called once per frame
         private void Update()
         {
+            if (!GameManager.instance.infoShown)
+            {
+                IntroEnd();
+                m_fDelay += 0.02f;
+            }            
+
             MouseOverHudCheck();
-            CheckKeyItems();
+
+            if (!m_bIsCleared && m_bCanBeCleared)
+                CheckKeyItems();
+
+            Debug.Log("phase: " + GameManager.instance.currentPhase);
         }
 
         /// <summary>
@@ -86,8 +127,11 @@ namespace ProjectThief
                 }
             }
 
-            if (result)
+            if (result && !m_bJustCleared)
             {
+                m_bJustCleared = true;
+                m_bIsCleared = true;
+                GameManager.instance.clearedRooms[m_iPos] = true;
                 GameManager.instance.currentPhase++;
             }
         }
@@ -118,8 +162,25 @@ namespace ProjectThief
         {
             m_goScreen.SetActive(true);
             GameManager.instance.canMove = false;
-            Time.timeScale = 0f;
-            GameManager.instance.infoShown = true;
+            Time.timeScale = 0f;            
+        }
+
+        private void IntroEnd()
+        {
+            if (m_fDelay >= 5f)
+            {
+                m_goContinueText.SetActive(true);
+
+                if (Input.anyKey)
+                {
+                    GameManager.instance.infoShown = true;
+                    m_goScreen.SetActive(false);
+                    m_bPauseButton.interactable = true;
+                    GameManager.instance.canMove = true;
+                    Time.timeScale = 1f;
+                    m_fDelay = 0;
+                }
+            }
         }
 
         private GameObject SpawnPlayer()

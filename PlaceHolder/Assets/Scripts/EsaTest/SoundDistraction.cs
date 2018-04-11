@@ -9,11 +9,15 @@ namespace ProjectThief
 
         //TODO: Replace with sound source variable.
         [SerializeField, Tooltip("Sound's sound source")]
-        private AudioSource m_goSound;
+        private AudioSource m_aoSound;
         [SerializeField, Tooltip("Distraction range")]
         private float m_fRange = 10f;
         [SerializeField, Tooltip("Audio clip")]
         private AudioClip m_acSound;
+        [SerializeField, Tooltip("Idle audio clip")]
+        private AudioClip m_acIdle;
+        [SerializeField, Tooltip("Object has idle audio")]
+        private bool m_bHasIdle;
 
         public bool trigger;
 
@@ -21,11 +25,9 @@ namespace ProjectThief
 
         private void Awake()
         {
-            m_goSound = GetComponent<AudioSource>();
-            m_goSound.volume = AudioManager.instance.SfxVol;
-            m_goSound.clip = m_acSound;
-            m_goSound.loop = true;
-            //m_goSound.volume = GameManager.instance.sfxVolume;
+            m_aoSound = GetComponent<AudioSource>(); 
+            m_aoSound.volume = AudioManager.instance.SFXPlayVol;            
+            m_aoSound.loop = true;            
         }
 
         private void Update()
@@ -34,6 +36,8 @@ namespace ProjectThief
             {
                 Activated();
             }
+            if (m_bHasIdle)
+                PlayAudio(m_acIdle);
         }
 
         private void OnDrawGizmos()
@@ -65,7 +69,7 @@ namespace ProjectThief
 
         public void Activated()
         {
-            m_goSound.Play();;
+            PlayAudio(m_acSound);
             Collider[] objects = Physics.OverlapSphere(transform.position, m_fRange);
 
             if (objects.Length > 0)
@@ -83,9 +87,16 @@ namespace ProjectThief
 
         public void ResetLight()
         {
-            m_goSound.Stop();
+            m_aoSound.Stop();
             guard.Distract(this, false);
             
+        }
+
+        public void PlayAudio(AudioClip clip)
+        {
+            m_aoSound.volume = AudioManager.instance.SFXPlayVol;
+            m_aoSound.clip = clip;
+            m_aoSound.Play();
         }
     }
 }

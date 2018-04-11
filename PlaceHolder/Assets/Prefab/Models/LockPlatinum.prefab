@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4581705769695598}
   - component: {fileID: 33901294673017708}
   - component: {fileID: 23601439698277436}
-  - component: {fileID: 95530976041637690}
+  - component: {fileID: 114899756445869164}
   m_Layer: 0
   m_Name: LockPlatinum
   m_TagString: Untagged
@@ -85,20 +85,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1954848651163338}
   m_Mesh: {fileID: 4300004, guid: e011ee38a262dfe408482ad5530c2007, type: 3}
---- !u!95 &95530976041637690
-Animator:
-  serializedVersion: 3
+--- !u!114 &114899756445869164
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1954848651163338}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: e011ee38a262dfe408482ad5530c2007, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a4cc581cedaa3e4aac52d42812038cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_tItemTexture: {fileID: 2800000, guid: f070a68fcb583bc49ad215557f1316b3, type: 3}
+  m_iInventory: {fileID: 0}
+  m_v3MoveToPos: {x: 0, y: 0, z: 0}
+  m_iRefPos: 0

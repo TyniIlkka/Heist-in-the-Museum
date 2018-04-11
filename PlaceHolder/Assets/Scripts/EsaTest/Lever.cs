@@ -19,7 +19,7 @@ namespace ProjectThief
         [SerializeField, Tooltip("Needed item")]
         private Item m_itNeededItem;
         [SerializeField, Tooltip("Position in GM's bool list")]
-        private int m_iPos;
+        private int m_iPos;        
 
         private Animator m_aLeverAnim;        
 
@@ -67,6 +67,7 @@ namespace ProjectThief
                         {                            
                             m_aLeverAnim.SetBool("Activated", true);
                             m_aObstacleAnim.SetBool("Open", true);
+                            m_dDoor.ObstacleSound();
                             m_dDoor.Open = false;
                             m_dDoor.Blocked = false;
                             GameManager.instance.usedlevers[m_iPos] = true;

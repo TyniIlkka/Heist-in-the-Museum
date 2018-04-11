@@ -32,11 +32,13 @@ namespace ProjectThief.PathFinding
             else if (Vector3.Distance(owner.transform.position, transform.position) < 2F)
             {
                 //Stop!
+                owner.Animation.SetBool("Moving", false);
             }
             else if (Vector3.Distance(owner.transform.position, transform.position) < 35F && moving)
             {
                 if (Path.Count > 0)
                 {
+                    
                     if (Vector3.Distance(owner.transform.position, Path[Path.Count - 1]) > 5F)
                     {
                         StartCoroutine(NewPath());
@@ -71,6 +73,7 @@ namespace ProjectThief.PathFinding
         {
             if (Path.Count > 0)
             {
+                owner.Animation.SetBool("Moving", true);
                 Vector3 direction = (Path[0] - transform.position).normalized;
 
 
@@ -107,6 +110,10 @@ namespace ProjectThief.PathFinding
                 {
                     transform.position = new Vector3(transform.position.x, maxY + 1F, transform.position.z);
                 }
+            }
+            else
+            {
+                owner.Animation.SetBool("Moving", false);
             }
         }
     }

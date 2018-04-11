@@ -15,6 +15,7 @@ namespace ProjectThief.AI
             State = AIStateType.Static;
             Owner = owner;
             AddTransition(AIStateType.StaticTurnTo);
+            AddTransition(AIStateType.Patrol);
             m_eDirection = currentDirection;
 
         }
@@ -31,6 +32,7 @@ namespace ProjectThief.AI
 
             if (!ChangeState())
             {
+                m_eDirection = Owner.CurrentDirection;
                 // 2. Stay on place.
                 switch (m_eDirection)
                 {
@@ -78,6 +80,10 @@ namespace ProjectThief.AI
                 Debug.Log("Hämätty");
                 bool result = Owner.PerformTransition(AIStateType.StaticTurnTo);
                 return result;
+            }
+            if (Owner.Moving)
+            {
+                bool result = Owner.PerformTransition(AIStateType.Patrol);
             }
             return false;
         }

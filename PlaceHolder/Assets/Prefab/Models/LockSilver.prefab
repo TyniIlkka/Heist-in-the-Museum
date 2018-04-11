@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4289133733417802}
   - component: {fileID: 33711936748398884}
   - component: {fileID: 23622924573817116}
-  - component: {fileID: 95431511451633868}
+  - component: {fileID: 114425578894272200}
   m_Layer: 0
   m_Name: LockSilver
   m_TagString: Untagged
@@ -85,20 +85,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1433219655978354}
   m_Mesh: {fileID: 4300004, guid: e011ee38a262dfe408482ad5530c2007, type: 3}
---- !u!95 &95431511451633868
-Animator:
-  serializedVersion: 3
+--- !u!114 &114425578894272200
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1433219655978354}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: e011ee38a262dfe408482ad5530c2007, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a4cc581cedaa3e4aac52d42812038cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_tItemTexture: {fileID: 2800000, guid: 45c14d540a4cf704c8a75aba2fe71e34, type: 3}
+  m_iInventory: {fileID: 0}
+  m_v3MoveToPos: {x: 0, y: 0, z: 0}
+  m_iRefPos: 0

@@ -11,6 +11,8 @@ namespace ProjectThief
         [SerializeField]
         private Slider m_sMusicVol;
         [SerializeField]
+        private Slider m_sMasterVol;
+        [SerializeField]
         private GameStateType _nextState;
         [SerializeField]
         private GameStateType _menuState;
@@ -48,7 +50,8 @@ namespace ProjectThief
             m_amAudioManager = GameManager.instance.audioManager;
             
             m_sSfxVol.value = (int)(m_amAudioManager.SfxVol * 100);
-            m_sMusicVol.value = (int)(m_amAudioManager.MusicVol * 100);  
+            m_sMusicVol.value = (int)(m_amAudioManager.MusicVol * 100);
+            m_sMasterVol.value = (int)(m_amAudioManager.MasterVol * 100);
         }        
 
         public void NewGame()
@@ -97,6 +100,11 @@ namespace ProjectThief
         public void SFXVol()
         {
             m_amAudioManager.SfxVol = (m_sSfxVol.value / 100);
+        }
+
+        public void MasterVol()
+        {
+            m_amAudioManager.MasterVol = (m_sMasterVol.value / 100);
         }
 
         public void Pause()
@@ -154,14 +162,6 @@ namespace ProjectThief
         {
             m_goExitConfirm.SetActive(false);
             m_goPauseMenu.SetActive(true);
-        }
-
-        public void IntroContinue()
-        {
-            m_goPlan.SetActive(false);
-            m_bPauseButton.interactable = true;
-            GameManager.instance.canMove = true;
-            Time.timeScale = 1f;
-        }
+        }        
     }
 }
