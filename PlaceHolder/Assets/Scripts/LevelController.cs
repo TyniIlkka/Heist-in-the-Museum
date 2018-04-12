@@ -97,25 +97,28 @@ namespace ProjectThief
                 m_fDelay += 0.02f;
             }            
 
-            MouseOverHudCheck();
+            MouseOverUICheck();
 
             if (!m_bIsCleared && m_bCanBeCleared)
                 CheckKeyItems();            
         }
 
         /// <summary>
-        /// Checks if mouse is over hud.
+        /// Checks if mouse is over an ui element.
         /// </summary>
-        private void MouseOverHudCheck()
+        private void MouseOverUICheck()
         {
             if (EventSystem.current.IsPointerOverGameObject())
             {
+                
                 m_mcController.DefaultCursor();
                 GameManager.instance.canMove = false;
+                GameManager.instance.mouseOverUI = true;
             }
             else
             {
                 GameManager.instance.canMove = true;
+                GameManager.instance.mouseOverUI = false;
             }
         }
 
