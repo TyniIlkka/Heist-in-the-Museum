@@ -10,10 +10,21 @@ namespace ProjectThief.PathFinding
         public Camera minimapCam;
 
         public float m_fMoveSpeed;
+        public float m_fSneakSpeed;
+        public float m_fWalkSpeed;
         public float m_fTurnSpeed;
 
         public Player player;
 
+        public LayerMask ingoreLayerMask;
+
+
+        public bool one_click = false;
+        public bool timer_running;
+        public float timer_for_double_click;
+
+        //this is how long in seconds to allow for a double click
+        public float delay;
 
         private void Start()
         {
@@ -22,10 +33,10 @@ namespace ProjectThief.PathFinding
             if (m_fMoveSpeed <= 0) m_fMoveSpeed = 1;
         }
 
-        //public GUIStyle bgStyle;
-
         void Update()
         {
+            SneakOrWalk();
+            DoubleClick();
             
             FindPath();
             player.MoveAnimation(Path);
@@ -38,12 +49,12 @@ namespace ProjectThief.PathFinding
         private void FindPath()
         {
 
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1") || Input.GetButton("Fire1"))
             {
                 Ray ray = playerCam.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
                 RaycastHit hit;
 
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, (int)ingoreLayerMask))
                 {
                     FindPath(transform.position, hit.point);
                 }
@@ -87,8 +98,49 @@ namespace ProjectThief.PathFinding
 
         void OnGUI()
         {
-            
+
             //GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "", bgStyle);
+        }
+
+        public void DoubleClick()
+        {
+
+            if (Input.GetButtonDown("Fire1"))
+            {
+                if (!one_click) // first click no previous clicks
+                {
+                    one_click = true;
+
+                    timer_for_double_click = Time.time;
+
+                    m_fMoveSpeed = m_fSneakSpeed;
+                }
+                else
+                {
+                    one_click = false;
+
+                    m_fMoveSpeed = m_fWalkSpeed;
+                }
+            }
+            if (one_click)
+            {
+                if ((Time.time - timer_for_double_click) > delay)
+                {
+                    one_click = false;
+                }
+            }
+        }
+
+        private void SneakOrWalk()
+        {
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                m_fMoveSpeed = m_fWalkSpeed;
+            }
+            else
+            {
+                //m_fMoveSpeed = m_fSneakSpeed;
+            }
         }
     }
 }

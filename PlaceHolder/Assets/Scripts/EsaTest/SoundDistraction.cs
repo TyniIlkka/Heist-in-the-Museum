@@ -79,7 +79,11 @@ namespace ProjectThief
                     guard = item.GetComponent<Guard>();
                     if (guard != null)
                     {
-                        guard.Distract(this, true);
+                        if (guard.Moving)
+                        {
+                            guard.Distract(this, true);
+                        }
+                        
                     }
                 }
             }

@@ -852,7 +852,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1288517433875154}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 6.087128, y: 0.036, z: 1.12}
+  m_LocalPosition: {x: -3.15, y: 0, z: 0.79}
   m_LocalScale: {x: 1.35, y: 1.35, z: 1.35}
   m_Children:
   - {fileID: 4325195508036858}
@@ -1076,13 +1076,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 114577851583317346, guid: f19a89018a78e974282cfdb7c33d0c1b, type: 2}
   m_bMoving: 1
-  m_fMovementSpeed: 5
+  m_fMovementSpeed: 2
   m_fTurnSpeed: 500
   m_fWaitTime: 0
   m_fLightDetectDistance: 5.6
   m_lmLightMask:
     serializedVersion: 2
     m_Bits: 16384
+  m_bDistracted: 0
   m_fSoundDetectDistance: 0
   m_lmSoundMask:
     serializedVersion: 2
@@ -1094,8 +1095,8 @@ MonoBehaviour:
   m_lmDetectHitMask:
     serializedVersion: 2
     m_Bits: 768
-  m_fMaxDetectionRange: 10.1
-  m_fMinDetectionRange: 0.18
+  m_fMaxDetectionRange: 10
+  m_fMinDetectionRange: 3.82
   m_fFieldOfView: 58
   m_vPosition: {x: 0, y: 0, z: 0}
 --- !u!136 &136256496487013576
