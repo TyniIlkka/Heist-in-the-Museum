@@ -16,39 +16,7 @@ namespace ProjectThief
         private void Awake()
         {
             m_aAnimator = GetComponent<Animator>();
-        }
-
-        protected override void OnMouseOver()
-        {
-            if (IsActive)
-            {
-                GetMouseController.InspectCursor();
-
-                if (!m_bIsLocked)
-                {
-                    if (IsInteractable)
-                    {
-                        GetMouseController.InteractCursor();
-                        if (Input.GetMouseButton(0))
-                        {
-                            m_aAnimator.SetBool("Open", true);
-                        }
-                    }
-                }
-                else
-                {
-                    if (IsInteractable && CheckKeys())
-                    {                        
-                        GetMouseController.InteractCursor();
-                        if (Input.GetMouseButton(0))
-                        {
-                            AddKeyPieces();
-                            m_bIsLocked = false;
-                        }
-                    }
-                }
-            }
-        }
+        }        
 
         private bool CheckKeys()
         {
@@ -72,9 +40,36 @@ namespace ProjectThief
             }
         }
 
-        protected override void OnMouseExit()
+        protected override void Activated()
         {
-            GetMouseController.DefaultCursor();
-        }        
+            if (IsActive)
+            {
+                GetMouseController.InspectCursor();
+
+                if (!m_bIsLocked)
+                {
+                    if (IsInteractable)
+                    {
+                        GetMouseController.InteractCursor();
+                        if (Input.GetMouseButton(0))
+                        {
+                            m_aAnimator.SetBool("Open", true);
+                        }
+                    }
+                }
+                else
+                {
+                    if (IsInteractable && CheckKeys())
+                    {
+                        GetMouseController.InteractCursor();
+                        if (Input.GetMouseButton(0))
+                        {
+                            AddKeyPieces();
+                            m_bIsLocked = false;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

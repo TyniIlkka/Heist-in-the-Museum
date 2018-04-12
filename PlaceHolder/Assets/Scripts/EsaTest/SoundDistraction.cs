@@ -5,9 +5,7 @@ using UnityEngine;
 namespace ProjectThief
 {
     public class SoundDistraction : ObjectBase
-    {
-
-        //TODO: Replace with sound source variable.
+    {        
         [SerializeField, Tooltip("Sound's sound source")]
         private AudioSource m_aoSound;
         [SerializeField, Tooltip("Distraction range")]
@@ -33,12 +31,17 @@ namespace ProjectThief
                 PlayAudio(m_acIdle);
         }
 
-        private void Update()
+        /// <summary>
+        /// For testing purposes.
+        /// </summary>
+        protected override void Update()
         {
+            base.Update();
+
             if (trigger)
             {
-                Activated();
-            }            
+                DistractionActive();
+            }
         }
 
         private void OnDrawGizmos()
@@ -46,29 +49,8 @@ namespace ProjectThief
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, m_fRange);
         }
-
-        protected override void OnMouseOver()
-        {
-            if (IsActive)
-            {
-                GetMouseController.InspectCursor();
-                if (IsInteractable)
-                {
-                    GetMouseController.InteractCursor();
-                    if (Input.GetMouseButton(0))
-                    {
-                        Activated();
-                    }
-                }
-            }
-        }
-
-        protected override void OnMouseExit()
-        {
-            GetMouseController.DefaultCursor();
-        }
-
-        public void Activated()
+        
+        public void DistractionActive()
         {
             PlayAudio(m_acSound);
             Collider[] objects = Physics.OverlapSphere(transform.position, m_fRange);
@@ -86,7 +68,7 @@ namespace ProjectThief
             }
         }
 
-        public void ResetLight()
+        public void ResetSound()
         {
             m_aoSound.Stop();
             guard.Distract(this, false);
@@ -98,6 +80,22 @@ namespace ProjectThief
             m_aoSound.volume = AudioManager.instance.SFXPlayVol;
             m_aoSound.clip = clip;
             m_aoSound.Play();
+        }
+
+        protected override void Activated()
+        {
+            if (IsActive)
+            {
+                GetMouseController.InspectCursor();
+                if (IsInteractable)
+                {
+                    GetMouseController.InteractCursor();
+                    if (Input.GetMouseButton(0))
+                    {
+                        DistractionActive();
+                    }
+                }
+            }
         }
     }
 }

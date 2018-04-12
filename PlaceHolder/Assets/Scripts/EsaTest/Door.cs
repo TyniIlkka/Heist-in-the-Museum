@@ -46,43 +46,10 @@ namespace ProjectThief
             m_aoSource.volume = AudioManager.instance.SFXPlayVol;
         }
 
-        /// <summary>
-        /// Detects if mouse is over an object.
-        /// </summary>
-        protected override void OnMouseOver()
-        {            
-            if (IsActive)
-            {
-                GetMouseController.InspectCursor();
-
-                if (!m_bIsBlocked)
-                { 
-                    if (IsInteractable)
-                    {
-                        GetMouseController.EnterCursor();
-                        if (!m_bIsOpen)
-                        {
-                            if (Input.GetMouseButtonDown(0) && !m_bOpened)
-                            {
-                                DoorOpenSound();
-                                m_bOpened = true;                                
-                            }
-                        }
-                        else if (GameManager.instance.levelController.Cleared)
-                        {
-                            if (Input.GetMouseButtonDown(0) && !m_bOpened)
-                            {
-                                DoorOpenSound();
-                                m_bOpened = true;                                
-                            }
-                        }
-                    }
-                }
-            }             
-        }
-
-        private void Update()
+        protected override void Update()
         {
+            base.Update();
+
             if (m_bOpened)
             {
                 if (!m_aoSource.isPlaying)
@@ -93,11 +60,6 @@ namespace ProjectThief
             }
         }
 
-        protected override void OnMouseExit()
-        {
-            GetMouseController.DefaultCursor();
-        }
-
         public void ObstacleSound()
         {            
             m_aoSource.PlayOneShot(m_acUnlock);
@@ -106,6 +68,38 @@ namespace ProjectThief
         private void DoorOpenSound()
         {
             m_aoSource.PlayOneShot(m_acOpen);
+        }
+
+        protected override void Activated()
+        {
+            if (IsActive)
+            {
+                GetMouseController.InspectCursor();
+
+                if (!m_bIsBlocked)
+                {
+                    if (IsInteractable)
+                    {
+                        GetMouseController.EnterCursor();
+                        if (!m_bIsOpen)
+                        {
+                            if (Input.GetMouseButtonDown(0) && !m_bOpened)
+                            {
+                                DoorOpenSound();
+                                m_bOpened = true;
+                            }
+                        }
+                        else if (GameManager.instance.levelController.Cleared)
+                        {
+                            if (Input.GetMouseButtonDown(0) && !m_bOpened)
+                            {
+                                DoorOpenSound();
+                                m_bOpened = true;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

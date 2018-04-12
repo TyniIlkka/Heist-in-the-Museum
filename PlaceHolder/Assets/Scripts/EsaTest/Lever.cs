@@ -51,16 +51,20 @@ namespace ProjectThief
         }
 
         /// <summary>
-        /// Detects if mouse is over an object.
+        /// Resets lever's and obstacle's animation
         /// </summary>
-        protected override void OnMouseOver()
-        {            
-            // TODO Change to raycast ScreenpointTo ray.
+        public void ResetLever()
+        {
+            m_aLeverAnim.SetBool("Activated", false);
+            m_aObstacleAnim.SetBool("Open", false);
+        }
 
+        protected override void Activated()
+        {
             if (IsActive)
             {
                 GetMouseController.InspectCursor();
-                
+
                 if (IsInteractable)
                 {
                     GetMouseController.InteractCursor();
@@ -74,23 +78,9 @@ namespace ProjectThief
                         m_dDoor.Open = false;
                         m_dDoor.Blocked = false;
                         GameManager.instance.usedlevers[m_iPos] = true;
-                    }                        
+                    }
                 }
-            } 
-        }
-
-        /// <summary>
-        /// Resets lever's and obstacle's animation
-        /// </summary>
-        public void ResetLever()
-        {
-            m_aLeverAnim.SetBool("Activated", false);
-            m_aObstacleAnim.SetBool("Open", false);
-        }
-
-        protected override void OnMouseExit()
-        {
-            GetMouseController.DefaultCursor();            
+            }
         }
     }    
 }

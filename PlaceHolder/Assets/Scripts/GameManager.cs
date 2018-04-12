@@ -21,6 +21,7 @@ namespace ProjectThief
         public Transform initialSpawn;
         public GameStateBase previousState;
         public int currentPhase;
+        public LayerMask rayCastLayers;
         #endregion
         #region Lists
         [Header("Lists")]
