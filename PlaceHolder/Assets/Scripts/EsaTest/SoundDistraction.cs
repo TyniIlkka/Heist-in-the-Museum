@@ -27,7 +27,10 @@ namespace ProjectThief
         {
             m_aoSound = GetComponent<AudioSource>(); 
             m_aoSound.volume = AudioManager.instance.SFXPlayVol;            
-            m_aoSound.loop = true;            
+            m_aoSound.loop = true;
+
+            if (m_bHasIdle)
+                PlayAudio(m_acIdle);
         }
 
         private void Update()
@@ -35,9 +38,7 @@ namespace ProjectThief
             if (trigger)
             {
                 Activated();
-            }
-            if (m_bHasIdle)
-                PlayAudio(m_acIdle);
+            }            
         }
 
         private void OnDrawGizmos()
