@@ -1906,6 +1906,18 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1263802897}
   m_Script: {fileID: 11500000, guid: ab28b214c003c1e4e92f2a7819f99a0e, type: 3}
+--- !u!114 &1263802902 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114997749290359420, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
+    type: 2}
+  m_PrefabInternal: {fileID: 1263802897}
+  m_Script: {fileID: 11500000, guid: a7917b55182620a41aa837b4804d86b5, type: 3}
+--- !u!114 &1263802903 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114939489821761660, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
+    type: 2}
+  m_PrefabInternal: {fileID: 1263802897}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &1357395935
 Prefab:
   m_ObjectHideFlags: 0
@@ -2365,6 +2377,16 @@ Prefab:
       propertyPath: m_sInventory
       value: 
       objectReference: {fileID: 1263802901}
+    - target: {fileID: 114982444803844292, guid: 5ded4a7572476c348b84d678d9242b92,
+        type: 2}
+      propertyPath: m_bPauseButton
+      value: 
+      objectReference: {fileID: 1263802903}
+    - target: {fileID: 114982444803844292, guid: 5ded4a7572476c348b84d678d9242b92,
+        type: 2}
+      propertyPath: m_sMenuControlscript
+      value: 
+      objectReference: {fileID: 1263802902}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ded4a7572476c348b84d678d9242b92, type: 2}
   m_IsPrefabParent: 0

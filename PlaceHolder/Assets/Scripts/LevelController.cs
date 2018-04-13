@@ -22,22 +22,24 @@ namespace ProjectThief
         private GameObject m_goContinueText;
         [SerializeField]
         private RoomReset m_sRoomReset;
+        [SerializeField, Tooltip("Main Camera")]
+        private CameraFollow m_sCameraScript;
+        [SerializeField]
+        private Inventory m_sInventory;
+        [SerializeField]
+        private MenuControls m_sMenuControlscript;
         [SerializeField, Tooltip("Initial Spawn location")]
         private Transform m_tInitialSpawn;
         [SerializeField, Tooltip("Scenes Doors")]
         private List<Door> m_lDoors;
         [SerializeField, Tooltip("Room position in list (starts from 0)")]
-        private int m_iPos;
-        [SerializeField, Tooltip("Main Camera")]
-        private CameraFollow m_sCameraScript;
+        private int m_iPos;        
         [SerializeField, Tooltip("Camera's distance from player")]
         private float m_fDist = 7f;
         [SerializeField, Tooltip("Camera's angle in room")]
         private float m_fAngle = 0;
         [SerializeField, Tooltip("Items neede to collect to advance into next phase")]
-        private List<Item> m_lKeyItems;        
-        [SerializeField]
-        private Inventory m_sInventory;
+        private List<Item> m_lKeyItems;         
         [SerializeField]
         private bool m_bCanBeCleared;
 
@@ -45,6 +47,7 @@ namespace ProjectThief
         private Quaternion m_qSpawnRotation;
         private bool m_bJustCleared;
         private bool m_bIsCleared;
+        private bool m_bPaused;
         private float m_fDelay = 0;
 
         public bool JustCleared { get { return m_bJustCleared; } }
@@ -98,9 +101,25 @@ namespace ProjectThief
             }            
 
             MouseOverUICheck();
+            if (GameManager.instance.infoShown)
+            {
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    if (!m_bPaused)
+                    {
+                        m_sMenuControlscript.Pause();
+                        m_bPaused = true;
+                    }
+                    else
+                    {
+                        m_sMenuControlscript.Continue();
+                        m_bPaused = false;
+                    }
+                }
 
-            if (!m_bIsCleared && m_bCanBeCleared)
-                CheckKeyItems();            
+                if (!m_bIsCleared && m_bCanBeCleared)
+                    CheckKeyItems();
+            }
         }
 
         /// <summary>
