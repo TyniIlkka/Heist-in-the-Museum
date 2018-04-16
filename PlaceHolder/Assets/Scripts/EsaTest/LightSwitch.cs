@@ -20,8 +20,22 @@ namespace ProjectThief
             m_aoSource.volume = AudioManager.instance.SFXPlayVol;
         }
 
-        protected override void OnMouseOver()
-        {            
+        public void ResetLights()
+        {
+            for (int i = 0; i < m_lLights.Count; i++)
+            {
+                m_lLights[i].ResetLight();
+            }
+        }
+
+        private void PlayEffect()
+        {
+            m_aoSource.volume = AudioManager.instance.SFXPlayVol;            
+            m_aoSource.PlayOneShot(m_acUseSFX);
+        }
+
+        protected override void Activated()
+        {
             if (IsActive)
             {
                 GetMouseController.InspectCursor();
@@ -41,25 +55,6 @@ namespace ProjectThief
                     }
                 }
             }
-        }
-
-        protected override void OnMouseExit()
-        {
-            GetMouseController.DefaultCursor();
-        }
-
-        public void ResetLights()
-        {
-            for (int i = 0; i < m_lLights.Count; i++)
-            {
-                m_lLights[i].ResetLight();
-            }
-        }
-
-        private void PlayEffect()
-        {
-            m_aoSource.volume = AudioManager.instance.SFXPlayVol;            
-            m_aoSource.PlayOneShot(m_acUseSFX);
         }
     }
 }

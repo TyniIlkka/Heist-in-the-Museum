@@ -43,7 +43,7 @@ namespace ProjectThief
         [SerializeField]
         private GameObject m_goPlan;
 
-        private AudioManager m_amAudioManager;
+        private AudioManager m_amAudioManager;        
 
         private void Awake()
         {

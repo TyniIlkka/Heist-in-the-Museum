@@ -51,50 +51,6 @@ namespace ProjectThief
         }
 
         /// <summary>
-        /// Detects if mouse is over an object.
-        /// </summary>
-        protected override void OnMouseOver()
-        {            
-            if (IsActive)
-            {
-                GetMouseController.InspectCursor();
-                if (!m_bBroken)
-                {
-                    if (IsInteractable)
-                    {
-                        GetMouseController.InteractCursor();
-                        if (Input.GetMouseButtonDown(0))
-                        {                            
-                            m_aLeverAnim.SetBool("Activated", true);
-                            m_aObstacleAnim.SetBool("Open", true);
-                            m_dDoor.ObstacleSound();
-                            m_dDoor.Open = false;
-                            m_dDoor.Blocked = false;
-                            GameManager.instance.usedlevers[m_iPos] = true;
-                        }                        
-                    }
-                }
-                else
-                {
-                    if (IsInteractable)
-                    {     
-                        // Show ghost image.
-                        if (m_itNeededItem.Collected)
-                        {
-                            GetMouseController.InteractCursor();
-                            if (Input.GetMouseButton(0))
-                            {                                
-                                m_iInventory.RemoveItem(m_itNeededItem);
-                                m_goHandle.SetActive(true);                                
-                                m_bBroken = false;                                
-                            }                            
-                        }                        
-                    }
-                }
-            } 
-        }
-
-        /// <summary>
         /// Resets lever's and obstacle's animation
         /// </summary>
         public void ResetLever()
@@ -103,9 +59,28 @@ namespace ProjectThief
             m_aObstacleAnim.SetBool("Open", false);
         }
 
-        protected override void OnMouseExit()
+        protected override void Activated()
         {
-            GetMouseController.DefaultCursor();            
+            if (IsActive)
+            {
+                GetMouseController.InspectCursor();
+
+                if (IsInteractable)
+                {
+                    GetMouseController.InteractCursor();
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        m_iInventory.RemoveItem(m_itNeededItem);
+                        m_goHandle.SetActive(true);
+                        m_aLeverAnim.SetBool("Activated", true);
+                        m_aObstacleAnim.SetBool("Open", true);
+                        m_dDoor.ObstacleSound();
+                        m_dDoor.Open = false;
+                        m_dDoor.Blocked = false;
+                        GameManager.instance.usedlevers[m_iPos] = true;
+                    }
+                }
+            }
         }
     }    
 }

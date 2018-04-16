@@ -32,34 +32,26 @@ namespace ProjectThief
                 m_bCollected = true;
                 gameObject.SetActive(false);
             }
-        }        
+        }
 
-        /// <summary>
-        /// Detects if mouse is over an object.
-        /// </summary>
-        protected override void OnMouseOver()
-        {            
+        protected override void Activated()
+        {
             if (IsActive)
             {
                 GetMouseController.InspectCursor();
-                if (IsInteractable) 
+                if (IsInteractable)
                 {
                     GetMouseController.InteractCursor();
                     if (Input.GetMouseButtonDown(0))
-                    {                        
+                    {
                         m_bCollected = true;
                         m_iInventory.AddItem(this);
                         gameObject.SetActive(false);
                         GameManager.instance.refItems[RefPos].Collected = true;
                         GetMouseController.DefaultCursor();
-                    }                    
-                }                
-            }           
-        }
-
-        protected override void OnMouseExit()
-        {
-            GetMouseController.DefaultCursor();
+                    }
+                }
+            }
         }
     }
 }
