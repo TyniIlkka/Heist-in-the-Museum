@@ -430,7 +430,7 @@ namespace ProjectThief {
         void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.white;
-            Gizmos.DrawWireSphere(transform.position, m_fMinDetectionRange);
+            //Gizmos.DrawWireSphere(transform.position, m_fMinDetectionRange);
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, m_fMaxDetectionRange);
             //Gizmos.DrawWireSphere(transform.position, LightDetectDistance);
