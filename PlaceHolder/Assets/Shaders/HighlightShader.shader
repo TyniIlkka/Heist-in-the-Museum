@@ -5,6 +5,7 @@ Shader "Unlit/HighlightShader"
 	{
 		_OutlineColor ("Outline Color", Color) = (0,0,0,1)
 		_Outline ("Outline width", Range (0.0, 0.3)) = .005
+		_OutLineScale ("Outlines scale", Range (0, 1)) = 1
 	}
  
 	CGINCLUDE
@@ -21,6 +22,7 @@ Shader "Unlit/HighlightShader"
 	};
  
 	uniform float _Outline;
+	uniform float _OutLineScale;
 	uniform float4 _OutlineColor;
  
 	v2f vert(appdata v) 
@@ -32,7 +34,7 @@ Shader "Unlit/HighlightShader"
 		float3 norm   = mul ((float3x3)UNITY_MATRIX_IT_MV, v.normal);
 		float2 offset = TransformViewToProjection(norm.xy);
  
-		o.pos.xy += offset * o.pos.z * _Outline;
+		o.pos.xy += (offset * o.pos.z * _Outline) * _OutLineScale;
 		o.color = _OutlineColor;
 		return o;
 	}
