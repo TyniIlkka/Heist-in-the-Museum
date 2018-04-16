@@ -7,21 +7,21 @@ Shader "Unlit/HighlightShader"
 		_Outline ("Outline width", Range (0.0, 0.3)) = .005
 	}
  
-CGINCLUDE
-#include "UnityCG.cginc"
+	CGINCLUDE
+	#include "UnityCG.cginc"
  
-struct appdata {
-	float4 vertex : POSITION;
-	float3 normal : NORMAL;
-};
+	struct appdata {
+		float4 vertex : POSITION;
+		float3 normal : NORMAL;
+	};
  
-struct v2f {
-	float4 pos : POSITION;
-	float4 color : COLOR;
-};
+	struct v2f {
+		float4 pos : POSITION;
+		float4 color : COLOR;
+	};
  
-uniform float _Outline;
-uniform float4 _OutlineColor;
+	uniform float _Outline;
+	uniform float4 _OutlineColor;
  
 	v2f vert(appdata v) 
 	{
