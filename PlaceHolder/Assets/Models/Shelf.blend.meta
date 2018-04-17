@@ -14,6 +14,8 @@ ModelImporter:
     400004: Ovi
     400006: //RootNode
     2100000: Wood__woodpaneltexture_png
+    2100002: Glass
+    2100004: Texture
     2300000: Hyllyt
     2300002: Kehys
     2300004: Ovi
@@ -31,6 +33,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Drawers__woodlockerstexture_png
     second: {fileID: 2100000, guid: 1bcd822481553044dad8db339a447c28, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass
+    second: {fileID: 2100000, guid: 40b70645afa09554e8f7587467c10146, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

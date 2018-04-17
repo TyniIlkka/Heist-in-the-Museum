@@ -51,6 +51,7 @@ namespace ProjectThief
                         GameManager.instance.refItems[5].Collected = false;
                         GameManager.instance.refItems[9].Collected = false;
                         GameManager.instance.openedVitrines[1] = false;
+                        GameManager.instance.keyItems[1].Collected = false;
 
                         if (inventory.InventoryItems.Contains(GameManager.instance.refItems[2]))
                             inventory.RemoveItem(GameManager.instance.refItems[2]);
@@ -70,7 +71,7 @@ namespace ProjectThief
                 }
             }
             else if (currentState.SceneName == "Room2")
-            {
+            {                
                 switch (GameManager.instance.currentPhase)
                 {
                     case 2:
@@ -78,13 +79,14 @@ namespace ProjectThief
                         GameManager.instance.refItems[6].Collected = false;
                         GameManager.instance.refItems[10].Collected = false;
                         GameManager.instance.openedVitrines[2] = false;
+                        GameManager.instance.keyItems[2].Collected = false;
 
                         if (inventory.InventoryItems.Contains(GameManager.instance.refItems[3]))
                             inventory.RemoveItem(GameManager.instance.refItems[3]);
                         if (inventory.InventoryItems.Contains(GameManager.instance.refItems[6]))
                             inventory.RemoveItem(GameManager.instance.refItems[6]);
                         if (inventory.InventoryItems.Contains(GameManager.instance.refItems[10]))
-                            inventory.RemoveItem(GameManager.instance.refItems[10]);
+                            inventory.RemoveItem(GameManager.instance.refItems[10]);                        
                         break;
 
                     default:

@@ -14,6 +14,7 @@ namespace ProjectThief
         public bool trigger;
         private bool m_bIsActive;
         Guard guard;
+        Collider[] objects;
 
         public bool IsActive { get { return m_bIsActive; } set { m_bIsActive = value; } }
 
@@ -35,7 +36,7 @@ namespace ProjectThief
         {            
             m_goLight.SetActive(true);
             m_bIsActive = true;
-            Collider[] objects = Physics.OverlapSphere(transform.position, m_fRange);
+            objects = Physics.OverlapSphere(transform.position, m_fRange);
 
             if (objects.Length > 0)
             {
@@ -54,7 +55,16 @@ namespace ProjectThief
         {
             m_goLight.SetActive(false);
             m_bIsActive = false;
-            guard.Distract(this, false);
+            //guard.Distract(this, false);
+
+            foreach (Collider item in objects)
+            {
+                guard = item.GetComponent<Guard>();
+                if (guard != null)
+                {
+                    guard.Distract(this, false);
+                }
+            }
         }
     }
 }

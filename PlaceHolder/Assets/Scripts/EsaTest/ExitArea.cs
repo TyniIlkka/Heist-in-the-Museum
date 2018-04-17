@@ -7,7 +7,7 @@ namespace ProjectThief
         [SerializeField, Tooltip("Treasure pos in ref list")]
         private int m_iPos = 12;
 
-        protected override void OnMouseOver()
+        protected override void Activated()
         {
             if (IsActive)
             {
@@ -24,10 +24,5 @@ namespace ProjectThief
                 }
             }
         }
-
-        protected override void OnMouseExit()
-        {
-            GetMouseController.DefaultCursor();
-        }        
     }
 }

@@ -63,7 +63,7 @@ namespace ProjectThief {
         [SerializeField]
         private LayerMask m_lmLightMask;
 
-        private bool m_bDistracted;
+        public bool m_bDistracted;
 
 
         #endregion
@@ -99,7 +99,9 @@ namespace ProjectThief {
         [SerializeField, Range(0,20), Tooltip("How far guard detect on facing direction.")]
         private float m_fMaxDetectionRange;
         [SerializeField, Range(0, 10), Tooltip("How close guard detect to every direction.")]
-        private float m_fMinDetectionRange;
+        private float m_fMinDetectionRangeWalk;
+        [SerializeField, Range(0, 10), Tooltip("How close guard detect to every direction.")]
+        private float m_fMinDetectionRangeSneak;
 
         [SerializeField, Range(0, 90), Tooltip("FieldOfView of guard.")]
         private float m_fFieldOfView;
@@ -145,6 +147,12 @@ namespace ProjectThief {
         {
             get { return _path; }
             set { _path = value; }
+        }
+
+        public Player Thief
+        {
+            get { return player; }
+            set { player = value; }
         }
 
 
@@ -199,17 +207,18 @@ namespace ProjectThief {
 
         public override void Init()
         {
+            Debug.Log("Init Guard");
             // Runs the base classes implementation of the Init method.
             base.Init();
             guardMover = GetComponent<GuardMover>();
             // Initializes the state system.
-            InitStates();
+            // InitStates();
         }
 
         /// <summary>
         /// Init States.
         /// </summary>
-        private void InitStates()
+        public void InitStates()
         {
             patrol = new Patrol(this, _path, _direction, _waypointArriveDistance);
             _states.Add(patrol);
@@ -275,19 +284,19 @@ namespace ProjectThief {
 
         private void Update()
         {
-            CurrentState.Update();           
+            if (CurrentState != null)
+            {
+                CurrentState.Update();
+            }                   
         }
 
         private void FixedUpdate()
         {
-            CanSeePlayer();
             if (CanSeePlayer())
             {
                 Debug.Log("GameLost");
                 GameManager.instance.levelController.PlayerFound();
             }
-            Debug.DrawLine(transform.forward, m_vDirection * m_fMaxDetectionRange, Color.blue);
-
         }
 
         /// <summary>
@@ -351,14 +360,27 @@ namespace ProjectThief {
         public bool CanSeePlayer()
         {
             RaycastHit hit;
-            Vector3 rayDirection = player.transform.position - transform.position;
+            Vector3 rayDirection = transform.position;
+
             if (Physics.Raycast(transform.position, rayDirection, out hit, m_fMaxDetectionRange))
             {
-                if ((hit.collider.gameObject.GetComponent<Player>() != null) && (hit.distance <= m_fMinDetectionRange))
+                if (player.GetComponent<GridPlayer>().m_fMoveSpeed > player.GetComponent<GridPlayer>().m_fSneakSpeed)
                 {
-                    Debug.Log("Player too close guard");
-                    return true;
+                    if (hit.distance < m_fMinDetectionRangeSneak)
+                    {
+
+
+                    }
                 }
+            }
+            
+            if (Physics.Raycast(transform.position, rayDirection, out hit, m_fMaxDetectionRange))
+            {
+                //if ((hit.collider.gameObject.GetComponent<Player>() != null) && (hit.distance <= m_fMinDetectionRange))
+                //{
+                //    Debug.Log("Player too close guard");
+                //    return true;
+                //}
             }
 
             if ((Vector3.Angle(rayDirection, transform.forward)) <= m_fFieldOfView * 0.5f)
@@ -369,7 +391,7 @@ namespace ProjectThief {
                     {
                         
                         Debug.DrawLine(transform.position, hit.point, Color.red);
-                        Debug.Log(hit);
+                        Debug.Log("Player spotted: " + hit);
                         return true;
                     }
                     else
@@ -407,8 +429,11 @@ namespace ProjectThief {
         }
         void OnDrawGizmosSelected()
         {
+            Gizmos.color = Color.white;
+            //Gizmos.DrawWireSphere(transform.position, m_fMinDetectionRange);
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, LightDetectDistance);
+            Gizmos.DrawWireSphere(transform.position, m_fMaxDetectionRange);
+            //Gizmos.DrawWireSphere(transform.position, LightDetectDistance);
         }
     }
 }

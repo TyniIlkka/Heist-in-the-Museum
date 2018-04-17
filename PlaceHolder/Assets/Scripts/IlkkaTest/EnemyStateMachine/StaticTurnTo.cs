@@ -38,7 +38,7 @@ namespace ProjectThief.AI
             if (!Owner.Distracted)
             {
                 Debug.Log("Hämätty");
-                bool result = Owner.PerformTransition(AIStateType.StaticTurnTo);
+                bool result = Owner.PerformTransition(AIStateType.Static);
                 return result;
             }
             return false;

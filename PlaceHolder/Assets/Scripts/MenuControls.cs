@@ -43,7 +43,7 @@ namespace ProjectThief
         [SerializeField]
         private GameObject m_goPlan;
 
-        private AudioManager m_amAudioManager;
+        private AudioManager m_amAudioManager;        
 
         private void Awake()
         {
@@ -57,7 +57,8 @@ namespace ProjectThief
         public void NewGame()
         {
             GameManager.instance.firstSpawn = true;
-            GameManager.instance.infoShown = false;            
+            GameManager.instance.infoShown = false;
+            GameManager.instance.previousState = GameStateController.CurrentState;
             GameStateController.PerformTransition(_nextState);
         }
 
@@ -162,6 +163,13 @@ namespace ProjectThief
         {
             m_goExitConfirm.SetActive(false);
             m_goPauseMenu.SetActive(true);
-        }        
+        } 
+        
+        public void LoadCheckpoint()
+        {            
+            GameManager.instance.levelController.RoomReset.ResetRoom();
+            GameStateType resetState = GameStateController.CurrentState.StateType;            
+            GameStateController.PerformTransition(resetState);
+        }
     }
 }

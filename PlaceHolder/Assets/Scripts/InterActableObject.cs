@@ -46,12 +46,16 @@ namespace ProjectThief
             }
 
             Debug.Log("Vitrine used? " + m_bLocked);
-        }        
+        }
+        
+        private void PlayAudio(AudioClip clip)
+        {
+            m_aoSource.clip = clip;
+            m_aoSource.volume = AudioManager.instance.SFXPlayVol;
+            m_aoSource.Play();
+        }
 
-        /// <summary>
-        /// Detects if mouse is over an object.
-        /// </summary>
-        protected override void OnMouseOver()
+        protected override void Activated()
         {
             if (!GameManager.instance.openedVitrines[m_iListPos])
             {
@@ -60,13 +64,11 @@ namespace ProjectThief
                     GetMouseController.InspectCursor();
                     if (!m_bLocked)
                     {
-
                         if (IsInteractable)
                         {
                             GetMouseController.InteractCursor();
                             if (Input.GetMouseButtonDown(0))
                             {
-                                Debug.Log("Key taken");
                                 PlayAudio(m_acOpen);
                                 m_aAnimator.SetBool("Open", true);
                                 m_iInventory.AddItem(m_itKey);
@@ -94,25 +96,13 @@ namespace ProjectThief
                             }
                         }
                     }
-                    
+
                 }
             }
             else
             {
                 GetMouseController.DefaultCursor();
             }
-        }
-
-        protected override void OnMouseExit()
-        {
-            GetMouseController.DefaultCursor();
-        }   
-        
-        private void PlayAudio(AudioClip clip)
-        {
-            m_aoSource.clip = clip;
-            m_aoSource.volume = AudioManager.instance.SFXPlayVol;
-            m_aoSource.Play();
         }
     }
 }

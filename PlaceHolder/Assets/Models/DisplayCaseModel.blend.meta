@@ -18,6 +18,9 @@ ModelImporter:
     2100000: IronMaterial__Wood
     2100002: MetalMaterial__Wood
     2100004: WoodMaterial__woodtexture_png
+    2100006: Cushion__chairtexture_png
+    2100008: WoodMaterial
+    2100010: Panels__woodpaneltexture_png
     2300000: Base
     2300002: Cover
     2300004: Joint
@@ -33,6 +36,11 @@ ModelImporter:
     7400000: Default Take
     9500000: //RootNode
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cushion__chairtexture_png
+    second: {fileID: 2100000, guid: 55bce9bde14cb4f4abe405367c3ceca0, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -53,6 +61,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: MetalMaterial__Wood
     second: {fileID: 2100000, guid: 019b31e9dc28f2e42a62f470a1fc0532, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Panels__woodpaneltexture_png
+    second: {fileID: 2100000, guid: 1bcd822481553044dad8db339a447c28, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

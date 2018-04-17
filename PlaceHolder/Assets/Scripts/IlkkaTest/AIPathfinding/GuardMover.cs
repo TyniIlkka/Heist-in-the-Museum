@@ -58,6 +58,12 @@ namespace ProjectThief.PathFinding
             {
                 moving = false;
             }
+
+            if (Path.Count > 0)
+            {
+
+                owner.Animation.SetBool("Moving",true);
+            }
         }
 
         IEnumerator NewPath()

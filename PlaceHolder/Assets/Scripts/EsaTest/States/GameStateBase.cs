@@ -47,10 +47,7 @@ namespace ProjectThief.States
 
         public virtual void Activate()
         {
-            if (SceneManager.GetActiveScene().name != SceneName)
-            {
-                SceneManager.LoadScene(SceneName);
-            }
+            SceneManager.LoadScene(SceneName);
         }
 
         public virtual void Deactivate() { }

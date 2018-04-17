@@ -6,9 +6,16 @@ using ProjectThief.PathFinding;
 namespace ProjectThief
 {
     public class Player : CharacterBase
-    { 
+    {
         private Animator m_aPlayerAnimator;
         public List<Vector3> Path = new List<Vector3>();
+
+        private float speed;
+
+        public float Speed()
+        {
+            return speed;
+        }
 
         public override void Init()
         {

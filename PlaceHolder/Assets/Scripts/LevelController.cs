@@ -20,22 +20,26 @@ namespace ProjectThief
         private Button m_bPauseButton;
         [SerializeField]
         private GameObject m_goContinueText;
+        [SerializeField]
+        private RoomReset m_sRoomReset;
+        [SerializeField, Tooltip("Main Camera")]
+        private CameraFollow m_sCameraScript;
+        [SerializeField]
+        private Inventory m_sInventory;
+        [SerializeField]
+        private MenuControls m_sMenuControlscript;
         [SerializeField, Tooltip("Initial Spawn location")]
         private Transform m_tInitialSpawn;
         [SerializeField, Tooltip("Scenes Doors")]
         private List<Door> m_lDoors;
         [SerializeField, Tooltip("Room position in list (starts from 0)")]
-        private int m_iPos;
-        [SerializeField, Tooltip("Main Camera")]
-        private CameraFollow m_sCameraScript;
+        private int m_iPos;        
         [SerializeField, Tooltip("Camera's distance from player")]
         private float m_fDist = 7f;
         [SerializeField, Tooltip("Camera's angle in room")]
         private float m_fAngle = 0;
         [SerializeField, Tooltip("Items neede to collect to advance into next phase")]
-        private List<Item> m_lKeyItems;        
-        [SerializeField]
-        private Inventory m_sInventory;
+        private List<Item> m_lKeyItems;         
         [SerializeField]
         private bool m_bCanBeCleared;
 
@@ -43,17 +47,21 @@ namespace ProjectThief
         private Quaternion m_qSpawnRotation;
         private bool m_bJustCleared;
         private bool m_bIsCleared;
+        private bool m_bPaused;
         private float m_fDelay = 0;
 
         public bool JustCleared { get { return m_bJustCleared; } }
         public int ListPos { get { return m_iPos; } }
         public bool Cleared { get { return m_bIsCleared; } set { m_bIsCleared = value; } }
         public Inventory Inventory { get { return m_sInventory; } }
+        public RoomReset RoomReset { get { return m_sRoomReset; } }
 
         private void Awake()
         {
             if (m_sInventory == null)
                 m_sInventory = FindObjectOfType<Inventory>();
+            if (m_sRoomReset == null)
+                m_sRoomReset = GetComponent<RoomReset>();
 
             if (m_bCanBeCleared)
             {
@@ -65,8 +73,7 @@ namespace ProjectThief
                 m_bIsCleared = true;
             }
 
-            m_bJustCleared = false;
-            Debug.Log("Current state: " + GameStateController.CurrentState);
+            m_bJustCleared = false;            
             m_sCameraScript.Distance = m_fDist;
             m_sCameraScript.Angle = m_fAngle;
 
@@ -75,7 +82,13 @@ namespace ProjectThief
             GameManager.instance.player = SpawnPlayer();               
 
             if (!GameManager.instance.infoShown)
-                Intro();            
+                Intro();     
+            else
+            {
+                GameManager.instance.canMove = true;
+                Time.timeScale = 1f;
+                m_goDefeat.SetActive(false);
+            }
         }
 
         // Update is called once per frame
@@ -87,27 +100,44 @@ namespace ProjectThief
                 m_fDelay += 0.02f;
             }            
 
-            MouseOverHudCheck();
+            MouseOverUICheck();
+            if (GameManager.instance.infoShown)
+            {
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    if (!m_bPaused)
+                    {
+                        m_sMenuControlscript.Pause();
+                        m_bPaused = true;
+                    }
+                    else
+                    {
+                        m_sMenuControlscript.Continue();
+                        m_bPaused = false;
+                    }
+                }
 
-            if (!m_bIsCleared && m_bCanBeCleared)
-                CheckKeyItems();
-
-            Debug.Log("phase: " + GameManager.instance.currentPhase);
+                if (!m_bIsCleared && m_bCanBeCleared)
+                    CheckKeyItems();
+            }
         }
 
         /// <summary>
-        /// Checks if mouse is over hud.
+        /// Checks if mouse is over an ui element.
         /// </summary>
-        private void MouseOverHudCheck()
+        private void MouseOverUICheck()
         {
             if (EventSystem.current.IsPointerOverGameObject())
             {
+                
                 m_mcController.DefaultCursor();
                 GameManager.instance.canMove = false;
+                GameManager.instance.mouseOverUI = true;
             }
             else
             {
                 GameManager.instance.canMove = true;
+                GameManager.instance.mouseOverUI = false;
             }
         }
 
@@ -222,8 +252,11 @@ namespace ProjectThief
                 else if (GameManager.instance.previousState.SceneName == "Room2")
                     result = m_lDoors[2].SpawnPoint.position;
 
+                else if (GameManager.instance.previousState.SceneName == "MainMenu")
+                    result = m_tInitialSpawn.position;
+
                 else
-                    Debug.LogError("ERROR Spawnpoint Not Found!");
+                    Debug.LogError("ERROR Spawnpoint Not Found! ");                
             }
             else if (GameStateController.CurrentState.SceneName == "Room1")
             {
@@ -256,6 +289,9 @@ namespace ProjectThief
 
                 else if (GameManager.instance.previousState.SceneName == "Room2")
                     result = m_lDoors[2].SpawnPoint.rotation;
+
+                else if (GameManager.instance.previousState.SceneName == "MainMenu")
+                    result = m_tInitialSpawn.rotation;
 
                 else
                     Debug.LogError("ERROR Spawnpoint Not Found!");

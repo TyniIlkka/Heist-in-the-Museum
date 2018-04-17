@@ -17,10 +17,12 @@ namespace ProjectThief
         public bool canMove;
         public bool infoShown;
         public bool firstSpawn;
+        public bool mouseOverUI;
         public Transform spawnPoint;
         public Transform initialSpawn;
         public GameStateBase previousState;
         public int currentPhase;
+        public LayerMask rayCastLayers;        
         #endregion
         #region Lists
         [Header("Lists")]
