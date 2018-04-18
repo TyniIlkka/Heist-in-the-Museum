@@ -9,7 +9,6 @@ namespace ProjectThief.PathFinding
     {
 
         public Guard owner;
-        private CharacterController controller;
         private bool newPath = true;
         private bool moving = false;
 

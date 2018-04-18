@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ProjectThief.States;
 using ProjectThief.WaypointSystem;
+using ProjectThief.PathFinding;
 
 namespace ProjectThief
 {
@@ -190,6 +191,7 @@ namespace ProjectThief
         {
             GameObject guardObject = Instantiate(m_oGuard, pos, rotation);
             Guard guard = guardObject.GetComponent<Guard>();
+            guard.GuardMover = guard.GetComponent<GuardMover>();
             guard.Path = pathList[pathListPosition];
             guard.CurrentDirection = staticPoints[staticListPosition].CurrentDir;
             guard.CurrentWaypoint = pathList[pathListPosition].Waypoints[0];

@@ -29,6 +29,9 @@ namespace ProjectThief {
         [SerializeField]
         private Player player;
 
+        Vector3 transformForward;
+        Vector3 startVec;
+
         #region States
         Patrol patrol;
         PatrolMoveTo patrolMoveTo;
@@ -54,7 +57,7 @@ namespace ProjectThief {
         [SerializeField]
         private float m_fWaitTime;
 
-        private GuardMover guardMover;
+        public GuardMover guardMover;
 
         #region StaticGuard
         [Header("StaticGuard")]
@@ -141,6 +144,12 @@ namespace ProjectThief {
             get { return m_bMoving; }
             set { m_bMoving = value; }
         }
+        public GuardMover GuardMover
+        {
+            get { return guardMover; }
+            set { guardMover = value; }
+        }
+
         public Waypoint CurrentWaypoint { get; set; }
 
         public PathPoints Path
@@ -213,6 +222,12 @@ namespace ProjectThief {
             guardMover = GetComponent<GuardMover>();
             // Initializes the state system.
             // InitStates();
+
+            transformForward = transform.forward;
+            transformForward.y += 0.5f;
+
+            startVec = transform.position;
+            startVec.y += 0.5f;
         }
 
         /// <summary>
@@ -226,8 +241,9 @@ namespace ProjectThief {
             patrolMoveTo = new PatrolMoveTo(this, guardMover);
             _states.Add(patrolMoveTo);
 
-            patrolMoveFrom = new PatrolMoveFrom(this,guardMover);
-            _states.Add(patrolMoveFrom);
+            //Not used
+            //patrolMoveFrom = new PatrolMoveFrom(this,guardMover);
+            //_states.Add(patrolMoveFrom);
 
             guardStatic = new Static(this, CurrentDirection);
             _states.Add(guardStatic);
@@ -359,46 +375,39 @@ namespace ProjectThief {
         /// <returns>Returns true if player is seen, otherwise false.</returns>
         public bool CanSeePlayer()
         {
+            //Close range detection
+            float distanceToPlayer = (transform.position - Thief.transform.position).sqrMagnitude; 
+
+            if ((distanceToPlayer <= m_fMinDetectionRangeWalk ) && (Thief.GetComponent<GridPlayer>().m_fMoveSpeed >= Thief.GetComponent<GridPlayer>().m_fSneakSpeed) ||
+                (distanceToPlayer <= m_fMinDetectionRangeSneak) && (Thief.GetComponent<GridPlayer>().m_fMoveSpeed <= Thief.GetComponent<GridPlayer>().m_fSneakSpeed))
+            {
+                return true;
+            }
+
+            //Cone detection front of Guard
+            //Vector3 transformForward = transform.forward;
+            //transformForward.y += 0.5f;
+
+            //Vector3 startVec = transform.position;
+            //startVec.y += 0.5f;
+
             RaycastHit hit;
-            Vector3 rayDirection = transform.position;
-
-            if (Physics.Raycast(transform.position, rayDirection, out hit, m_fMaxDetectionRange))
+            Vector3 rayDirection = Thief.transform.position - transform.position;
+            Debug.Log(startVec);
+            Debug.Log(transformForward);
+            if (((Vector3.Angle(rayDirection, transform.forward)) < m_fFieldOfView * 0.5f) && 
+                (Physics.Raycast(transform.position, rayDirection, out hit, m_fMaxDetectionRange)))
             {
-                if (player.GetComponent<GridPlayer>().m_fMoveSpeed > player.GetComponent<GridPlayer>().m_fSneakSpeed)
+
+                
+                Debug.Log(hit.collider.gameObject);
+                if (hit.collider.gameObject == Thief)
                 {
-                    if (hit.distance < m_fMinDetectionRangeSneak)
-                    {
-
-
-                    }
+                    Debug.DrawLine(transform.position, hit.point, Color.red);
+                    Debug.Log("Player spotted: " + hit);
+                    return true;
                 }
-            }
-            
-            if (Physics.Raycast(transform.position, rayDirection, out hit, m_fMaxDetectionRange))
-            {
-                //if ((hit.collider.gameObject.GetComponent<Player>() != null) && (hit.distance <= m_fMinDetectionRange))
-                //{
-                //    Debug.Log("Player too close guard");
-                //    return true;
-                //}
-            }
-
-            if ((Vector3.Angle(rayDirection, transform.forward)) <= m_fFieldOfView * 0.5f)
-            {
-                if (Physics.Raycast(transform.position, rayDirection, out hit, m_fMaxDetectionRange))
-                {
-                    if (hit.collider.gameObject.GetComponent<Player>() != null)
-                    {
-                        
-                        Debug.DrawLine(transform.position, hit.point, Color.red);
-                        Debug.Log("Player spotted: " + hit);
-                        return true;
-                    }
-                    else
-                    {
-                        Debug.DrawLine(transform.position, hit.point, Color.green);
-                    }
-                }
+                return true;
             }
             return false;
         }
@@ -430,7 +439,9 @@ namespace ProjectThief {
         void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.white;
-            //Gizmos.DrawWireSphere(transform.position, m_fMinDetectionRange);
+            Gizmos.DrawWireSphere(transform.position, m_fMinDetectionRangeWalk);
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(transform.position, m_fMinDetectionRangeSneak);
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, m_fMaxDetectionRange);
             //Gizmos.DrawWireSphere(transform.position, LightDetectDistance);
