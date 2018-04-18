@@ -16,7 +16,8 @@ namespace ProjectThief
         private Transform m_tPlayerTransform; 
 
         public float Distance { get { return m_fDistance; } set { m_fDistance = value; } }
-        public float Angle { get { return m_fHorizontalAngle; } set { m_fHorizontalAngle = value; } }
+        public float HorizontalAngle { get { return m_fHorizontalAngle; } set { m_fHorizontalAngle = value; } }
+        public float VerticalAngle { get { return m_fVerticalAngle; } set { m_fVerticalAngle = value; } }
 
         /// <summary>
         /// Awake method for setting initial position & rotation.
