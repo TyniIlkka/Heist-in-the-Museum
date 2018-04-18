@@ -36,8 +36,10 @@ namespace ProjectThief
         private int m_iPos;        
         [SerializeField, Tooltip("Camera's distance from player")]
         private float m_fDist = 7f;
-        [SerializeField, Tooltip("Camera's angle in room")]
-        private float m_fAngle = 0;
+        [SerializeField, Tooltip("Camera's horizontal angle in room")]
+        private float m_fHorizontalAngle = 0;
+        [SerializeField, Tooltip("Camera's vertical angle in room")]
+        private float m_fVerticalAngle = 35;
         [SerializeField, Tooltip("Items neede to collect to advance into next phase")]
         private List<Item> m_lKeyItems;         
         [SerializeField]
@@ -75,7 +77,8 @@ namespace ProjectThief
 
             m_bJustCleared = false;            
             m_sCameraScript.Distance = m_fDist;
-            m_sCameraScript.Angle = m_fAngle;
+            m_sCameraScript.HorizontalAngle = m_fHorizontalAngle;
+            m_sCameraScript.VerticalAngle = m_fVerticalAngle;
 
             GameManager.instance.levelController = this;            
             m_mcController = GameManager.instance.mouseController;
