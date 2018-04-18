@@ -32,17 +32,19 @@ namespace ProjectThief.AI
             {
                 //2. Find the way to the current way point
 
-                Mover.FindPath(Owner.transform.position, Owner.TargetSound.transform.position);
+                //Mover.FindPath(Owner.transform.position, )
+
+                //Mover.FindPath(Owner.transform.position, Owner.TargetSound.transform.position);
 
 
                 //3. Move the finded way
 
                 //TODO: add animation trigger
                 //Owner.MoveAnimation(Path);
-                if (Mover.Path.Count > 0)
+                if (Path.Count > 0)
                 {
                     MoveMethod();
-                    if (Mover.Path.Count == 1 && Owner.Distracted)
+                    if (Path.Count == 1 && Owner.Distracted)
                     {
                         WaitTillMoveBack();
                         Owner.Distracted = false;
@@ -65,7 +67,7 @@ namespace ProjectThief.AI
         /// <returns>Bool result</returns>
         private bool ChangeState()
         {
-            if (Mover.Path.Count <= 0 && Owner.Distracted == false)
+            if (Path.Count <= 0 && Owner.Distracted == false)
             {
                 Debug.Log("Liikutaan pois hämäyksestä");
                 bool result = Owner.PerformTransition(AIStateType.Patrol);

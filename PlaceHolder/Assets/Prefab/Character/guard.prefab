@@ -888,16 +888,18 @@ MonoBehaviour:
   m_bMoving: 0
   m_fMovementSpeed: 5
   m_fTurnSpeed: 180
+  m_fWaitTime: 0
+  guardMover: {fileID: 0}
   m_fLightDetectDistance: 5.6
   m_lmLightMask:
     serializedVersion: 2
     m_Bits: 16384
+  m_bDistracted: 0
   m_fSoundDetectDistance: 0
   m_lmSoundMask:
     serializedVersion: 2
     m_Bits: 8192
-  _paths:
-  - {fileID: 0}
+  _path: {fileID: 0}
   _waypointArriveDistance: 0.5
   _direction: 0
   m_eDirection: 1
@@ -905,7 +907,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 768
   m_fMaxDetectionRange: 10.1
-  m_fMinDetectionRange: 0.18
+  m_fMinDetectionRangeWalk: 3
+  m_fMinDetectionRangeSneak: 1.5
   m_fFieldOfView: 58
   m_vPosition: {x: 0, y: 0, z: 0}
 --- !u!136 &136164956003477450
