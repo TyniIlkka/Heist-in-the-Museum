@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43686056, g: 0.484509, b: 0.564764, a: 1}
+  m_IndirectSpecularColor: {r: 0.43686023, g: 0.4845081, b: 0.5647633, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1499,12 +1499,12 @@ Prefab:
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 651
+      value: 538
       objectReference: {fileID: 0}
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 319
+      value: 302.5
       objectReference: {fileID: 0}
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
@@ -1586,26 +1586,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 224803340038644938, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
-        type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 339.99997
-      objectReference: {fileID: 0}
-    - target: {fileID: 224908547204256154, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
-        type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 339.99997
-      objectReference: {fileID: 0}
-    - target: {fileID: 224354230602968206, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
-        type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224330814204741702, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
-        type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -716.5154
-      objectReference: {fileID: 0}
     - target: {fileID: 224241846196181510, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.y
@@ -1621,19 +1601,35 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 95250844436681340, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
-        type: 2}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 7753537f941573f4db9c150e93ad5915, type: 2}
-    - target: {fileID: 224036943609739822, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
+    - target: {fileID: 224354230602968206, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -701.5154
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1646268083079582, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177, type: 2}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 224803340038644938, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 339.99997
+      objectReference: {fileID: 0}
+    - target: {fileID: 224908547204256154, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 339.99997
+      objectReference: {fileID: 0}
+    - target: {fileID: 224330814204741702, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -918.13947
+      objectReference: {fileID: 0}
+    - target: {fileID: 224290726879019734, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -400
+      objectReference: {fileID: 0}
+    - target: {fileID: 224290726879019734, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -918.1394
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177, type: 2}
@@ -5764,8 +5760,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_aoSound: {fileID: 1192683368}
   m_fRange: 10
-  m_acSound: {fileID: 8300000, guid: 91bed14410de92d489bb0480b94c8e98, type: 3}
-  m_acIdle: {fileID: 8300000, guid: 24b26af68a77e0140b0f75fd59841e68, type: 3}
+  m_acSound: {fileID: 8300000, guid: 24b26af68a77e0140b0f75fd59841e68, type: 3}
+  m_acIdle: {fileID: 8300000, guid: 91bed14410de92d489bb0480b94c8e98, type: 3}
   m_bHasIdle: 1
   trigger: 0
 --- !u!65 &1192683370
