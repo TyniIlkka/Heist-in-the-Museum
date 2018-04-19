@@ -9,18 +9,19 @@ namespace ProjectThief.AI
 {
     public class PatrolMoveTo : AIStateBase
     {
-        public PatrolMoveTo(Guard owner, GuardMover mover)
+        public PatrolMoveTo(Guard owner)
             : base()
         {
             State = AIStateType.PatrolMoveTo;
             Owner = owner;
-            Mover = mover;
+            
             AddTransition(AIStateType.Patrol);
         }
 
         public override void StateActivated()
         {
             base.StateActivated();
+            Mover = Owner.GetComponent<GuardMover>();
         }
 
         public override void Update()
@@ -34,7 +35,7 @@ namespace ProjectThief.AI
 
                 //Mover.FindPath(Owner.transform.position, )
 
-                //Mover.FindPath(Owner.transform.position, Owner.TargetSound.transform.position);
+                Mover.Target = Owner.TargetSound.transform.position;
 
 
                 //3. Move the finded way
@@ -48,7 +49,7 @@ namespace ProjectThief.AI
                     {
                         WaitTillMoveBack();
                         Owner.Distracted = false;
-                        Mover.FindPath(Owner.transform.position, Owner.CurrentWaypoint.Position);
+                        Mover.Target = Owner.CurrentWaypoint.transform.position;
                     }
                     
                 }

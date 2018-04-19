@@ -53,7 +53,6 @@ namespace ProjectThief.AI
             //TODO: are we close enough the current waypoint.
             if (result)
             {
-                
                 return result;
             }
             return false;

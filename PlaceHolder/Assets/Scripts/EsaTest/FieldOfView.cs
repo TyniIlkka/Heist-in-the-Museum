@@ -26,6 +26,8 @@ namespace ProjectThief
 
         private Mesh m_mViewMesh;
 
+        public Player m_pPlayerObject;
+
 
         public float ViewRad { get { return m_fViewRad; } }
         public float ViewAngle { get { return m_fViewAngle; } }
@@ -45,6 +47,8 @@ namespace ProjectThief
             {
                 m_fViewRad = GetComponentInParent<Guard>().DetectionRange;
                 m_fViewAngle = GetComponentInParent<Guard>().FieldOfView;
+                m_pPlayerObject = GetComponentInParent<Guard>().Thief;
+
             }
             else
             {
@@ -66,6 +70,10 @@ namespace ProjectThief
         {
             Init();
             DrawFieldOfView();
+            if (CanSeePlayer())
+            {
+                GameManager.instance.levelController.PlayerFound();
+            }
         }
 
         private void DrawFieldOfView()
@@ -202,6 +210,29 @@ namespace ProjectThief
                 pointA = _pointA;
                 pointB = _pointB;
             }
+        }
+
+        public bool CanSeePlayer()
+        {
+            
+            Vector3 rayDirection = (m_pPlayerObject.transform.position) - transform.position;
+            float angle = Vector3.Angle(rayDirection, transform.forward);
+            if (angle < m_fViewAngle * 0.5)
+            {
+                RaycastHit hit;
+                rayDirection += Vector3.up;
+                if (Physics.Raycast(transform.position, rayDirection.normalized, out hit, m_fViewRad))
+                {
+                    Debug.DrawRay(transform.position, rayDirection.normalized);
+                    Debug.Log(hit.collider.gameObject);
+                    if (hit.collider.gameObject.GetComponent<Player>() != null)
+                    {
+                        Debug.Log(hit.collider.gameObject);
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }

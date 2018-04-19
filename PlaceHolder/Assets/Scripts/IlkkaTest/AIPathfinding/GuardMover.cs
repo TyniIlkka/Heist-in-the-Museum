@@ -9,8 +9,15 @@ namespace ProjectThief.PathFinding
     {
 
         public Guard owner;
+        public Vector3 target;
         private bool newPath = true;
         private bool moving = false;
+
+        public Vector3 Target
+        {
+            get { return target; }
+            set { target = value; }
+        }
 
 
         void Start()
@@ -20,7 +27,7 @@ namespace ProjectThief.PathFinding
 
         void Update()
         {
-            if (Vector3.Distance(owner.transform.position, transform.position) < 25F && !moving)
+            if (Vector3.Distance(Target, transform.position) < 25F && !moving)
             {
                 if (newPath)
                 {
@@ -28,17 +35,17 @@ namespace ProjectThief.PathFinding
                 }
                 moving = true;
             }
-            else if (Vector3.Distance(owner.transform.position, transform.position) < 2F)
+            else if (Vector3.Distance(Target, transform.position) < 2F)
             {
                 //Stop!
                 owner.Animation.SetBool("Moving", false);
             }
-            else if (Vector3.Distance(owner.transform.position, transform.position) < 35F && moving)
+            else if (Vector3.Distance(Target, transform.position) < 35F && moving)
             {
                 if (Path.Count > 0)
                 {
                     
-                    if (Vector3.Distance(owner.transform.position, Path[Path.Count - 1]) > 5F)
+                    if (Vector3.Distance(Target, Path[Path.Count - 1]) > 5F)
                     {
                         StartCoroutine(NewPath());
                     }

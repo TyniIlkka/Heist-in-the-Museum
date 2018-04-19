@@ -238,7 +238,7 @@ namespace ProjectThief {
             patrol = new Patrol(this, _path, _direction, _waypointArriveDistance);
             _states.Add(patrol);
 
-            patrolMoveTo = new PatrolMoveTo(this, guardMover);
+            patrolMoveTo = new PatrolMoveTo(this);
             _states.Add(patrolMoveTo);
 
             //Not used
@@ -391,24 +391,24 @@ namespace ProjectThief {
             //Vector3 startVec = transform.position;
             //startVec.y += 0.5f;
 
-            RaycastHit hit;
-            Vector3 rayDirection = Thief.transform.position - transform.position;
-            Debug.Log(startVec);
-            Debug.Log(transformForward);
-            if (((Vector3.Angle(rayDirection, transform.forward)) < m_fFieldOfView * 0.5f) && 
-                (Physics.Raycast(transform.position, rayDirection, out hit, m_fMaxDetectionRange)))
-            {
+            //RaycastHit hit;
+            //Vector3 rayDirection = Thief.transform.position - transform.position;
+            //Debug.Log(startVec);
+            //Debug.Log(transformForward);
+            //if (((Vector3.Angle(rayDirection, transform.forward)) < m_fFieldOfView * 0.5f) && 
+            //    (Physics.Raycast(transform.position, rayDirection, out hit, m_fMaxDetectionRange)))
+            //{
 
                 
-                Debug.Log(hit.collider.gameObject);
-                if (hit.collider.gameObject == Thief)
-                {
-                    Debug.DrawLine(transform.position, hit.point, Color.red);
-                    Debug.Log("Player spotted: " + hit);
-                    return true;
-                }
-                return true;
-            }
+            //    Debug.Log(hit.collider.gameObject);
+            //    if (hit.collider.gameObject == Thief)
+            //    {
+            //        Debug.DrawLine(transform.position, hit.point, Color.red);
+            //        Debug.Log("Player spotted: " + hit);
+            //        return true;
+            //    }
+            //    //return true;
+            //}
             return false;
         }
 
@@ -445,6 +445,11 @@ namespace ProjectThief {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, m_fMaxDetectionRange);
             //Gizmos.DrawWireSphere(transform.position, LightDetectDistance);
+        }
+
+        public void FindPath(Vector3 start, Vector3 end)
+        {
+
         }
     }
 }
