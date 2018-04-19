@@ -44,6 +44,8 @@ namespace ProjectThief
         private List<Item> m_lKeyItems;         
         [SerializeField]
         private bool m_bCanBeCleared;
+        [SerializeField]
+        private float m_fInfoWait = 5f;
 
         private Vector3 m_v3SpawnPosition;        
         private Quaternion m_qSpawnRotation;
@@ -200,7 +202,7 @@ namespace ProjectThief
 
         private void IntroEnd()
         {
-            if (m_fDelay >= 5f)
+            if (m_fDelay >= m_fInfoWait)
             {
                 m_goContinueText.SetActive(true);
 
