@@ -28,7 +28,7 @@ namespace ProjectThief
             m_aoSound.loop = true;
 
             if (m_bHasIdle)
-                PlayAudio(m_acIdle);
+                PlayAudio(m_acIdle, true);
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace ProjectThief
         
         public void DistractionActive()
         {
-            PlayAudio(m_acSound);
+            PlayAudio(m_acSound, false);
             Collider[] objects = Physics.OverlapSphere(transform.position, m_fRange);
 
             if (objects.Length > 0)
@@ -79,11 +79,18 @@ namespace ProjectThief
             
         }
 
-        public void PlayAudio(AudioClip clip)
+        public void PlayAudio(AudioClip clip, bool isIdle)
         {
             m_aoSound.volume = AudioManager.instance.SFXPlayVol;
-            m_aoSound.clip = clip;
-            m_aoSound.Play();
+            if (!isIdle)
+            {                
+                m_aoSound.PlayOneShot(clip);
+            }
+            else
+            {
+                m_aoSound.clip = clip;
+                m_aoSound.Play();
+            }
         }
 
         protected override void Activated()
