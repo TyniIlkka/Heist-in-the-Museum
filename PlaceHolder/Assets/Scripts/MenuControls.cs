@@ -113,7 +113,7 @@ namespace ProjectThief
             m_goPausePlan.SetActive(true);
             m_goPauseMenuBg.SetActive(true);
             m_goPauseMenu.SetActive(true);
-            m_bPauseButton.interactable = false;
+            //m_bPauseButton.interactable = false;
             GameManager.instance.canMove = false;
             Time.timeScale = 0f;            
         }
@@ -123,7 +123,7 @@ namespace ProjectThief
             m_goPausePlan.SetActive(false);
             m_goPauseMenuBg.SetActive(false);
             m_goPauseMenu.SetActive(false);            
-            m_bPauseButton.interactable = true;
+            //m_bPauseButton.interactable = true;
             GameManager.instance.canMove = true;
             Time.timeScale = 1f;
         }
@@ -137,7 +137,7 @@ namespace ProjectThief
         public void MenuYes()
         {            
             m_goPauseMenu.SetActive(false);
-            m_bPauseButton.interactable = true;
+            //m_bPauseButton.interactable = true;
             Time.timeScale = 1f;
             GameStateController.PerformTransition(_menuState);
         }

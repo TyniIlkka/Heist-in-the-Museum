@@ -210,7 +210,7 @@ namespace ProjectThief
                 {
                     GameManager.instance.infoShown = true;
                     m_goScreen.SetActive(false);
-                    m_bPauseButton.interactable = true;
+                   //m_bPauseButton.interactable = true;
                     GameManager.instance.canMove = true;
                     Time.timeScale = 1f;
                     m_fDelay = 0;
