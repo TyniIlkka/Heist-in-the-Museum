@@ -64,7 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3acbb4e49121d5547bc77d0746f98633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_oGuard: {fileID: 1288517433875154, guid: 258d00bdb09f0aa4f9ede9d172e3c232, type: 2}
+  m_oGuard: {fileID: 1546448833491500, guid: 4d8ed23939da6994a8c598aa1d826227, type: 2}
   thief: {fileID: 0}
   pathList:
   - {fileID: 114551474568650656, guid: ca705a487e68c654da32bfd02c7567fb, type: 2}
@@ -104,13 +104,16 @@ MonoBehaviour:
   m_goScreen: {fileID: 0}
   m_bPauseButton: {fileID: 0}
   m_goContinueText: {fileID: 0}
+  m_sRoomReset: {fileID: 0}
+  m_sCameraScript: {fileID: 0}
+  m_sInventory: {fileID: 0}
+  m_sMenuControlscript: {fileID: 0}
   m_tInitialSpawn: {fileID: 0}
   m_lDoors:
   - {fileID: 0}
   m_iPos: 0
-  m_sCameraScript: {fileID: 0}
   m_fDist: 7
-  m_fAngle: 55
+  m_fHorizontalAngle: 0
+  m_fVerticalAngle: 35
   m_lKeyItems: []
-  m_sInventory: {fileID: 0}
   m_bCanBeCleared: 0

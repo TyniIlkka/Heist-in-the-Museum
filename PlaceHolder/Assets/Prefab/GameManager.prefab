@@ -53,13 +53,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  playerPrefab: {fileID: 1841031547246476, guid: f19a89018a78e974282cfdb7c33d0c1b,
+  playerPrefab: {fileID: 1442945149949480, guid: c4bad608348153f4596c0647059bf816,
     type: 2}
   mouseController: {fileID: 114590737761679002}
+  audioManager: {fileID: 0}
   levelController: {fileID: 0}
   canMove: 0
   infoShown: 0
   firstSpawn: 0
+  mouseOverUI: 0
+  spawnPoint: {fileID: 0}
+  initialSpawn: {fileID: 0}
+  currentPhase: 0
+  rayCastLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  refItems: []
+  keyItems: []
+  inventory: []
+  usedlevers: 
+  openedVitrines: 
+  clearedRooms: 
   guards: []
 --- !u!114 &114590737761679002
 MonoBehaviour:
