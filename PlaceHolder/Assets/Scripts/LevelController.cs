@@ -246,7 +246,14 @@ namespace ProjectThief
         {
             Vector3 result = Vector3.zero;
 
-            if (GameStateController.CurrentState.SceneName == "Lobby")
+            if (GameStateController.CurrentState.SceneName == "Tutorial")
+            {
+                if (GameManager.instance.previousState.SceneName == "Lobby")
+                    result = m_lDoors[0].SpawnPoint.position;
+                else
+                    result = m_tInitialSpawn.position;
+            }
+            else if (GameStateController.CurrentState.SceneName == "Lobby")
             {
                 if (GameManager.instance.previousState.SceneName == "RoomVault")
                     result = m_lDoors[0].SpawnPoint.position;
@@ -257,8 +264,8 @@ namespace ProjectThief
                 else if (GameManager.instance.previousState.SceneName == "Room2")
                     result = m_lDoors[2].SpawnPoint.position;
 
-                else if (GameManager.instance.previousState.SceneName == "MainMenu")
-                    result = m_tInitialSpawn.position;
+                else if (GameManager.instance.previousState.SceneName == "Tutorial")
+                    result = m_lDoors[3].SpawnPoint.position;
 
                 else
                     Debug.LogError("ERROR Spawnpoint Not Found! ");                
@@ -284,7 +291,14 @@ namespace ProjectThief
         {
             Quaternion result = Quaternion.identity;
 
-            if (GameStateController.CurrentState.SceneName == "Lobby")
+            if (GameStateController.CurrentState.SceneName == "Tutorial")
+            {
+                if (GameManager.instance.previousState.SceneName == "Lobby")
+                    result = m_lDoors[0].SpawnPoint.rotation;
+                else
+                    result = m_tInitialSpawn.rotation;
+            }
+            else if (GameStateController.CurrentState.SceneName == "Lobby")
             {
                 if (GameManager.instance.previousState.SceneName == "RoomVault")
                     result = m_lDoors[0].SpawnPoint.rotation;
@@ -295,8 +309,8 @@ namespace ProjectThief
                 else if (GameManager.instance.previousState.SceneName == "Room2")
                     result = m_lDoors[2].SpawnPoint.rotation;
 
-                else if (GameManager.instance.previousState.SceneName == "MainMenu")
-                    result = m_tInitialSpawn.rotation;
+                else if (GameManager.instance.previousState.SceneName == "Tutorial")
+                    result = m_lDoors[3].SpawnPoint.rotation;
 
                 else
                     Debug.LogError("ERROR Spawnpoint Not Found!");

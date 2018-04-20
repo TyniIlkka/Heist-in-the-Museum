@@ -21,9 +21,8 @@ GameObject:
   - component: {fileID: 4568357600196474}
   - component: {fileID: 33212864891375692}
   - component: {fileID: 23511071807681190}
-  - component: {fileID: 95086810555469574}
   - component: {fileID: 65686368368866578}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: wallHalfInvisibleBlack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,10 +39,9 @@ GameObject:
   - component: {fileID: 4528847731228660}
   - component: {fileID: 33400477106525756}
   - component: {fileID: 23624197218031688}
-  - component: {fileID: 95915808043500812}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: wallHalf (1)
-  m_TagString: Untagged
+  m_TagString: Obstacles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,37 +167,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.500002, y: 0.4000001, z: 4.000001}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!95 &95086810555469574
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1842057923538790}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 237cc300134661043aabb1d5d8f96ad5, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
---- !u!95 &95915808043500812
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1912925754393988}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 7db77a6c3aec322458604f4ce0860211, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1

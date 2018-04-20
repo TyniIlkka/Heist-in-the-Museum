@@ -23,6 +23,7 @@ namespace ProjectThief.States
             _gameStates.Add(new Room1State());
             _gameStates.Add(new Room2State());
             _gameStates.Add(new Room3State());
+            _gameStates.Add(new TutorialState());
         }
 
         public static bool PerformTransition(GameStateType targetStateType)

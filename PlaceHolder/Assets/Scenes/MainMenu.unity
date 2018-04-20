@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -399,7 +399,7 @@ Prefab:
     - target: {fileID: 114291211523647866, guid: fdc98461904a9934a819fab4e195d03e,
         type: 2}
       propertyPath: refItems.Array.size
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 114291211523647866, guid: fdc98461904a9934a819fab4e195d03e,
         type: 2}
@@ -566,6 +566,12 @@ Prefab:
       propertyPath: rayCastLayers.m_Bits
       value: 5121
       objectReference: {fileID: 0}
+    - target: {fileID: 114291211523647866, guid: fdc98461904a9934a819fab4e195d03e,
+        type: 2}
+      propertyPath: refItems.Array.data[12]
+      value: 
+      objectReference: {fileID: 114688537420296332, guid: 80be5f3b4e813a84ba5ab9769dbcc2b2,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fdc98461904a9934a819fab4e195d03e, type: 2}
   m_IsPrefabParent: 0
@@ -2827,7 +2833,7 @@ MonoBehaviour:
   m_sSfxVol: {fileID: 1065363560}
   m_sMusicVol: {fileID: 345328492}
   m_sMasterVol: {fileID: 2010914610}
-  _nextState: 1
+  _nextState: 6
   _menuState: 0
   m_goView1: {fileID: 1006319993}
   m_goView2: {fileID: 1369385620}
@@ -2904,7 +2910,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2105646932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 833, y: 478.5, z: 0}
+  m_LocalPosition: {x: 538, y: 302.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1006319994}

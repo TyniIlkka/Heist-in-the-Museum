@@ -22,6 +22,7 @@
             AddTargetState(GameStateType.Vault);
             AddTargetState(GameStateType.Room1);
             AddTargetState(GameStateType.Room2);
+            AddTargetState(GameStateType.Tutorial);
         }        
     }
 }

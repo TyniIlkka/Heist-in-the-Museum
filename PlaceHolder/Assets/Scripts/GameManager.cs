@@ -51,7 +51,7 @@ namespace ProjectThief
             inventory = new List<Item>();            
             usedlevers = new bool[4];            
             openedVitrines = new bool[4];
-            clearedRooms = new bool[4];
+            clearedRooms = new bool[5];
         }         
 
         public void ResetGame()
@@ -64,9 +64,10 @@ namespace ProjectThief
                 {
                     usedlevers[i] = false;
                     keyItems[i].Collected = false;
-                    openedVitrines[i] = false;
-                    clearedRooms[i] = false;
+                    openedVitrines[i] = false;                    
                 }
+                if (i < clearedRooms.Length)
+                    clearedRooms[i] = false;
             }
 
             inventory.Clear();

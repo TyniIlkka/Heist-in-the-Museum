@@ -17,7 +17,7 @@
 
         public MenuState()
         {
-            AddTargetState(GameStateType.Lobby);
+            AddTargetState(GameStateType.Tutorial);
         }
 
         public override void Activate()

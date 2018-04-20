@@ -11,7 +11,8 @@ namespace ProjectThief.States
         Vault,
         Room1,
         Room2,
-        Room3
+        Room3,
+        Tutorial
     }
 
     public abstract class GameStateBase

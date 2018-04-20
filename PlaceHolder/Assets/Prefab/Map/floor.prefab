@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4396461210083772}
   - component: {fileID: 33904959262376188}
   - component: {fileID: 23626922799550632}
-  - component: {fileID: 95709832471090268}
+  - component: {fileID: 65104953805557374}
   m_Layer: 0
   m_Name: floor
   m_TagString: Untagged
@@ -83,20 +83,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1308900323467746}
   m_Mesh: {fileID: 4300000, guid: 59398c3fdeacc4d4d9be71c1ecd9690a, type: 3}
---- !u!95 &95709832471090268
-Animator:
-  serializedVersion: 3
+--- !u!65 &65104953805557374
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1308900323467746}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 59398c3fdeacc4d4d9be71c1ecd9690a, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  serializedVersion: 2
+  m_Size: {x: 4.5, y: 4.500001, z: 0.100000024}
+  m_Center: {x: 0, y: 0, z: 0}

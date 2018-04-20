@@ -9,6 +9,8 @@ namespace ProjectThief
         private List<GameObject> m_lPieces;
         [SerializeField]
         private AudioClip m_acSFXEffect;
+        [SerializeField, Tooltip("Vault doors wall")]
+        private GameObject _wall;
 
         private Animator m_aAnimator;
         private bool m_bIsLocked;
@@ -30,7 +32,7 @@ namespace ProjectThief
             }
 
             return result;
-        }
+        }        
 
         private void AddKeyPieces()
         {
@@ -45,30 +47,17 @@ namespace ProjectThief
             if (IsActive)
             {
                 GetMouseController.InspectCursor();
-
-                if (!m_bIsLocked)
+                
+                if (IsInteractable)
                 {
-                    if (IsInteractable)
-                    {
-                        GetMouseController.InteractCursor();
-                        if (Input.GetMouseButton(0))
-                        {
-                            m_aAnimator.SetBool("Open", true);
-                        }
+                    GetMouseController.InteractCursor();
+                    if (Input.GetMouseButtonDown(0))
+                    {                            
+                        AddKeyPieces();
+                        m_aAnimator.SetBool("Open", true);   
+                        // TODO Hide wall
                     }
-                }
-                else
-                {
-                    if (IsInteractable && CheckKeys())
-                    {
-                        GetMouseController.InteractCursor();
-                        if (Input.GetMouseButton(0))
-                        {
-                            AddKeyPieces();
-                            m_bIsLocked = false;
-                        }
-                    }
-                }
+                }                
             }
         }
     }

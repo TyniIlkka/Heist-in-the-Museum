@@ -21,10 +21,10 @@ GameObject:
   - component: {fileID: 4390778183424234}
   - component: {fileID: 33848377109594214}
   - component: {fileID: 23357211453724028}
-  - component: {fileID: 95648090542022318}
-  m_Layer: 0
+  - component: {fileID: 65389741757644796}
+  m_Layer: 9
   m_Name: wallHalf (1)
-  m_TagString: Untagged
+  m_TagString: Obstacles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,8 +39,7 @@ GameObject:
   - component: {fileID: 4952506697902202}
   - component: {fileID: 33820965516995752}
   - component: {fileID: 23025459701504676}
-  - component: {fileID: 95482575464589878}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: wallHalfInvisible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,37 +155,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1238149612208518}
   m_Mesh: {fileID: 4300000, guid: 7db77a6c3aec322458604f4ce0860211, type: 3}
---- !u!95 &95482575464589878
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1750245060743390}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 237cc300134661043aabb1d5d8f96ad5, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
---- !u!95 &95648090542022318
-Animator:
-  serializedVersion: 3
+--- !u!65 &65389741757644796
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1238149612208518}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 7db77a6c3aec322458604f4ce0860211, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  serializedVersion: 2
+  m_Size: {x: 4.500002, y: 0.4000001, z: 1.0000002}
+  m_Center: {x: 0, y: 0, z: -0.00000044703484}
