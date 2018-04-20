@@ -10,6 +10,12 @@ namespace ProjectThief
         private GameObject m_goLight;
         [SerializeField, Tooltip("Distraction range")]
         private float m_fRange = 10f;
+        [SerializeField, Tooltip("Default material")]
+        private Material m_mDefaultMat;
+        [SerializeField, Tooltip("Lit material")]
+        private Material m_mLitMaterial;
+        [SerializeField, Tooltip("Light")]
+        private GameObject m_goLightObject;
 
         public bool trigger;
         private bool m_bIsActive;
@@ -24,6 +30,8 @@ namespace ProjectThief
             {
                 Activated();
             }
+            else
+                ResetLight();
         }
 
         private void OnDrawGizmos()
@@ -37,6 +45,7 @@ namespace ProjectThief
             m_goLight.SetActive(true);
             m_bIsActive = true;
             objects = Physics.OverlapSphere(transform.position, m_fRange);
+            m_goLightObject.GetComponent<MeshRenderer>().material = m_mLitMaterial;
 
             if (objects.Length > 0)
             {
@@ -56,6 +65,7 @@ namespace ProjectThief
             m_goLight.SetActive(false);
             m_bIsActive = false;
             //guard.Distract(this, false);
+            m_goLightObject.GetComponent<MeshRenderer>().material = m_mDefaultMat;
 
             foreach (Collider item in objects)
             {
