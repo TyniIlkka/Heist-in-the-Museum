@@ -36,7 +36,7 @@ namespace ProjectThief
 
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.red;
+            Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, m_fRange);
         }
 
