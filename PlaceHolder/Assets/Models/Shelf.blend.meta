@@ -18,6 +18,8 @@ ModelImporter:
     2100004: Texture
     2100006: Texture__Books_png
     2100008: Shelves__woodtexture_png
+    2100010: Wood__Books_png
+    2100012: Wood__woodtexture_png
     2300000: Hyllyt
     2300002: Kehys
     2300004: Ovi
@@ -49,7 +51,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Shelves__woodtexture_png
-    second: {fileID: 2100000, guid: f1e0040f4ad615942981142f04a5343b, type: 2}
+    second: {fileID: 2100000, guid: 60496c060b7b96f47afd0f76687fd80d, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -68,12 +70,22 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Wood__Books_png
+    second: {fileID: 2100000, guid: 60496c060b7b96f47afd0f76687fd80d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Wood__walltextureBeige_png
     second: {fileID: 2100000, guid: 60496c060b7b96f47afd0f76687fd80d, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Wood__woodpaneltexture_png
+    second: {fileID: 2100000, guid: fa8a1ab2514d17f43a043ab083b91c18, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood__woodtexture_png
     second: {fileID: 2100000, guid: fa8a1ab2514d17f43a043ab083b91c18, type: 2}
   materials:
     importMaterials: 1
