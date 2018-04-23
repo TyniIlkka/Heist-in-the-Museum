@@ -60,8 +60,7 @@ namespace ProjectThief
             if (!GameManager.instance.openedVitrines[m_iListPos])
             {
                 if (IsActive)
-                {
-                    GetMouseController.InspectCursor();
+                {                    
                     if (!m_bLocked)
                     {
                         if (IsInteractable)
@@ -96,7 +95,7 @@ namespace ProjectThief
                             }
                         }
                     }
-
+                    GetMouseController.InspectCursor();
                 }
             }
             else

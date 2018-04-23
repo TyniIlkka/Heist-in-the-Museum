@@ -174,6 +174,7 @@ GameObject:
   - component: {fileID: 114454661324735852}
   - component: {fileID: 114526315497594598}
   - component: {fileID: 136710752733265696}
+  - component: {fileID: 81685407002456598}
   m_Layer: 8
   m_Name: thief 1
   m_TagString: Player
@@ -858,6 +859,13 @@ Transform:
   m_Father: {fileID: 4297210990796696}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &81685407002456598
+AudioListener:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1442945149949480}
+  m_Enabled: 1
 --- !u!95 &95463506207954782
 Animator:
   serializedVersion: 3

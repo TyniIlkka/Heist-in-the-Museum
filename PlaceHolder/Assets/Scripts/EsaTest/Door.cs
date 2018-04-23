@@ -18,10 +18,14 @@ namespace ProjectThief
         [SerializeField, Tooltip("Bars moving sound")]
         private AudioClip m_acUnlock;
         [SerializeField]
-        private AudioSource m_aoSource;        
+        private AudioSource m_aoSource;
+        [SerializeField, Tooltip("Delay before door can be used")]
+        private float m_fDelay = 2f;
 
         private bool m_bIsBlocked;
         private bool m_bOpened;
+        private bool m_bCanUse;        
+        private float m_fTimer;
 
         public Transform SpawnPoint { get { return m_tSpawnPoint; } }
         public bool Open { set { m_bIsOpen = value; } }
@@ -44,11 +48,17 @@ namespace ProjectThief
 
             m_bOpened = false;
             m_aoSource.volume = AudioManager.instance.SFXPlayVol;
+
+            m_bCanUse = false;
+            m_fTimer = 0;
         }
 
         protected override void Update()
         {
             base.Update();
+
+            if (!m_bCanUse)
+                Timer();
 
             if (m_bOpened)
             {
@@ -58,6 +68,13 @@ namespace ProjectThief
                     GameStateController.PerformTransition(_nextState);
                 }
             }
+        }
+
+        private void Timer()
+        {
+            m_fTimer += Time.deltaTime;
+            if (m_fTimer >= m_fDelay)
+                m_bCanUse = true;
         }
 
         public void ObstacleSound()
@@ -73,32 +90,34 @@ namespace ProjectThief
         protected override void Activated()
         {
             if (IsActive)
-            {
-                GetMouseController.InspectCursor();
-
+            {  
                 if (!m_bIsBlocked)
                 {
                     if (IsInteractable)
                     {
                         GetMouseController.EnterCursor();
-                        if (!m_bIsOpen)
+                        if (m_bCanUse)
                         {
-                            if (Input.GetMouseButtonDown(0) && !m_bOpened)
+                            if (!m_bIsOpen)
                             {
-                                DoorOpenSound();
-                                m_bOpened = true;
+                                if (Input.GetMouseButtonDown(0) && !m_bOpened)
+                                {
+                                    DoorOpenSound();
+                                    m_bOpened = true;
+                                }
                             }
-                        }
-                        else if (GameManager.instance.levelController.Cleared)
-                        {
-                            if (Input.GetMouseButtonDown(0) && !m_bOpened)
+                            else if (GameManager.instance.levelController.Cleared)
                             {
-                                DoorOpenSound();
-                                m_bOpened = true;
+                                if (Input.GetMouseButtonDown(0) && !m_bOpened)
+                                {
+                                    DoorOpenSound();
+                                    m_bOpened = true;
+                                }
                             }
                         }
                     }
                 }
+                GetMouseController.InspectCursor();
             }
         }
     }
