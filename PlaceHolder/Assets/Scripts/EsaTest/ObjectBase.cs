@@ -11,7 +11,7 @@ namespace ProjectThief
         {
             LayerMask hitLayers = GameManager.instance.rayCastLayers;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
+            Debug.DrawRay(ray.origin, ray.direction * 100, Color.yellow);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 20, hitLayers) && !GameManager.instance.mouseOverUI)
             {

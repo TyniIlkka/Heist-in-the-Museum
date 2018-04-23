@@ -41,8 +41,7 @@ namespace ProjectThief
 
             if (m_bIsOpen)
             {
-                m_bIsBlocked = false;
-                m_bCanUse = true;
+                m_bIsBlocked = false;                
                 m_goObstacle.SetActive(false);
             }
             else
@@ -118,7 +117,8 @@ namespace ProjectThief
                         }
                     }
                 }
-                GetMouseController.InspectCursor();
+                else 
+                    GetMouseController.InspectCursor();
             }
         }
     }

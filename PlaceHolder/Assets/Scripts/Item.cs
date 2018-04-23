@@ -38,7 +38,7 @@ namespace ProjectThief
         {
             if (IsActive)
             {
-                GetMouseController.InspectCursor();
+                
                 if (IsInteractable)
                 {
                     GetMouseController.InteractCursor();
@@ -51,6 +51,8 @@ namespace ProjectThief
                         GetMouseController.DefaultCursor();
                     }
                 }
+                else
+                    GetMouseController.InspectCursor();
             }
         }
     }
