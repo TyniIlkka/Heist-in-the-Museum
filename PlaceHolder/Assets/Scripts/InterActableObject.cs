@@ -104,14 +104,12 @@ namespace ProjectThief
         {
             if (!m_bItemTaken)
             {
-                Debug.Log("Item taken");
                 m_bItemTaken = true;
                 m_iInventory.AddItem(m_itKey);
                 m_itKey.gameObject.SetActive(false);
                 GameManager.instance.keyItems[m_iPos].Collected = true;
                 GameManager.instance.openedVitrines[m_iListPos] = true;
-            }
-            Debug.Log("Item taken: " + m_bItemTaken);
+            }            
         }
     }
 }
