@@ -76,6 +76,8 @@ namespace ProjectThief
                                 GameManager.instance.openedVitrines[m_iListPos] = true;
                             }
                         }
+                        else
+                            GetMouseController.InspectCursor();
                     }
                     else
                     {
@@ -94,14 +96,13 @@ namespace ProjectThief
                                 }
                             }
                         }
-                    }
-                    GetMouseController.InspectCursor();
+                        else
+                            GetMouseController.InspectCursor();
+                    }                    
                 }
             }
-            else
-            {
-                GetMouseController.DefaultCursor();
-            }
+            else            
+                GetMouseController.DefaultCursor();            
         }
     }
 }

@@ -78,7 +78,8 @@ namespace ProjectThief
                         GameManager.instance.usedlevers[m_iPos] = true;
                     }
                 }
-                GetMouseController.InspectCursor();
+                else
+                    GetMouseController.InspectCursor();
             }
         }
     }    

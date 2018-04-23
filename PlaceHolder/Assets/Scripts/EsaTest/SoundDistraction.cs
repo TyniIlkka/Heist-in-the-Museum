@@ -136,7 +136,8 @@ namespace ProjectThief
                         DistractionActive();
                     }
                 }
-                GetMouseController.InspectCursor();
+                else
+                    GetMouseController.InspectCursor();
             }
         }
     }

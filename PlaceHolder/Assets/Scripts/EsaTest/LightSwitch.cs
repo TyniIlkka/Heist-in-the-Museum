@@ -53,7 +53,8 @@ namespace ProjectThief
                         }
                     }
                 }
-                GetMouseController.InspectCursor();
+                else
+                    GetMouseController.InspectCursor();
             }
         }
     }
