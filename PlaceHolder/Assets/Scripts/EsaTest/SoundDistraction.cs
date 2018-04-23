@@ -16,12 +16,21 @@ namespace ProjectThief
         private AudioClip m_acIdle;
         [SerializeField, Tooltip("Object has idle audio")]
         private bool m_bHasIdle;
+        [SerializeField]
+        public Transform moveToPoint;
 
         private float m_fDistractTime;
         private float m_fTime;
         private bool m_bActive;
 
         public bool trigger;
+
+        Collider[] objects;
+
+        public Vector3 MoveToPoint
+        {
+            get { return moveToPoint.position; }
+        }
 
         Guard guard;
 
@@ -69,7 +78,7 @@ namespace ProjectThief
         {
             PlayAudio(m_acSound, false);
             m_bActive = true;
-            Collider[] objects = Physics.OverlapSphere(transform.position, m_fRange);
+            objects = Physics.OverlapSphere(transform.position, m_fRange);
 
             if (objects.Length > 0)
             {
@@ -89,9 +98,16 @@ namespace ProjectThief
         }
 
         public void DistractionInactive()
-        {            
-            guard.Distract(this, false);
-            m_bActive = false;
+        {
+            foreach (Collider item in objects)
+            {
+                guard = item.GetComponent<Guard>();
+                if (guard != null)
+                {
+                    guard.Distract(this, false);
+                    m_bActive = false;
+                }
+            }
         }
 
         public void PlayAudio(AudioClip clip, bool isIdle)

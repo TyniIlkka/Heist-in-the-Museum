@@ -29,8 +29,8 @@ namespace ProjectThief.PathFinding
             Target = transform.position;
         }
 
-        //void Update()
-        //{
+       void Update()
+       {
         //    if (Vector3.Distance(Target, transform.position) < 25f && !moving)
         //    {
         //        if (newPath)
@@ -69,12 +69,16 @@ namespace ProjectThief.PathFinding
         //        moving = false;
         //    }
 
-        //    if (Path.Count > 0)
-        //    {
+            if (Path.Count > 0)
+            {
 
-        //        owner.Animation.SetBool("Moving",true);
-        //    }
-        //}
+               owner.Animation.SetBool("Moving",true);
+           }
+            else
+            {
+                owner.Animation.SetBool("Moving", false);
+            }
+       }
 
         public IEnumerator NewPath()
         {

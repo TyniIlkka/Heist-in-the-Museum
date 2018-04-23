@@ -43,8 +43,8 @@ namespace ProjectThief.AI
                 //Mover.FindPath(Owner.transform.position, )
 
                 //Owner.TargetSound.transform.position.y = 0;
-                Mover.Target = Owner.TargetSound.transform.position;
-                Mover.FindPath(Owner.transform.position, Owner.TargetSound.transform.position);
+                Mover.Target = Owner.TargetSound.MoveToPoint;
+                Mover.FindPath(Owner.transform.position, Owner.TargetSound.MoveToPoint);
 
 
                 //3. Move the finded way
@@ -54,10 +54,11 @@ namespace ProjectThief.AI
                 if (Mover.MoverPath.Count > 0)
                 {
                     MoveMethod();
-                    if (Path.Count == 1 && Owner.Distracted)
+                    if (Mover.MoverPath.Count <= 1 && Owner.Distracted)
                     {
-                        WaitTillMoveBack();
-                        Owner.Distracted = false;
+                        //Owner.transform.LookAt(Owner.TargetSound.transform.position, Vector3.up);
+                        //WaitTillMoveBack();
+                        //Owner.Distracted = false;
                         Mover.Target = Owner.CurrentWaypoint.transform.position;
                     }
                     
