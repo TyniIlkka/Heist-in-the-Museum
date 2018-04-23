@@ -25,6 +25,7 @@ namespace ProjectThief
          
         private Animator m_aAnimator;
         private bool m_bLocked = true;
+        private bool m_bItemTaken;
 
         private void Awake()
         {
@@ -39,13 +40,12 @@ namespace ProjectThief
 
             if (GameManager.instance.openedVitrines[m_iListPos])
             {
+                m_bItemTaken = true;
                 m_aAnimator.SetBool("Open", true);
                 m_bLocked = false;
                 m_goLock.SetActive(false);
                 m_itKey.gameObject.SetActive(false);
             }
-
-            Debug.Log("Vitrine used? " + m_bLocked);
         }
         
         private void PlayAudio(AudioClip clip)
@@ -69,11 +69,7 @@ namespace ProjectThief
                             if (Input.GetMouseButtonDown(0))
                             {
                                 PlayAudio(m_acOpen);
-                                m_aAnimator.SetBool("Open", true);
-                                m_iInventory.AddItem(m_itKey);
-                                m_itKey.gameObject.SetActive(false);
-                                GameManager.instance.keyItems[m_iPos].Collected = true;
-                                GameManager.instance.openedVitrines[m_iListPos] = true;
+                                m_aAnimator.SetBool("Open", true);                                                              
                             }
                         }
                         else
@@ -88,7 +84,6 @@ namespace ProjectThief
                             {
                                 if (Input.GetMouseButtonDown(0))
                                 {
-                                    Debug.Log("Lock open");
                                     m_iInventory.RemoveItem(m_itKeyItem);
                                     PlayAudio(m_acUnlock);
                                     m_bLocked = false;
@@ -103,6 +98,20 @@ namespace ProjectThief
             }
             else            
                 GetMouseController.DefaultCursor();            
+        }
+
+        public void TakeItem()
+        {
+            if (!m_bItemTaken)
+            {
+                Debug.Log("Item taken");
+                m_bItemTaken = true;
+                m_iInventory.AddItem(m_itKey);
+                m_itKey.gameObject.SetActive(false);
+                GameManager.instance.keyItems[m_iPos].Collected = true;
+                GameManager.instance.openedVitrines[m_iListPos] = true;
+            }
+            Debug.Log("Item taken: " + m_bItemTaken);
         }
     }
 }

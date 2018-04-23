@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23240017208078600}
   - component: {fileID: 114834111104811342}
   - component: {fileID: 65999566374177996}
+  - component: {fileID: 95647368155232360}
   m_Layer: 10
   m_Name: LeverRed
   m_TagString: Interactable
@@ -40,9 +41,8 @@ GameObject:
   - component: {fileID: 4552291902238956}
   - component: {fileID: 33500111030350752}
   - component: {fileID: 23834215351402640}
-  - component: {fileID: 95567970570306406}
   m_Layer: 10
-  m_Name: LeverHandleRed
+  m_Name: LeverHandle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -173,16 +173,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6, y: 1, z: 7}
   m_Center: {x: 0, y: -0.4619341, z: 0.000000110133655}
---- !u!95 &95567970570306406
+--- !u!95 &95647368155232360
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1658144792711776}
+  m_GameObject: {fileID: 1000300821905394}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: f44bb260310533b43bc0c581a3bcfe38, type: 3}
-  m_Controller: {fileID: 9100000, guid: 04c168d746eb0624e837a9faa484b583, type: 2}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f869cc5281f47304d8362df6c9c7eb2a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

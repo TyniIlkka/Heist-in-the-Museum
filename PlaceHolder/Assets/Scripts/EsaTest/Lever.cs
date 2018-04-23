@@ -21,14 +21,15 @@ namespace ProjectThief
         [SerializeField, Tooltip("Position in GM's bool list")]
         private int m_iPos;        
 
-        private Animator m_aLeverAnim;        
+        private Animator m_aLeverAnim;
+        private bool m_bDone;
 
         private void Awake()
         {
             if (m_iInventory == null)
                 m_iInventory = FindObjectOfType<Inventory>();
 
-            m_aLeverAnim = GetComponentInChildren<Animator>();
+            m_aLeverAnim = GetComponent<Animator>();
             m_itNeededItem = GameManager.instance.refItems[m_itNeededItem.RefPos];
 
             Init();
@@ -38,6 +39,7 @@ namespace ProjectThief
         {           
             if (GameManager.instance.usedlevers[m_iPos])
             {
+                m_bDone = true;
                 m_goHandle.SetActive(true);
                 m_aLeverAnim.SetBool("Activated", true);                
                 m_dDoor.Open = true;
@@ -71,15 +73,23 @@ namespace ProjectThief
                         m_iInventory.RemoveItem(m_itNeededItem);
                         m_goHandle.SetActive(true);
                         m_aLeverAnim.SetBool("Activated", true);
-                        m_aObstacleAnim.SetBool("Open", true);
-                        m_dDoor.ObstacleSound();
-                        m_dDoor.Open = false;
-                        m_dDoor.Blocked = false;
-                        GameManager.instance.usedlevers[m_iPos] = true;
                     }
                 }
                 else
                     GetMouseController.InspectCursor();
+            }
+        }
+
+        public void OpenObstacle()
+        {
+            if (!m_bDone)
+            {
+                m_bDone = true;
+                m_aObstacleAnim.SetBool("Open", true);
+                m_dDoor.ObstacleSound();
+                m_dDoor.Open = false;
+                m_dDoor.Blocked = false;
+                GameManager.instance.usedlevers[m_iPos] = true;
             }
         }
     }    

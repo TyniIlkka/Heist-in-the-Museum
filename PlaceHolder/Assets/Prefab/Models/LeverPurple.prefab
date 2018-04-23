@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23928042250061278}
   - component: {fileID: 114937588251963340}
   - component: {fileID: 65721158113842446}
+  - component: {fileID: 95858709045047214}
   m_Layer: 10
   m_Name: LeverPurple
   m_TagString: Interactable
@@ -40,9 +41,8 @@ GameObject:
   - component: {fileID: 4440894342302134}
   - component: {fileID: 33215575568431734}
   - component: {fileID: 23047872845387076}
-  - component: {fileID: 95098756299929154}
   m_Layer: 10
-  m_Name: LeverHandlePurple
+  m_Name: LeverHandle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -173,16 +173,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6, y: 1, z: 7}
   m_Center: {x: 0, y: -0.4619341, z: 0.000000110133655}
---- !u!95 &95098756299929154
+--- !u!95 &95858709045047214
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1659096598380416}
+  m_GameObject: {fileID: 1608781712906472}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: f44bb260310533b43bc0c581a3bcfe38, type: 3}
-  m_Controller: {fileID: 9100000, guid: 04c168d746eb0624e837a9faa484b583, type: 2}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f869cc5281f47304d8362df6c9c7eb2a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
