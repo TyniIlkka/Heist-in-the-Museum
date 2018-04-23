@@ -223,8 +223,8 @@ namespace ProjectThief
                 rayDirection += Vector3.up;
                 if (Physics.Raycast(transform.position, rayDirection.normalized, out hit, m_fViewRad))
                 {
-                    Debug.DrawRay(transform.position, rayDirection.normalized);
-                    Debug.Log(hit.collider.gameObject);
+                    //Debug.DrawRay(transform.position, rayDirection.normalized);
+                    //Debug.Log(hit.collider.gameObject);
                     if (hit.collider.gameObject.GetComponent<Player>() != null)
                     {
                         Debug.Log(hit.collider.gameObject);

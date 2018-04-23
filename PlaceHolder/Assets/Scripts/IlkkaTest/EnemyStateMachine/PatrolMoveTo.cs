@@ -9,6 +9,8 @@ namespace ProjectThief.AI
 {
     public class PatrolMoveTo : AIStateBase
     {
+        public bool ready;
+
         public PatrolMoveTo(Guard owner)
             : base()
         {
@@ -23,12 +25,12 @@ namespace ProjectThief.AI
             base.StateActivated();
             Mover = Owner.GetComponent<GuardMover>();
             Mover.gameObject.SetActive(true);
+            ready = false;
         }
 
         public override void StateDeactivating()
         {
             base.StateDeactivating();
-            Mover.gameObject.SetActive(false);
         }
 
         public override void Update()
@@ -39,12 +41,15 @@ namespace ProjectThief.AI
             if (!ChangeState())
             {
                 //2. Find the way to the current way point
-                Mover.gameObject.SetActive(true);
                 //Mover.FindPath(Owner.transform.position, )
 
                 //Owner.TargetSound.transform.position.y = 0;
-                Mover.Target = Owner.TargetSound.MoveToPoint;
-                Mover.FindPath(Owner.transform.position, Owner.TargetSound.MoveToPoint);
+                if (!ready)
+                {
+                    Mover.Target = Owner.TargetSound.MoveToPoint;
+                    Mover.FindPath(Owner.transform.position, Owner.TargetSound.MoveToPoint);
+                }
+                
 
 
                 //3. Move the finded way
@@ -54,12 +59,16 @@ namespace ProjectThief.AI
                 if (Mover.MoverPath.Count > 0)
                 {
                     MoveMethod();
-                    if (Mover.MoverPath.Count <= 1 && Owner.Distracted)
+                    if (Mover.MoverPath.Count == 1)
                     {
                         //Owner.transform.LookAt(Owner.TargetSound.transform.position, Vector3.up);
                         //WaitTillMoveBack();
-                        //Owner.Distracted = false;
-                        Mover.Target = Owner.CurrentWaypoint.transform.position;
+                        Owner.Distracted = false;
+                        //Mover.Target = Owner.CurrentWaypoint.transform.position;
+
+                        Mover.FindPath(Owner.transform.position, Owner.CurrentWaypoint.transform.position);
+                        Debug.Log("Etsittiin path takaisin " + Mover.MoverPath.Count);
+                        ready = true;
                     }
                     
                 }
@@ -79,7 +88,7 @@ namespace ProjectThief.AI
         /// <returns>Bool result</returns>
         private bool ChangeState()
         {
-            if (Path.Count <= 0 && Owner.Distracted == false)
+            if (Mover.MoverPath.Count <= 0 && ready)
             {
                 Debug.Log("Liikutaan pois hämäyksestä");
                 bool result = Owner.PerformTransition(AIStateType.Patrol);

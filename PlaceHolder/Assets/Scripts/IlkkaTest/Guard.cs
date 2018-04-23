@@ -429,7 +429,8 @@ namespace ProjectThief {
         public override void Turn(Vector3 target)
         {
             Vector3 direction = target - transform.position;
-            direction.y = transform.position.y;
+            direction.y = 0;
+            //direction.x = 0; direction.z = 0;
             direction = direction.normalized;
             float turnSpeedRad = Mathf.Deg2Rad * m_fTurnSpeed * Time.deltaTime;
             Vector3 rotation = Vector3.RotateTowards(transform.forward,
