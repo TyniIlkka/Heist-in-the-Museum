@@ -51,7 +51,7 @@ namespace ProjectThief.AI
 
                 //TODO: add animation trigger
                 //Owner.MoveAnimation(Path);
-                if (Path.Count > 0)
+                if (Mover.MoverPath.Count > 0)
                 {
                     MoveMethod();
                     if (Path.Count == 1 && Owner.Distracted)

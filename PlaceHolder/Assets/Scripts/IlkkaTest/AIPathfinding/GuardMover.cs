@@ -13,6 +13,9 @@ namespace ProjectThief.PathFinding
         private bool newPath = true;
         private bool moving = false;
 
+        public List<Vector3> MoverPath { get { return Path; } set { MoverPath = value; } }
+
+
         public Vector3 Target
         {
             get { return target; }
