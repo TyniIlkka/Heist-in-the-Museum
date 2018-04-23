@@ -19,7 +19,9 @@ namespace ProjectThief
         [SerializeField]
         private GameObject m_goView1;
         [SerializeField]
-        private GameObject m_goView2;        
+        private GameObject m_goView2;
+        [SerializeField, Tooltip("Continue button")]
+        private Button m_bContinueButton;
 
         #region Pause controls
         [SerializeField]
@@ -52,10 +54,22 @@ namespace ProjectThief
             m_sSfxVol.value = (int)(m_amAudioManager.SfxVol * 100);
             m_sMusicVol.value = (int)(m_amAudioManager.MusicVol * 100);
             m_sMasterVol.value = (int)(m_amAudioManager.MasterVol * 100);
-        }        
+        }
+
+        private void Update()
+        {
+            if (GameStateController.CurrentState.SceneName == "MainMenu")
+            {
+                if (GameManager.instance.canContinue)
+                    m_bContinueButton.gameObject.SetActive(true);
+                else
+                    m_bContinueButton.gameObject.SetActive(false);
+            }
+        }
 
         public void NewGame()
         {
+            GameManager.instance.ResetGame();
             GameManager.instance.firstSpawn = true;
             GameManager.instance.infoShown = false;
             GameManager.instance.previousState = GameStateController.CurrentState;
@@ -134,10 +148,12 @@ namespace ProjectThief
             m_goMenuConfirm.SetActive(true);
         }
 
-        public void MenuYes()
+        public void ReturnMenuOther()
         {            
             m_goPauseMenu.SetActive(false);
             //m_bPauseButton.interactable = true;
+            GameManager.instance.canContinue = true;
+            GameManager.instance.continueState = GameStateController.CurrentState;
             Time.timeScale = 1f;
             GameStateController.PerformTransition(_menuState);
         }
@@ -170,6 +186,22 @@ namespace ProjectThief
             GameManager.instance.levelController.RoomReset.ResetRoom();
             GameStateType resetState = GameStateController.CurrentState.StateType;            
             GameStateController.PerformTransition(resetState);
+        }
+
+        public void ReturnMenuVictory()
+        {
+            m_goPauseMenu.SetActive(false);
+            //m_bPauseButton.interactable = true;
+            GameManager.instance.canContinue = true;
+            Time.timeScale = 1f;
+            GameStateController.PerformTransition(_menuState);
+        }
+
+        public void ContinueGame()
+        {
+            Debug.Log("Pressed continue");
+            GameStateController.PerformTransition(
+                GameManager.instance.continueState.StateType);
         }
     }
 }

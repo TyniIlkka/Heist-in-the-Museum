@@ -16,23 +16,12 @@ namespace ProjectThief
         private Material m_mLitMaterial;
         [SerializeField, Tooltip("Light")]
         private GameObject m_goLightObject;
-
-        public bool trigger;
+        
         private bool m_bIsActive;
         Guard guard;
         Collider[] objects;
 
-        public bool IsActive { get { return m_bIsActive; } set { m_bIsActive = value; } }
-
-        private void Update()
-        {
-            if (trigger)
-            {
-                Activated();
-            }
-            else
-                ResetLight();
-        }
+        public bool IsActive { get { return m_bIsActive; } set { m_bIsActive = value; } }        
 
         private void OnDrawGizmos()
         {

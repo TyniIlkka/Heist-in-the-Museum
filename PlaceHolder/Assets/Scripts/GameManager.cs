@@ -18,9 +18,11 @@ namespace ProjectThief
         public bool infoShown;
         public bool firstSpawn;
         public bool mouseOverUI;
+        public bool canContinue;
         public Transform spawnPoint;
         public Transform initialSpawn;
         public GameStateBase previousState;
+        public GameStateBase continueState;
         public int currentPhase;
         public LayerMask rayCastLayers;        
         #endregion
@@ -52,6 +54,7 @@ namespace ProjectThief
             usedlevers = new bool[4];            
             openedVitrines = new bool[4];
             clearedRooms = new bool[5];
+            canContinue = false;
         }         
 
         public void ResetGame()

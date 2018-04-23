@@ -17,6 +17,10 @@ namespace ProjectThief
         [SerializeField, Tooltip("Object has idle audio")]
         private bool m_bHasIdle;
 
+        private float m_fDistractTime;
+        private float m_fTime;
+        private bool m_bActive;
+
         public bool trigger;
 
         Guard guard;
@@ -26,6 +30,7 @@ namespace ProjectThief
             m_aoSound = GetComponent<AudioSource>(); 
             m_aoSound.volume = AudioManager.instance.SFXPlayVol;            
             m_aoSound.loop = true;
+            m_fDistractTime = m_acSound.length;
 
             if (m_bHasIdle)
                 PlayAudio(m_acIdle, true);
@@ -38,10 +43,20 @@ namespace ProjectThief
         {
             base.Update();
 
+            if (m_bActive)
+                Timer();
+
             if (trigger)
             {
                 DistractionActive();
             }
+        }
+
+        private void Timer()
+        {
+            m_fTime += Time.deltaTime;
+            if (m_fTime >= m_fDistractTime)            
+                DistractionInactive(); 
         }
 
         private void OnDrawGizmos()
@@ -53,6 +68,7 @@ namespace ProjectThief
         public void DistractionActive()
         {
             PlayAudio(m_acSound, false);
+            m_bActive = true;
             Collider[] objects = Physics.OverlapSphere(transform.position, m_fRange);
 
             if (objects.Length > 0)
@@ -72,11 +88,10 @@ namespace ProjectThief
             }
         }
 
-        public void ResetSound()
-        {
-            m_aoSound.Stop();
+        public void DistractionInactive()
+        {            
             guard.Distract(this, false);
-            
+            m_bActive = false;
         }
 
         public void PlayAudio(AudioClip clip, bool isIdle)

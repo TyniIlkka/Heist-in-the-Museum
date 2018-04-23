@@ -18,12 +18,11 @@
         public MenuState()
         {
             AddTargetState(GameStateType.Tutorial);
-        }
-
-        public override void Activate()
-        {
-            base.Activate();
-            GameManager.instance.ResetGame();
-        }
+            AddTargetState(GameStateType.Lobby);
+            AddTargetState(GameStateType.Vault);
+            AddTargetState(GameStateType.Room1);
+            AddTargetState(GameStateType.Room2);
+            AddTargetState(GameStateType.Room3);
+        }        
     }
 }

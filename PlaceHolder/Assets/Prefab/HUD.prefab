@@ -1672,7 +1672,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114997749290359420}
-        m_MethodName: MenuYes
+        m_MethodName: ReturnMenuVictory
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1725,7 +1725,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114997749290359420}
-        m_MethodName: MenuYes
+        m_MethodName: ReturnMenuOther
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3442,7 +3442,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114997749290359420}
-        m_MethodName: MenuYes
+        m_MethodName: ReturnMenuOther
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3637,6 +3637,7 @@ MonoBehaviour:
   _menuState: 0
   m_goView1: {fileID: 0}
   m_goView2: {fileID: 0}
+  m_bContinueButton: {fileID: 0}
   m_goPauseMenu: {fileID: 1649375534991092}
   m_goPauseOptions: {fileID: 1029700396934028}
   m_goShade: {fileID: 1300115735536656}
