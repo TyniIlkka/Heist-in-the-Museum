@@ -37,8 +37,7 @@ namespace ProjectThief
         protected override void Activated()
         {
             if (IsActive)
-            {
-                GetMouseController.InspectCursor();
+            {                
                 if (IsInteractable)
                 {
                     GetMouseController.InteractCursor();
@@ -54,6 +53,7 @@ namespace ProjectThief
                         }
                     }
                 }
+                GetMouseController.InspectCursor();
             }
         }
     }
