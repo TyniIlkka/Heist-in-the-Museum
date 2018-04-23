@@ -22,6 +22,13 @@ namespace ProjectThief.AI
         {
             base.StateActivated();
             Mover = Owner.GetComponent<GuardMover>();
+            Mover.gameObject.SetActive(true);
+        }
+
+        public override void StateDeactivating()
+        {
+            base.StateDeactivating();
+            Mover.gameObject.SetActive(false);
         }
 
         public override void Update()
@@ -32,10 +39,12 @@ namespace ProjectThief.AI
             if (!ChangeState())
             {
                 //2. Find the way to the current way point
-
+                Mover.gameObject.SetActive(true);
                 //Mover.FindPath(Owner.transform.position, )
 
+                //Owner.TargetSound.transform.position.y = 0;
                 Mover.Target = Owner.TargetSound.transform.position;
+                Mover.FindPath(Owner.transform.position, Owner.TargetSound.transform.position);
 
 
                 //3. Move the finded way
@@ -53,6 +62,7 @@ namespace ProjectThief.AI
                     }
                     
                 }
+
             }
         }
 

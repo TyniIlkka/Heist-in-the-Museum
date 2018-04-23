@@ -23,59 +23,61 @@ namespace ProjectThief.PathFinding
         void Start()
         {
             owner = GetComponent<Guard>();
+            Target = transform.position;
         }
 
-        void Update()
-        {
-            if (Vector3.Distance(Target, transform.position) < 25F && !moving)
-            {
-                if (newPath)
-                {
-                    StartCoroutine(NewPath());
-                }
-                moving = true;
-            }
-            else if (Vector3.Distance(Target, transform.position) < 2F)
-            {
-                //Stop!
-                owner.Animation.SetBool("Moving", false);
-            }
-            else if (Vector3.Distance(Target, transform.position) < 35F && moving)
-            {
-                if (Path.Count > 0)
-                {
+        //void Update()
+        //{
+        //    if (Vector3.Distance(Target, transform.position) < 25f && !moving)
+        //    {
+        //        if (newPath)
+        //        {
+        //            StartCoroutine(NewPath());
+        //        }
+        //        moving = true;
+        //    }
+        //    else if (Vector3.Distance(Target, transform.position) < 2f)
+        //    {
+        //        //Stop!
+        //        owner.Animation.SetBool("Moving", false);
+        //    }
+        //    else if (Vector3.Distance(Target, transform.position) < 35f && moving)
+        //    {
+        //        if (Path.Count > 0)
+        //        {
                     
-                    if (Vector3.Distance(Target, Path[Path.Count - 1]) > 5F)
-                    {
-                        StartCoroutine(NewPath());
-                    }
-                }
-                else
-                {
-                    if (newPath)
-                    {
-                        StartCoroutine(NewPath());
-                    }
-                }
-                //Move the ai towards the player
-                MoveMethod();
-            }
-            else
-            {
-                moving = false;
-            }
+        //            if (Vector3.Distance(Target, Path[Path.Count - 1]) > 5f)
+        //            {
+        //                StartCoroutine(NewPath());
+        //            }
+        //        }
+        //        else
+        //        {
+        //            if (newPath)
+        //            {
+        //                StartCoroutine(NewPath());
+        //            }
+        //        }
+        //        //Move the ai towards the player
+        //        MoveMethod();
+        //    }
+        //    else
+        //    {
+        //        moving = false;
+        //    }
 
-            if (Path.Count > 0)
-            {
+        //    if (Path.Count > 0)
+        //    {
 
-                owner.Animation.SetBool("Moving",true);
-            }
-        }
+        //        owner.Animation.SetBool("Moving",true);
+        //    }
+        //}
 
-        IEnumerator NewPath()
+        public IEnumerator NewPath()
         {
             newPath = false;
-            FindPath(transform.position, owner.transform.position);
+            target.y = 0f;
+            FindPath(Target, owner.transform.position);
             yield return new WaitForSeconds(1F);
             newPath = true;
         }
