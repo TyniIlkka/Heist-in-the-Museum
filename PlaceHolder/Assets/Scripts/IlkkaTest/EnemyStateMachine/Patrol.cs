@@ -28,7 +28,7 @@ namespace ProjectThief.AI {
         {
             base.StateActivated();
 
-            //Owner.CurrentWaypoint = _path.GetClosestWaypoint(Owner.transform.position);
+            Owner.CurrentWaypoint = GetWaypoint();
             
         }
         void OnEnable()
@@ -41,10 +41,10 @@ namespace ProjectThief.AI {
         {
             // 1. Should we change the state?
             //   1.1 If yes, change state and return.
-            if (Owner.CurrentWaypoint == null && _path != null)
-            {
-                StateActivated();
-            }
+            //if (Owner.CurrentWaypoint == null && _path != null)
+            //{
+            //    StateActivated();
+            //}
 
 
             if (!ChangeState())
