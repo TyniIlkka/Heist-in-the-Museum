@@ -33,12 +33,16 @@ namespace ProjectThief
 
         private void Awake()
         {
+            m_bCanUse = false;
+            m_fTimer = 0;
+
             if (m_aoSource == null)
                 m_aoSource = GetComponent<AudioSource>();
 
             if (m_bIsOpen)
             {
                 m_bIsBlocked = false;
+                m_bCanUse = true;
                 m_goObstacle.SetActive(false);
             }
             else
@@ -47,10 +51,7 @@ namespace ProjectThief
             }
 
             m_bOpened = false;
-            m_aoSource.volume = AudioManager.instance.SFXPlayVol;
-
-            m_bCanUse = false;
-            m_fTimer = 0;
+            m_aoSource.volume = AudioManager.instance.SFXPlayVol;            
         }
 
         protected override void Update()
