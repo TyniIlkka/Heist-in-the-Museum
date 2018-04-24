@@ -12,9 +12,43 @@ namespace ProjectThief
 
         private float speed;
 
-        public float Speed()
+        public float walkRange;
+        public float sneakRange;
+
+        public float DetectRange
         {
-            return speed;
+            get
+            {
+                if (Speed > 2f)
+                {
+                    return walkRange;
+                }
+                else if ( 0f < Speed && Speed < 2f)
+                {
+                    return sneakRange;
+                }
+                else
+                {
+                    return 0f;
+                }
+            }
+            set
+            {
+
+            }
+        }
+
+        public float Speed
+        {
+            get
+            {
+                return speed;
+            }
+            set
+            {
+                speed = value;
+            }
+            
         }
 
         public override void Init()

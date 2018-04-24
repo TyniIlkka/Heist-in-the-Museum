@@ -303,6 +303,15 @@ namespace ProjectThief {
             if (CurrentState != null)
             {
                 CurrentState.Update();
+                if (CurrentState == patrol)
+                {
+                    Animation.SetBool("Moving", true);
+                }
+                else if (CurrentState == staticTurnTo || CurrentState == guardStatic)
+                {
+                    Animation.SetBool("Moving", false);
+                }
+
             }                   
         }
 
@@ -349,7 +358,7 @@ namespace ProjectThief {
             else
             {
                 m_bDistracted = result;
-                TargetSound = null;
+                //TargetSound = null;
             }
         }
 
@@ -376,9 +385,9 @@ namespace ProjectThief {
         public bool CanSeePlayer()
         {
             //Close range detection
-            float distanceToPlayer = (transform.position - Thief.transform.position).sqrMagnitude; 
+            float distanceToPlayer = (transform.position - Thief.transform.position).magnitude; 
 
-            if ((distanceToPlayer <= m_fMinDetectionRangeWalk ) && (Thief.GetComponent<GridPlayer>().m_fMoveSpeed >= Thief.GetComponent<GridPlayer>().m_fSneakSpeed) ||
+            if ((distanceToPlayer <= m_fMinDetectionRangeWalk ) && (Thief.GetComponent<GridPlayer>().m_fMoveSpeed > Thief.GetComponent<GridPlayer>().m_fSneakSpeed) ||
                 (distanceToPlayer <= m_fMinDetectionRangeSneak) && (Thief.GetComponent<GridPlayer>().m_fMoveSpeed <= Thief.GetComponent<GridPlayer>().m_fSneakSpeed))
             {
                 return true;

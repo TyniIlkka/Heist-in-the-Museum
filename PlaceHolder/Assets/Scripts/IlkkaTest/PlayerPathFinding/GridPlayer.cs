@@ -15,6 +15,7 @@ namespace ProjectThief.PathFinding
         public float m_fTurnSpeed;
 
         public Player player;
+        private ParticleSystem soundWaves;
 
         public LayerMask ingoreLayerMask;
 
@@ -30,19 +31,46 @@ namespace ProjectThief.PathFinding
         {
             player = GetComponent<Player>();
             playerCam = Camera.main;
-            if (m_fMoveSpeed <= 0) m_fMoveSpeed = 1;
+            soundWaves = GetComponentInChildren<ParticleSystem>();
+
+            if (m_fMoveSpeed < 0) m_fMoveSpeed = 0;
         }
 
         void Update()
         {
             SneakOrWalk();
             DoubleClick();
+            if (Path.Count == 0)
+            {
+                m_fMoveSpeed = 0f;
+            }
+            RippleEffect();
             
             FindPath();
             player.MoveAnimation(Path);
             if (Path.Count > 0)
             {
                 MoveMethod();
+            }
+
+        }
+
+        private void RippleEffect()
+        {
+            var main = soundWaves.main;
+            if (m_fMoveSpeed > m_fSneakSpeed)
+            {
+                main.startSize = 3f;
+            }
+            else if (m_fMoveSpeed <= m_fSneakSpeed && m_fMoveSpeed > 0f)
+            {
+                main.startSize = 1f;
+            }
+
+
+            else
+            {
+                main.startSize = 0f;
             }
         }
 
