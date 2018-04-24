@@ -15,21 +15,9 @@ namespace ProjectThief
         private Animator m_aAnimator;
         private bool m_bIsLocked;
 
-        public bool open;
-
         private void Awake()
         {
             m_aAnimator = GetComponent<Animator>();
-        }
-
-        private void Update()
-        {
-            if(open)
-            {
-                AddKeyPieces();
-                m_aAnimator.SetBool("Open", true);
-            }
-
         }
 
         private bool CheckKeys()
