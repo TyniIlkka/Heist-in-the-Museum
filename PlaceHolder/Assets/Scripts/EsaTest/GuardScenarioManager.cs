@@ -123,7 +123,7 @@ namespace ProjectThief
                         break;
 
                     default:
-                        Debug.LogError("Not valid Phase for current Room!");
+                        Debug.Log("Not valid Phase for current Room!");
                         break;
                 }
 
@@ -138,7 +138,7 @@ namespace ProjectThief
                     
                     case 1:
                         i = 5;
-                        Guard guard1 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, p, i, false);
+                        Guard guard1 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, s, i, false);
 
                         break;
 
@@ -155,7 +155,7 @@ namespace ProjectThief
                         break;
 
                     default:
-                        Debug.LogError("Not valid Phase for current Room!");
+                        Debug.Log("Not valid Phase for current Room!");
                         break;
                 }
 
@@ -166,20 +166,20 @@ namespace ProjectThief
                 switch (m_iCurrentPhase)
                 {
                     case 2:
-                        i = 5; j = 2;
+                        i = 6; j = 9;
                         Guard guard1 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, s, i, false);
                         Guard guard2 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
 
                         break;
 
                     default:
-                        Debug.LogError("Not valid Phase for current Room!");
+                        Debug.Log("Not valid Phase for current Room!");
                         break;
                 }
             }
             else
             {
-                Debug.LogError("ERROR: Scenarios for scene not found!");
+                Debug.Log("ERROR: Scenarios for scene not found!");
             }
         }
 
