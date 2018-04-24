@@ -98,6 +98,8 @@ namespace ProjectThief
                         Debug.Log("Case3 Lobby Guards spawned");
                         break;
 
+
+                    ////////////-------Bugi!!-------/////
                     case 4:
                         i = 4; j = 5; k = 3;
                         //-----Guard 9 I shape-----//
@@ -142,13 +144,13 @@ namespace ProjectThief
 
                         break;
 
-                    case 7:
+                    case 3:
                         i = 4;
                         Guard guard2 = SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
 
                         break;
 
-                    case 8:
+                    case 4:
                         i = 5;
                         Guard guard3 = SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
 
@@ -168,6 +170,7 @@ namespace ProjectThief
                     case 2:
                         i = 6; j = 9;
                         Guard guard1 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, s, i, false);
+
                         Guard guard2 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
 
                         break;
