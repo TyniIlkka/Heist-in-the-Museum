@@ -34,8 +34,7 @@ namespace ProjectThief
         {            
             Item newItem = GameManager.instance.refItems[item.RefPos];
             newItem.Collected = true;
-            m_lInventoryItems.Add(newItem);            
-            Debug.Log("Added Item: " + item + " Refid: " + item.RefPos);
+            m_lInventoryItems.Add(newItem);
             UpdateInventory();
         }
 
@@ -46,10 +45,7 @@ namespace ProjectThief
         {
             Item removeItem = GameManager.instance.refItems[item.RefPos];
             m_lInventoryItems.Remove(removeItem);            
-            m_lSlots[item.Slot].GetComponent<RawImage>().texture = m_tEmpty;
-            // TODO Add use Animation and use animation to call updateInventory
-            //UpdateInventory();
-            Debug.Log("Removed Item: " + item + " from slot: " + item.Slot);            
+            m_lSlots[item.Slot].GetComponent<RawImage>().texture = m_tEmpty;        
             time = delay;
             start = true;            
         }
@@ -70,8 +66,7 @@ namespace ProjectThief
                     m_lSlots[i].GetComponent<RawImage>().texture = m_lInventoryItems[i].ItemImage;
                     m_lInventoryItems[i].Slot = i;
                 }
-            }
-            DebugInventory();
+            }            
         }
 
         // Update method for testing delay.
@@ -88,17 +83,6 @@ namespace ProjectThief
                 {
                     time -= Time.deltaTime;
                 }
-            }
-        }
-
-        private void DebugInventory()
-        {
-            for (int i = 0; i < m_lSlots.Count; i++)
-            {
-                if (i < m_lInventoryItems.Count)
-                    Debug.Log("Item: " + m_lInventoryItems[i].name +
-                        " ref id: " + m_lInventoryItems[i].RefPos + 
-                        " in slot: " + i);
             }
         }
     }

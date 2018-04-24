@@ -4,7 +4,7 @@ namespace ProjectThief
 {
     public class InterActableObject : ObjectBase
     {
-        [SerializeField, Tooltip("Vitrines key")]
+        [SerializeField, Tooltip("Display case's key")]
         private Item m_itKeyItem;        
         [SerializeField, Tooltip("Inventory object")]
         private Inventory m_iInventory;        
@@ -12,19 +12,25 @@ namespace ProjectThief
         private GameObject m_goLock;
         [SerializeField, Tooltip("position in key list")]
         private int m_iPos;
-        [SerializeField, Tooltip("Item")]
+        [SerializeField, Tooltip("Vault's key item")]
         private Item m_itKey;
-        [SerializeField, Tooltip("Vitrine opening sound")]
+        [SerializeField, Tooltip("Display case's opening sound")]
         private AudioClip m_acOpen;
         [SerializeField, Tooltip("Unlocking sound")]
         private AudioClip m_acUnlock;
         [SerializeField]
         private AudioSource m_aoSource;
-        [SerializeField, Tooltip("Vitrines position in gm list")]
+        [SerializeField, Tooltip("Display case's position in gm list")]
         private int m_iListPos;
+        [SerializeField, Tooltip("Display case's door")]
+        private GameObject m_goDoor;
+        [SerializeField, Tooltip("Doors open rotation")]
+        private float m_fRotationZ = 140;
          
         private Animator m_aAnimator;        
         private bool m_bUsed;
+
+        public bool trigger;
 
         private void Awake()
         {
@@ -40,12 +46,27 @@ namespace ProjectThief
             if (GameManager.instance.openedVitrines[m_iListPos])
             {
                 m_bUsed = true;
-                m_aAnimator.SetBool("Open", true);                
+                m_aAnimator.enabled = false;
+                m_goDoor.transform.localEulerAngles = new Vector3(m_goDoor.transform.localEulerAngles.x,
+                    m_goDoor.transform.localEulerAngles.y, m_fRotationZ);
+                Debug.Log("Door rotation " + m_goDoor.transform.localEulerAngles);
                 m_goLock.SetActive(false);
                 m_itKey.gameObject.SetActive(false);
             }
         }
-        
+
+        protected override void Update()
+        {
+            base.Update();
+
+            if (GameManager.instance.openedVitrines[m_iListPos] && trigger)
+            {
+                m_goDoor.transform.localEulerAngles = new Vector3(m_goDoor.transform.localEulerAngles.x,
+                    m_goDoor.transform.localEulerAngles.y, m_fRotationZ);
+                Debug.Log("Door rotation " + m_goDoor.transform.localEulerAngles);
+            }
+        }
+
         private void PlayAudio(AudioClip clip)
         {
             m_aoSource.clip = clip;
