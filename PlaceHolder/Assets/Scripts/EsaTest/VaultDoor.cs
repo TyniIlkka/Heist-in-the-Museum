@@ -19,7 +19,7 @@ namespace ProjectThief
 
         private void Awake()
         {
-            m_aAnimator = GetComponentInParent<Animator>();
+            m_aAnimator = GetComponent<Animator>();
         }
 
         private void Update()

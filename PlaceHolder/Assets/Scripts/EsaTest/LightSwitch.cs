@@ -6,7 +6,7 @@ namespace ProjectThief
     public class LightSwitch : ObjectBase
     {
         [SerializeField, Tooltip("Connected lights")]
-        private List<LightDistraction> m_lLights = new List<LightDistraction>();
+        private LightDistraction m_lLights;
         [SerializeField]
         private AudioSource m_aoSource;
         [SerializeField]
@@ -22,10 +22,7 @@ namespace ProjectThief
 
         public void ResetLights()
         {
-            for (int i = 0; i < m_lLights.Count; i++)
-            {
-                m_lLights[i].ResetLight();
-            }
+            m_lLights.ResetLight();
         }
 
         private void PlayEffect()
@@ -44,14 +41,11 @@ namespace ProjectThief
                     if (Input.GetMouseButtonDown(0))
                     {
                         Debug.Log("Switch actvated");
-                        PlayEffect();
-                        for (int i = 0; i < m_lLights.Count; i++)
-                        {
-                            if (!m_lLights[i].IsActive)
-                                m_lLights[i].Activated();
-                            else
-                                m_lLights[i].ResetLight();
-                        }
+                        PlayEffect();                        
+                        if (!m_lLights.IsActive)
+                            m_lLights.Activated();
+                        else
+                            m_lLights.ResetLight();                        
                     }
                 }
                 else
