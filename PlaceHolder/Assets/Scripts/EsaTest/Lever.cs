@@ -65,7 +65,7 @@ namespace ProjectThief
         {
             if (IsActive)
             {
-                if (IsInteractable)
+                if (IsInteractable && (!m_bBroken || m_itNeededItem.Collected))
                 {
                     GetMouseController.InteractCursor();
                     if (Input.GetMouseButtonDown(0))

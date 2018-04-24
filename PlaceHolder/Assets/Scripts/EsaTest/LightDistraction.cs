@@ -30,7 +30,8 @@ namespace ProjectThief
         }
 
         public void Activated()
-        {            
+        {
+            Debug.Log("Light Activated");
             m_goLight.SetActive(true);
             m_bIsActive = true;
             objects = Physics.OverlapSphere(transform.position, m_fRange);
@@ -44,6 +45,7 @@ namespace ProjectThief
                     if (guard != null)
                     {
                         guard.Distract(this, true);
+                        Debug.Log("Guard distracted");
                     }
                 }                
             }
@@ -51,6 +53,7 @@ namespace ProjectThief
 
         public void ResetLight()
         {
+            Debug.Log("Light Deactivated");
             m_goLight.SetActive(false);
             m_bIsActive = false;
             //guard.Distract(this, false);
@@ -62,6 +65,7 @@ namespace ProjectThief
                 if (guard != null)
                 {
                     guard.Distract(this, false);
+                    Debug.Log("Guard no longer distracted");
                 }
             }
         }

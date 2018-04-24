@@ -43,6 +43,7 @@ namespace ProjectThief
                     GetMouseController.InteractCursor();
                     if (Input.GetMouseButtonDown(0))
                     {
+                        Debug.Log("Switch actvated");
                         PlayEffect();
                         for (int i = 0; i < m_lLights.Count; i++)
                         {

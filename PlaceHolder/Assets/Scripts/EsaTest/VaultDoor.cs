@@ -15,10 +15,22 @@ namespace ProjectThief
         private Animator m_aAnimator;
         private bool m_bIsLocked;
 
+        public bool open;
+
         private void Awake()
         {
-            m_aAnimator = GetComponent<Animator>();
-        }        
+            m_aAnimator = GetComponentInParent<Animator>();
+        }
+
+        private void Update()
+        {
+            if(open)
+            {
+                AddKeyPieces();
+                m_aAnimator.SetBool("Open", true);
+            }
+
+        }
 
         private bool CheckKeys()
         {
@@ -45,10 +57,8 @@ namespace ProjectThief
         protected override void Activated()
         {
             if (IsActive)
-            {
-                GetMouseController.InspectCursor();
-                
-                if (IsInteractable)
+            { 
+                if (IsInteractable && CheckKeys())
                 {
                     GetMouseController.InteractCursor();
                     if (Input.GetMouseButtonDown(0))
@@ -59,6 +69,8 @@ namespace ProjectThief
                     }
                 }                
             }
+            else
+                GetMouseController.InspectCursor();
         }
     }
 }
