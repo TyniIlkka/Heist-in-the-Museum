@@ -33,20 +33,23 @@ namespace ProjectThief.PathFinding
             playerCam = Camera.main;
             soundWaves = GetComponentInChildren<ParticleSystem>();
 
-            if (m_fMoveSpeed < 0) m_fMoveSpeed = 0;
+            if (m_fMoveSpeed <= 0) m_fMoveSpeed = 1;
         }
 
         void Update()
         {
-            SneakOrWalk();
-            DoubleClick();
             if (Path.Count == 0)
             {
+                player.AnimationPlayer.SetBool("Moving", false);
                 m_fMoveSpeed = 0f;
             }
+            SneakOrWalk();
+            DoubleClick();
+           
             RippleEffect();
             
             FindPath();
+            
             player.MoveAnimation(Path);
             if (Path.Count > 0)
             {
@@ -66,8 +69,6 @@ namespace ProjectThief.PathFinding
             {
                 main.startSize = 1f;
             }
-
-
             else
             {
                 main.startSize = 0f;

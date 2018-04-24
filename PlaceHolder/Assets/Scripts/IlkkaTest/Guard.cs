@@ -340,7 +340,7 @@ namespace ProjectThief {
             else
             {
                 m_bDistracted = result;
-                TargetLight = null;
+                //TargetLight = null;
             }
         }
         /// <summary>
@@ -393,31 +393,6 @@ namespace ProjectThief {
                 return true;
             }
 
-            //Cone detection front of Guard
-            //Vector3 transformForward = transform.forward;
-            //transformForward.y += 0.5f;
-
-            //Vector3 startVec = transform.position;
-            //startVec.y += 0.5f;
-
-            //RaycastHit hit;
-            //Vector3 rayDirection = Thief.transform.position - transform.position;
-            //Debug.Log(startVec);
-            //Debug.Log(transformForward);
-            //if (((Vector3.Angle(rayDirection, transform.forward)) < m_fFieldOfView * 0.5f) && 
-            //    (Physics.Raycast(transform.position, rayDirection, out hit, m_fMaxDetectionRange)))
-            //{
-
-                
-            //    Debug.Log(hit.collider.gameObject);
-            //    if (hit.collider.gameObject == Thief)
-            //    {
-            //        Debug.DrawLine(transform.position, hit.point, Color.red);
-            //        Debug.Log("Player spotted: " + hit);
-            //        return true;
-            //    }
-            //    //return true;
-            //}
             return false;
         }
 

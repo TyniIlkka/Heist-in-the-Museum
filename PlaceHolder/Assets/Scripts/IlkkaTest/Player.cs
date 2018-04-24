@@ -15,6 +15,9 @@ namespace ProjectThief
         public float walkRange;
         public float sneakRange;
 
+        public Animator AnimationPlayer { get { return m_aPlayerAnimator; } }
+        
+
         public float DetectRange
         {
             get
