@@ -23,9 +23,8 @@ namespace ProjectThief
         [SerializeField, Tooltip("Vitrines position in gm list")]
         private int m_iListPos;
          
-        private Animator m_aAnimator;
-        private bool m_bLocked = true;
-        private bool m_bItemTaken;
+        private Animator m_aAnimator;        
+        private bool m_bUsed;
 
         private void Awake()
         {
@@ -40,9 +39,8 @@ namespace ProjectThief
 
             if (GameManager.instance.openedVitrines[m_iListPos])
             {
-                m_bItemTaken = true;
-                m_aAnimator.SetBool("Open", true);
-                m_bLocked = false;
+                m_bUsed = true;
+                m_aAnimator.SetBool("Open", true);                
                 m_goLock.SetActive(false);
                 m_itKey.gameObject.SetActive(false);
             }
@@ -60,40 +58,22 @@ namespace ProjectThief
             if (!GameManager.instance.openedVitrines[m_iListPos])
             {
                 if (IsActive)
-                {                    
-                    if (!m_bLocked)
+                {                     
+                    if (IsInteractable && m_itKeyItem.Collected && !m_bUsed)
                     {
-                        if (IsInteractable)
+                        GetMouseController.InteractCursor();
+                        if (Input.GetMouseButtonDown(0))
                         {
-                            GetMouseController.InteractCursor();
-                            if (Input.GetMouseButtonDown(0))
-                            {
-                                PlayAudio(m_acOpen);
-                                m_aAnimator.SetBool("Open", true);                                                              
-                            }
+                            m_bUsed = true;
+                            m_iInventory.RemoveItem(m_itKeyItem);
+                            PlayAudio(m_acUnlock);                                
+                            m_goLock.SetActive(false);
+                            PlayAudio(m_acOpen);
+                            m_aAnimator.SetBool("Open", true);                                                              
                         }
-                        else
-                            GetMouseController.InspectCursor();
                     }
                     else
-                    {
-                        if (IsInteractable)
-                        {
-                            GetMouseController.InteractCursor();
-                            if (m_itKeyItem.Collected)
-                            {
-                                if (Input.GetMouseButtonDown(0))
-                                {
-                                    m_iInventory.RemoveItem(m_itKeyItem);
-                                    PlayAudio(m_acUnlock);
-                                    m_bLocked = false;
-                                    m_goLock.SetActive(false);
-                                }
-                            }
-                        }
-                        else
-                            GetMouseController.InspectCursor();
-                    }                    
+                        GetMouseController.InspectCursor();
                 }
             }
             else            
@@ -102,14 +82,10 @@ namespace ProjectThief
 
         public void TakeItem()
         {
-            if (!m_bItemTaken)
-            {
-                m_bItemTaken = true;
-                m_iInventory.AddItem(m_itKey);
-                m_itKey.gameObject.SetActive(false);
-                GameManager.instance.keyItems[m_iPos].Collected = true;
-                GameManager.instance.openedVitrines[m_iListPos] = true;
-            }            
+            m_iInventory.AddItem(m_itKey);
+            m_itKey.gameObject.SetActive(false);
+            GameManager.instance.keyItems[m_iPos].Collected = true;
+            GameManager.instance.openedVitrines[m_iListPos] = true;
         }
     }
 }
