@@ -114,9 +114,10 @@ namespace ProjectThief
                         i = 5; j = 6; k = 4;
                         //-----Guard 12 S PingPong-----//
                         Guard guard12 = SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
+                        //-----Guard 13-----//
                         Guard guard13 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
 
-                        //-----Guard 9 Near Vault-----//
+                        //-----Guard 14 Near Vault-----//
                         Guard guard14 = SpawnGuard(staticPoints[k].transform.position, Quaternion.identity, s, k, false);
 
                         break;
@@ -136,18 +137,18 @@ namespace ProjectThief
                 {
                     
                     case 1:
-                        i = 3;
+                        i = 5;
                         Guard guard1 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, p, i, false);
 
                         break;
 
-                    case 3:
+                    case 7:
                         i = 4;
                         Guard guard2 = SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
 
                         break;
 
-                    case 4:
+                    case 8:
                         i = 5;
                         Guard guard3 = SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
 
@@ -166,7 +167,7 @@ namespace ProjectThief
                 {
                     case 2:
                         i = 5; j = 2;
-                        Guard guard1 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, p, i, false);
+                        Guard guard1 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, s, i, false);
                         Guard guard2 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
 
                         break;
