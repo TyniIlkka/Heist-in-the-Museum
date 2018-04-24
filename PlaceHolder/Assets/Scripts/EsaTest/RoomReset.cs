@@ -47,14 +47,14 @@ namespace ProjectThief
                 switch (GameManager.instance.currentPhase)
                 {
                     case 1:
-                        GameManager.instance.refItems[2].Collected = false;
+                        GameManager.instance.refItems[1].Collected = false;
                         GameManager.instance.refItems[5].Collected = false;
                         GameManager.instance.refItems[9].Collected = false;
                         GameManager.instance.openedVitrines[1] = false;
                         GameManager.instance.keyItems[1].Collected = false;
 
-                        if (inventory.InventoryItems.Contains(GameManager.instance.refItems[2]))
-                            inventory.RemoveItem(GameManager.instance.refItems[2]);
+                        if (inventory.InventoryItems.Contains(GameManager.instance.refItems[1]))
+                            inventory.RemoveItem(GameManager.instance.refItems[1]);
                         if (inventory.InventoryItems.Contains(GameManager.instance.refItems[5]))
                             inventory.RemoveItem(GameManager.instance.refItems[5]);
                         if (inventory.InventoryItems.Contains(GameManager.instance.refItems[9]))
