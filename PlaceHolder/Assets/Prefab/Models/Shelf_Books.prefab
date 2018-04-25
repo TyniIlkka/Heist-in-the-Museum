@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4058492303729024}
   - component: {fileID: 33860781554894852}
   - component: {fileID: 23188322336376392}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hyllyt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4353875530654254}
   - component: {fileID: 33025913568659926}
   - component: {fileID: 23700830171181360}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ovi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,10 +53,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4902674867627638}
-  - component: {fileID: 95948752730435380}
-  m_Layer: 0
+  - component: {fileID: 65091332143539668}
+  m_Layer: 9
   m_Name: Shelf_Books
-  m_TagString: Untagged
+  m_TagString: Obstacles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 4302257414523128}
   - component: {fileID: 33793919599743602}
   - component: {fileID: 23134506762935074}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Kehys
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1221363630330868}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 10.06, y: 0.085559, z: 26.062}
+  m_LocalPosition: {x: 8.387892, y: 0.049999405, z: -3.7619133}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4058492303729024}
@@ -262,20 +262,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1098324855164540}
   m_Mesh: {fileID: 4300002, guid: 18235b9cebd31cf47a4e10fc4e6822d4, type: 3}
---- !u!95 &95948752730435380
-Animator:
-  serializedVersion: 3
+--- !u!65 &65091332143539668
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1221363630330868}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 18235b9cebd31cf47a4e10fc4e6822d4, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 3.5, z: 0.6}
+  m_Center: {x: 0, y: 1.7, z: 0}

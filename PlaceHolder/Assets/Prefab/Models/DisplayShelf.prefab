@@ -21,9 +21,8 @@ GameObject:
   - component: {fileID: 4712827864138144}
   - component: {fileID: 33726019309455806}
   - component: {fileID: 23692447438359334}
-  - component: {fileID: 95617257261933108}
   - component: {fileID: 65310840925343346}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DisplayShelf
   m_TagString: Obstacles
   m_Icon: {fileID: 0}
@@ -101,20 +100,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 1.0000002, z: 2.5319476}
   m_Center: {x: 0, y: 0, z: 1.2704148}
---- !u!95 &95617257261933108
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1766487431701138}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 88b6da7ec6ecbe84d8cc2486f21e8414, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1

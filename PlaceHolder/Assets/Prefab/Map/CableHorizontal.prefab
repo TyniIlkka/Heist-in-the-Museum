@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4548651955078916}
   - component: {fileID: 33305027278441128}
   - component: {fileID: 23298505408391836}
-  - component: {fileID: 95692800031749806}
   m_Layer: 0
   m_Name: CableHorizontal
   m_TagString: Untagged
@@ -83,20 +82,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1707663626079948}
   m_Mesh: {fileID: 4300004, guid: 1badf829d7b64024abe735689da08271, type: 3}
---- !u!95 &95692800031749806
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1707663626079948}
-  m_Enabled: 0
-  m_Avatar: {fileID: 9000000, guid: 1badf829d7b64024abe735689da08271, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1

@@ -69,7 +69,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4055419951329396}
-  - component: {fileID: 95288554068715252}
   - component: {fileID: 114150199793613570}
   m_Layer: 0
   m_Name: Lamp
@@ -216,23 +215,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1514388857423342}
   m_Mesh: {fileID: 4300000, guid: 000ad68852be4224297bb97d442d119c, type: 3}
---- !u!95 &95288554068715252
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1813890274199308}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 000ad68852be4224297bb97d442d119c, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!108 &108280714685972912
 Light:
   m_ObjectHideFlags: 1
@@ -285,4 +267,3 @@ MonoBehaviour:
   m_mDefaultMat: {fileID: 2100000, guid: fd524497fd33cd44082b721fea67cbe6, type: 2}
   m_mLitMaterial: {fileID: 2100000, guid: a3b249e54b722d24c9b94b50341e7f31, type: 2}
   m_goLightObject: {fileID: 1514388857423342}
-  trigger: 0

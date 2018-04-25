@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4360855055594794}
   - component: {fileID: 33487327329265910}
   - component: {fileID: 23483631022292662}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Kehys
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,9 +36,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4122124464801160}
-  - component: {fileID: 95668261287115340}
   - component: {fileID: 65701683246499374}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Archive
   m_TagString: Obstacles
   m_Icon: {fileID: 0}
@@ -55,7 +54,7 @@ GameObject:
   - component: {fileID: 4924018308391316}
   - component: {fileID: 33990769448337024}
   - component: {fileID: 23472566085361396}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ovi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +71,7 @@ GameObject:
   - component: {fileID: 4647060614937920}
   - component: {fileID: 33905359538124042}
   - component: {fileID: 23556152342368440}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hyllyt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,20 +276,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.96, y: 0.98, z: 0.52}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!95 &95668261287115340
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1517418342692726}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 18235b9cebd31cf47a4e10fc4e6822d4, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1

@@ -36,7 +36,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4867122152963930}
-  - component: {fileID: 95518441538556796}
   - component: {fileID: 65990137106938234}
   - component: {fileID: 114273116692499424}
   m_Layer: 0
@@ -199,23 +198,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1.5, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!95 &95518441538556796
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1742636710891128}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: a42079a7356133543aa0024e682dd4b7, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114273116692499424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -227,5 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24acf59b6bc672c4d8421b0daa21d66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_lLights:
-  - {fileID: 0}
+  m_lLight: {fileID: 0}
+  m_aoSource: {fileID: 0}
+  m_acUseSFX: {fileID: 0}
+  m_fCooldown: 0.3
