@@ -41,8 +41,7 @@ namespace ProjectThief
             int j = 0;
             int k = 0;
 
-            int s = 8;  //Staticlist null position
-            int p = 10; //Pathlist null position
+            int s = 0;  //Staticlist null position And Pathlist null position
 
             //Debug.Log(m_iCurrentPhase);
             if (m_sCurrentState.SceneName == "Lobby")
@@ -51,83 +50,82 @@ namespace ProjectThief
                 switch (m_iCurrentPhase)
                 {
                     case 0:
-                        i = 0; j = 1;
+                        i = 1; j = 1;
 
-                        //-----Guard 1 Spawn and set-----//
-                        Guard guard1 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, p, i, false);
+                        //-----Guard 1 Spawn Middle Door-----//
+                        Guard guard1 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, s, i, false);
+                
 
-                        guard1.CurrentDirection = staticPoints[i].CurrentDir;
-                        guard1.Path = pathList[10];
-                        
-                        guard1.InitStates();
-                        guard1.Thief = thief;
-                        guard1.Moving = false;
-
-                        guard1.enabled = true;
-
-                        //-----Guard 2 Spawn and set-----//
-                        Guard guard2 = SpawnGuard(staticPoints[j].transform.position, Quaternion.identity, p, j, false);
+                        //-----Guard 2 Spawn Patrol T wall-----//
+                        Guard guard2 = SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
 
                         Debug.Log("Case0 Lobby Guards spawned");
                         break;
 
                     case 1:
-                        i = 2; j = 0;
+                        i = 1; j = 2;
 
-                        //-----Guard 3 Spawn and set-----//
-                        Guard guard3 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, p , i, false);
+                        //-----Guard 3 Spawn Middle Door-----//
+                        Guard guard3 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, s , i, false);
 
-                        //-----Guard 4 Spawn and set-----//
-                        Guard guard4 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
+                        //-----Guard 4 Spawn Patrol T wall-----//
+                        Guard guard4 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, i, s, true);
 
-                        //guard4.CurrentDirection = staticPoints[11].CurrentDir;
-                        //guard4.Path = pathList[j];
-                        //guard4.CurrentWaypoint = pathList[j].GetClosestWaypoint(guard4.transform.position);
-                        //guard4.Moving = true;
-       
-                        //guard4.enabled = true;
+                        //-----Guard 5 Spawn Around Table-----//
+                        Guard guard5 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
+
 
                         Debug.Log("Case1 Lobby Guards spawned");
                         break;
 
                     case 2:
-                        i = 4; j = 1;
+                        i = 2; j = 2;
 
-                        Guard guard5 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, p, i, false);
+                        //-----Guard 6 Left Door-----//
+                        Guard guard6 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, s, i, false);
 
-                        Guard guard6 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
+                        //-----Guard 7 Spawn Around Table-----//
+                        Guard guard7 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
 
                         Debug.Log("Case2 Lobby Guards spawned");
                         break;
 
                     case 3:
-                        i = 5; j = 2;
-                        Guard guard7 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, p, i, false);
-
-                        Guard guard8 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
+                        i = 3;
+                        //-----Guard 8 Tetris-----//
+                        Guard guard8 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, i, s, true);
 
                         Debug.Log("Case3 Lobby Guards spawned");
                         break;
 
+
+                    ////////////-------Bugi!!-------/////
                     case 4:
-                        i = 7; j = 8;
+                        i = 4; j = 5; k = 3;
+                        //-----Guard 9 I shape-----//
                         Guard guard9 = SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
+                        //-----Guard 10 L PingPong-----//
                         Guard guard10 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
+                        //-----Guard 11 X North-----//
+                        Guard guard11 = SpawnGuard(staticPoints[k].transform.position, Quaternion.identity, s, k, false);
 
                         Debug.Log("Case4 Lobby Guards spawned");
                         break;
 
                     case 5:
-                        i = 9; j =10; k = 8;
+                        i = 5; j = 6; k = 4;
+                        //-----Guard 12 S PingPong-----//
+                        Guard guard12 = SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
+                        //-----Guard 13-----//
+                        Guard guard13 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
 
-                        Guard guard11 = SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
-                        Guard guard12 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
-                        Guard guard13 = SpawnGuard(staticPoints[k].transform.position, Quaternion.identity, p, k, false);
+                        //-----Guard 14 Near Vault-----//
+                        Guard guard14 = SpawnGuard(staticPoints[k].transform.position, Quaternion.identity, s, k, false);
 
                         break;
 
                     default:
-                        Debug.LogError("Not valid Phase for current Room!");
+                        Debug.Log("Not valid Phase for current Room!");
                         break;
                 }
 
@@ -141,8 +139,8 @@ namespace ProjectThief
                 {
                     
                     case 1:
-                        i = 3;
-                        Guard guard1 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, p, i, false);
+                        i = 5;
+                        Guard guard1 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, s, i, false);
 
                         break;
 
@@ -159,7 +157,7 @@ namespace ProjectThief
                         break;
 
                     default:
-                        Debug.LogError("Not valid Phase for current Room!");
+                        Debug.Log("Not valid Phase for current Room!");
                         break;
                 }
 
@@ -170,20 +168,21 @@ namespace ProjectThief
                 switch (m_iCurrentPhase)
                 {
                     case 2:
-                        i = 5; j = 2;
-                        Guard guard1 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, p, i, false);
+                        i = 6; j = 9;
+                        Guard guard1 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, s, i, false);
+
                         Guard guard2 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
 
                         break;
 
                     default:
-                        Debug.LogError("Not valid Phase for current Room!");
+                        Debug.Log("Not valid Phase for current Room!");
                         break;
                 }
             }
             else
             {
-                Debug.LogError("ERROR: Scenarios for scene not found!");
+                Debug.Log("ERROR: Scenarios for scene not found!");
             }
         }
 

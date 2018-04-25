@@ -24,7 +24,7 @@ namespace ProjectThief.AI
         {
             base.StateActivated();
             Mover = Owner.GetComponent<GuardMover>();
-            Mover.gameObject.SetActive(true);
+
             ready = false;
         }
 

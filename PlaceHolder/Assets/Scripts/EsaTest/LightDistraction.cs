@@ -43,7 +43,7 @@ namespace ProjectThief
                     guard = item.GetComponent<Guard>(); 
                     if (guard != null)
                     {
-                        guard.Distract(this, true);
+                        guard.Distract(this, true);                        
                     }
                 }                
             }

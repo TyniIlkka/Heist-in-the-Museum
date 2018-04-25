@@ -303,6 +303,15 @@ namespace ProjectThief {
             if (CurrentState != null)
             {
                 CurrentState.Update();
+                if (CurrentState == patrol)
+                {
+                    Animation.SetBool("Moving", true);
+                }
+                else if (CurrentState == staticTurnTo || CurrentState == guardStatic)
+                {
+                    Animation.SetBool("Moving", false);
+                }
+
             }                   
         }
 
@@ -331,7 +340,7 @@ namespace ProjectThief {
             else
             {
                 m_bDistracted = result;
-                TargetLight = null;
+                //TargetLight = null;
             }
         }
         /// <summary>
@@ -349,7 +358,7 @@ namespace ProjectThief {
             else
             {
                 m_bDistracted = result;
-                TargetSound = null;
+                //TargetSound = null;
             }
         }
 
@@ -376,39 +385,14 @@ namespace ProjectThief {
         public bool CanSeePlayer()
         {
             //Close range detection
-            float distanceToPlayer = (transform.position - Thief.transform.position).sqrMagnitude; 
+            float distanceToPlayer = (transform.position - Thief.transform.position).magnitude; 
 
-            if ((distanceToPlayer <= m_fMinDetectionRangeWalk ) && (Thief.GetComponent<GridPlayer>().m_fMoveSpeed >= Thief.GetComponent<GridPlayer>().m_fSneakSpeed) ||
+            if ((distanceToPlayer <= m_fMinDetectionRangeWalk ) && (Thief.GetComponent<GridPlayer>().m_fMoveSpeed > Thief.GetComponent<GridPlayer>().m_fSneakSpeed) ||
                 (distanceToPlayer <= m_fMinDetectionRangeSneak) && (Thief.GetComponent<GridPlayer>().m_fMoveSpeed <= Thief.GetComponent<GridPlayer>().m_fSneakSpeed))
             {
                 return true;
             }
 
-            //Cone detection front of Guard
-            //Vector3 transformForward = transform.forward;
-            //transformForward.y += 0.5f;
-
-            //Vector3 startVec = transform.position;
-            //startVec.y += 0.5f;
-
-            //RaycastHit hit;
-            //Vector3 rayDirection = Thief.transform.position - transform.position;
-            //Debug.Log(startVec);
-            //Debug.Log(transformForward);
-            //if (((Vector3.Angle(rayDirection, transform.forward)) < m_fFieldOfView * 0.5f) && 
-            //    (Physics.Raycast(transform.position, rayDirection, out hit, m_fMaxDetectionRange)))
-            //{
-
-                
-            //    Debug.Log(hit.collider.gameObject);
-            //    if (hit.collider.gameObject == Thief)
-            //    {
-            //        Debug.DrawLine(transform.position, hit.point, Color.red);
-            //        Debug.Log("Player spotted: " + hit);
-            //        return true;
-            //    }
-            //    //return true;
-            //}
             return false;
         }
 

@@ -19,10 +19,14 @@ namespace ProjectThief
         [SerializeField, Tooltip("Needed item")]
         private Item m_itNeededItem;
         [SerializeField, Tooltip("Position in GM's bool list")]
-        private int m_iPos;        
+        private int m_iPos;
+        [SerializeField, Tooltip("Levers used rotation")]
+        private float m_fRoationX = -238;
 
         private Animator m_aLeverAnim;
-        private bool m_bDone;
+        private bool m_bUsed;
+
+        public bool trigger;
 
         private void Awake()
         {
@@ -39,9 +43,12 @@ namespace ProjectThief
         {           
             if (GameManager.instance.usedlevers[m_iPos])
             {
-                m_bDone = true;
+                m_bUsed = true;
                 m_goHandle.SetActive(true);
-                m_aLeverAnim.SetBool("Activated", true);                
+                m_aLeverAnim.enabled = false;
+                m_goHandle.transform.localEulerAngles = new Vector3(m_fRoationX,
+                    m_goHandle.transform.localEulerAngles.y, m_goHandle.transform.localEulerAngles.z);
+                Debug.Log("Handle rotation: " + m_goHandle.transform.localEulerAngles);
                 m_dDoor.Open = true;
                 m_dDoor.Blocked = false;
             } 
@@ -49,6 +56,18 @@ namespace ProjectThief
             {
                 m_goHandle.SetActive(false);
                 m_bBroken = true;
+            }
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+
+            if (GameManager.instance.usedlevers[m_iPos] && trigger)
+            {
+                m_goHandle.transform.localEulerAngles = new Vector3(m_fRoationX,
+                    m_goHandle.transform.localEulerAngles.y, m_goHandle.transform.localEulerAngles.z);
+                Debug.Log("Handle rotation: " + m_goHandle.transform.localEulerAngles);
             }
         }
 
@@ -65,11 +84,12 @@ namespace ProjectThief
         {
             if (IsActive)
             {
-                if (IsInteractable)
+                if (IsInteractable && (!m_bBroken || m_itNeededItem.Collected) && !m_bUsed)
                 {
                     GetMouseController.InteractCursor();
                     if (Input.GetMouseButtonDown(0))
                     {
+                        m_bUsed = true;
                         m_iInventory.RemoveItem(m_itNeededItem);
                         m_goHandle.SetActive(true);
                         m_aLeverAnim.SetBool("Activated", true);
@@ -81,16 +101,12 @@ namespace ProjectThief
         }
 
         public void OpenObstacle()
-        {
-            if (!m_bDone)
-            {
-                m_bDone = true;
-                m_aObstacleAnim.SetBool("Open", true);
-                m_dDoor.ObstacleSound();
-                m_dDoor.Open = false;
-                m_dDoor.Blocked = false;
-                GameManager.instance.usedlevers[m_iPos] = true;
-            }
+        {             
+            m_aObstacleAnim.SetBool("Open", true);
+            m_dDoor.ObstacleSound();
+            m_dDoor.Open = false;
+            m_dDoor.Blocked = false;
+            GameManager.instance.usedlevers[m_iPos] = true;            
         }
     }    
 }
