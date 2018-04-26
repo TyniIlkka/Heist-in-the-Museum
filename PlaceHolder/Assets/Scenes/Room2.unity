@@ -466,7 +466,6 @@ Transform:
   - {fileID: 686263138}
   - {fileID: 45273712}
   - {fileID: 1414385097}
-  - {fileID: 747623779}
   m_Father: {fileID: 310028340}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4884,7 +4883,7 @@ Prefab:
         type: 2}
       propertyPath: m_itKeyItem
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1793676775}
     - target: {fileID: 114440937410009216, guid: 01e1532fab9046849892d5316a2cf7c5,
         type: 2}
       propertyPath: m_iInventory
@@ -6681,6 +6680,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4706447883345188, guid: ad8e2cf1d766aeb45ac39af501b120f0,
     type: 2}
   m_PrefabInternal: {fileID: 1793676773}
+--- !u!114 &1793676775 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114121378785211760, guid: ad8e2cf1d766aeb45ac39af501b120f0,
+    type: 2}
+  m_PrefabInternal: {fileID: 1793676773}
+  m_Script: {fileID: 11500000, guid: 8a4cc581cedaa3e4aac52d42812038cb, type: 3}
 --- !u!1001 &1809097274
 Prefab:
   m_ObjectHideFlags: 0

@@ -59,18 +59,22 @@ namespace ProjectThief
                 {
                     ObjectBase obj = _objects[i];
 
-                    if (Vector3.Distance(transform.position, obj.gameObject.transform.position) <= _interactDist)
+                    if (obj.GetComponent<Item>() != null)
+                        Debug.Log("object: " + obj.name + " distance: " + Vector3.Distance(transform.position, obj.transform.position));
+
+                    if (Vector3.Distance(transform.position, obj.transform.position) <= _interactDist)
                     {
                         obj.IsInteractable = true;
                     }
-                    else if (Vector3.Distance(transform.position, obj.gameObject.transform.position) > _interactDist)
+                    if (Vector3.Distance(transform.position, obj.transform.position) > _interactDist)
                     {
                         obj.IsInteractable = false;
                     }
-                    else if (Vector3.Distance(transform.position, obj.gameObject.transform.position) > _activationDist)
+                    if (Vector3.Distance(transform.position, obj.transform.position) > _activationDist)
                     {
                         obj.IsActive = false;
-                        obj.IsInteractable = false;
+                        if (obj.GetComponent<Item>() != null)
+                            Debug.Log(obj.name + " removed from tracking list");
                         _toBeRemoved.Add(obj);                       
                     }
                 }

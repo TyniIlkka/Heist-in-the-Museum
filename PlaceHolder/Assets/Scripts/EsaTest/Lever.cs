@@ -87,15 +87,23 @@ namespace ProjectThief
         {
             if (IsActive)
             {
-                if (IsInteractable && (!m_bBroken || m_itNeededItem.Collected) && !m_bUsed)
+                if (IsInteractable)
                 {
-                    GetMouseController.InteractCursor();
-                    if (Input.GetButtonDown("Fire1"))
+                    if ((m_bBroken && m_itNeededItem.Collected) || !m_bUsed)
                     {
-                        m_bUsed = true;
-                        m_iInventory.RemoveItem(m_itNeededItem);
-                        m_goHandle.SetActive(true);
-                        m_aLeverAnim.SetBool("Activated", true);
+                        GetMouseController.InteractCursor();
+                        if (Input.GetButtonDown("Fire1"))
+                        {
+                            m_bUsed = true;
+                            m_iInventory.RemoveItem(m_itNeededItem);
+                            m_goHandle.SetActive(true);
+                            m_aLeverAnim.SetBool("Activated", true);
+                        }
+                    }
+                    else
+                    {
+                        GetMouseController.InspectCursor();
+                        // TODO inform player that they are missing something.
                     }
                 }
                 else
