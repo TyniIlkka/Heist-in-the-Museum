@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+
 namespace ProjectThief.PathFinding
 {
     public class GridPlayer : Pathfinding
@@ -13,6 +14,8 @@ namespace ProjectThief.PathFinding
         public float m_fSneakSpeed;
         public float m_fWalkSpeed;
         public float m_fTurnSpeed;
+
+        private bool sneaking = false;
 
         public Player player;
         private ParticleSystem soundWaves;
@@ -43,12 +46,11 @@ namespace ProjectThief.PathFinding
                 player.AnimationPlayer.SetBool("Moving", false);
                 m_fMoveSpeed = 0.99f;
             }
-            SneakOrWalk();
-            DoubleClick();
-           
+            //SneakOrWalk();
+            //DoubleClick();
+
+            MoveSpeedMethod();
             RippleEffect();
-            
-            FindPath();
             
             player.MoveAnimation(Path);
             if (Path.Count > 0)
@@ -75,19 +77,60 @@ namespace ProjectThief.PathFinding
             }
         }
 
+        private void MoveSpeedMethod()
+        {
+            
+            bool input= false;
+            if (GameManager.instance.canMove)
+            {
+                if (Input.GetButtonDown("Fire1") || Input.GetButton("Fire1"))
+                {
+                    m_fMoveSpeed = m_fSneakSpeed;
+                    input = true;
+
+                }
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    m_fMoveSpeed = m_fWalkSpeed;
+                }
+                else if (!sneaking)
+                {
+                    m_fMoveSpeed = m_fSneakSpeed;
+                }
+                sneaking = false;
+
+                if (Input.GetButtonDown("Fire2") || Input.GetButton("Fire2"))
+                {
+                    m_fMoveSpeed = m_fWalkSpeed;
+                    input = true;
+                    sneaking = true;
+                }
+                if (input)
+                {
+                    FindPath();
+                }
+            }
+        }
+
         private void FindPath()
         {
 
-            if (Input.GetButtonDown("Fire1") || Input.GetButton("Fire1"))
-            {
-                Ray ray = playerCam.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
-                RaycastHit hit;
+            Ray ray = playerCam.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+            RaycastHit hit;
 
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity, (int)ingoreLayerMask))
-                {
-                    FindPath(transform.position, hit.point);
-                }
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, (int)ingoreLayerMask))
+            {
+                FindPath(transform.position, hit.point);
             }
+        }
+
+        /// <summary>
+        /// Used to move target point when clicked to interactable.
+        /// </summary>
+        /// <param name="targetPosition">MoveToPoint position</param>
+        private void FindPath(Vector3 targetPosition)
+        {
+            FindPath(transform.position, targetPosition);
         }
 
         private void MoveMethod()
