@@ -41,7 +41,7 @@ namespace ProjectThief.PathFinding
             if (Path.Count == 0)
             {
                 player.AnimationPlayer.SetBool("Moving", false);
-                m_fMoveSpeed = 0f;
+                m_fMoveSpeed = 0.99f;
             }
             SneakOrWalk();
             DoubleClick();
@@ -65,7 +65,7 @@ namespace ProjectThief.PathFinding
             {
                 main.startSize = 3f;
             }
-            else if (m_fMoveSpeed <= m_fSneakSpeed && m_fMoveSpeed > 0f)
+            else if (m_fMoveSpeed <= m_fSneakSpeed && m_fMoveSpeed > 0.99f)
             {
                 main.startSize = 1f;
             }
