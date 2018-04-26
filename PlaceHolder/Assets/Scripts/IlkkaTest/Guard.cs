@@ -33,11 +33,11 @@ namespace ProjectThief {
         Vector3 startVec;
 
         #region States
-        Patrol patrol;
-        PatrolMoveTo patrolMoveTo;
-        PatrolMoveFrom patrolMoveFrom;
-        Static guardStatic;
-        StaticTurnTo staticTurnTo;
+        public Patrol patrol;
+        public PatrolMoveTo patrolMoveTo;
+        public PatrolMoveFrom patrolMoveFrom;
+        public Static guardStatic;
+        public StaticTurnTo staticTurnTo;
 
         #endregion
         
@@ -66,7 +66,7 @@ namespace ProjectThief {
         [SerializeField]
         private LayerMask m_lmLightMask;
 
-        public bool m_bDistracted;
+        private bool m_bDistractedLight;
 
 
         #endregion
@@ -87,6 +87,8 @@ namespace ProjectThief {
         //Which way are we moving.
         [SerializeField]
         private Direction _direction;
+
+        private bool m_bDistractedSound;
         
         
         #endregion
@@ -184,11 +186,17 @@ namespace ProjectThief {
         {
             get { return m_lmLightMask; }
         }
-        public bool Distracted
+        public bool DistractedLight
         {
-            get { return m_bDistracted; }
-            set { m_bDistracted = value; }
+            get { return m_bDistractedLight; }
+            set { m_bDistractedLight = value; }
         }
+        public bool DistractedSound
+        {
+            get { return m_bDistractedSound; }
+            set { m_bDistractedSound = value; }
+        }
+
         #endregion
 
         #region StateMachine
@@ -208,7 +216,8 @@ namespace ProjectThief {
         private IList<AIStateBase> _states = new List<AIStateBase>();
 
         public AIStateBase CurrentState { get; set; }
-        // The player unit this enemy is trying to shoot at.
+
+        // The target this guard is trying to aim at.
         public LightDistraction TargetLight { get; set; }
         public SoundDistraction TargetSound { get; set; }
         #endregion
@@ -331,15 +340,15 @@ namespace ProjectThief {
         /// <param name="result">Is guard set on/off.</param>
         public void Distract(LightDistraction targetLight, bool result)
         {
-            if (result && !m_bMoving)
+            if (result && (CurrentState == staticTurnTo || CurrentState == guardStatic))
             {
                 Debug.Log("Hämäytetään Valolla! ");
                 TargetLight = targetLight;
-                m_bDistracted = result;
+                m_bDistractedLight = result;
             }
             else
             {
-                m_bDistracted = result;
+                m_bDistractedLight = result;
                 //TargetLight = null;
             }
         }
@@ -350,14 +359,14 @@ namespace ProjectThief {
         /// <param name="result">Is guard set on/off.</param>
         public void Distract(SoundDistraction targetSound, bool result)
         {
-            if (result && m_bMoving)
+            if (result && (CurrentState == patrol || CurrentState == patrolMoveTo))
             {
                 TargetSound = targetSound;
-                m_bDistracted = result;
+                m_bDistractedSound = result;
             }
             else
             {
-                m_bDistracted = result;
+                m_bDistractedSound = result;
                 //TargetSound = null;
             }
         }

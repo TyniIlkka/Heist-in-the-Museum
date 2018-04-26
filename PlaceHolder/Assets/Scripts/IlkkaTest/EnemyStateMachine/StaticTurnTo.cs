@@ -35,7 +35,7 @@ namespace ProjectThief.AI
 
         private bool ChangeState()
         {
-            if (!Owner.Distracted)
+            if (!Owner.DistractedLight)
             {
                 Debug.Log("Hämätty");
                 bool result = Owner.PerformTransition(AIStateType.Static);

@@ -77,7 +77,7 @@ namespace ProjectThief.AI {
 
         private bool ChangeState()
         {
-            if (Owner.Distracted)
+            if (Owner.DistractedSound)
             {
                 Debug.Log("Hämätty äänellä!");
                 bool result = Owner.PerformTransition(AIStateType.PatrolMoveTo);

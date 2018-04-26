@@ -62,8 +62,8 @@ namespace ProjectThief.AI
                     if (Mover.MoverPath.Count == 1)
                     {
                         //Owner.transform.LookAt(Owner.TargetSound.transform.position, Vector3.up);
-                        //WaitTillMoveBack();
-                        Owner.Distracted = false;
+                        WaitTillMoveBack();
+                        Owner.DistractedSound = false;
                         //Mover.Target = Owner.CurrentWaypoint.transform.position;
 
                         Mover.FindPath(Owner.transform.position, Owner.CurrentWaypoint.transform.position);
