@@ -46,8 +46,8 @@ namespace ProjectThief.AI
                 //Owner.TargetSound.transform.position.y = 0;
                 if (!ready)
                 {
-                    Mover.Target = Owner.TargetSound.MoveToPoint;
-                    Mover.FindPath(Owner.transform.position, Owner.TargetSound.MoveToPoint);
+                    Mover.Target = Owner.TargetSound.MoveToPos;
+                    Mover.FindPath(Owner.transform.position, Owner.TargetSound.MoveToPos);
                 }
                 
 

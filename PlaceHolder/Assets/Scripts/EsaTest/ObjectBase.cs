@@ -6,8 +6,16 @@ namespace ProjectThief
 {
     public abstract class ObjectBase : MonoBehaviour
     {
+        private float _volume;
+
         protected abstract void Activated();
         protected virtual void Update()
+        {
+            _volume = AudioManager.instance.SFXPlayVol;
+            MouseCheck();
+        }
+
+        private void MouseCheck()
         {
             LayerMask hitLayers = GameManager.instance.rayCastLayers;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -16,8 +24,8 @@ namespace ProjectThief
             if (Physics.Raycast(ray, out hit, 20, hitLayers) && !GameManager.instance.mouseOverUI)
             {
                 if (hit.collider != null && hit.collider.GetComponent<ObjectBase>() != null)
-                {                    
-                    ObjectBase hitObject = hit.collider.GetComponent<ObjectBase>();                    
+                {
+                    ObjectBase hitObject = hit.collider.GetComponent<ObjectBase>();
                     hitObject.Activated();
                 }
                 else
@@ -33,6 +41,7 @@ namespace ProjectThief
 
         public MouseController GetMouseController { get { return GameManager.instance.mouseController; } }
         public bool IsActive { get; set; }
-        public bool IsInteractable { get; set; }                
+        public bool IsInteractable { get; set; }          
+        public float PlayVolume { get { return _volume; } }
     }
 }

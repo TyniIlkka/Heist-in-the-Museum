@@ -233,6 +233,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4802551608647098}
   - component: {fileID: 114346951895917744}
+  - component: {fileID: 114472415224837096}
   m_Layer: 11
   m_Name: FOV
   m_TagString: Untagged
@@ -466,6 +467,23 @@ GameObject:
   - component: {fileID: 4473164301168526}
   m_Layer: 11
   m_Name: thigh_R
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1926133611880528
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4719721398957596}
+  - component: {fileID: 33426583630092284}
+  - component: {fileID: 23966879008764946}
+  m_Layer: 11
+  m_Name: View Visualization close
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -852,6 +870,19 @@ Transform:
   m_Father: {fileID: 4664637908726076}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4719721398957596
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1926133611880528}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4802551608647098}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4770532374890388
 Transform:
   m_ObjectHideFlags: 1
@@ -904,6 +935,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4186005990437708}
+  - {fileID: 4719721398957596}
   m_Father: {fileID: 4655614912144056}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -948,6 +980,40 @@ Transform:
   m_Father: {fileID: 4775713935855540}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &23966879008764946
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1926133611880528}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: ff1b16bc697e5844b962854cea280470, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!23 &23996343578064202
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -982,6 +1048,13 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!33 &33426583630092284
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1926133611880528}
+  m_Mesh: {fileID: 0}
 --- !u!33 &33570729390720616
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -1080,6 +1153,29 @@ MonoBehaviour:
   m_fMult: 2
   m_lLight: {fileID: 108446764904156734}
   m_pPlayerObject: {fileID: 0}
+--- !u!114 &114472415224837096
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1538381965344324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53cc0bed6168031448003b64e66ac8a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_fViewRad: 0
+  m_fViewAngle: 0
+  m_lmObstacleMask:
+    serializedVersion: 2
+    m_Bits: 1536
+  m_fMeshResolution: 5
+  m_mfViewMeshFilter: {fileID: 33426583630092284}
+  m_fEdgeDistThreshold: 0.5
+  m_iEdgeResolveIters: 6
+  m_fMult: 2
+  m_lLight: {fileID: 0}
+  m_pPlayerObject: {fileID: 0}
 --- !u!114 &114874787884004906
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1101,7 +1197,6 @@ MonoBehaviour:
   m_lmLightMask:
     serializedVersion: 2
     m_Bits: 16384
-  m_bDistracted: 0
   m_fSoundDetectDistance: 0
   m_lmSoundMask:
     serializedVersion: 2

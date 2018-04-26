@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using ProjectThief.PathFinding;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,49 +17,38 @@ namespace ProjectThief
         private AudioClip m_acIdle;
         [SerializeField, Tooltip("Object has idle audio")]
         private bool m_bHasIdle;
-        [SerializeField]
-        public Transform moveToPoint;
+        [SerializeField, Tooltip("Move to point")]
+        private Transform _moveToPoint;
 
         private float m_fDistractTime;
         private float m_fTime;
         private bool m_bActive;
 
-        public bool trigger;
+        public Vector3 MoveToPos { get { return _moveToPoint.position; } }        
 
-        Collider[] objects;
-
-        public Vector3 MoveToPoint
-        {
-            get { return moveToPoint.position; }
-        }
+        Collider[] objects;        
 
         Guard guard;
 
         private void Awake()
         {
             m_aoSound = GetComponent<AudioSource>(); 
-            m_aoSound.volume = AudioManager.instance.SFXPlayVol;            
+            m_aoSound.volume = PlayVolume;
             m_aoSound.loop = true;
             m_fDistractTime = m_acSound.length;
 
             if (m_bHasIdle)
                 PlayAudio(m_acIdle, true);
         }
-
-        /// <summary>
-        /// For testing purposes.
-        /// </summary>
+        
         protected override void Update()
         {
             base.Update();
 
+            m_aoSound.volume = PlayVolume;
+
             if (m_bActive)
                 Timer();
-
-            if (trigger)
-            {
-                DistractionActive();
-            }
         }
 
         private void Timer()
@@ -127,17 +117,24 @@ namespace ProjectThief
         protected override void Activated()
         {
             if (IsActive)
-            {               
+            {
                 if (IsInteractable)
                 {
                     GetMouseController.InteractCursor();
-                    if (Input.GetMouseButton(0))
+                    if (Input.GetButtonDown("Fire1"))
                     {
                         DistractionActive();
                     }
                 }
                 else
-                    GetMouseController.InspectCursor();
+                {
+                    GetMouseController.InspectCursor();                    
+
+                    if (Input.GetButtonDown("Fire1"))
+                    {
+                        GameManager.instance.player.GetComponent<GridPlayer>().FindPath(MoveToPos);
+                    }
+                }
             }
         }
     }

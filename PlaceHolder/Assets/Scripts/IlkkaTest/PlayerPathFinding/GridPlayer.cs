@@ -128,7 +128,7 @@ namespace ProjectThief.PathFinding
         /// Used to move target point when clicked to interactable.
         /// </summary>
         /// <param name="targetPosition">MoveToPoint position</param>
-        private void FindPath(Vector3 targetPosition)
+        public void FindPath(Vector3 targetPosition)
         {
             FindPath(transform.position, targetPosition);
         }

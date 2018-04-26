@@ -1,4 +1,5 @@
-﻿using ProjectThief.States;
+﻿using ProjectThief.PathFinding;
+using ProjectThief.States;
 using UnityEngine;
 
 namespace ProjectThief
@@ -21,15 +22,19 @@ namespace ProjectThief
         private AudioSource m_aoSource;
         [SerializeField, Tooltip("Delay before door can be used")]
         private float m_fDelay = 2f;
+        [SerializeField, Tooltip("Move to point")]
+        private Transform _moveToPoint;
 
         private bool m_bIsBlocked;
         private bool m_bOpened;
         private bool m_bCanUse;        
         private float m_fTimer;
+        private LevelController _levelController;
 
         public Transform SpawnPoint { get { return m_tSpawnPoint; } }
         public bool Open { set { m_bIsOpen = value; } }
         public bool Blocked { set { m_bIsBlocked = value; } }  
+        public Vector3 MoveToPos { get { return _moveToPoint.position; } }
 
         private void Awake()
         {
@@ -50,12 +55,15 @@ namespace ProjectThief
             }
 
             m_bOpened = false;
-            m_aoSource.volume = AudioManager.instance.SFXPlayVol;            
+            m_aoSource.volume = PlayVolume;
+            _levelController = GameManager.instance.levelController;
         }
 
         protected override void Update()
         {
             base.Update();
+
+            m_aoSource.volume = PlayVolume;
 
             if (!m_bCanUse)
                 Timer();
@@ -90,8 +98,8 @@ namespace ProjectThief
         protected override void Activated()
         {
             if (IsActive)
-            {  
-                if (!m_bIsBlocked)
+            {
+                if (!m_bIsBlocked && _levelController.Cleared)
                 {
                     if (IsInteractable)
                     {
@@ -100,7 +108,7 @@ namespace ProjectThief
                         {
                             if (!m_bIsOpen)
                             {
-                                if (Input.GetMouseButtonDown(0) && !m_bOpened)
+                                if (Input.GetButtonDown("Fire1") && !m_bOpened)
                                 {
                                     DoorOpenSound();
                                     m_bOpened = true;
@@ -108,7 +116,7 @@ namespace ProjectThief
                             }
                             else if (GameManager.instance.levelController.Cleared)
                             {
-                                if (Input.GetMouseButtonDown(0) && !m_bOpened)
+                                if (Input.GetButtonDown("Fire1") && !m_bOpened)
                                 {
                                     DoorOpenSound();
                                     m_bOpened = true;
@@ -116,9 +124,20 @@ namespace ProjectThief
                             }
                         }
                     }
+                    else
+                    {
+                        GetMouseController.InspectCursor();
+
+                        if (Input.GetButtonDown("Fire1"))
+                        {
+                            GameManager.instance.player.GetComponent<GridPlayer>().FindPath(MoveToPos);
+                        }                        
+                    }
                 }
-                else 
+                else
+                {
                     GetMouseController.InspectCursor();
+                }
             }
         }
     }

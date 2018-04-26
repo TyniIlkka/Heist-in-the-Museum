@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ProjectThief.PathFinding;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectThief
@@ -13,22 +14,27 @@ namespace ProjectThief
         private AudioClip m_acUseSFX;
         [SerializeField, Tooltip("Cooldown time")]
         private float m_fCooldown = 0.3f;
+        [SerializeField, Tooltip("Move to point")]
+        private Transform _moveToPoint;
 
         private float m_fTimePassed;
-        private bool m_bCanUse;        
+        private bool m_bCanUse;  
+        
+        public Vector3 MoveToPos { get { return _moveToPoint.position; } }
 
         private void Awake()
         {
             if (m_aoSource == null)
                 m_aoSource = GetComponent<AudioSource>();
 
-            m_aoSource.volume = AudioManager.instance.SFXPlayVol;
+            m_aoSource.volume = PlayVolume;
             m_bCanUse = true;
         }
 
         protected override void Update()
         {
             base.Update();
+            m_aoSource.volume = PlayVolume;
 
             if (!m_bCanUse)
                 Timer();
@@ -46,31 +52,37 @@ namespace ProjectThief
         }
 
         private void PlayEffect()
-        {
-            m_aoSource.volume = AudioManager.instance.SFXPlayVol;            
+        {           
             m_aoSource.PlayOneShot(m_acUseSFX);
         }
 
         protected override void Activated()
         {
             if (IsActive)
-            {                
+            {
                 if (IsInteractable)
                 {
                     GetMouseController.InteractCursor();
-                    if (Input.GetMouseButtonDown(0) && m_bCanUse)
+                    if (Input.GetButtonDown("Fire1") && m_bCanUse)
                     {
-                        m_bCanUse = false;                                                
+                        m_bCanUse = false;
                         PlayEffect();
 
                         if (!m_lLight.IsActive)
                             m_lLight.Activated();
-                        else                                                    
-                            m_lLight.ResetLight();                        
+                        else
+                            m_lLight.ResetLight();
                     }
                 }
                 else
+                {
                     GetMouseController.InspectCursor();
+
+                    //if (Input.GetButtonDown("Fire1"))
+                    //{
+                    //    GameManager.instance.player.GetComponent<GridPlayer>().FindPath(MoveToPos);
+                    //}
+                }
             }            
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using ProjectThief.PathFinding;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,9 +23,13 @@ namespace ProjectThief
         private int m_iPos;
         [SerializeField, Tooltip("Levers used rotation")]
         private float m_fRoationX = -238;
+        [SerializeField, Tooltip("Move to point")]
+        private Transform _moveToPos;
 
         private Animator m_aLeverAnim;
         private bool m_bUsed;
+
+        public Vector3 MoveToPos { get { return _moveToPos.position; } }
 
         public bool trigger;
 
@@ -47,8 +52,7 @@ namespace ProjectThief
                 m_goHandle.SetActive(true);
                 m_aLeverAnim.enabled = false;
                 m_goHandle.transform.localEulerAngles = new Vector3(m_fRoationX,
-                    m_goHandle.transform.localEulerAngles.y, m_goHandle.transform.localEulerAngles.z);
-                Debug.Log("Handle rotation: " + m_goHandle.transform.localEulerAngles);
+                    m_goHandle.transform.localEulerAngles.y, m_goHandle.transform.localEulerAngles.z);                
                 m_dDoor.Open = true;
                 m_dDoor.Blocked = false;
             } 
@@ -67,7 +71,6 @@ namespace ProjectThief
             {
                 m_goHandle.transform.localEulerAngles = new Vector3(m_fRoationX,
                     m_goHandle.transform.localEulerAngles.y, m_goHandle.transform.localEulerAngles.z);
-                Debug.Log("Handle rotation: " + m_goHandle.transform.localEulerAngles);
             }
         }
 
@@ -87,7 +90,7 @@ namespace ProjectThief
                 if (IsInteractable && (!m_bBroken || m_itNeededItem.Collected) && !m_bUsed)
                 {
                     GetMouseController.InteractCursor();
-                    if (Input.GetMouseButtonDown(0))
+                    if (Input.GetButtonDown("Fire1"))
                     {
                         m_bUsed = true;
                         m_iInventory.RemoveItem(m_itNeededItem);
@@ -96,7 +99,14 @@ namespace ProjectThief
                     }
                 }
                 else
+                {
                     GetMouseController.InspectCursor();
+
+                    //if (Input.GetButtonDown("Fire1"))
+                    //{
+                    //    GameManager.instance.player.GetComponent<GridPlayer>().FindPath(MoveToPos);
+                    //}
+                }
             }
         }
 

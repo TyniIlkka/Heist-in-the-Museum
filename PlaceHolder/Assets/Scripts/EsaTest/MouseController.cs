@@ -7,39 +7,39 @@ namespace ProjectThief
     public class MouseController : MonoBehaviour
     {
         [SerializeField]
-        private Texture2D m_tDefaultIcon;
+        private Texture2D _defaultIcon;
         [SerializeField]
-        private Texture2D m_tMoveIcon;
+        private Texture2D _moveIcon;
         [SerializeField]
-        private Texture2D m_tInspectIcon;
+        private Texture2D _inspectIcon;
         [SerializeField]
-        private Texture2D m_tEnterIcon;
+        private Texture2D _enterIcon;
         [SerializeField]
-        private Texture2D m_tInteractIcon;                
+        private Texture2D _interactIcon;                
 
         public void MoveCursor()
         {
-            Cursor.SetCursor(m_tMoveIcon, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(_moveIcon, Vector2.zero, CursorMode.Auto);
         }
 
         public void InspectCursor()
         {
-            Cursor.SetCursor(m_tInspectIcon, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(_inspectIcon, Vector2.zero, CursorMode.Auto);
         }
 
         public void EnterCursor()
         {
-            Cursor.SetCursor(m_tEnterIcon, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(_enterIcon, Vector2.zero, CursorMode.Auto);
         }
 
         public void InteractCursor()
         {
-            Cursor.SetCursor(m_tInteractIcon, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(_interactIcon, Vector2.zero, CursorMode.Auto);
         }
 
         public void DefaultCursor()
         {
-            Cursor.SetCursor(m_tDefaultIcon, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(_defaultIcon, Vector2.zero, CursorMode.Auto);
         }        
     }
 }

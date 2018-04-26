@@ -49,7 +49,7 @@ namespace ProjectThief
                 if (IsInteractable && CheckKeys())
                 {
                     GetMouseController.InteractCursor();
-                    if (Input.GetMouseButtonDown(0))
+                    if (Input.GetButtonDown("Fire1"))
                     {                            
                         AddKeyPieces();
                         m_aAnimator.SetBool("Open", true);   

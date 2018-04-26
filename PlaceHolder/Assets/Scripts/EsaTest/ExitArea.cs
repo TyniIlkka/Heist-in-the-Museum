@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ProjectThief.PathFinding;
+using UnityEngine;
 
 namespace ProjectThief
 {
@@ -6,6 +7,10 @@ namespace ProjectThief
     {
         [SerializeField, Tooltip("Treasure pos in ref list")]
         private int m_iPos = 12;
+        [SerializeField, Tooltip("Move to point")]
+        private Transform _moveToPoint;
+
+        public Vector3 MoveToPos { get { return _moveToPoint.position; } }
 
         protected override void Activated()
         {
@@ -16,12 +21,23 @@ namespace ProjectThief
                     if (IsInteractable)
                     {
                         GetMouseController.EnterCursor();
-                        if (Input.GetMouseButton(0))
+                        if (Input.GetButtonDown("Fire1"))
                         {
                             GameManager.instance.levelController.PlayerEscaped();
                         }
                     }
+                    else
+                    {
+                        GetMouseController.InspectCursor();
+
+                        if (Input.GetButtonDown("Fire1"))
+                        {
+                            GameManager.instance.player.GetComponent<GridPlayer>().FindPath(MoveToPos);
+                        }
+                    }
                 }
+                else
+                    GetMouseController.InspectCursor();
             }
         }
     }

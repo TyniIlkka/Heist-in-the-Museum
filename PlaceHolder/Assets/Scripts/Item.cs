@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ProjectThief.PathFinding;
+using UnityEngine;
 
 namespace ProjectThief
 {
@@ -12,6 +13,8 @@ namespace ProjectThief
         private Vector3 m_v3MoveToPos;        
         [SerializeField, Tooltip("Items position in GM's ref list")]
         private int m_iRefPos;
+        [SerializeField, Tooltip("Move to point")]
+        private Transform _moveToPoint;
 
         private bool m_bCollected;
         private int m_iSlotPosition;        
@@ -20,6 +23,7 @@ namespace ProjectThief
         public bool Collected { get { return m_bCollected; } set { m_bCollected = value; } }         
         public int Slot { get { return m_iSlotPosition; } set { m_iSlotPosition = value; } }         
         public int RefPos { get { return m_iRefPos; } }
+        public Vector3 MoveToPos { get { return _moveToPoint.position; } }
 
         private void Awake()
         {
@@ -28,7 +32,6 @@ namespace ProjectThief
 
             if (GameManager.instance.refItems[RefPos].Collected)
             {
-                Debug.Log("Item already Collected");
                 m_bCollected = true;
                 gameObject.SetActive(false);
             }
@@ -38,11 +41,11 @@ namespace ProjectThief
         {
             if (IsActive)
             {
-                
+
                 if (IsInteractable)
                 {
                     GetMouseController.InteractCursor();
-                    if (Input.GetMouseButtonDown(0))
+                    if (Input.GetButtonDown("Fire1"))
                     {
                         m_bCollected = true;
                         m_iInventory.AddItem(this);
@@ -51,8 +54,8 @@ namespace ProjectThief
                         GetMouseController.DefaultCursor();
                     }
                 }
-                else
-                    GetMouseController.InspectCursor();
+                else                
+                    GetMouseController.InspectCursor();                    
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ProjectThief.PathFinding;
+using UnityEngine;
 
 namespace ProjectThief
 {
@@ -26,9 +27,13 @@ namespace ProjectThief
         private GameObject m_goDoor;
         [SerializeField, Tooltip("Doors open rotation")]
         private float m_fRotationZ = 140;
+        [SerializeField, Tooltip("Move to point")]
+        private Transform _moveToPos;
          
         private Animator m_aAnimator;        
         private bool m_bUsed;
+
+        public Vector3 MoveToPos { get { return _moveToPos.position; } }
 
         public bool trigger;
 
@@ -79,22 +84,26 @@ namespace ProjectThief
             if (!GameManager.instance.openedVitrines[m_iListPos])
             {
                 if (IsActive)
-                {                     
+                {
                     if (IsInteractable && m_itKeyItem.Collected && !m_bUsed)
                     {
                         GetMouseController.InteractCursor();
-                        if (Input.GetMouseButtonDown(0))
+                        if (Input.GetButtonDown("Fire1"))
                         {
                             m_bUsed = true;
                             m_iInventory.RemoveItem(m_itKeyItem);
-                            PlayAudio(m_acUnlock);                                
+                            PlayAudio(m_acUnlock);
                             m_goLock.SetActive(false);
                             PlayAudio(m_acOpen);
-                            m_aAnimator.SetBool("Open", true);                                                              
+                            m_aAnimator.SetBool("Open", true);
                         }
                     }
                     else
+                    {
                         GetMouseController.InspectCursor();
+
+                        GameManager.instance.player.GetComponent<GridPlayer>().FindPath(MoveToPos);
+                    }
                 }
             }
             else            
