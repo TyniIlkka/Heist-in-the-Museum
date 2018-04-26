@@ -8,19 +8,19 @@ namespace ProjectThief
     public class DistanceChecker : MonoBehaviour
     {
         [SerializeField, Tooltip("Object activation distance")]
-        private float m_fActivate = 10f;
+        private float _activationDist = 10f;
         [SerializeField, Tooltip("Object interaction distance")]
-        private float m_fInteract = 5f;
+        private float _interactDist = 5f;
 
-        private List<ObjectBase> m_lObjects = new List<ObjectBase>();
-        private List<ObjectBase> m_lItemRemove = new List<ObjectBase>();
+        private List<ObjectBase> _objects = new List<ObjectBase>();
+        private List<ObjectBase> _toBeRemoved = new List<ObjectBase>();
 
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, m_fActivate);
+            Gizmos.DrawWireSphere(transform.position, _activationDist);
             Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(transform.position, m_fInteract);
+            Gizmos.DrawWireSphere(transform.position, _interactDist);
         }
 
         // Call this only when player moves?
@@ -33,7 +33,7 @@ namespace ProjectThief
 
         private void GetObjectsInRange()
         {            
-            Collider[] objects = Physics.OverlapSphere(transform.position, m_fActivate);
+            Collider[] objects = Physics.OverlapSphere(transform.position, _activationDist);
             
             if (objects.Length > 0)
             {
@@ -42,10 +42,10 @@ namespace ProjectThief
 
                     // TODO Check if object is in currently active room.
                     if (objects[i].GetComponent<ObjectBase>() != null &&
-                        !m_lObjects.Contains(objects[i].GetComponent<ObjectBase>()))
+                        !_objects.Contains(objects[i].GetComponent<ObjectBase>()))
                     {
                         objects[i].GetComponent<ObjectBase>().IsActive = true;
-                        m_lObjects.Add(objects[i].GetComponent<ObjectBase>());                        
+                        _objects.Add(objects[i].GetComponent<ObjectBase>());
                     }                    
                 }
             }
@@ -53,28 +53,29 @@ namespace ProjectThief
 
         private void CheckDistance()
         {
-            if (m_lObjects.Count > 0)
+            if (_objects.Count > 0)
             {
-                for (int i = 0; i < m_lObjects.Count; i++)
+                for (int i = 0; i < _objects.Count; i++)
                 {
-                    ObjectBase obj = m_lObjects[i];
+                    ObjectBase obj = _objects[i];
 
-                    if (Vector3.Distance(transform.position, obj.gameObject.transform.position) <= m_fInteract)
+                    if (Vector3.Distance(transform.position, obj.gameObject.transform.position) <= _interactDist)
                     {
                         obj.IsInteractable = true;
                     }
-                    else if (Vector3.Distance(transform.position, obj.gameObject.transform.position) > m_fInteract)
+                    else if (Vector3.Distance(transform.position, obj.gameObject.transform.position) > _interactDist)
                     {
                         obj.IsInteractable = false;
                     }
-                    else if (Vector3.Distance(transform.position, obj.gameObject.transform.position) > m_fInteract)
+                    else if (Vector3.Distance(transform.position, obj.gameObject.transform.position) > _activationDist)
                     {
                         obj.IsActive = false;
-                        m_lItemRemove.Add(obj);
+                        obj.IsInteractable = false;
+                        _toBeRemoved.Add(obj);                       
                     }
                 }
 
-                if (m_lItemRemove.Count > 0)
+                if (_toBeRemoved.Count > 0)
                 {
                     RemoveItems();
                 }
@@ -83,13 +84,13 @@ namespace ProjectThief
 
         private void RemoveItems()
         {
-            for (int i = 0; i < m_lItemRemove.Count; i++)
+            for (int i = 0; i < _toBeRemoved.Count; i++)
             {
-                ObjectBase item = m_lItemRemove[i];
-                m_lObjects.Remove(item);
+                ObjectBase item = _toBeRemoved[i];
+                _objects.Remove(item);
             }
 
-            m_lItemRemove.Clear();
+            _toBeRemoved.Clear();
         }
     }
 }

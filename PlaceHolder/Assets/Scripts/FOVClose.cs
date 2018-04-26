@@ -54,16 +54,6 @@ namespace ProjectThief
             {
                 Debug.LogError("ERROR: Guard not found.");
             }
-
-            if (m_lLight != null)
-            {
-                m_lLight.range = m_fViewRad * m_fMult;
-                m_lLight.spotAngle = m_fViewAngle;
-            }
-            else
-            {
-                Debug.LogError("ERROR: Light not found.");
-            }
         }
 
         private void LateUpdate()

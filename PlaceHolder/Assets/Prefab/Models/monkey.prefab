@@ -112,8 +112,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1335207977795250}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.999, y: 1.078, z: -3.031}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0.29394722, y: -0.418, z: 1.121}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4678696274894304}
@@ -121,7 +121,7 @@ Transform:
   - {fileID: 4521767980111444}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4678696274894304
 Transform:
   m_ObjectHideFlags: 1
@@ -258,10 +258,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a4cc581cedaa3e4aac52d42812038cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_tItemTexture: {fileID: 2800000, guid: bfca90768228f154094b412b57d3e7f1, type: 3}
-  m_iInventory: {fileID: 0}
-  m_v3MoveToPos: {x: 0, y: 0, z: 0}
-  m_iRefPos: 12
+  _itemIcon: {fileID: 2800000, guid: bfca90768228f154094b412b57d3e7f1, type: 3}
+  _inventory: {fileID: 0}
+  _refPos: 12
+  _meshRenderer: {fileID: 0}
+  _hasHighlight: 0
+  _defaultMat: {fileID: 0}
+  _highlightMat: {fileID: 0}
+  _materialListPos: 0
 --- !u!198 &198479461802102180
 ParticleSystem:
   m_ObjectHideFlags: 1

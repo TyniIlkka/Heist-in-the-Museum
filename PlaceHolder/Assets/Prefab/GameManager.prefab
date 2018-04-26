@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4430646993122916}
   - component: {fileID: 114291211523647866}
   - component: {fileID: 114590737761679002}
+  - component: {fileID: 82240214753654162}
+  - component: {fileID: 114260495688740828}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -41,6 +43,101 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &82240214753654162
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1150629605671668}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!114 &114260495688740828
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1150629605671668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7692c4ecacc664b479a8a161ff68445f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_lTracks: []
+  m_fDelay: 0
+  m_fProgress: 0
+  m_bPause: 0
 --- !u!114 &114291211523647866
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -62,14 +159,32 @@ MonoBehaviour:
   infoShown: 0
   firstSpawn: 0
   mouseOverUI: 0
+  canContinue: 0
   spawnPoint: {fileID: 0}
   initialSpawn: {fileID: 0}
   currentPhase: 1
   rayCastLayers:
     serializedVersion: 2
-    m_Bits: 0
-  refItems: []
-  keyItems: []
+    m_Bits: 5121
+  refItems:
+  - {fileID: 114317372279428544, guid: 903c2cfd5d0582f4b8136a7518926d03, type: 2}
+  - {fileID: 114620377678367772, guid: f36c06b516160634e9e99de18d4b7535, type: 2}
+  - {fileID: 114645056116989290, guid: ddb5d3a109e8948449ad446d47d0d745, type: 2}
+  - {fileID: 114868823079148236, guid: 3aaa6b47572c8764b9ad7bba00f7b973, type: 2}
+  - {fileID: 114152405543476942, guid: 98a695760d16a5b438664ddce7e5a3d7, type: 2}
+  - {fileID: 114006270162152646, guid: c09d3ae3a4ad93a459a7fad376ac64de, type: 2}
+  - {fileID: 114121378785211760, guid: ad8e2cf1d766aeb45ac39af501b120f0, type: 2}
+  - {fileID: 114253353811205274, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
+  - {fileID: 114354420011864102, guid: 1a6c0f85b21ff0c40a20d85f7ad83f99, type: 2}
+  - {fileID: 114864530558262876, guid: 01fcb67b186a32e4eaaf43043552cf2e, type: 2}
+  - {fileID: 114290740670265774, guid: 1b883ec76d6fc2a41b65043477c89ea6, type: 2}
+  - {fileID: 114835407644549246, guid: 98b54ab6bab2fb04aa1c7c8a7630e339, type: 2}
+  - {fileID: 114688537420296332, guid: 80be5f3b4e813a84ba5ab9769dbcc2b2, type: 2}
+  keyItems:
+  - {fileID: 114354420011864102, guid: 1a6c0f85b21ff0c40a20d85f7ad83f99, type: 2}
+  - {fileID: 114864530558262876, guid: 01fcb67b186a32e4eaaf43043552cf2e, type: 2}
+  - {fileID: 114290740670265774, guid: 1b883ec76d6fc2a41b65043477c89ea6, type: 2}
+  - {fileID: 114835407644549246, guid: 98b54ab6bab2fb04aa1c7c8a7630e339, type: 2}
   inventory: []
   usedlevers: 
   openedVitrines: 
@@ -86,8 +201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ec27867190bc1438dacccf8955b5f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_tDefaultIcon: {fileID: 2800000, guid: 23d5ff6a915bf03479919d0a2d07ead6, type: 3}
-  m_tMoveIcon: {fileID: 2800000, guid: 7fa51dc8aec8eb040a5bf7ce877b4b9a, type: 3}
-  m_tInspectIcon: {fileID: 2800000, guid: ff659c0cbde24aa4a8a29002e636766e, type: 3}
-  m_tEnterIcon: {fileID: 2800000, guid: f7f0cebc93e7d0d48ade64b311d2f3ea, type: 3}
-  m_tInteractIcon: {fileID: 2800000, guid: 14d658e2397afa44c9866cd3cdc8b5be, type: 3}
+  _defaultIcon: {fileID: 2800000, guid: 23d5ff6a915bf03479919d0a2d07ead6, type: 3}
+  _moveIcon: {fileID: 2800000, guid: 7fa51dc8aec8eb040a5bf7ce877b4b9a, type: 3}
+  _inspectIcon: {fileID: 2800000, guid: ff659c0cbde24aa4a8a29002e636766e, type: 3}
+  _enterIcon: {fileID: 2800000, guid: f7f0cebc93e7d0d48ade64b311d2f3ea, type: 3}
+  _interactIcon: {fileID: 2800000, guid: 14d658e2397afa44c9866cd3cdc8b5be, type: 3}

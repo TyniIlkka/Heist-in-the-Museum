@@ -8,15 +8,15 @@ namespace ProjectThief
     public class SoundDistraction : ObjectBase
     {        
         [SerializeField, Tooltip("Sound's sound source")]
-        private AudioSource m_aoSound;
+        private AudioSource _source;
         [SerializeField, Tooltip("Distraction range")]
-        private float m_fRange = 10f;
+        private float _range = 15f;
         [SerializeField, Tooltip("Audio clip")]
-        private AudioClip m_acSound;
+        private AudioClip _soundClip;
         [SerializeField, Tooltip("Idle audio clip")]
-        private AudioClip m_acIdle;
+        private AudioClip _idle;
         [SerializeField, Tooltip("Object has idle audio")]
-        private bool m_bHasIdle;
+        private bool _hasIdle;
         [SerializeField, Tooltip("Move to point")]
         private Transform _moveToPoint;
 
@@ -32,20 +32,20 @@ namespace ProjectThief
 
         private void Awake()
         {
-            m_aoSound = GetComponent<AudioSource>(); 
-            m_aoSound.volume = PlayVolume;
-            m_aoSound.loop = true;
-            m_fDistractTime = m_acSound.length;
+            _source = GetComponent<AudioSource>(); 
+            _source.volume = PlayVolume;
+            _source.loop = true;
+            m_fDistractTime = _soundClip.length;
 
-            if (m_bHasIdle)
-                PlayAudio(m_acIdle, true);
+            if (_hasIdle)
+                PlayAudio(_idle, true);
         }
         
         protected override void Update()
         {
             base.Update();
 
-            m_aoSound.volume = PlayVolume;
+            _source.volume = PlayVolume;
 
             if (m_bActive)
                 Timer();
@@ -61,14 +61,14 @@ namespace ProjectThief
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, m_fRange);
+            Gizmos.DrawWireSphere(transform.position, _range);
         }
         
         public void DistractionActive()
         {
-            PlayAudio(m_acSound, false);
+            PlayAudio(_soundClip, false);
             m_bActive = true;
-            objects = Physics.OverlapSphere(transform.position, m_fRange);
+            objects = Physics.OverlapSphere(transform.position, _range);
 
             if (objects.Length > 0)
             {
@@ -102,15 +102,15 @@ namespace ProjectThief
 
         public void PlayAudio(AudioClip clip, bool isIdle)
         {
-            m_aoSound.volume = AudioManager.instance.SFXPlayVol;
+            _source.volume = AudioManager.instance.SFXPlayVol;
             if (!isIdle)
             {                
-                m_aoSound.PlayOneShot(clip);
+                _source.PlayOneShot(clip);
             }
             else
             {
-                m_aoSound.clip = clip;
-                m_aoSound.Play();
+                _source.clip = clip;
+                _source.Play();
             }
         }
 

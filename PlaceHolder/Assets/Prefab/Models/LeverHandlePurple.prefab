@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4780167977134684}
   - component: {fileID: 33008322266189224}
   - component: {fileID: 23311484240388352}
-  - component: {fileID: 95203578178858556}
   - component: {fileID: 114317372279428544}
   - component: {fileID: 65364657021555842}
   m_Layer: 0
@@ -37,8 +36,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1940964724259218}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.792, y: 0, z: -2.86}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0.5, y: -1, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -62,6 +61,7 @@ MeshRenderer:
   - {fileID: 2100000, guid: b0a08983ed1fdd948a053e78e6d02e3e, type: 2}
   - {fileID: 2100000, guid: 72a07ea8ca561584e9f32dc2833e26d6, type: 2}
   - {fileID: 2100000, guid: 72a07ea8ca561584e9f32dc2833e26d6, type: 2}
+  - {fileID: 2100000, guid: 442c87d6b7c208b4c97463f2d9eb31b5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -100,23 +100,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.05, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0.10362952}
---- !u!95 &95203578178858556
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1940964724259218}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: f44bb260310533b43bc0c581a3bcfe38, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114317372279428544
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -128,7 +111,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a4cc581cedaa3e4aac52d42812038cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_tItemTexture: {fileID: 2800000, guid: 565b5f9e5cd7a1b459038d4b548254da, type: 3}
-  m_iInventory: {fileID: 0}
-  m_v3MoveToPos: {x: 0, y: 0, z: 0}
-  m_iRefPos: 0
+  _itemIcon: {fileID: 2800000, guid: 565b5f9e5cd7a1b459038d4b548254da, type: 3}
+  _inventory: {fileID: 0}
+  _refPos: 0
+  _meshRenderer: {fileID: 23311484240388352}
+  _hasHighlight: 1
+  _defaultMat: {fileID: 2100000, guid: 5450ce9c10c29dc4592105cf2f357996, type: 2}
+  _highlightMat: {fileID: 2100000, guid: f6b1d767923ad3840929851c5f9b8c3a, type: 2}
+  _materialListPos: 4

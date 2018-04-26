@@ -5,35 +5,67 @@ namespace ProjectThief
 {
     public class Item : ObjectBase
     {
-        [SerializeField, Tooltip("Item's image")]
-        private Texture m_tItemTexture;
+        [SerializeField, Tooltip("Item's icon image")]
+        private Texture _itemIcon;
         [SerializeField, Tooltip("Inventory object")]
-        private Inventory m_iInventory;
-        [SerializeField, Tooltip("Position close to object")]
-        private Vector3 m_v3MoveToPos;        
-        [SerializeField, Tooltip("Items position in GM's ref list")]
-        private int m_iRefPos;
-        [SerializeField, Tooltip("Move to point")]
-        private Transform _moveToPoint;
+        private Inventory _inventory;          
+        [SerializeField, Tooltip("Items position in GM's reference list")]
+        private int _refPos;
+        [Header("Highlight")]
+        [SerializeField, Tooltip("Meshrenderer")]
+        private MeshRenderer _meshRenderer;
+        [SerializeField, Tooltip("Has highlight material")]
+        private bool _hasHighlight;
+        [SerializeField, Tooltip("Default material")]
+        private Material _defaultMat;
+        [SerializeField, Tooltip("Highlight material")]
+        private Material _highlightMat;
+        [SerializeField, Tooltip("Highlight material Position")]
+        private int _materialListPos;
 
-        private bool m_bCollected;
-        private int m_iSlotPosition;        
+        private bool _collected;
+        private int _slotPosition;
 
-        public Texture ItemImage { get { return m_tItemTexture; } }        
-        public bool Collected { get { return m_bCollected; } set { m_bCollected = value; } }         
-        public int Slot { get { return m_iSlotPosition; } set { m_iSlotPosition = value; } }         
-        public int RefPos { get { return m_iRefPos; } }
-        public Vector3 MoveToPos { get { return _moveToPoint.position; } }
+        public Texture ItemImage { get { return _itemIcon; } }        
+        public bool Collected { get { return _collected; } set { _collected = value; } }         
+        public int Slot { get { return _slotPosition; } set { _slotPosition = value; } }         
+        public int RefPos { get { return _refPos; } }
 
         private void Awake()
         {
-            if (m_iInventory == null)
-                m_iInventory = FindObjectOfType<Inventory>();
+            if (_inventory == null)
+                _inventory = FindObjectOfType<Inventory>();
 
             if (GameManager.instance.refItems[RefPos].Collected)
             {
-                m_bCollected = true;
+                _collected = true;
                 gameObject.SetActive(false);
+            }
+
+            if (_meshRenderer == null && _hasHighlight)
+                _meshRenderer = GetComponent<MeshRenderer>();
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+
+            if (_hasHighlight)
+            {
+                Debug.Log("Highlight is active");
+                Debug.Log("Object is Active: " + IsActive);
+                Debug.Log("Material in use: " + _meshRenderer.materials[_materialListPos]);
+
+                if (IsActive)
+                {
+                    _meshRenderer.materials[_materialListPos] = _highlightMat;
+                    Debug.Log("Highlight material set");
+                }
+                else
+                {
+                    _meshRenderer.materials[_materialListPos] = _defaultMat;
+                    Debug.Log("Default material set");
+                }
             }
         }
 
@@ -47,8 +79,8 @@ namespace ProjectThief
                     GetMouseController.InteractCursor();
                     if (Input.GetButtonDown("Fire1"))
                     {
-                        m_bCollected = true;
-                        m_iInventory.AddItem(this);
+                        _collected = true;
+                        _inventory.AddItem(this);
                         gameObject.SetActive(false);
                         GameManager.instance.refItems[RefPos].Collected = true;
                         GetMouseController.DefaultCursor();
