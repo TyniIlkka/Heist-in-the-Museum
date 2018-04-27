@@ -46,6 +46,9 @@ namespace ProjectThief
                     {
                         objects[i].GetComponent<ObjectBase>().IsActive = true;
                         _objects.Add(objects[i].GetComponent<ObjectBase>());
+
+                        if (objects[i].GetComponent<Item>() != null)
+                            objects[i].GetComponent<Item>().HighLightItem();
                     }                    
                 }
             }
@@ -58,10 +61,7 @@ namespace ProjectThief
                 for (int i = 0; i < _objects.Count; i++)
                 {
                     ObjectBase obj = _objects[i];
-
-                    if (obj.GetComponent<Item>() != null)
-                        Debug.Log("object: " + obj.name + " distance: " + Vector3.Distance(transform.position, obj.transform.position));
-
+                    
                     if (Vector3.Distance(transform.position, obj.transform.position) <= _interactDist)
                     {
                         obj.IsInteractable = true;
@@ -74,7 +74,10 @@ namespace ProjectThief
                     {
                         obj.IsActive = false;
                         if (obj.GetComponent<Item>() != null)
+                        {
                             Debug.Log(obj.name + " removed from tracking list");
+                            obj.GetComponent<Item>().DeHighLight();
+                        }
                         _toBeRemoved.Add(obj);                       
                     }
                 }

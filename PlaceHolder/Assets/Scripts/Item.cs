@@ -20,8 +20,6 @@ namespace ProjectThief
         private Material _defaultMat;
         [SerializeField, Tooltip("Highlight material")]
         private Material _highlightMat;
-        [SerializeField, Tooltip("Highlight material Position")]
-        private int _materialListPos;
 
         private bool _collected;
         private int _slotPosition;
@@ -48,24 +46,24 @@ namespace ProjectThief
 
         protected override void Update()
         {
-            base.Update();
+            base.Update();            
+        }
 
+        public void HighLightItem()
+        {
             if (_hasHighlight)
             {
-                Debug.Log("Highlight is active");
-                Debug.Log("Object is Active: " + IsActive);
-                Debug.Log("Material in use: " + _meshRenderer.materials[_materialListPos]);
+                _meshRenderer.material = _highlightMat;
+                Debug.Log("Item: " + this.name + " is highlighted. Material: " + _meshRenderer.material);
+            }
+        }
 
-                if (IsActive)
-                {
-                    _meshRenderer.materials[_materialListPos] = _highlightMat;
-                    Debug.Log("Highlight material set");
-                }
-                else
-                {
-                    _meshRenderer.materials[_materialListPos] = _defaultMat;
-                    Debug.Log("Default material set");
-                }
+        public void DeHighLight()
+        {
+            if (_hasHighlight)
+            {
+                _meshRenderer.material = _defaultMat;
+                Debug.Log("Item: " + this.name + " is no longer highlighted. Material: " + _meshRenderer.material);
             }
         }
 

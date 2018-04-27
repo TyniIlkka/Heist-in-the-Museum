@@ -85,11 +85,11 @@ namespace ProjectThief
 
         protected override void Activated()
         {
-            if (IsActive)
+            if (IsActive && !m_bUsed)
             {
                 if (IsInteractable)
                 {
-                    if ((m_bBroken && m_itNeededItem.Collected) || !m_bUsed)
+                    if (m_bBroken && m_itNeededItem.Collected)
                     {
                         GetMouseController.InteractCursor();
                         if (Input.GetButtonDown("Fire1"))
@@ -115,6 +115,10 @@ namespace ProjectThief
                     //    GameManager.instance.player.GetComponent<GridPlayer>().FindPath(MoveToPos);
                     //}
                 }
+            }
+            else if (m_bUsed)
+            {
+                // Tell player that they have used it already
             }
         }
 

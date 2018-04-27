@@ -85,6 +85,7 @@ namespace ProjectThief
                     }
                 }
             }
+            Debug.Log("Distraction active");
         }
 
         public void DistractionInactive()
@@ -98,6 +99,7 @@ namespace ProjectThief
                     m_bActive = false;
                 }
             }
+            Debug.Log("Distraction inactive");
         }
 
         public void PlayAudio(AudioClip clip, bool isIdle)
