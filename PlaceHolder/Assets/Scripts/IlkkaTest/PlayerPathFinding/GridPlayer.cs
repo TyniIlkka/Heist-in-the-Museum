@@ -35,6 +35,11 @@ namespace ProjectThief.PathFinding
             player = GetComponent<Player>();
             playerCam = Camera.main;
             soundWaves = GetComponentInChildren<ParticleSystem>();
+            var main = soundWaves.main;
+            var emission = soundWaves.emission;
+            main.startLifetime = 20f;
+            main.simulationSpeed = 50f;
+            emission.rateOverTime = 0.05f;
 
             if (m_fMoveSpeed <= 0) m_fMoveSpeed = 1;
         }
@@ -65,17 +70,16 @@ namespace ProjectThief.PathFinding
             var main = soundWaves.main;
             if (m_fMoveSpeed > m_fSneakSpeed)
             {
-                soundWaves.Play();
                 main.startSize = 3f;
             }
             else if (m_fMoveSpeed <= m_fSneakSpeed && m_fMoveSpeed > 0.99f)
             {
-                soundWaves.Play();
                 main.startSize = 1f;
             }
             else
             {
 
+                main.startSize = 0f;
                 //soundWaves.Stop();
             }
         }
