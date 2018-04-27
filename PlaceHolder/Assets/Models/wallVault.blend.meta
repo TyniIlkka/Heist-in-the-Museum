@@ -13,6 +13,8 @@ ModelImporter:
     100010: KeyPart3
     100012: KeyPart4
     100014: VaultDoor_001
+    100016: VaultWallBottom
+    100018: VaultWallTop
     400000: VaultDoor
     400002: VaultWall
     400004: //RootNode
@@ -21,6 +23,8 @@ ModelImporter:
     400010: KeyPart3
     400012: KeyPart4
     400014: VaultDoor_001
+    400016: VaultWallBottom
+    400018: VaultWallTop
     2300000: VaultDoor
     2300002: VaultWall
     2300004: KeyPart1
@@ -28,6 +32,8 @@ ModelImporter:
     2300008: KeyPart3
     2300010: KeyPart4
     2300012: VaultDoor_001
+    2300014: VaultWallBottom
+    2300016: VaultWallTop
     3300000: VaultDoor
     3300002: VaultWall
     3300004: KeyPart1
@@ -35,6 +41,8 @@ ModelImporter:
     3300008: KeyPart3
     3300010: KeyPart4
     3300012: VaultDoor_001
+    3300014: VaultWallBottom
+    3300016: VaultWallTop
     4300000: VaultDoor
     4300002: VaultWall
     4300004: KeyPart4
@@ -42,6 +50,8 @@ ModelImporter:
     4300008: KeyPart2
     4300010: KeyPart1
     4300012: VaultDoor_001
+    4300014: VaultWallTop
+    4300016: VaultWallBottom
     7400000: Default Take
     9500000: //RootNode
   externalObjects:
@@ -88,8 +98,28 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: VaulDoorFrame__walltexturePurple_png
+    second: {fileID: 2100000, guid: b272897bb2fbf6f4681b4fd8d0cf8538, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: VaultKey__vaultKey_png
     second: {fileID: 2100000, guid: 129930424e866d54e9d28bb781d59fae, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WallBottom__walltexturePurple_png
+    second: {fileID: 2100000, guid: b272897bb2fbf6f4681b4fd8d0cf8538, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WallTop
+    second: {fileID: 2100000, guid: b272897bb2fbf6f4681b4fd8d0cf8538, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WallTop__walltexturePurple_png
+    second: {fileID: 2100000, guid: 7e7c29b2cb81d594abf35c40ceb00973, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

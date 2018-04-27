@@ -73,11 +73,10 @@ namespace ProjectThief
                     if (Vector3.Distance(transform.position, obj.transform.position) > _activationDist)
                     {
                         obj.IsActive = false;
+
                         if (obj.GetComponent<Item>() != null)
-                        {
-                            Debug.Log(obj.name + " removed from tracking list");
                             obj.GetComponent<Item>().DeHighLight();
-                        }
+
                         _toBeRemoved.Add(obj);                       
                     }
                 }

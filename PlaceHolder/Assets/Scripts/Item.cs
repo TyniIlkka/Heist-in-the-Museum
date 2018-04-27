@@ -44,27 +44,16 @@ namespace ProjectThief
                 _meshRenderer = GetComponent<MeshRenderer>();
         }
 
-        protected override void Update()
-        {
-            base.Update();            
-        }
-
         public void HighLightItem()
         {
             if (_hasHighlight)
-            {
                 _meshRenderer.material = _highlightMat;
-                Debug.Log("Item: " + this.name + " is highlighted. Material: " + _meshRenderer.material);
-            }
         }
 
         public void DeHighLight()
         {
-            if (_hasHighlight)
-            {
+            if (_hasHighlight)            
                 _meshRenderer.material = _defaultMat;
-                Debug.Log("Item: " + this.name + " is no longer highlighted. Material: " + _meshRenderer.material);
-            }
         }
 
         protected override void Activated()
@@ -77,11 +66,15 @@ namespace ProjectThief
                     GetMouseController.InteractCursor();
                     if (Input.GetButtonDown("Fire1"))
                     {
+                        if (_refPos == 12 && !_collected)
+                            GameManager.instance.currentPhase++;
+
                         _collected = true;
                         _inventory.AddItem(this);
                         gameObject.SetActive(false);
                         GameManager.instance.refItems[RefPos].Collected = true;
                         GetMouseController.DefaultCursor();
+                        
                     }
                 }
                 else                
