@@ -188,6 +188,7 @@ namespace ProjectThief
 
         private Guard SpawnGuard(Vector3 pos, Quaternion rotation, int pathListPosition, int staticListPosition, bool moving)
         {
+            pos.y += 0.1f;
             GameObject guardObject = Instantiate(m_oGuard, pos, rotation);
             Guard guard = guardObject.GetComponent<Guard>();
             guard.GuardMover = guard.GetComponent<GuardMover>();
