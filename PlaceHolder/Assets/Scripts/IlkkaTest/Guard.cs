@@ -342,11 +342,11 @@ namespace ProjectThief {
 
         private void FixedUpdate()
         {
-            if (CanSeePlayer())
-            {
-                Debug.Log("GameLost");
-                GameManager.instance.levelController.PlayerFound();
-            }
+            //if (CanSeePlayer())
+            //{
+            //    Debug.Log("GameLost");
+            //    GameManager.instance.levelController.PlayerFound();
+            //}
         }
 
         /// <summary>

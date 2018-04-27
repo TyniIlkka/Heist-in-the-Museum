@@ -21,8 +21,6 @@ namespace ProjectThief
         private int m_iEdgeResolveIters = 6;
         [SerializeField, Tooltip("Light distance mult")]
         private float m_fMult = 2;
-        [SerializeField, Tooltip("Flashlight")]
-        private Light m_lLight;
 
         private Mesh m_mViewMesh;
 
@@ -205,18 +203,19 @@ namespace ProjectThief
         public bool CanSeePlayer()
         {
 
-            Vector3 rayDirection = (m_pPlayerObject.transform.position) - transform.position;
-            float angle = Vector3.Angle(rayDirection, transform.forward);
-            if (angle < m_fViewAngle * 0.5)
+            //Close range detection
+            float distanceToPlayer = (transform.position - m_pPlayerObject.transform.position).magnitude;
+            
+            if ((distanceToPlayer <= m_fViewRad ))
             {
+                Vector3 rayDirection = (m_pPlayerObject.transform.position) - transform.position;
                 RaycastHit hit;
                 rayDirection += Vector3.up;
                 if (Physics.Raycast(transform.position, rayDirection.normalized, out hit, m_fViewRad))
                 {
-                    //Debug.DrawRay(transform.position, rayDirection.normalized);
-                    //Debug.Log(hit.collider.gameObject);
                     if (hit.collider.gameObject.GetComponent<Player>() != null)
                     {
+                        Debug.DrawRay(transform.position, rayDirection.normalized);
                         Debug.Log(hit.collider.gameObject);
                         return true;
                     }
