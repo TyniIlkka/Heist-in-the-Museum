@@ -3503,6 +3503,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4055419951329396, guid: 9482527514c237142a6ef9e6379cc128,
     type: 2}
   m_PrefabInternal: {fileID: 768364068}
+--- !u!114 &768364070 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114150199793613570, guid: 9482527514c237142a6ef9e6379cc128,
+    type: 2}
+  m_PrefabInternal: {fileID: 768364068}
+  m_Script: {fileID: 11500000, guid: d6c031e22bcb6f443a7bed1f81a81194, type: 3}
 --- !u!1001 &814897497
 Prefab:
   m_ObjectHideFlags: 0
@@ -7485,7 +7491,7 @@ Prefab:
         type: 2}
       propertyPath: m_lLight
       value: 
-      objectReference: {fileID: 1367631324}
+      objectReference: {fileID: 768364070}
     - target: {fileID: 4637761792693596, guid: 0e2c761905b49034bbea38fea9a9aada, type: 2}
       propertyPath: m_LocalScale.x
       value: 1
