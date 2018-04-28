@@ -110,8 +110,11 @@ namespace ProjectThief
                             {
                                 if (Input.GetButtonDown("Fire1") && !m_bOpened)
                                 {
+                                    
                                     DoorOpenSound();
                                     m_bOpened = true;
+                                    GameManager.instance.canMove = false;
+                                    Debug.Log("In transit. " + "Can move: " + GameManager.instance.canMove);
                                 }
                             }
                             else if (GameManager.instance.levelController.Cleared)
@@ -120,6 +123,8 @@ namespace ProjectThief
                                 {
                                     DoorOpenSound();
                                     m_bOpened = true;
+                                    GameManager.instance.canMove = false;
+                                    Debug.Log("In transit. " + "Can move: " + GameManager.instance.canMove);
                                 }
                             }
                         }

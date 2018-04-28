@@ -20,8 +20,6 @@ namespace ProjectThief
         private Material _defaultMat;
         [SerializeField, Tooltip("Highlight material")]
         private Material _highlightMat;
-        [SerializeField, Tooltip("Highlight material Position")]
-        private int _materialListPos;
 
         private bool _collected;
         private int _slotPosition;
@@ -46,27 +44,16 @@ namespace ProjectThief
                 _meshRenderer = GetComponent<MeshRenderer>();
         }
 
-        protected override void Update()
+        public void HighLightItem()
         {
-            base.Update();
-
             if (_hasHighlight)
-            {
-                Debug.Log("Highlight is active");
-                Debug.Log("Object is Active: " + IsActive);
-                Debug.Log("Material in use: " + _meshRenderer.materials[_materialListPos]);
+                _meshRenderer.material = _highlightMat;
+        }
 
-                if (IsActive)
-                {
-                    _meshRenderer.materials[_materialListPos] = _highlightMat;
-                    Debug.Log("Highlight material set");
-                }
-                else
-                {
-                    _meshRenderer.materials[_materialListPos] = _defaultMat;
-                    Debug.Log("Default material set");
-                }
-            }
+        public void DeHighLight()
+        {
+            if (_hasHighlight)            
+                _meshRenderer.material = _defaultMat;
         }
 
         protected override void Activated()
@@ -79,11 +66,15 @@ namespace ProjectThief
                     GetMouseController.InteractCursor();
                     if (Input.GetButtonDown("Fire1"))
                     {
+                        if (_refPos == 12 && !_collected)
+                            GameManager.instance.currentPhase++;
+
                         _collected = true;
                         _inventory.AddItem(this);
                         gameObject.SetActive(false);
                         GameManager.instance.refItems[RefPos].Collected = true;
                         GetMouseController.DefaultCursor();
+                        
                     }
                 }
                 else                

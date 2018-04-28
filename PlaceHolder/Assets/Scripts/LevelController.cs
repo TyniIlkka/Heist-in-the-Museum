@@ -104,8 +104,7 @@ namespace ProjectThief
                 IntroEnd();
                 m_fDelay += 0.02f;
             }            
-
-            MouseOverUICheck();
+            
             if (GameManager.instance.infoShown)
             {
                 if (Input.GetKeyDown(KeyCode.Escape))
@@ -125,6 +124,8 @@ namespace ProjectThief
                 if (!m_bIsCleared && m_bCanBeCleared)
                     CheckKeyItems();
             }
+
+            Debug.Log("LC: Player can move: " + GameManager.instance.canMove);
         }
 
         /// <summary>
@@ -141,6 +142,7 @@ namespace ProjectThief
             }
             else
             {
+                // Check if in transition
                 GameManager.instance.canMove = true;
                 GameManager.instance.mouseOverUI = false;
             }

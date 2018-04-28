@@ -565,7 +565,8 @@ Prefab:
       propertyPath: m_TagString
       value: Obstacles
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 95784804564044204, guid: 269b27e9e6ac9df43bda665a5d777481, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 269b27e9e6ac9df43bda665a5d777481, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &183550510 stripped
@@ -1837,6 +1838,11 @@ Prefab:
       propertyPath: m_lDoors.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114982444803844292, guid: 5ded4a7572476c348b84d678d9242b92,
+        type: 2}
+      propertyPath: m_lKeyItems.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4943085576204660, guid: 5ded4a7572476c348b84d678d9242b92, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1944,6 +1950,18 @@ Prefab:
       propertyPath: m_fVerticalAngle
       value: 43
       objectReference: {fileID: 0}
+    - target: {fileID: 114982444803844292, guid: 5ded4a7572476c348b84d678d9242b92,
+        type: 2}
+      propertyPath: m_lKeyItems.Array.data[0]
+      value: 
+      objectReference: {fileID: 114253353811205274, guid: 7d6fb06d9ac5e3443a879d7c67c872be,
+        type: 2}
+    - target: {fileID: 114982444803844292, guid: 5ded4a7572476c348b84d678d9242b92,
+        type: 2}
+      propertyPath: m_lKeyItems.Array.data[1]
+      value: 
+      objectReference: {fileID: 114835407644549246, guid: 98b54ab6bab2fb04aa1c7c8a7630e339,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ded4a7572476c348b84d678d9242b92, type: 2}
   m_IsPrefabParent: 0
@@ -2995,31 +3013,31 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4198071794600240, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.584
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4198071794600240, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.111
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4198071794600240, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -1.647
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4198071794600240, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4198071794600240, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0.8870109
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4198071794600240, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4198071794600240, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.46174863
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4198071794600240, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
       propertyPath: m_RootOrder
@@ -3027,15 +3045,39 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4198071794600240, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4198071794600240, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
       propertyPath: m_LocalScale.y
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4198071794600240, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
       propertyPath: m_LocalScale.z
-      value: 3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4937276829886916, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -0.411
+      objectReference: {fileID: 0}
+    - target: {fileID: 4937276829886916, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.044
+      objectReference: {fileID: 0}
+    - target: {fileID: 4937276829886916, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.384
+      objectReference: {fileID: 0}
+    - target: {fileID: 4937276829886916, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.92762303
+      objectReference: {fileID: 0}
+    - target: {fileID: 4937276829886916, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.37351778
+      objectReference: {fileID: 0}
+    - target: {fileID: 4937276829886916, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 136.13501
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
@@ -3450,7 +3492,8 @@ Prefab:
       propertyPath: m_TagString
       value: Obstacles
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 95784804564044204, guid: 269b27e9e6ac9df43bda665a5d777481, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 269b27e9e6ac9df43bda665a5d777481, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &2035888468 stripped
@@ -3468,12 +3511,12 @@ Prefab:
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 599
+      value: 602.5
       objectReference: {fileID: 0}
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 337
+      value: 339
       objectReference: {fileID: 0}
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
