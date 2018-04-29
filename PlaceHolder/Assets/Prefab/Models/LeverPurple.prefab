@@ -48,6 +48,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1988689427653852
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4659436092993568}
+  m_Layer: 0
+  m_Name: MoveToPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &4440894342302134
 Transform:
   m_ObjectHideFlags: 1
@@ -61,17 +76,31 @@ Transform:
   m_Father: {fileID: 4727570979104396}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -68, y: 0, z: 0}
+--- !u!4 &4659436092993568
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1988689427653852}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: -1, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4727570979104396}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4727570979104396
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1608781712906472}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: 0.7071068, w: 0}
   m_LocalPosition: {x: 9.594, y: 1.49, z: 1.8450009}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4440894342302134}
+  - {fileID: 4659436092993568}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 180}
@@ -201,14 +230,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2289db238ca0c3c4284b1a3c7df354e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_aObstacleAnim: {fileID: 0}
-  m_iInventory: {fileID: 0}
-  m_dDoor: {fileID: 0}
-  m_bBroken: 1
-  m_goHandle: {fileID: 1659096598380416}
-  m_itNeededItem: {fileID: 114317372279428544, guid: 903c2cfd5d0582f4b8136a7518926d03,
+  _obstacleAnim: {fileID: 0}
+  _inventory: {fileID: 0}
+  _door: {fileID: 0}
+  _isBroken: 1
+  _leverHandle: {fileID: 1659096598380416}
+  _neededItem: {fileID: 114317372279428544, guid: 903c2cfd5d0582f4b8136a7518926d03,
     type: 2}
-  m_iPos: 0
-  m_fRoationX: -238
-  _moveToPos: {fileID: 0}
+  _boolListPos: 1
+  _leverUsedRotation: -238
+  _moveToPos: {fileID: 4659436092993568}
   trigger: 0

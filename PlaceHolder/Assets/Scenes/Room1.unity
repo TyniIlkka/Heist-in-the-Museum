@@ -3519,12 +3519,12 @@ Prefab:
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 602.5
+      value: 598
       objectReference: {fileID: 0}
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 339
+      value: 336.5
       objectReference: {fileID: 0}
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
@@ -4328,6 +4328,21 @@ Prefab:
       propertyPath: m_aObstacleAnim
       value: 
       objectReference: {fileID: 1996093860}
+    - target: {fileID: 114834111104811342, guid: 4372865de1196774e976b6b15a14a254,
+        type: 2}
+      propertyPath: _door
+      value: 
+      objectReference: {fileID: 1996093858}
+    - target: {fileID: 114834111104811342, guid: 4372865de1196774e976b6b15a14a254,
+        type: 2}
+      propertyPath: _inventory
+      value: 
+      objectReference: {fileID: 814897501}
+    - target: {fileID: 114834111104811342, guid: 4372865de1196774e976b6b15a14a254,
+        type: 2}
+      propertyPath: _obstacleAnim
+      value: 
+      objectReference: {fileID: 1996093860}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4372865de1196774e976b6b15a14a254, type: 2}
   m_IsPrefabParent: 0
@@ -4574,6 +4589,32 @@ Prefab:
       propertyPath: m_iListPos
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114440937410009216, guid: 01e1532fab9046849892d5316a2cf7c5,
+        type: 2}
+      propertyPath: _vaultKeyItem
+      value: 
+      objectReference: {fileID: 631383823}
+    - target: {fileID: 114440937410009216, guid: 01e1532fab9046849892d5316a2cf7c5,
+        type: 2}
+      propertyPath: _keyPos
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114440937410009216, guid: 01e1532fab9046849892d5316a2cf7c5,
+        type: 2}
+      propertyPath: _boolListPos
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114440937410009216, guid: 01e1532fab9046849892d5316a2cf7c5,
+        type: 2}
+      propertyPath: _keyItem
+      value: 
+      objectReference: {fileID: 114628748915279340, guid: c09d3ae3a4ad93a459a7fad376ac64de,
+        type: 2}
+    - target: {fileID: 114440937410009216, guid: 01e1532fab9046849892d5316a2cf7c5,
+        type: 2}
+      propertyPath: _inventory
+      value: 
+      objectReference: {fileID: 814897501}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 01e1532fab9046849892d5316a2cf7c5, type: 2}
   m_IsPrefabParent: 0
@@ -5758,6 +5799,15 @@ Prefab:
         type: 2}
       propertyPath: m_bIsOpen
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114412196402930356, guid: 4c3e4c74e6ba57642a4ce8ebdb0f8944,
+        type: 2}
+      propertyPath: _isOpen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1983405640390352, guid: 4c3e4c74e6ba57642a4ce8ebdb0f8944, type: 2}
+      propertyPath: m_Name
+      value: wallDoor (Lobby)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4c3e4c74e6ba57642a4ce8ebdb0f8944, type: 2}
@@ -8985,7 +9035,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1983405640390352, guid: 4c3e4c74e6ba57642a4ce8ebdb0f8944, type: 2}
       propertyPath: m_Name
-      value: WallDoor (1)
+      value: WallDoor (Room3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4c3e4c74e6ba57642a4ce8ebdb0f8944, type: 2}
