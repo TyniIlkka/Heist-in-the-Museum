@@ -446,16 +446,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d690c92267e56546b9954eea2466342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_itKeyItem: {fileID: 0}
-  m_iInventory: {fileID: 0}
-  m_goLock: {fileID: 1193880418195802}
-  m_iPos: 0
-  m_itKey: {fileID: 0}
-  m_acOpen: {fileID: 8300000, guid: abd95e009901ae54880d9d33ed062b2d, type: 3}
-  m_acUnlock: {fileID: 8300000, guid: b68670e07afb8e147a4a5660e7d86557, type: 3}
-  m_aoSource: {fileID: 82637809545091886}
-  m_iListPos: 0
-  m_goDoor: {fileID: 1676392797448852}
-  m_fRotationZ: 140
+  _keyItem: {fileID: 0}
+  _inventory: {fileID: 0}
+  _lock: {fileID: 1193880418195802}
+  _keyPos: 0
+  _vaultKeyItem: {fileID: 0}
+  _openingEffect: {fileID: 8300000, guid: abd95e009901ae54880d9d33ed062b2d, type: 3}
+  _unlockEffect: {fileID: 8300000, guid: b68670e07afb8e147a4a5660e7d86557, type: 3}
+  _audioSource: {fileID: 82637809545091886}
+  _boolListPos: 0
+  _doorObject: {fileID: 1676392797448852}
+  _openRotation: 140
   _moveToPos: {fileID: 4332892114263052}
   trigger: 0

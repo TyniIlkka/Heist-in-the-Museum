@@ -51,7 +51,7 @@ namespace ProjectThief
             }            
 
             inventory = new List<Item>();            
-            usedlevers = new bool[4];            
+            usedlevers = new bool[5];            
             openedVitrines = new bool[4];
             clearedRooms = new bool[5];
             canContinue = false;
@@ -63,14 +63,16 @@ namespace ProjectThief
             {
                 refItems[i].Collected = false;
 
-                if (i < usedlevers.Length)
-                {
-                    usedlevers[i] = false;
+                if (i < openedVitrines.Length)
+                {                    
                     keyItems[i].Collected = false;
                     openedVitrines[i] = false;                    
                 }
                 if (i < clearedRooms.Length)
+                {
                     clearedRooms[i] = false;
+                    usedlevers[i] = false;
+                }
             }
 
             inventory.Clear();
