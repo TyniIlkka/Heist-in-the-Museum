@@ -52,48 +52,58 @@ namespace ProjectThief
                     case 0:
                         i = 1; j = 1;
 
-                        //-----Guard 1 Spawn Middle Door-----//
-                        Guard guard1 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, s, i, false);
+                        //-----Guard Spawn Middle-----//
+                        SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, s, i, false);
                 
 
-                        //-----Guard 2 Spawn Patrol T wall-----//
-                        Guard guard2 = SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
+                        //-----Guard Spawn Patrol T wall-----//
+                        SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
 
                         Debug.Log("Case0 Lobby Guards spawned");
                         break;
 
                     case 1:
-                        i = 1; j = 2;
+                        i = 3; j = 2;
 
-                        //-----Guard 3 Spawn Middle Door-----//
-                        Guard guard3 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, s , i, false);
+                        //-----Guard Spawn Near X-----//
+                        SpawnGuard(staticPoints[j].transform.position, Quaternion.identity, s , j, false);
 
-                        //-----Guard 4 Spawn Patrol T wall-----//
-                        Guard guard4 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, i, s, true);
+                        //-----Guard Spawn TutorialDoor-----//
+                        SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, s, i, false);
 
-                        //-----Guard 5 Spawn Around Table-----//
-                        Guard guard5 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
+                        //-----Guard Spawn Patrol IT walls-----//
+                        SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
 
 
                         Debug.Log("Case1 Lobby Guards spawned");
                         break;
 
                     case 2:
-                        i = 2; j = 2;
+                        i = 3; j = 4;
 
-                        //-----Guard 6 Left Door-----//
-                        Guard guard6 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, s, i, false);
+                        //-----Guard Left Door-----//
+                        SpawnGuard(staticPoints[j].transform.position, Quaternion.identity, s, j, false);
 
-                        //-----Guard 7 Spawn Around Table-----//
-                        Guard guard7 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
+                        //-----Guard Spawn Around Table-----//
+                        SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
+
+                        //-----Guard Spawn Around Table-----//
+                        SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
 
                         Debug.Log("Case2 Lobby Guards spawned");
                         break;
 
                     case 3:
-                        i = 3;
-                        //-----Guard 8 Tetris-----//
-                        Guard guard8 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, i, s, true);
+                        i = 5; j = 2;
+                        //-----Guard Spawn EastDoor-----//
+                        SpawnGuard(staticPoints[j].transform.position, Quaternion.identity, s, i, false);
+
+                        //-----Guard 8 Vault to Tut-----//
+                        SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
+
+                        //-----Guard Spawn Patrol IT walls-----//
+                        SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
+
 
                         Debug.Log("Case3 Lobby Guards spawned");
                         break;
@@ -101,26 +111,31 @@ namespace ProjectThief
 
                     ////////////-------Bugi!!-------/////
                     case 4:
-                        i = 4; j = 5; k = 3;
-                        //-----Guard 9 I shape-----//
-                        Guard guard9 = SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
-                        //-----Guard 10 L PingPong-----//
-                        Guard guard10 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
+                        i = 6; j = 7;
+                        //-----Guard T and Tutorial Door Path-----//
+                        SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
+                        //-----Guard XI Walls Roam-----//
+                        SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
+
                         //-----Guard 11 X North-----//
-                        Guard guard11 = SpawnGuard(staticPoints[k].transform.position, Quaternion.identity, s, k, false);
+                        SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, s, i, false);
+                        //-----Guard 11 X North-----//
+                        SpawnGuard(staticPoints[j].transform.position, Quaternion.identity, s, j, false);
 
                         Debug.Log("Case4 Lobby Guards spawned");
                         break;
 
                     case 5:
-                        i = 5; j = 6; k = 4;
-                        //-----Guard 12 S PingPong-----//
-                        Guard guard12 = SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
-                        //-----Guard 13-----//
-                        Guard guard13 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
+                        i = 8; j = 9; k = 7;
+                        //-----Guard T and Tutorial Door Path-----//
+                        SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
+                        //-----Guard XI Walls Roam-----//
+                        SpawnGuard(pathList[k].Waypoints[0].Position, Quaternion.identity, k, s, true);
 
-                        //-----Guard 14 Near Vault-----//
-                        Guard guard14 = SpawnGuard(staticPoints[k].transform.position, Quaternion.identity, s, k, false);
+                        //-----Guard 11 X North-----//
+                        SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, s, i, false);
+                        //-----Guard 11 X North-----//
+                        SpawnGuard(staticPoints[j].transform.position, Quaternion.identity, s, j, false);
 
                         break;
 
@@ -188,6 +203,7 @@ namespace ProjectThief
 
         private Guard SpawnGuard(Vector3 pos, Quaternion rotation, int pathListPosition, int staticListPosition, bool moving)
         {
+            pos.y += 0.1f;
             GameObject guardObject = Instantiate(m_oGuard, pos, rotation);
             Guard guard = guardObject.GetComponent<Guard>();
             guard.GuardMover = guard.GetComponent<GuardMover>();

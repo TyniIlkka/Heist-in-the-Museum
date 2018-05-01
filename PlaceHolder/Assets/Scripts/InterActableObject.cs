@@ -6,32 +6,32 @@ namespace ProjectThief
     public class InterActableObject : ObjectBase
     {
         [SerializeField, Tooltip("Display case's key")]
-        private Item m_itKeyItem;        
+        private Item _keyItem;        
         [SerializeField, Tooltip("Inventory object")]
-        private Inventory m_iInventory;        
+        private Inventory _inventory;        
         [SerializeField, Tooltip("Lock")]
-        private GameObject m_goLock;
+        private GameObject _lock;
         [SerializeField, Tooltip("position in key list")]
-        private int m_iPos;
+        private int _keyPos;
         [SerializeField, Tooltip("Vault's key item")]
-        private Item m_itKey;
+        private Item _vaultKeyItem;
         [SerializeField, Tooltip("Display case's opening sound")]
-        private AudioClip m_acOpen;
+        private AudioClip _openingEffect;
         [SerializeField, Tooltip("Unlocking sound")]
-        private AudioClip m_acUnlock;
+        private AudioClip _unlockEffect;
         [SerializeField]
-        private AudioSource m_aoSource;
+        private AudioSource _audioSource;
         [SerializeField, Tooltip("Display case's position in gm list")]
-        private int m_iListPos;
+        private int _boolListPos;
         [SerializeField, Tooltip("Display case's door")]
-        private GameObject m_goDoor;
+        private GameObject _doorObject;
         [SerializeField, Tooltip("Doors open rotation")]
-        private float m_fRotationZ = 140;
+        private float _openRotation = 140;
         [SerializeField, Tooltip("Move to point")]
         private Transform _moveToPos;
          
-        private Animator m_aAnimator;        
-        private bool m_bUsed;
+        private Animator _animator;        
+        private bool _used;
 
         public Vector3 MoveToPos { get { return _moveToPos.position; } }
 
@@ -39,24 +39,24 @@ namespace ProjectThief
 
         private void Awake()
         {
-            if (m_aoSource == null)
-                m_aoSource = GetComponent<AudioSource>();
+            if (_audioSource == null)
+                _audioSource = GetComponent<AudioSource>();
 
-            if (m_iInventory == null)
-                m_iInventory = FindObjectOfType<Inventory>();
+            if (_inventory == null)
+                _inventory = FindObjectOfType<Inventory>();
 
-            m_aAnimator = GetComponent<Animator>();
-            m_aoSource.volume = AudioManager.instance.SFXPlayVol;
+            _animator = GetComponent<Animator>();
+            _audioSource.volume = AudioManager.instance.SFXPlayVol;
 
-            if (GameManager.instance.openedVitrines[m_iListPos])
+            if (GameManager.instance.openedVitrines[_boolListPos])
             {
-                m_bUsed = true;
-                m_aAnimator.enabled = false;
-                m_goDoor.transform.localEulerAngles = new Vector3(m_goDoor.transform.localEulerAngles.x,
-                    m_goDoor.transform.localEulerAngles.y, m_fRotationZ);
-                Debug.Log("Door rotation " + m_goDoor.transform.localEulerAngles);
-                m_goLock.SetActive(false);
-                m_itKey.gameObject.SetActive(false);
+                _used = true;
+                _animator.enabled = false;
+                _doorObject.transform.localEulerAngles = new Vector3(_doorObject.transform.localEulerAngles.x,
+                    _doorObject.transform.localEulerAngles.y, _openRotation);
+                Debug.Log("Door rotation " + _doorObject.transform.localEulerAngles);
+                _lock.SetActive(false);
+                _vaultKeyItem.gameObject.SetActive(false);
             }
         }
 
@@ -64,38 +64,38 @@ namespace ProjectThief
         {
             base.Update();
 
-            if (GameManager.instance.openedVitrines[m_iListPos] && trigger)
+            if (GameManager.instance.openedVitrines[_boolListPos] && trigger)
             {
-                m_goDoor.transform.localEulerAngles = new Vector3(m_goDoor.transform.localEulerAngles.x,
-                    m_goDoor.transform.localEulerAngles.y, m_fRotationZ);
-                Debug.Log("Door rotation " + m_goDoor.transform.localEulerAngles);
+                _doorObject.transform.localEulerAngles = new Vector3(_doorObject.transform.localEulerAngles.x,
+                    _doorObject.transform.localEulerAngles.y, _openRotation);
+                Debug.Log("Door rotation " + _doorObject.transform.localEulerAngles);
             }
         }
 
         private void PlayAudio(AudioClip clip)
         {
-            m_aoSource.clip = clip;
-            m_aoSource.volume = AudioManager.instance.SFXPlayVol;
-            m_aoSource.Play();
+            _audioSource.clip = clip;
+            _audioSource.volume = AudioManager.instance.SFXPlayVol;
+            _audioSource.Play();
         }
 
         protected override void Activated()
         {
-            if (!GameManager.instance.openedVitrines[m_iListPos])
+            if (!GameManager.instance.openedVitrines[_boolListPos])
             {
                 if (IsActive)
                 {
-                    if (IsInteractable && m_itKeyItem.Collected && !m_bUsed)
+                    if (IsInteractable && _keyItem.Collected && !_used)
                     {
                         GetMouseController.InteractCursor();
                         if (Input.GetButtonDown("Fire1"))
                         {
-                            m_bUsed = true;
-                            m_iInventory.RemoveItem(m_itKeyItem);
-                            PlayAudio(m_acUnlock);
-                            m_goLock.SetActive(false);
-                            PlayAudio(m_acOpen);
-                            m_aAnimator.SetBool("Open", true);
+                            _used = true;
+                            _inventory.RemoveItem(_keyItem);
+                            PlayAudio(_unlockEffect);
+                            _lock.SetActive(false);
+                            PlayAudio(_openingEffect);
+                            _animator.SetBool("Open", true);
                         }
                     }
                     else
@@ -112,10 +112,10 @@ namespace ProjectThief
 
         public void TakeItem()
         {
-            m_iInventory.AddItem(m_itKey);
-            m_itKey.gameObject.SetActive(false);
-            GameManager.instance.keyItems[m_iPos].Collected = true;
-            GameManager.instance.openedVitrines[m_iListPos] = true;
+            _inventory.AddItem(_vaultKeyItem);
+            _vaultKeyItem.gameObject.SetActive(false);
+            GameManager.instance.keyItems[_keyPos].Collected = true;
+            GameManager.instance.openedVitrines[_boolListPos] = true;
         }
     }
 }

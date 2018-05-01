@@ -1,33 +1,30 @@
-﻿using ProjectThief.PathFinding;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ProjectThief
 {
     public class Lever : ObjectBase
     {
         [SerializeField, Tooltip("Obstacle Animator")]
-        private Animator m_aObstacleAnim;
+        private Animator _obstacleAnim;
         [SerializeField, Tooltip("Inventory object")]
-        private Inventory m_iInventory;
+        private Inventory _inventory;
         [SerializeField, Tooltip("Door")]
-        private Door m_dDoor;
+        private Door _door;
         [SerializeField, Tooltip("Marks if lever is broken")]
-        private bool m_bBroken;
+        private bool _isBroken;
         [SerializeField, Tooltip("Levers handle")]
-        private GameObject m_goHandle;
+        private GameObject _leverHandle;
         [SerializeField, Tooltip("Needed item")]
-        private Item m_itNeededItem;
+        private Item _neededItem;
         [SerializeField, Tooltip("Position in GM's bool list")]
-        private int m_iPos;
+        private int _boolListPos;
         [SerializeField, Tooltip("Levers used rotation")]
-        private float m_fRoationX = -238;
+        private float _leverUsedRotation = -238;
         [SerializeField, Tooltip("Move to point")]
         private Transform _moveToPos;
 
-        private Animator m_aLeverAnim;
-        private bool m_bUsed;
+        private Animator _leverAnimator;
+        private bool _used;
 
         public Vector3 MoveToPos { get { return _moveToPos.position; } }
 
@@ -35,31 +32,31 @@ namespace ProjectThief
 
         private void Awake()
         {
-            if (m_iInventory == null)
-                m_iInventory = FindObjectOfType<Inventory>();
+            if (_inventory == null)
+                _inventory = FindObjectOfType<Inventory>();
 
-            m_aLeverAnim = GetComponent<Animator>();
-            m_itNeededItem = GameManager.instance.refItems[m_itNeededItem.RefPos];
+            _leverAnimator = GetComponent<Animator>();
+            _neededItem = GameManager.instance.refItems[_neededItem.RefPos];
 
             Init();
         }        
 
         private void Init()
         {           
-            if (GameManager.instance.usedlevers[m_iPos])
+            if (GameManager.instance.usedlevers[_boolListPos])
             {
-                m_bUsed = true;
-                m_goHandle.SetActive(true);
-                m_aLeverAnim.enabled = false;
-                m_goHandle.transform.localEulerAngles = new Vector3(m_fRoationX,
-                    m_goHandle.transform.localEulerAngles.y, m_goHandle.transform.localEulerAngles.z);                
-                m_dDoor.Open = true;
-                m_dDoor.Blocked = false;
+                _used = true;
+                _leverHandle.SetActive(true);
+                _leverAnimator.enabled = false;
+                _leverHandle.transform.localEulerAngles = new Vector3(_leverUsedRotation,
+                    _leverHandle.transform.localEulerAngles.y, _leverHandle.transform.localEulerAngles.z);                
+                _door.Open = true;
+                _door.Blocked = false;
             } 
             else
             {
-                m_goHandle.SetActive(false);
-                m_bBroken = true;
+                _leverHandle.SetActive(false);
+                _isBroken = true;
             }
         }
 
@@ -67,10 +64,10 @@ namespace ProjectThief
         {
             base.Update();
 
-            if (GameManager.instance.usedlevers[m_iPos] && trigger)
+            if (GameManager.instance.usedlevers[_boolListPos] && trigger)
             {
-                m_goHandle.transform.localEulerAngles = new Vector3(m_fRoationX,
-                    m_goHandle.transform.localEulerAngles.y, m_goHandle.transform.localEulerAngles.z);
+                _leverHandle.transform.localEulerAngles = new Vector3(_leverUsedRotation,
+                    _leverHandle.transform.localEulerAngles.y, _leverHandle.transform.localEulerAngles.z);
             }
         }
 
@@ -79,25 +76,25 @@ namespace ProjectThief
         /// </summary>
         public void ResetLever()
         {
-            m_aLeverAnim.SetBool("Activated", false);
-            m_aObstacleAnim.SetBool("Open", false);
+            _leverAnimator.SetBool("Activated", false);
+            _obstacleAnim.SetBool("Open", false);
         }
 
         protected override void Activated()
         {
-            if (IsActive && !m_bUsed)
+            if (IsActive && !_used)
             {
                 if (IsInteractable)
                 {
-                    if (m_bBroken && m_itNeededItem.Collected)
+                    if (_isBroken && _neededItem.Collected)
                     {
                         GetMouseController.InteractCursor();
                         if (Input.GetButtonDown("Fire1"))
                         {
-                            m_bUsed = true;
-                            m_iInventory.RemoveItem(m_itNeededItem);
-                            m_goHandle.SetActive(true);
-                            m_aLeverAnim.SetBool("Activated", true);
+                            _used = true;
+                            _inventory.RemoveItem(_neededItem);
+                            _leverHandle.SetActive(true);
+                            _leverAnimator.SetBool("Activated", true);
                         }
                     }
                     else
@@ -116,7 +113,7 @@ namespace ProjectThief
                     //}
                 }
             }
-            else if (m_bUsed)
+            else if (_used)
             {
                 // Tell player that they have used it already
             }
@@ -124,11 +121,11 @@ namespace ProjectThief
 
         public void OpenObstacle()
         {             
-            m_aObstacleAnim.SetBool("Open", true);
-            m_dDoor.ObstacleSound();
-            m_dDoor.Open = false;
-            m_dDoor.Blocked = false;
-            GameManager.instance.usedlevers[m_iPos] = true;            
+            _obstacleAnim.SetBool("Open", true);
+            _door.ObstacleSound();
+            _door.Open = false;
+            _door.Blocked = false;
+            GameManager.instance.usedlevers[_boolListPos] = true;            
         }
     }    
 }

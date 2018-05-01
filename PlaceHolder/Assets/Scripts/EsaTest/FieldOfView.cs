@@ -227,6 +227,7 @@ namespace ProjectThief
                     //Debug.Log(hit.collider.gameObject);
                     if (hit.collider.gameObject.GetComponent<Player>() != null)
                     {
+                        
                         Debug.Log(hit.collider.gameObject);
                         return true;
                     }

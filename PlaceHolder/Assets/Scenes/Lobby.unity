@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.43686056, g: 0.484509, b: 0.564764, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -88,7 +88,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
-  m_LightingDataAsset: {fileID: 112000072, guid: febc1394170cecd4cb45989f2fd1775a,
+  m_LightingDataAsset: {fileID: 112000064, guid: febc1394170cecd4cb45989f2fd1775a,
     type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -188,6 +188,14 @@ Prefab:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: c4d53904da51ce1478c296926296e200, type: 2}
+    - target: {fileID: 100000, guid: bbe375211629c8049b3631416591e448, type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: bbe375211629c8049b3631416591e448, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bbe375211629c8049b3631416591e448, type: 3}
   m_IsPrefabParent: 0
@@ -309,7 +317,7 @@ Prefab:
     - target: {fileID: 2300000, guid: 51305a02a6815904383bb36c005b0293, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: fb3b63000eff0d94cb7512231a88402e, type: 2}
+      objectReference: {fileID: 2100000, guid: f643efd04704c3c4b999fac532e14416, type: 2}
     - target: {fileID: 100000, guid: 51305a02a6815904383bb36c005b0293, type: 3}
       propertyPath: m_TagString
       value: Rug
@@ -1097,7 +1105,7 @@ Prefab:
     - target: {fileID: 2300000, guid: 51305a02a6815904383bb36c005b0293, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: fb3b63000eff0d94cb7512231a88402e, type: 2}
+      objectReference: {fileID: 2100000, guid: f643efd04704c3c4b999fac532e14416, type: 2}
     - target: {fileID: 100000, guid: 51305a02a6815904383bb36c005b0293, type: 3}
       propertyPath: m_TagString
       value: Rug
@@ -1390,6 +1398,14 @@ Prefab:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 7ebc61f62b6de194899f3a0d4d7f7d09, type: 2}
+    - target: {fileID: 100000, guid: bbe375211629c8049b3631416591e448, type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: bbe375211629c8049b3631416591e448, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bbe375211629c8049b3631416591e448, type: 3}
   m_IsPrefabParent: 0
@@ -2215,12 +2231,12 @@ Prefab:
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 602.5
+      value: 645.5
       objectReference: {fileID: 0}
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 339
+      value: 311
       objectReference: {fileID: 0}
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
@@ -2991,6 +3007,14 @@ Prefab:
     - target: {fileID: 400000, guid: 71c57f74c4ba33143beccbd12843815f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 71c57f74c4ba33143beccbd12843815f, type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 71c57f74c4ba33143beccbd12843815f, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 71c57f74c4ba33143beccbd12843815f, type: 3}
@@ -5140,6 +5164,10 @@ Prefab:
       propertyPath: m_TagString
       value: Obstacles
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 31a54fec58fa38a4ea40491a653370d7, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 31a54fec58fa38a4ea40491a653370d7, type: 3}
   m_IsPrefabParent: 0
@@ -5272,6 +5300,11 @@ Prefab:
         type: 2}
       propertyPath: _nextState
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114412196402930356, guid: 4c3e4c74e6ba57642a4ce8ebdb0f8944,
+        type: 2}
+      propertyPath: _isOpen
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4c3e4c74e6ba57642a4ce8ebdb0f8944, type: 2}
@@ -6135,6 +6168,14 @@ Prefab:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: fb3b63000eff0d94cb7512231a88402e, type: 2}
+    - target: {fileID: 100000, guid: bbe375211629c8049b3631416591e448, type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: bbe375211629c8049b3631416591e448, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bbe375211629c8049b3631416591e448, type: 3}
   m_IsPrefabParent: 0
@@ -6499,6 +6540,14 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e376a8a601326b34bb1d0aba09938e67, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e376a8a601326b34bb1d0aba09938e67, type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e376a8a601326b34bb1d0aba09938e67, type: 3}
   m_IsPrefabParent: 0
@@ -6556,6 +6605,14 @@ Prefab:
     - target: {fileID: 400000, guid: 36d4d18bc7eab7d49912897cf0efe2b7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 36d4d18bc7eab7d49912897cf0efe2b7, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 36d4d18bc7eab7d49912897cf0efe2b7, type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 36d4d18bc7eab7d49912897cf0efe2b7, type: 3}
@@ -6989,6 +7046,14 @@ Prefab:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 4b8124f880f99a74f90ca6ee83f6dca1, type: 2}
+    - target: {fileID: 100000, guid: bbe375211629c8049b3631416591e448, type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: bbe375211629c8049b3631416591e448, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bbe375211629c8049b3631416591e448, type: 3}
   m_IsPrefabParent: 0
@@ -7426,6 +7491,21 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 1.6
       objectReference: {fileID: 0}
+    - target: {fileID: 114937588251963340, guid: bc792b05a28b642479167391cb3c76d8,
+        type: 2}
+      propertyPath: _door
+      value: 
+      objectReference: {fileID: 1832108683}
+    - target: {fileID: 114937588251963340, guid: bc792b05a28b642479167391cb3c76d8,
+        type: 2}
+      propertyPath: _obstacleAnim
+      value: 
+      objectReference: {fileID: 1832108684}
+    - target: {fileID: 114937588251963340, guid: bc792b05a28b642479167391cb3c76d8,
+        type: 2}
+      propertyPath: _inventory
+      value: 
+      objectReference: {fileID: 312220030}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bc792b05a28b642479167391cb3c76d8, type: 2}
   m_IsPrefabParent: 0
@@ -7732,7 +7812,8 @@ Prefab:
       propertyPath: _moveToPoint
       value: 
       objectReference: {fileID: 1192683367}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 95106502170058610, guid: a5158961b56d4454aa43fc3fad8d732b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: a5158961b56d4454aa43fc3fad8d732b, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1192683367 stripped
@@ -8299,6 +8380,11 @@ Prefab:
       propertyPath: DisallowedTags.Array.data[1]
       value: Rug
       objectReference: {fileID: 0}
+    - target: {fileID: 114113693937897672, guid: c4beb8624b30dea46ab5e3e3934c8e62,
+        type: 2}
+      propertyPath: DrawMapInEditor
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c4beb8624b30dea46ab5e3e3934c8e62, type: 2}
   m_IsPrefabParent: 0
@@ -8425,7 +8511,7 @@ Prefab:
     - target: {fileID: 2300000, guid: 51305a02a6815904383bb36c005b0293, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: fb3b63000eff0d94cb7512231a88402e, type: 2}
+      objectReference: {fileID: 2100000, guid: f643efd04704c3c4b999fac532e14416, type: 2}
     - target: {fileID: 100000, guid: 51305a02a6815904383bb36c005b0293, type: 3}
       propertyPath: m_TagString
       value: Rug
@@ -8850,6 +8936,14 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 36d4d18bc7eab7d49912897cf0efe2b7, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 36d4d18bc7eab7d49912897cf0efe2b7, type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 36d4d18bc7eab7d49912897cf0efe2b7, type: 3}
   m_IsPrefabParent: 0
@@ -9041,6 +9135,46 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 1.6
       objectReference: {fileID: 0}
+    - target: {fileID: 114366675898633202, guid: 0467a912a92eef4488bb4db41b0c8a5b,
+        type: 2}
+      propertyPath: _door
+      value: 
+      objectReference: {fileID: 453389432}
+    - target: {fileID: 114366675898633202, guid: 0467a912a92eef4488bb4db41b0c8a5b,
+        type: 2}
+      propertyPath: _obstacleAnim
+      value: 
+      objectReference: {fileID: 453389434}
+    - target: {fileID: 114366675898633202, guid: 0467a912a92eef4488bb4db41b0c8a5b,
+        type: 2}
+      propertyPath: _inventory
+      value: 
+      objectReference: {fileID: 312220030}
+    - target: {fileID: 65348324740644852, guid: 0467a912a92eef4488bb4db41b0c8a5b,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 65348324740644852, guid: 0467a912a92eef4488bb4db41b0c8a5b,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 65348324740644852, guid: 0467a912a92eef4488bb4db41b0c8a5b,
+        type: 2}
+      propertyPath: m_Size.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 65348324740644852, guid: 0467a912a92eef4488bb4db41b0c8a5b,
+        type: 2}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 65348324740644852, guid: 0467a912a92eef4488bb4db41b0c8a5b,
+        type: 2}
+      propertyPath: m_Center.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0467a912a92eef4488bb4db41b0c8a5b, type: 2}
   m_IsPrefabParent: 0
@@ -9190,6 +9324,14 @@ Prefab:
     - target: {fileID: 100000, guid: 1ff5bfcc676202243a1e439724835715, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 1ff5bfcc676202243a1e439724835715, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 1ff5bfcc676202243a1e439724835715, type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ff5bfcc676202243a1e439724835715, type: 3}
@@ -9973,6 +10115,10 @@ Prefab:
       propertyPath: m_TagString
       value: Rug
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 30de805610338f64b98376f22b1c7322, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f643efd04704c3c4b999fac532e14416, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30de805610338f64b98376f22b1c7322, type: 3}
   m_IsPrefabParent: 0
@@ -10026,6 +10172,14 @@ Prefab:
     - target: {fileID: 400000, guid: 1ff5bfcc676202243a1e439724835715, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 1ff5bfcc676202243a1e439724835715, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 1ff5bfcc676202243a1e439724835715, type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ff5bfcc676202243a1e439724835715, type: 3}
@@ -10096,6 +10250,14 @@ Prefab:
     - target: {fileID: 100000, guid: e376a8a601326b34bb1d0aba09938e67, type: 3}
       propertyPath: m_Name
       value: FrameSmall (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e376a8a601326b34bb1d0aba09938e67, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e376a8a601326b34bb1d0aba09938e67, type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e376a8a601326b34bb1d0aba09938e67, type: 3}
@@ -10854,6 +11016,14 @@ Prefab:
     - target: {fileID: 400000, guid: 71c57f74c4ba33143beccbd12843815f, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 71c57f74c4ba33143beccbd12843815f, type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 71c57f74c4ba33143beccbd12843815f, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 71c57f74c4ba33143beccbd12843815f, type: 3}
@@ -12116,6 +12286,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 9a72e6ef651baf3488d713596fe340eb, type: 2}
+    - target: {fileID: 114412196402930356, guid: 4c3e4c74e6ba57642a4ce8ebdb0f8944,
+        type: 2}
+      propertyPath: _nextState
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4c3e4c74e6ba57642a4ce8ebdb0f8944, type: 2}
   m_IsPrefabParent: 0
@@ -12636,6 +12811,14 @@ Prefab:
     - target: {fileID: 100000, guid: 36d4d18bc7eab7d49912897cf0efe2b7, type: 3}
       propertyPath: m_Name
       value: FrameMedium (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 36d4d18bc7eab7d49912897cf0efe2b7, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 36d4d18bc7eab7d49912897cf0efe2b7, type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 36d4d18bc7eab7d49912897cf0efe2b7, type: 3}
@@ -13230,6 +13413,21 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 1.6
       objectReference: {fileID: 0}
+    - target: {fileID: 114394928364336840, guid: 4406a91cea45232448098c523222cd38,
+        type: 2}
+      propertyPath: _door
+      value: 
+      objectReference: {fileID: 2129353690}
+    - target: {fileID: 114394928364336840, guid: 4406a91cea45232448098c523222cd38,
+        type: 2}
+      propertyPath: _obstacleAnim
+      value: 
+      objectReference: {fileID: 2129353692}
+    - target: {fileID: 114394928364336840, guid: 4406a91cea45232448098c523222cd38,
+        type: 2}
+      propertyPath: _inventory
+      value: 
+      objectReference: {fileID: 312220030}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4406a91cea45232448098c523222cd38, type: 2}
   m_IsPrefabParent: 0
