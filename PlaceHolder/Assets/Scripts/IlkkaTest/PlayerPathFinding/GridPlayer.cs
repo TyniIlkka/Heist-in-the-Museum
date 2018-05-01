@@ -37,9 +37,9 @@ namespace ProjectThief.PathFinding
             soundWaves = GetComponentInChildren<ParticleSystem>();
             var main = soundWaves.main;
             var emission = soundWaves.emission;
-            main.startLifetime = 20f;
-            main.simulationSpeed = 50f;
-            emission.rateOverTime = 0.05f;
+            main.startLifetime = 3f;
+            main.simulationSpeed = 1f;
+            emission.rateOverTime = 1f;
 
             if (m_fMoveSpeed <= 0) m_fMoveSpeed = 1;
         }

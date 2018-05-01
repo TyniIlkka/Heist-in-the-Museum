@@ -76,7 +76,7 @@ namespace ProjectThief
             }
 
             inventory.Clear();
-            currentPhase = 0;
+            currentPhase = 5;
         }            
     }
 }
