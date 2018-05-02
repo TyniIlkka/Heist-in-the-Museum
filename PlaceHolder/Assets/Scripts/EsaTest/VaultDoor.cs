@@ -11,13 +11,17 @@ namespace ProjectThief
         private AudioClip m_acSFXEffect;
         [SerializeField, Tooltip("Vault doors wall")]
         private GameObject _wall;
+        [SerializeField, Tooltip("Vault key parts")]
+        private List<Item> _keyParts;
 
         private Animator m_aAnimator;
         private bool m_bIsLocked;
+        private Inventory _inventory;
 
         private void Awake()
         {
             m_aAnimator = GetComponent<Animator>();
+            _inventory = FindObjectOfType<Inventory>();
         }
 
         private bool CheckKeys()
@@ -37,13 +41,25 @@ namespace ProjectThief
         private void AddKeyPieces()
         {
             foreach (GameObject obj in m_lPieces)
-            {
+            {                
                 obj.SetActive(true);
             }
+
+            for (int i = 0; i < _keyParts.Count; i++)
+            {
+                _inventory.RemoveItem(_keyParts[i]);
+            }
+        }
+
+        public void HideWall()
+        {
+            _wall.SetActive(false);
         }
 
         protected override void Activated()
         {
+            Debug.Log("vault");
+
             if (IsActive)
             { 
                 if (IsInteractable && CheckKeys())
@@ -52,8 +68,7 @@ namespace ProjectThief
                     if (Input.GetButtonDown("Fire1"))
                     {                            
                         AddKeyPieces();
-                        m_aAnimator.SetBool("Open", true);   
-                        // TODO Hide wall
+                        m_aAnimator.SetBool("Open", true);                        
                     }
                 }                
             }

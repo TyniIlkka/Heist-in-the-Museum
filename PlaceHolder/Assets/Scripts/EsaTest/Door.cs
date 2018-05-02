@@ -114,7 +114,7 @@ namespace ProjectThief
                                     DoorOpenSound();
                                     _opened = true;
                                     GameManager.instance.canMove = false;
-                                    Debug.Log("In transit. " + "Can move: " + GameManager.instance.canMove);
+                                    GameManager.instance.inTransit = true;
                                 }
                             }
                             else if (GameManager.instance.levelController.Cleared)
@@ -124,7 +124,7 @@ namespace ProjectThief
                                     DoorOpenSound();
                                     _opened = true;
                                     GameManager.instance.canMove = false;
-                                    Debug.Log("In transit. " + "Can move: " + GameManager.instance.canMove);
+                                    GameManager.instance.inTransit = true;
                                 }
                             }
                         }

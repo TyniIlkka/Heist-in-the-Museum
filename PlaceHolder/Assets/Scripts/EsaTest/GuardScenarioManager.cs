@@ -57,7 +57,7 @@ namespace ProjectThief
                 
 
                         //-----Guard Spawn Patrol T wall-----//
-                        SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
+                        SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.Euler(0, 0, -1), i, s, true);
 
                         Debug.Log("Case0 Lobby Guards spawned");
                         break;
@@ -72,7 +72,7 @@ namespace ProjectThief
                         SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, s, i, false);
 
                         //-----Guard Spawn Patrol IT walls-----//
-                        SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
+                        SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.Euler(0, 0, -1), j, s, true);
 
 
                         Debug.Log("Case1 Lobby Guards spawned");
@@ -99,7 +99,7 @@ namespace ProjectThief
                         SpawnGuard(staticPoints[j].transform.position, Quaternion.identity, s, i, false);
 
                         //-----Guard 8 Vault to Tut-----//
-                        SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
+                        SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.Euler(-1,0,0), i, s, true);
 
                         //-----Guard Spawn Patrol IT walls-----//
                         SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
@@ -115,7 +115,7 @@ namespace ProjectThief
                         //-----Guard T and Tutorial Door Path-----//
                         SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
                         //-----Guard XI Walls Roam-----//
-                        SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
+                        SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.Euler(0,0,1), j, s, true);
 
                         //-----Guard 11 X North-----//
                         SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, s, i, false);
@@ -130,7 +130,7 @@ namespace ProjectThief
                         //-----Guard T and Tutorial Door Path-----//
                         SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
                         //-----Guard XI Walls Roam-----//
-                        SpawnGuard(pathList[k].Waypoints[0].Position, Quaternion.identity, k, s, true);
+                        SpawnGuard(pathList[k].Waypoints[0].Position, Quaternion.Euler(0,0,1), k, s, true);
 
                         //-----Guard 11 X North-----//
                         SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, s, i, false);
@@ -154,20 +154,35 @@ namespace ProjectThief
                 {
                     
                     case 1:
-                        i = 5;
-                        Guard guard1 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, s, i, false);
+                        i = 9; j = 11;
+                        //-----Guard Room 1 phase 1 static-----//
+                        SpawnGuard(staticPoints[j].transform.position, Quaternion.identity, s, j, false);
+
+                        //-----Guard Room 1 phase 1 patrol-----//
+                        SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.Euler(-1,0,0), i, s, true);
 
                         break;
 
                     case 3:
-                        i = 4;
-                        Guard guard2 = SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
+                        i = 10; j = 11;
+                        //-----Guard Room 1 phase 3 PingPong-----//
+                        SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.Euler(-1,0,0), i, s, true);
+
+                        //-----Guard Room 1 phase 3 Loop-----//
+                        SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
 
                         break;
 
                     case 4:
-                        i = 5;
-                        Guard guard3 = SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.identity, i, s, true);
+                        i = 12; j = 13;
+                        //-----Guard Room 1 phase 4 static-----//
+                        SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, s, i, false);
+
+                        //-----Guard Room 1 phase 4 static-----//
+                        SpawnGuard(staticPoints[j].transform.position, Quaternion.identity, s, j, false);
+
+                        //-----Guard Room 1 phase 4 patrol-----//
+                        SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.Euler(0,0,1), i, s, true);
 
                         break;
 
@@ -183,14 +198,28 @@ namespace ProjectThief
                 switch (m_iCurrentPhase)
                 {
                     case 2:
-                        i = 6; j = 9;
-                        Guard guard1 = SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, s, i, false);
+                        i = 13; j = 14;
 
-                        Guard guard2 = SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.identity, j, s, true);
+                        //-----Guard Room 2 East Patrol-----//
+                        SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.Euler(0,0,-1) , i, s, true);
+                        //-----Guard Room 2 West Patrol-----//
+                        SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.Euler(0, 0, -1), j, s, true);
+
+                        //-----Guard Room 2 Static-----//
+                        SpawnGuard(staticPoints[j].transform.position, Quaternion.identity, s, j, false);
 
                         break;
 
                     default:
+                        i = 13; j = 14;
+
+                        //-----Guard Room 2 East Patrol-----//
+                        SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.Euler(0, 0, -1), i, s, true);
+                        //-----Guard Room 2 West Patrol-----//
+                        SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.Euler(0, 0, -1), j, s, true);
+
+                        //-----Guard Room 2 Static-----//
+                        SpawnGuard(staticPoints[j].transform.position, Quaternion.identity, s, j, false);
                         Debug.Log("Not valid Phase for current Room!");
                         break;
                 }

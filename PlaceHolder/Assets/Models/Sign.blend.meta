@@ -7,6 +7,11 @@ ModelImporter:
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
+    2100000: Frame__RoomName
+    2100002: Base__RoomName
+    2100004: Base__RoomName_png
+    2100006: Base__RNArchive_png
+    2100008: Base__RNCO_png
     2300000: //RootNode
     3300000: //RootNode
     4300000: Sign
@@ -16,8 +21,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Base__RoomName
+    second: {fileID: 2100000, guid: 104154ec2e0171f49a160101014ba035, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Base__vaultdetails_png
     second: {fileID: 2100000, guid: 104154ec2e0171f49a160101014ba035, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frame__RoomName
+    second: {fileID: 2100000, guid: 3f2ec58a731912d4a96b757990bce496, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

@@ -19,6 +19,7 @@ namespace ProjectThief
         public bool firstSpawn;
         public bool mouseOverUI;
         public bool canContinue;
+        public bool inTransit;
         public Transform spawnPoint;
         public Transform initialSpawn;
         public GameStateBase previousState;
@@ -76,7 +77,7 @@ namespace ProjectThief
             }
 
             inventory.Clear();
-            currentPhase = 5;
+            currentPhase = 0;
         }            
     }
 }
