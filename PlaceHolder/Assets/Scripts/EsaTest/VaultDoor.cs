@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using ProjectThief.PathFinding;
 
 namespace ProjectThief
 {
@@ -14,9 +15,14 @@ namespace ProjectThief
         [SerializeField, Tooltip("Vault key parts")]
         private List<Item> _keyParts;
 
+        [SerializeField]
+        private DynamicMapUpdate _pathUpdater;
+
         private Animator m_aAnimator;
         private bool m_bIsLocked;
         private Inventory _inventory;
+        private Vector3 lastPosition;
+        Bounds lastBounds;
 
         private void Awake()
         {
@@ -68,12 +74,25 @@ namespace ProjectThief
                     if (Input.GetButtonDown("Fire1"))
                     {                            
                         AddKeyPieces();
-                        m_aAnimator.SetBool("Open", true);                        
+                        UpdateMapOnce();
+                        m_aAnimator.SetBool("Open", true);
+                        
+                        
+                        Debug.Log("Updated map!");
                     }
                 }                
             }
             else
                 GetMouseController.InspectCursor();
+        }
+
+        private void UpdateMapOnce()
+        {
+            Bounds bR = GetComponent<Renderer>().bounds;
+            Pathfinder.Instance.DynamicRaycastUpdate(lastBounds);
+            Pathfinder.Instance.DynamicRaycastUpdate(bR);
+            lastPosition = transform.position;
+            lastBounds = bR;
         }
     }
 }

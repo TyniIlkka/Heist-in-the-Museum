@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 using System;
 using ProjectThief.PathFinding;
@@ -9,6 +8,7 @@ namespace ProjectThief.AI
 {
     public class PatrolMoveTo : AIStateBase
     {
+        private IEnumerator coroutine;
         public bool ready;
 
         public PatrolMoveTo(Guard owner)
@@ -62,7 +62,7 @@ namespace ProjectThief.AI
                     if (Mover.MoverPath.Count == 1)
                     {
                         //Owner.transform.LookAt(Owner.TargetSound.transform.position, Vector3.up);
-                        WaitTillMoveBack();
+                        Owner.StartWait(Owner.WaitTime);
                         Owner.DistractedSound = false;
                         //Mover.Target = Owner.CurrentWaypoint.transform.position;
 
@@ -76,7 +76,7 @@ namespace ProjectThief.AI
             }
         }
 
-        public IEnumerable WaitTillMoveBack()
+        IEnumerable WaitTillMoveBack()
         {
             yield return new WaitForSeconds(Owner.WaitTime);
             Owner.TargetSound = null;

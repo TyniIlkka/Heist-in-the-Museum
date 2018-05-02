@@ -28,5 +28,14 @@ namespace ProjectThief
         {
             anim = GetComponent<Animator>();
         }
+        public void StartWait(float time)
+        {
+            StartCoroutine(GuardWaitTime(time));
+        }
+
+        public IEnumerator GuardWaitTime(float time)
+        {
+            yield return new WaitForSeconds(time);
+        }
     }
 }
