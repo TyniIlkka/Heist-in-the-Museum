@@ -59,6 +59,7 @@ namespace ProjectThief
         public bool Cleared { get { return m_bIsCleared; } set { m_bIsCleared = value; } }
         public Inventory Inventory { get { return m_sInventory; } }
         public RoomReset RoomReset { get { return m_sRoomReset; } }
+        public bool Paused { get { return m_bPaused; } set { m_bPaused = value; } }
 
         private void Awake()
         {
@@ -77,6 +78,7 @@ namespace ProjectThief
                 m_bIsCleared = true;
             }
 
+            m_bPaused = false;
             m_bJustCleared = false;            
             m_sCameraScript.Distance = m_fDist;
             m_sCameraScript.HorizontalAngle = m_fHorizontalAngle;
@@ -110,16 +112,10 @@ namespace ProjectThief
             {
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
-                    if (!m_bPaused)
-                    {
+                    if (!m_bPaused)                   
                         m_sMenuControlscript.Pause();
-                        m_bPaused = true;
-                    }
                     else
-                    {
                         m_sMenuControlscript.Continue();
-                        m_bPaused = false;
-                    }
                 }
 
                 if (!m_bIsCleared && m_bCanBeCleared)
