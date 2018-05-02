@@ -2665,6 +2665,11 @@ GameObject:
   m_PrefabParentObject: {fileID: 1011425885596068, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
     type: 2}
   m_PrefabInternal: {fileID: 312220026}
+--- !u!1 &312220032 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1808227801255132, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
+    type: 2}
+  m_PrefabInternal: {fileID: 312220026}
 --- !u!114 &312220033 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114997749290359420, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
@@ -7004,6 +7009,23 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 73c406a1f980a594c81a3e966b6441da, type: 3}
   m_PrefabInternal: {fileID: 973436939}
+--- !u!1 &976928004 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1425525111994826, guid: 294ca015ecd1282468eb90ff4cab5256,
+    type: 2}
+  m_PrefabInternal: {fileID: 1014746597}
+--- !u!65 &976928006
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 976928004}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.5000014, y: 3.5000017, z: 2.0986614}
+  m_Center: {x: 0.000013113025, y: -0.002951981, z: 1.0568247}
 --- !u!1 &998918485
 GameObject:
   m_ObjectHideFlags: 0
@@ -7196,6 +7218,14 @@ Prefab:
     - target: {fileID: 4561637298895142, guid: 294ca015ecd1282468eb90ff4cab5256, type: 2}
       propertyPath: m_RootOrder
       value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 1425525111994826, guid: 294ca015ecd1282468eb90ff4cab5256, type: 2}
+      propertyPath: m_TagString
+      value: Obstacles
+      objectReference: {fileID: 0}
+    - target: {fileID: 1425525111994826, guid: 294ca015ecd1282468eb90ff4cab5256, type: 2}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 294ca015ecd1282468eb90ff4cab5256, type: 2}
@@ -12145,6 +12175,11 @@ Prefab:
       value: 
       objectReference: {fileID: 114399216956586930, guid: 2ed77783a630ea84c8a2378bf29bcb9f,
         type: 2}
+    - target: {fileID: 114982444803844292, guid: 5ded4a7572476c348b84d678d9242b92,
+        type: 2}
+      propertyPath: m_goEndBackground
+      value: 
+      objectReference: {fileID: 312220032}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ded4a7572476c348b84d678d9242b92, type: 2}
   m_IsPrefabParent: 0

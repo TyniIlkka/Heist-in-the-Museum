@@ -11,6 +11,8 @@ namespace ProjectThief
         private MouseController m_mcController;
 
         [SerializeField]
+        private GameObject m_goEndBackground;
+        [SerializeField]
         private GameObject m_goDefeat;
         [SerializeField]
         private GameObject m_goVictory;
@@ -96,6 +98,7 @@ namespace ProjectThief
                 GameManager.instance.canMove = true;
                 Time.timeScale = 1f;
                 m_goDefeat.SetActive(false);
+                m_goEndBackground.SetActive(false);
             }
         }
 
@@ -177,6 +180,7 @@ namespace ProjectThief
         {
             GameManager.instance.canMove = false;
             Time.timeScale = 0f;
+            m_goEndBackground.SetActive(true);
             m_goDefeat.SetActive(true);            
         }
 
@@ -188,6 +192,7 @@ namespace ProjectThief
         {
             GameManager.instance.canMove = false;
             Time.timeScale = 0f;
+            m_goEndBackground.SetActive(true);
             m_goVictory.SetActive(true);
         }
         
