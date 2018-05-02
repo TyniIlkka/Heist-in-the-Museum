@@ -28,6 +28,8 @@ namespace ProjectThief
                         GetMouseController.EnterCursor();
                         if (Input.GetButtonDown("Fire1"))
                         {
+                            GameManager.instance.canMove = false;
+                            GameManager.instance.inTransit = true;
                             GameManager.instance.levelController.PlayerEscaped();
                         }
                     }

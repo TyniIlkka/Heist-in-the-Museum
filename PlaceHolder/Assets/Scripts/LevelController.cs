@@ -82,7 +82,8 @@ namespace ProjectThief
             m_sCameraScript.HorizontalAngle = m_fHorizontalAngle;
             m_sCameraScript.VerticalAngle = m_fVerticalAngle;
 
-            GameManager.instance.levelController = this;            
+            GameManager.instance.levelController = this;
+            GameManager.instance.inTransit = false;
             m_mcController = GameManager.instance.mouseController;
             GameManager.instance.player = SpawnPlayer();               
 
@@ -125,7 +126,7 @@ namespace ProjectThief
                     CheckKeyItems();
             }
 
-            Debug.Log("LC: Player can move: " + GameManager.instance.canMove);
+            MouseOverUICheck();
         }
 
         /// <summary>
@@ -140,9 +141,8 @@ namespace ProjectThief
                 GameManager.instance.canMove = false;
                 GameManager.instance.mouseOverUI = true;
             }
-            else
+            else if (!GameManager.instance.inTransit)
             {
-                // Check if in transition
                 GameManager.instance.canMove = true;
                 GameManager.instance.mouseOverUI = false;
             }
