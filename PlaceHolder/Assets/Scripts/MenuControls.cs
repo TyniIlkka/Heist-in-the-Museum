@@ -123,7 +123,8 @@ namespace ProjectThief
         }
 
         public void Pause()
-        {            
+        {
+            GameManager.instance.levelController.Paused = true;
             m_goPausePlan.SetActive(true);
             m_goPauseMenuBg.SetActive(true);
             m_goPauseMenu.SetActive(true);
@@ -133,7 +134,8 @@ namespace ProjectThief
         }
 
         public void Continue()
-        {            
+        {
+            GameManager.instance.levelController.Paused = false;
             m_goPausePlan.SetActive(false);
             m_goPauseMenuBg.SetActive(false);
             m_goPauseMenu.SetActive(false);
