@@ -136,7 +136,8 @@ namespace ProjectThief
         {            
             m_goPausePlan.SetActive(false);
             m_goPauseMenuBg.SetActive(false);
-            m_goPauseMenu.SetActive(false);            
+            m_goPauseMenu.SetActive(false);
+            m_goPauseOptions.SetActive(false);
             //m_bPauseButton.interactable = true;
             GameManager.instance.canMove = true;
             Time.timeScale = 1f;
