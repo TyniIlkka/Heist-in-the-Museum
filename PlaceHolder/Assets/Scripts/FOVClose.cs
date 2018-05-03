@@ -8,7 +8,7 @@ namespace ProjectThief
         [SerializeField]
         private float m_fViewRad;
         [SerializeField]
-        private float m_fViewAngle;
+        private float m_fViewAngle = 360f;
         [SerializeField]
         private LayerMask m_lmObstacleMask;
         [SerializeField]
@@ -44,7 +44,7 @@ namespace ProjectThief
             if (GetComponentInParent<Guard>() != null)
             {
                 m_fViewRad = GetComponentInParent<Guard>().MinDetectionRange;
-                m_fViewAngle = 360;
+                m_fViewAngle = 360f;
                 m_pPlayerObject = GetComponentInParent<Guard>().Thief;
 
             }

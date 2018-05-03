@@ -16,7 +16,10 @@ namespace ProjectThief
         [SerializeField]
         private Transform _playerTransform;
 
+
         public float speed;
+
+        private ParticleSystem particleSystem;
         private CharacterController _charCont;
         private Vector3 _movement;
         private Animator _playerAnimator;
@@ -25,6 +28,7 @@ namespace ProjectThief
 
         private void Awake()
         {
+            particleSystem = GetComponentInChildren<ParticleSystem>();
             player = GetComponent<Player>();
             _charCont = GetComponent<CharacterController>();
             _playerAnimator = GetComponentInChildren<Animator>();
@@ -34,12 +38,13 @@ namespace ProjectThief
         {
             Move();
             MoveSpeed();
+            //RippleEffect();
             speed = player.Speed;
         }
 
         private void Move()
         {
-            if (_charCont.isGrounded)
+            if (_charCont.isGrounded && GameManager.instance.canMove)
             {
                 _movement = new Vector3(Input.GetAxis("Vertical"), 0, -Input.GetAxis("Horizontal"));
 
@@ -56,18 +61,27 @@ namespace ProjectThief
                     _playerAnimator.SetBool("Moving", true);
                     //TODO: Replace to value
                     _playerAnimator.SetFloat("Speed", player.Speed);
-                    //
 
+                    if (player.Speed > 2)
+                    {
+                        particleSystem.transform.localScale = new Vector3(3, 3, 3);
+                    }
+                    else
+                    {
+                        particleSystem.transform.localScale = new Vector3(1, 1, 1);
+                    }
                     _movement = transform.forward + transform.right;
                     _movement *= player.Speed;
                 }
                 else
                 {
                     _playerAnimator.SetBool("Moving", false);
+                    particleSystem.transform.localScale = new Vector3(0, 0, 0);
                 }                
             }
             else
             {
+                particleSystem.transform.localScale = new Vector3(0, 0, 0);
                 _playerAnimator.SetBool("Moving", false);
             }
 
@@ -80,10 +94,30 @@ namespace ProjectThief
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 player.Speed = _moveSpeedSneak;
+                particleSystem.transform.localScale = new Vector3(1, 1, 1);
             }
             else
             {
                 player.Speed = _moveSpeedWalk;
+            }
+        }
+
+        private void RippleEffect()
+        {
+            var main = particleSystem.main;
+            if (player.Speed > _moveSpeedSneak)
+            {
+                main.startSize = 3f;
+            }
+            else if (player.Speed <= _moveSpeedSneak && player.Speed > 0.99f)
+            {
+                main.startSize = 1f;
+            }
+            else
+            {
+
+                main.startSize = 0f;
+                //soundWaves.Stop();
             }
         }
     }
