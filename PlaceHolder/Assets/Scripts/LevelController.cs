@@ -100,6 +100,8 @@ namespace ProjectThief
                 m_goDefeat.SetActive(false);
                 m_goEndBackground.SetActive(false);
             }
+            GameManager.instance.fadeInStart = true;
+            GameManager.instance.fadeIn = false;
         }
 
         // Update is called once per frame
@@ -213,10 +215,9 @@ namespace ProjectThief
                 {
                     GameManager.instance.infoShown = true;
                     m_goScreen.SetActive(false);
-                   //m_bPauseButton.interactable = true;
                     GameManager.instance.canMove = true;
                     Time.timeScale = 1f;
-                    m_fDelay = 0;
+                    m_fDelay = 0;                   
                 }
             }
         }

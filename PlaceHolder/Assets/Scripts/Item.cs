@@ -66,7 +66,7 @@ namespace ProjectThief
                     GetMouseController.InteractCursor();
                     if (Input.GetButtonDown("Fire1"))
                     {
-                        if (_refPos == 12 && !_collected)
+                        if (_refPos == 13 && !_collected)
                             GameManager.instance.currentPhase++;
 
                         _collected = true;

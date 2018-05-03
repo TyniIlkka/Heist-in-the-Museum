@@ -110,11 +110,9 @@ namespace ProjectThief
                             {
                                 if (Input.GetButtonDown("Fire1") && !_opened)
                                 {
-                                    
-                                    DoorOpenSound();
-                                    _opened = true;
-                                    GameManager.instance.canMove = false;
-                                    GameManager.instance.inTransit = true;
+
+                                    DoorOpenSound();                                    
+                                    UpdateBooleans();
                                 }
                             }
                             else if (GameManager.instance.levelController.Cleared)
@@ -122,9 +120,7 @@ namespace ProjectThief
                                 if (Input.GetButtonDown("Fire1") && !_opened)
                                 {
                                     DoorOpenSound();
-                                    _opened = true;
-                                    GameManager.instance.canMove = false;
-                                    GameManager.instance.inTransit = true;
+                                    UpdateBooleans();
                                 }
                             }
                         }
@@ -144,6 +140,15 @@ namespace ProjectThief
                     GetMouseController.InspectCursor();
                 }
             }
+        }
+
+        private void UpdateBooleans()
+        {
+            _opened = true;
+            GameManager.instance.canMove = false;
+            GameManager.instance.inTransit = true;
+            GameManager.instance.fadeIn = true;
+            GameManager.instance.fadeInStart = true;
         }
     }
 }

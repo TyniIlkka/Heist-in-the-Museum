@@ -20,6 +20,8 @@ namespace ProjectThief
         public bool mouseOverUI;
         public bool canContinue;
         public bool inTransit;
+        public bool fadeIn;
+        public bool fadeInStart;
         public Transform spawnPoint;
         public Transform initialSpawn;
         public GameStateBase previousState;
