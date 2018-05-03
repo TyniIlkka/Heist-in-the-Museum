@@ -44,49 +44,57 @@ namespace ProjectThief
 
         private void Move()
         {
-            if (_charCont.isGrounded && GameManager.instance.canMove)
+            if (GameManager.instance.canMove)
             {
-                _movement = new Vector3(Input.GetAxis("Vertical"), 0, -Input.GetAxis("Horizontal"));
 
-                if (_movement != Vector3.zero)
+                if (_charCont.isGrounded)
                 {
-                    Vector3 newRotation = _movement;
-                    transform.rotation = Quaternion.LookRotation(newRotation);
-                    _playerTransform.rotation = Quaternion.LookRotation(newRotation);
+                    _movement = new Vector3(Input.GetAxis("Vertical"), 0, -Input.GetAxis("Horizontal"));
 
-                    float offsetY = _playerTransform.eulerAngles.y;
-                    _playerTransform.eulerAngles = new Vector3(_playerTransform.eulerAngles.x,
-                        offsetY + 45, _playerTransform.eulerAngles.z);
-
-                    _playerAnimator.SetBool("Moving", true);
-                    //TODO: Replace to value
-                    _playerAnimator.SetFloat("Speed", player.Speed);
-
-                    if (player.Speed > 2)
+                    if (_movement != Vector3.zero)
                     {
-                        particleSystem.transform.localScale = new Vector3(3, 3, 3);
+                        Vector3 newRotation = _movement;
+                        transform.rotation = Quaternion.LookRotation(newRotation);
+                        _playerTransform.rotation = Quaternion.LookRotation(newRotation);
+
+                        float offsetY = _playerTransform.eulerAngles.y;
+                        _playerTransform.eulerAngles = new Vector3(_playerTransform.eulerAngles.x,
+                            offsetY + 45, _playerTransform.eulerAngles.z);
+
+                        _playerAnimator.SetBool("Moving", true);
+                        _playerAnimator.SetFloat("Speed", player.Speed);
+
+                        if (player.Speed > _moveSpeedSneak)
+                        {
+                            particleSystem.transform.localScale = new Vector3(3, 3, 3);
+                        }
+                        else
+                        {
+                            particleSystem.transform.localScale = new Vector3(1, 1, 1);
+                        }
+                        _movement = transform.forward + transform.right;
+                        _movement *= player.Speed;
                     }
                     else
                     {
-                        particleSystem.transform.localScale = new Vector3(1, 1, 1);
+                        particleSystem.transform.localScale = new Vector3(0, 0, 0);
+                        _playerAnimator.SetBool("Moving", false);
+                        
                     }
-                    _movement = transform.forward + transform.right;
-                    _movement *= player.Speed;
                 }
                 else
                 {
-                    _playerAnimator.SetBool("Moving", false);
                     particleSystem.transform.localScale = new Vector3(0, 0, 0);
-                }                
+                    _playerAnimator.SetBool("Moving", false);
+                }
+
+                _movement.y -= _gravity * Time.deltaTime;
+                _charCont.Move(_movement * Time.deltaTime);
             }
             else
             {
-                particleSystem.transform.localScale = new Vector3(0, 0, 0);
-                _playerAnimator.SetBool("Moving", false);
+                _movement = new Vector3(0,0,0d);
             }
-
-            _movement.y -= _gravity * Time.deltaTime;
-            _charCont.Move(_movement * Time.deltaTime);
         }
 
         private void MoveSpeed()
