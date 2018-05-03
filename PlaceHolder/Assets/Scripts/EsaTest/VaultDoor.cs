@@ -30,6 +30,13 @@ namespace ProjectThief
             _inventory = FindObjectOfType<Inventory>();
         }
 
+        private void Start()
+        {
+            lastPosition = transform.position;
+            lastBounds = GetComponent<Renderer>().bounds;
+            UpdateMapOnce();
+        }
+
         private bool CheckKeys()
         {
             bool result = true;
