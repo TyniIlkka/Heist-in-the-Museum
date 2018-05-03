@@ -63,11 +63,35 @@ namespace ProjectThief
 
             _r = _fadeScreen.color.r;
             _g = _fadeScreen.color.g;
-            _b = _fadeScreen.color.b;            
+            _b = _fadeScreen.color.b;
+
+            if (GameStateController.CurrentState.SceneName == "MainMenu")
+            {
+                if (!GameManager.instance.initialMenu)
+                    _fadeScreen.color = new Vector4(_r, _g, _b, 1);
+
+                if (_fadeScreen.color.a != 0)
+                {
+                    GameManager.instance.fadeInStart = true;
+                    GameManager.instance.fadeIn = false;
+                }
+
+                GameManager.instance.initialMenu = false;
+            }
         }
 
         private void Update()
         {
+           // Debug.Log("Fade screen alpha: " + _fadeScreen.color.a);
+
+            if (GameStateController.CurrentState.SceneName == "MainMenu")
+            {
+                if (GameManager.instance.canContinue)
+                    _continueButton.gameObject.SetActive(true);
+                else
+                    _continueButton.gameObject.SetActive(false);
+            }
+
             if (GameManager.instance.fadeInStart)
             {
                 _start = Time.time;
@@ -77,16 +101,6 @@ namespace ProjectThief
                     _fadeScreen.color = new Vector4(_r, _g, _b, 0);
                 else
                     _fadeScreen.color = new Vector4(_r, _g, _b, 1);
-            }
-
-            Debug.Log("Fade screen alpha: " + _fadeScreen.color.a);
-
-            if (GameStateController.CurrentState.SceneName == "MainMenu")
-            {
-                if (GameManager.instance.canContinue)
-                    _continueButton.gameObject.SetActive(true);
-                else
-                    _continueButton.gameObject.SetActive(false);
             }
 
             if (GameManager.instance.fadeIn && _fadeScreen.color.a != 1)
@@ -114,15 +128,13 @@ namespace ProjectThief
         private void FadeIn()
         {
             _progress = Time.time - _start;
-            _fadeScreen.color = Color.Lerp(_fadeScreen.color, new Vector4(_r, _g, _b, 1), _progress / _duration);
-            Debug.Log("fade in");
+            _fadeScreen.color = Color.Lerp(_fadeScreen.color, new Vector4(_r, _g, _b, 1), _progress / _duration);            
         }
 
         private void FadeOut()
         {
             _progress = Time.time - _start;
             _fadeScreen.color = Color.Lerp(_fadeScreen.color, new Vector4(_r, _g, _b, 0), _progress / _duration);
-            Debug.Log("fade out");
         }
 
         public void NewGame()
@@ -133,7 +145,6 @@ namespace ProjectThief
             GameManager.instance.firstSpawn = true;
             GameManager.instance.infoShown = false;
             _newGame = true;
-            Debug.Log("new game");
         }
 
         public void Options()

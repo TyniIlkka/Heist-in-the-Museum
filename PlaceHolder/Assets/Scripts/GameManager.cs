@@ -22,6 +22,7 @@ namespace ProjectThief
         public bool inTransit;
         public bool fadeIn;
         public bool fadeInStart;
+        public bool initialMenu;
         public Transform spawnPoint;
         public Transform initialSpawn;
         public GameStateBase previousState;
@@ -39,6 +40,8 @@ namespace ProjectThief
         public bool[] clearedRooms;
         [SerializeField] List<Guard> guards;
         #endregion
+        [Header("Debug variables")]
+        public bool mouseMovemet;
 
         private void Awake()
         {
@@ -58,6 +61,7 @@ namespace ProjectThief
             openedVitrines = new bool[4];
             clearedRooms = new bool[5];
             canContinue = false;
+            initialMenu = true;
         }         
 
         public void ResetGame()

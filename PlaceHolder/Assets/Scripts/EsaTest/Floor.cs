@@ -8,7 +8,8 @@ namespace ProjectThief
     {
         protected override void Activated()
         {
-            GetMouseController.MoveCursor();
+            if (GameManager.instance.mouseMovemet)
+                GetMouseController.MoveCursor();
         }
     }
 }

@@ -67,14 +67,16 @@ namespace ProjectThief
                     if (Input.GetButtonDown("Fire1"))
                     {
                         if (_refPos == 13 && !_collected)
+                        {
                             GameManager.instance.currentPhase++;
+                            Debug.Log("Target collected phase increased, Current phase: " + GameManager.instance.currentPhase);
+                        }
 
                         _collected = true;
                         _inventory.AddItem(this);
                         gameObject.SetActive(false);
                         GameManager.instance.refItems[RefPos].Collected = true;
                         GetMouseController.DefaultCursor();
-                        
                     }
                 }
                 else                

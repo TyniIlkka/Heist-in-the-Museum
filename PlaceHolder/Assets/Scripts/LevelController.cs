@@ -99,9 +99,9 @@ namespace ProjectThief
                 Time.timeScale = 1f;
                 m_goDefeat.SetActive(false);
                 m_goEndBackground.SetActive(false);
+                GameManager.instance.fadeInStart = true;
+                GameManager.instance.fadeIn = false;
             }
-            GameManager.instance.fadeInStart = true;
-            GameManager.instance.fadeIn = false;
         }
 
         // Update is called once per frame
@@ -217,7 +217,9 @@ namespace ProjectThief
                     m_goScreen.SetActive(false);
                     GameManager.instance.canMove = true;
                     Time.timeScale = 1f;
-                    m_fDelay = 0;                   
+                    m_fDelay = 0;
+                    GameManager.instance.fadeInStart = true;
+                    GameManager.instance.fadeIn = false;
                 }
             }
         }
@@ -228,8 +230,6 @@ namespace ProjectThief
 
             if (!GameManager.instance.firstSpawn)
             {
-                // TODO update spawn position & rotation.
-
                 m_v3SpawnPosition = SpawnPosition();
                 m_qSpawnRotation = SpawnRotation();
 
