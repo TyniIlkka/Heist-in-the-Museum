@@ -23,9 +23,10 @@ namespace ProjectThief
         private float m_fMult = 2;
 
         private Mesh m_mViewMesh;
+        private float distanceToPlayer;
 
         public Player m_pPlayerObject;
-
+        private Guard guard;
 
         public float ViewRad { get { return m_fViewRad; } }
         public float ViewAngle { get { return m_fViewAngle; } }
@@ -41,7 +42,8 @@ namespace ProjectThief
 
         private void Init()
         {
-            if (GetComponentInParent<Guard>() != null)
+            guard = GetComponentInParent<Guard>();
+            if (guard != null)
             {
                 m_fViewRad = GetComponentInParent<Guard>().MinDetectionRange;
                 m_fViewAngle = 360f;
@@ -54,8 +56,22 @@ namespace ProjectThief
             }
         }
 
+        private void CheckRadius()
+        {
+            if (guard != null)
+            {
+                m_fViewRad = guard.MinDetectionRange;
+            }
+            else
+            {
+                Debug.LogError("ERROR: Guard not found.");
+            }
+            
+        }
+
         private void LateUpdate()
         {
+            CheckRadius();
             Init();
             DrawFieldOfView();
             if (CanSeePlayer())
@@ -204,9 +220,9 @@ namespace ProjectThief
         {
 
             //Close range detection
-            float distanceToPlayer = (transform.position - m_pPlayerObject.transform.position).magnitude;
+            distanceToPlayer = (transform.position - m_pPlayerObject.transform.position).sqrMagnitude;
             
-            if ((distanceToPlayer <= m_fViewRad ))
+            if ((distanceToPlayer <= m_fViewRad * m_fViewRad))
             {
                 Vector3 rayDirection = (m_pPlayerObject.transform.position) - transform.position;
                 RaycastHit hit;
@@ -215,8 +231,6 @@ namespace ProjectThief
                 {
                     if (hit.collider.gameObject.GetComponent<Player>() != null)
                     {
-                        Debug.DrawRay(transform.position, rayDirection.normalized);
-                        Debug.Log(hit.collider.gameObject);
                         return true;
                     }
                 }

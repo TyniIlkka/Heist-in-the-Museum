@@ -102,7 +102,7 @@ namespace ProjectThief
                     {
                         GetMouseController.InspectCursor();
 
-                        GameManager.instance.player.GetComponent<GridPlayer>().FindPath(MoveToPos);
+                        //GameManager.instance.player.GetComponent<GridPlayer>().FindPath(MoveToPos);
                     }
                 }
             }

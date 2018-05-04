@@ -11,9 +11,13 @@ namespace ProjectThief
         private float _activationDist = 10f;
         [SerializeField, Tooltip("Object interaction distance")]
         private float _interactDist = 5f;
+        [SerializeField]
+        private LayerMask mask;
 
         private List<ObjectBase> _objects = new List<ObjectBase>();
         private List<ObjectBase> _toBeRemoved = new List<ObjectBase>();
+
+        public Collider[] objects;
 
         private void OnDrawGizmos()
         {
@@ -32,8 +36,9 @@ namespace ProjectThief
         }
 
         private void GetObjectsInRange()
-        {            
-            Collider[] objects = Physics.OverlapSphere(transform.position, _activationDist);
+        {
+            
+            objects = Physics.OverlapSphere(transform.position, _activationDist, mask);
             
             if (objects.Length > 0)
             {
@@ -81,7 +86,7 @@ namespace ProjectThief
                     }
                 }
 
-                if (_toBeRemoved.Count > 0)
+                if (_toBeRemoved.Count > 10)
                 {
                     RemoveItems();
                 }

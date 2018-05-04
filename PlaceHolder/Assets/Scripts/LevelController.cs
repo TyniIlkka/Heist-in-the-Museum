@@ -139,7 +139,7 @@ namespace ProjectThief
             {
                 
                 m_mcController.DefaultCursor();
-                GameManager.instance.canMove = false;
+                //GameManager.instance.canMove = false;
                 GameManager.instance.mouseOverUI = true;
             }
             else if (!GameManager.instance.inTransit)

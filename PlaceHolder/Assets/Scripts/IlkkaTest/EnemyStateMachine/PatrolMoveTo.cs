@@ -40,45 +40,24 @@ namespace ProjectThief.AI
 
             if (!ChangeState())
             {
-                //2. Find the way to the current way point
-                //Mover.FindPath(Owner.transform.position, )
-
-                //Owner.TargetSound.transform.position.y = 0;
+                //2. 
                 if (!ready)
                 {
                     Mover.Target = Owner.TargetSound.MoveToPos;
                     Mover.FindPath(Owner.transform.position, Owner.TargetSound.MoveToPos);
                 }
                 
-
-
-                //3. Move the finded way
-
-                //TODO: add animation trigger
-                //Owner.MoveAnimation(Path);
                 if (Mover.MoverPath.Count > 0)
                 {
                     MoveMethod();
                     if (Mover.MoverPath.Count == 1)
                     {
-                        
-                        //Owner.DistractedSound = false;
-                        //Mover.Target = Owner.CurrentWaypoint.transform.position;
-
-                        //Mover.FindPath(Owner.transform.position, Owner.CurrentWaypoint.transform.position);
-                        Debug.Log("Etsittiin path takaisin " + Mover.MoverPath.Count);
                         ready = true;
                     }
                     
                 }
 
             }
-        }
-
-        IEnumerable WaitTillMoveBack()
-        {
-            yield return new WaitForSeconds(Owner.WaitTime);
-            Owner.TargetSound = null;
         }
 
         /// <summary>
@@ -91,13 +70,6 @@ namespace ProjectThief.AI
             {
                 bool result = Owner.PerformTransition(AIStateType.PatrolStayAtTarget);
                 return result;
-            }
-
-            if (Mover.MoverPath.Count <= 0 && ready)
-            {
-                //Debug.Log("Liikutaan pois hämäyksestä");
-                //bool result = Owner.PerformTransition(AIStateType.Patrol);
-                //return result;
             }
             return false;
         }

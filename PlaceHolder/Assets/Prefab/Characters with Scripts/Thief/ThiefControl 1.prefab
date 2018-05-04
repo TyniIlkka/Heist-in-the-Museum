@@ -957,6 +957,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _activationDist: 10
   _interactDist: 3
+  mask:
+    serializedVersion: 2
+    m_Bits: 1025
+  objects: []
 --- !u!114 &114762870905765928
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -969,6 +973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: []
+  speed: 0
   walkRange: 0
   sneakRange: 0
 --- !u!114 &114836524620015326
