@@ -93,7 +93,7 @@ namespace ProjectThief
             }
             else
             {
-                _movement = new Vector3(0,0,0d);
+                _movement = new Vector3(0,0,0);
             }
         }
 
