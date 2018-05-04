@@ -25,7 +25,7 @@ namespace ProjectThief
         [SerializeField, Header("Fade In/Out")]
         private RawImage _fadeScreen;
         [SerializeField, Tooltip("Fade in/ out effect duration")]
-        private float _duration = 150;
+        private float _duration = 2;
 
         #region Pause controls
         [SerializeField, Header("Pause menu")]
