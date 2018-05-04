@@ -22,6 +22,8 @@ namespace ProjectThief
         public bool inTransit;
         public bool fadeIn;
         public bool fadeInStart;
+        public bool infoFadeIn;
+        public bool infoFadeInStart;
         public bool initialMenu;
         public Transform spawnPoint;
         public Transform initialSpawn;

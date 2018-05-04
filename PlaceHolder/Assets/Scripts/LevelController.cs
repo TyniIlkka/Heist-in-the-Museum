@@ -10,7 +10,7 @@ namespace ProjectThief
     {
         private MouseController m_mcController;
 
-        [SerializeField]
+        [SerializeField, Header("Hud items")]
         private GameObject m_goEndBackground;
         [SerializeField]
         private GameObject m_goDefeat;
@@ -22,7 +22,7 @@ namespace ProjectThief
         private Button m_bPauseButton;
         [SerializeField]
         private GameObject m_goContinueText;
-        [SerializeField]
+        [SerializeField, Header("Scripts")]
         private RoomReset m_sRoomReset;
         [SerializeField, Tooltip("Main Camera")]
         private CameraFollow m_sCameraScript;
@@ -30,31 +30,31 @@ namespace ProjectThief
         private Inventory m_sInventory;
         [SerializeField]
         private MenuControls m_sMenuControlscript;
-        [SerializeField, Tooltip("Initial Spawn location")]
+        [SerializeField, Tooltip("Initial Spawn location"), Header("Other")]
         private Transform m_tInitialSpawn;
         [SerializeField, Tooltip("Scenes Doors")]
         private List<Door> m_lDoors;
         [SerializeField, Tooltip("Room position in list (starts from 0)")]
-        private int m_iPos;        
-        [SerializeField, Tooltip("Camera's distance from player")]
-        private float m_fDist = 7f;
-        [SerializeField, Tooltip("Camera's horizontal angle in room")]
-        private float m_fHorizontalAngle = 0;
-        [SerializeField, Tooltip("Camera's vertical angle in room")]
-        private float m_fVerticalAngle = 35;
+        private int m_iPos; 
         [SerializeField, Tooltip("Items neede to collect to advance into next phase")]
         private List<Item> m_lKeyItems;         
         [SerializeField]
         private bool m_bCanBeCleared;
         [SerializeField]
-        private float m_fInfoWait = 5f;
+        private float _infoWaitTime = 5f;
+        [SerializeField, Tooltip("Camera's distance from player"), Header("Camera settings")]
+        private float m_fDist = 7f;
+        [SerializeField, Tooltip("Camera's horizontal angle in room")]
+        private float m_fHorizontalAngle = 0;
+        [SerializeField, Tooltip("Camera's vertical angle in room")]
+        private float m_fVerticalAngle = 35;
 
         private Vector3 m_v3SpawnPosition;        
         private Quaternion m_qSpawnRotation;
         private bool m_bJustCleared;
         private bool m_bIsCleared;
         private bool m_bPaused;
-        private float m_fDelay = 0;
+        private float _delay = 0;
 
         public bool JustCleared { get { return m_bJustCleared; } }
         public int ListPos { get { return m_iPos; } }
@@ -95,13 +95,15 @@ namespace ProjectThief
                 Intro();     
             else
             {
-                GameManager.instance.canMove = true;
-                Time.timeScale = 1f;
+                GameManager.instance.canMove = true;                
                 m_goDefeat.SetActive(false);
-                m_goEndBackground.SetActive(false);
-                GameManager.instance.fadeInStart = true;
-                GameManager.instance.fadeIn = false;
+                m_goEndBackground.SetActive(false);                
             }
+
+            Time.timeScale = 1;
+            GameManager.instance.fadeInStart = true;
+            GameManager.instance.fadeIn = false;
+            Debug.Log("fade out");
         }
 
         // Update is called once per frame
@@ -109,8 +111,8 @@ namespace ProjectThief
         {
             if (!GameManager.instance.infoShown)
             {
-                IntroEnd();
-                m_fDelay += 0.02f;
+                _delay += Time.deltaTime;
+                IntroEnd();                
             }            
             
             if (GameManager.instance.infoShown)
@@ -136,13 +138,12 @@ namespace ProjectThief
         private void MouseOverUICheck()
         {
             if (EventSystem.current.IsPointerOverGameObject())
-            {
-                
+            {                
                 m_mcController.DefaultCursor();
                 //GameManager.instance.canMove = false;
                 GameManager.instance.mouseOverUI = true;
             }
-            else if (!GameManager.instance.inTransit)
+            else if (!GameManager.instance.inTransit && GameManager.instance.infoShown)
             {
                 GameManager.instance.canMove = true;
                 GameManager.instance.mouseOverUI = false;
@@ -201,13 +202,12 @@ namespace ProjectThief
         private void Intro()
         {
             m_goScreen.SetActive(true);
-            GameManager.instance.canMove = false;
-            Time.timeScale = 0f;            
+            GameManager.instance.canMove = false;                       
         }
 
         private void IntroEnd()
         {
-            if (m_fDelay >= m_fInfoWait)
+            if (_delay >= _infoWaitTime)
             {
                 m_goContinueText.SetActive(true);
 
@@ -215,11 +215,13 @@ namespace ProjectThief
                 {
                     GameManager.instance.infoShown = true;
                     m_goScreen.SetActive(false);
+                    m_goContinueText.SetActive(false);
                     GameManager.instance.canMove = true;
                     Time.timeScale = 1f;
-                    m_fDelay = 0;
-                    GameManager.instance.fadeInStart = true;
-                    GameManager.instance.fadeIn = false;
+                    _delay = 0;
+
+                    GameManager.instance.infoFadeIn = true;
+                    GameManager.instance.infoFadeInStart = true;
                 }
             }
         }

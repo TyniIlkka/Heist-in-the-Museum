@@ -45,11 +45,24 @@ namespace ProjectThief
         [SerializeField, Header("Info screen")]
         private GameObject _infoBg;
 
+        [SerializeField, Header("Info text")]
+        private RawImage _textBg;
+        [SerializeField]
+        private Text _infoText;
+        [SerializeField, Tooltip("Text hide delay")]
+        private float _delay = 5f;
+        [SerializeField, Tooltip("Info fade effect duration")]
+        private float _infoDuration = 2f;
+
         private AudioManager _audioManager;
         private float _r, _g, _b;
-        private float _start, _progress;
+        private float _start, _infoStart;
         private bool _newGame;
         private bool _returnMenu;
+        private float _timePassed;
+        private float _rInfo, _gInfo, _bInfo;
+        private float _rText, _gText, _bText;
+        private bool _infoVisible;
 
         private void Awake()
         {
@@ -64,6 +77,17 @@ namespace ProjectThief
             _r = _fadeScreen.color.r;
             _g = _fadeScreen.color.g;
             _b = _fadeScreen.color.b;
+
+            if (GameStateController.CurrentState.SceneName != "MainMenu")
+            {
+                _rInfo = _textBg.color.r;
+                _gInfo = _textBg.color.g;
+                _bInfo = _textBg.color.b;
+
+                _rText = _infoText.color.r;
+                _gText = _infoText.color.g;
+                _bText = _infoText.color.b;
+            }
 
             if (GameStateController.CurrentState.SceneName == "MainMenu")
             {
@@ -82,8 +106,6 @@ namespace ProjectThief
 
         private void Update()
         {
-           // Debug.Log("Fade screen alpha: " + _fadeScreen.color.a);
-
             if (GameStateController.CurrentState.SceneName == "MainMenu")
             {
                 if (GameManager.instance.canContinue)
@@ -97,20 +119,18 @@ namespace ProjectThief
                 _start = Time.time;
                 GameManager.instance.fadeInStart = false;
 
-                if (GameManager.instance.fadeIn)
-                    _fadeScreen.color = new Vector4(_r, _g, _b, 0);
+                if (GameManager.instance.fadeIn)                
+                    _fadeScreen.color = new Vector4(_r, _g, _b, 0);   
                 else
                     _fadeScreen.color = new Vector4(_r, _g, _b, 1);
             }
 
-            if (GameManager.instance.fadeIn && _fadeScreen.color.a != 1)
-            {
+            if (GameManager.instance.fadeIn && _fadeScreen.color.a != 1)            
                 FadeIn();
-            }
-            if (!GameManager.instance.fadeIn && _fadeScreen.color.a != 0)
-            {
+            
+            if (!GameManager.instance.fadeIn && _fadeScreen.color.a != 0)            
                 FadeOut();
-            }
+            
 
             if (_newGame && _fadeScreen.color.a == 1)
             {
@@ -123,18 +143,73 @@ namespace ProjectThief
                 _returnMenu = false;
                 GameStateController.PerformTransition(_menuState);
             }
+
+            if (GameStateController.CurrentState.SceneName != "MainMenu")
+            {
+                if (GameManager.instance.infoFadeInStart)
+                {
+                    _infoStart = Time.time;
+                    GameManager.instance.infoFadeInStart = false;
+
+                    if (GameManager.instance.infoFadeIn)
+                    {
+                        _textBg.color = new Vector4(_rInfo, _gInfo, _bInfo, 0);
+                        _infoVisible = true;
+                    }
+                    else
+                        _textBg.color = new Vector4(_rInfo, _gInfo, _bInfo, 1);
+                }
+
+                if (_textBg != null)
+                {
+                    if (_infoVisible && _textBg.color.a == 1)
+                        InfoTimer();
+
+                    if (_infoVisible && _textBg.color.a != 1)
+                        FadeInInfo();
+
+                    if (!_infoVisible && _textBg.color.a != 0)
+                        FadeOutInfo();
+                }
+            }
+        }
+
+        private void InfoTimer()
+        {
+            _timePassed += Time.deltaTime;
+
+            if (_timePassed >= _delay)
+            {
+                _timePassed = 0;
+                _infoVisible = false;
+                _infoStart = Time.time;
+            }
+        }
+
+        private void FadeInInfo()
+        {
+            float progress = Time.time - _infoStart;
+            _infoText.color = Color.Lerp(_infoText.color, new Vector4(_rText, _gText, _bText, 1), progress / _infoDuration);
+            _textBg.color = Color.Lerp(_textBg.color, new Vector4(_rInfo, _gInfo, _bInfo, 1), progress / _infoDuration);
+        }
+
+        private void FadeOutInfo()
+        {
+            float progress = Time.time - _infoStart;
+            _infoText.color = Color.Lerp(_infoText.color, new Vector4(_rText, _gText, _bText, 0), progress / _infoDuration);
+            _textBg.color = Color.Lerp(_textBg.color, new Vector4(_rInfo, _gInfo, _bInfo, 0), progress / _infoDuration);
         }
 
         private void FadeIn()
         {
-            _progress = Time.time - _start;
-            _fadeScreen.color = Color.Lerp(_fadeScreen.color, new Vector4(_r, _g, _b, 1), _progress / _duration);            
+            float progress = Time.time - _start;
+            _fadeScreen.color = Color.Lerp(_fadeScreen.color, new Vector4(_r, _g, _b, 1), progress / _duration);            
         }
 
         private void FadeOut()
         {
-            _progress = Time.time - _start;
-            _fadeScreen.color = Color.Lerp(_fadeScreen.color, new Vector4(_r, _g, _b, 0), _progress / _duration);
+            float progress = Time.time - _start;
+            _fadeScreen.color = Color.Lerp(_fadeScreen.color, new Vector4(_r, _g, _b, 0), progress / _duration);
         }
 
         public void NewGame()
@@ -208,6 +283,8 @@ namespace ProjectThief
             _pauseMenuBg.SetActive(false);
             _pauseMenu.SetActive(false);
             _pauseOptions.SetActive(false);
+            _menuConfirm.SetActive(false);
+            _exitConfirm.SetActive(false);
             GameManager.instance.canMove = true;
             Time.timeScale = 1f;
         }

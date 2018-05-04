@@ -15,18 +15,15 @@ namespace ProjectThief
         private void Awake()
         {
             _lastItem = GameManager.instance.refItems.Count - 1;
-            Debug.Log("Item needed: " + _lastItem);
-            Debug.Log("Monkey collected: " + GameManager.instance.refItems[_lastItem].Collected);
         }
 
         protected override void Activated()
         {
             if (IsActive)
             {
-                Debug.Log("end area is active");
                 if (GameManager.instance.refItems[_lastItem].Collected)
                 {
-                    Debug.Log("Escape possible");
+                    
                     if (IsInteractable)
                     {
                         GetMouseController.EnterCursor();
@@ -41,19 +38,15 @@ namespace ProjectThief
                     {
                         GetMouseController.InspectCursor();
 
-                        if (Input.GetButtonDown("Fire1"))
-                        {
+                        if (Input.GetButtonDown("Fire1"))                        
                             GameManager.instance.player.GetComponent<GridPlayer>().FindPath(MoveToPos);
-                        }
+                        
                     }
                 }
-                else
-                {
+                else                
                     GetMouseController.InspectCursor();
-                    Debug.Log("Escape impossible");
-                }
+                
             }
-            Debug.Log("end area is no longer active");
         }
     }
 }
