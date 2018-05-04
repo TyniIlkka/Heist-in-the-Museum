@@ -10,7 +10,7 @@ namespace ProjectThief
         private Animator m_aPlayerAnimator;
         public List<Vector3> Path = new List<Vector3>();
 
-        private float speed;
+        public float speed;
 
         public float walkRange;
         public float sneakRange;

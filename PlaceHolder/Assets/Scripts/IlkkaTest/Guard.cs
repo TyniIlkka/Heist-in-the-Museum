@@ -170,11 +170,11 @@ namespace ProjectThief {
         {
             get
             {
-                if (Thief.GetComponent<GridPlayer>().m_fMoveSpeed > Thief.GetComponent<GridPlayer>().m_fSneakSpeed)
+                if (Thief.Speed > 2f)
                 {
                     return m_fMinDetectionRangeWalk;
                 }
-                else if (Thief.GetComponent<GridPlayer>().m_fMoveSpeed <= Thief.GetComponent<GridPlayer>().m_fSneakSpeed )
+                else if (Thief.Speed <= 2f )
                 {
                     return m_fMinDetectionRangeSneak;
                 }
