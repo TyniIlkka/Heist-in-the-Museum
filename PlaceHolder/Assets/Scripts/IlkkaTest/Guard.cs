@@ -35,7 +35,8 @@ namespace ProjectThief {
         #region States
         public Patrol patrol;
         public PatrolMoveTo patrolMoveTo;
-        public PatrolMoveFrom patrolMoveFrom;
+        public PatrolStayAtTarget patrolStayAtTarget;
+        public PatrolMoveBack patrolMoveBack;
         public Static guardStatic;
         public StaticTurnTo staticTurnTo;
 
@@ -266,9 +267,11 @@ namespace ProjectThief {
             patrolMoveTo = new PatrolMoveTo(this);
             _states.Add(patrolMoveTo);
 
-            //Not used
-            //patrolMoveFrom = new PatrolMoveFrom(this,guardMover);
-            //_states.Add(patrolMoveFrom);
+            patrolStayAtTarget = new PatrolStayAtTarget(this);
+            _states.Add(patrolStayAtTarget);
+
+            patrolMoveBack = new PatrolMoveBack(this);
+            _states.Add(patrolMoveBack);
 
             guardStatic = new Static(this, CurrentDirection);
             _states.Add(guardStatic);

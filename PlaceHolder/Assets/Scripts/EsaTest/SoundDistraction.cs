@@ -24,6 +24,7 @@ namespace ProjectThief
         private float m_fTime;
         private bool m_bActive;
 
+        public float DistractionTime { get { return m_fDistractTime - m_fTime; } }
         public Vector3 MoveToPos { get { return _moveToPoint.position; } }        
 
         Collider[] objects;        

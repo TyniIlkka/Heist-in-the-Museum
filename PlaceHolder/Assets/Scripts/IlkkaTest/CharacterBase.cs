@@ -35,7 +35,9 @@ namespace ProjectThief
 
         public IEnumerator GuardWaitTime(float time)
         {
+            Debug.Log(Time.time + "Base");
             yield return new WaitForSeconds(time);
+            Debug.Log(Time.time + "Base");
         }
     }
 }

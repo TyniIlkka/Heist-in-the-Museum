@@ -6,18 +6,18 @@ using ProjectThief.PathFinding;
 
 namespace ProjectThief.AI
 {
-    public class PatrolMoveTo : AIStateBase
+    public class PatrolMoveBack : AIStateBase
     {
         private IEnumerator coroutine;
         public bool ready;
 
-        public PatrolMoveTo(Guard owner)
+        public PatrolMoveBack(Guard owner)
             : base()
         {
-            State = AIStateType.PatrolMoveTo;
+            State = AIStateType.PatrolMoveBack;
             Owner = owner;
-            
-            AddTransition(AIStateType.PatrolStayAtTarget);
+
+            AddTransition(AIStateType.Patrol);
         }
 
         public override void StateActivated()
@@ -46,10 +46,10 @@ namespace ProjectThief.AI
                 //Owner.TargetSound.transform.position.y = 0;
                 if (!ready)
                 {
-                    Mover.Target = Owner.TargetSound.MoveToPos;
-                    Mover.FindPath(Owner.transform.position, Owner.TargetSound.MoveToPos);
+                    Mover.Target = Owner.CurrentWaypoint.transform.position;
+                    Mover.FindPath(Owner.transform.position, Owner.CurrentWaypoint.transform.position);
                 }
-                
+
 
 
                 //3. Move the finded way
@@ -61,15 +61,12 @@ namespace ProjectThief.AI
                     MoveMethod();
                     if (Mover.MoverPath.Count == 1)
                     {
-                        
-                        //Owner.DistractedSound = false;
-                        //Mover.Target = Owner.CurrentWaypoint.transform.position;
 
-                        //Mover.FindPath(Owner.transform.position, Owner.CurrentWaypoint.transform.position);
+                        Owner.DistractedSound = false;
                         Debug.Log("Etsittiin path takaisin " + Mover.MoverPath.Count);
                         ready = true;
                     }
-                    
+
                 }
 
             }
@@ -89,15 +86,9 @@ namespace ProjectThief.AI
         {
             if (Mover.MoverPath.Count <= 0 && ready)
             {
-                bool result = Owner.PerformTransition(AIStateType.PatrolStayAtTarget);
+                Debug.Log("Liikutaan pois hämäyksestä");
+                bool result = Owner.PerformTransition(AIStateType.Patrol);
                 return result;
-            }
-
-            if (Mover.MoverPath.Count <= 0 && ready)
-            {
-                //Debug.Log("Liikutaan pois hämäyksestä");
-                //bool result = Owner.PerformTransition(AIStateType.Patrol);
-                //return result;
             }
             return false;
         }
