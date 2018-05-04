@@ -54,9 +54,10 @@ GameObject:
   - component: {fileID: 4054983805206180}
   - component: {fileID: 33284327086908208}
   - component: {fileID: 23836974224298858}
-  m_Layer: 0
+  - component: {fileID: 65506370654579192}
+  m_Layer: 9
   m_Name: temple
-  m_TagString: Untagged
+  m_TagString: Obstacles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -259,6 +260,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1582345782944076}
   m_Mesh: {fileID: 4300010, guid: 5011d8d7508b4284695785b7dd8e61d0, type: 3}
+--- !u!65 &65506370654579192
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1425525111994826}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.5000014, y: 3.5000017, z: 2.0986614}
+  m_Center: {x: 0.000013113025, y: -0.002951981, z: 1.0568247}
 --- !u!95 &95158745361196452
 Animator:
   serializedVersion: 3
