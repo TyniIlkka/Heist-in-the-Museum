@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using ProjectThief.PathFinding;
 
 namespace ProjectThief
 {
@@ -22,6 +23,8 @@ namespace ProjectThief
         private float _leverUsedRotation = -238;
         [SerializeField, Tooltip("Move to point")]
         private Transform _moveToPos;
+        [SerializeField, Tooltip("Inspect text")]
+        private string _inspectText = "A[colour] mechanism.It looks like it is missing a part";
 
         private Animator _leverAnimator;
         private bool _used;
@@ -100,22 +103,21 @@ namespace ProjectThief
                     else
                     {
                         GetMouseController.InspectCursor();
-                        // TODO inform player that they are missing something.
+                        if (Input.GetButtonDown("Fire1"))
+                        {
+                            InspectText();
+                        }
                     }
                 }
                 else
                 {
                     GetMouseController.InspectCursor();
 
-                    //if (Input.GetButtonDown("Fire1"))
-                    //{
-                    //    GameManager.instance.player.GetComponent<GridPlayer>().FindPath(MoveToPos);
-                    //}
+                    if (Input.GetButtonDown("Fire1") && GameManager.instance.mouseMovemet)
+                    {
+                        GameManager.instance.player.GetComponent<GridPlayer>().FindPath(MoveToPos);
+                    }
                 }
-            }
-            else if (_used)
-            {
-                // Tell player that they have used it already
             }
         }
 
@@ -126,6 +128,21 @@ namespace ProjectThief
             _door.Open = false;
             _door.Blocked = false;
             GameManager.instance.usedlevers[_boolListPos] = true;            
+        }
+
+        private void InspectText()
+        {
+            GameManager.instance.infoText = _inspectText;
+
+            if (!GameManager.instance.infoFadeIn)
+            {
+                GameManager.instance.infoFadeIn = true;
+                GameManager.instance.infoFadeInStart = true;
+            }
+            else
+            {
+                GameManager.instance.resetInfoTimer = true;
+            }
         }
     }    
 }

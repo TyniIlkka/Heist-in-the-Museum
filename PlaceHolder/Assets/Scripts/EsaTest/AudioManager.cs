@@ -87,8 +87,6 @@ namespace ProjectThief
 
             if (m_fDelay < 0)
                 m_fDelay = 0;
-
-            Debug.Log("Initilization done");
         }
         
         private void Update()

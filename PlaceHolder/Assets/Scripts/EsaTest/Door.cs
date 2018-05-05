@@ -24,6 +24,8 @@ namespace ProjectThief
         private float _useDelay = 2f;
         [SerializeField, Tooltip("Move to point")]
         private Transform _moveToPoint;
+        [SerializeField, Tooltip("Inspect info")]
+        private string _inspectText = "The door is blocked by bars. I wonder if there is a way to get through.";
 
         private bool _isBlocked;
         private bool _opened;
@@ -71,7 +73,7 @@ namespace ProjectThief
             if (_opened)
             {
                 if (!_audioSource.isPlaying)
-                {
+                { 
                     GameManager.instance.previousState = GameStateController.CurrentState;
                     GameStateController.PerformTransition(_nextState);
                 }
@@ -129,7 +131,7 @@ namespace ProjectThief
                     {
                         GetMouseController.InspectCursor();
 
-                        if (Input.GetButtonDown("Fire1"))
+                        if (Input.GetButtonDown("Fire1") && GameManager.instance.mouseMovemet)
                         {
                             GameManager.instance.player.GetComponent<GridPlayer>().FindPath(MoveToPos);
                         }                        
@@ -138,6 +140,10 @@ namespace ProjectThief
                 else
                 {
                     GetMouseController.InspectCursor();
+                    if (Input.GetButtonDown("Fire1"))
+                    {
+                        InspectText();
+                    }
                 }
             }
         }
@@ -149,6 +155,23 @@ namespace ProjectThief
             GameManager.instance.inTransit = true;
             GameManager.instance.fadeIn = true;
             GameManager.instance.fadeInStart = true;
+            GameManager.instance.levelController.Inventory.SaveInventory();
+        }
+
+        private void InspectText()
+        {
+            GameManager.instance.infoText = _inspectText;            
+
+            if (!GameManager.instance.infoFadeIn)
+            {
+                GameManager.instance.infoFadeIn = true;
+                GameManager.instance.infoFadeInStart = true;
+                Debug.Log("open info");
+            }
+            else
+            {
+                GameManager.instance.resetInfoTimer = true;
+            }
         }
     }
 }

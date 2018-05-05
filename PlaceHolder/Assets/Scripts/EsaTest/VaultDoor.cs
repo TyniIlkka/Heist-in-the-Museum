@@ -14,6 +14,8 @@ namespace ProjectThief
         private GameObject _wall;
         [SerializeField, Tooltip("Vault key parts")]
         private List<Item> _keyParts;
+        [SerializeField, Tooltip("Inspect text")]
+        private string _inspectText = "The treasure is stored behind this door";
 
         [SerializeField]
         private DynamicMapUpdate _pathUpdater;
@@ -83,14 +85,17 @@ namespace ProjectThief
                         AddKeyPieces();
                         UpdateMapOnce();
                         m_aAnimator.SetBool("Open", true);
-                        
-                        
-                        Debug.Log("Updated map!");
                     }
-                }                
+                } 
+                else
+                {
+                    GetMouseController.InspectCursor();
+                    if (Input.GetButtonDown("Fire1"))
+                    {
+                        InspectText();
+                    }
+                }
             }
-            else
-                GetMouseController.InspectCursor();
         }
 
         private void UpdateMapOnce()
@@ -100,6 +105,21 @@ namespace ProjectThief
             Pathfinder.Instance.DynamicRaycastUpdate(bR);
             lastPosition = transform.position;
             lastBounds = bR;
+        }
+
+        private void InspectText()
+        {
+            GameManager.instance.infoText = _inspectText;
+
+            if (!GameManager.instance.infoFadeIn)
+            {
+                GameManager.instance.infoFadeIn = true;
+                GameManager.instance.infoFadeInStart = true;
+            }
+            else
+            {
+                GameManager.instance.resetInfoTimer = true;
+            }
         }
     }
 }

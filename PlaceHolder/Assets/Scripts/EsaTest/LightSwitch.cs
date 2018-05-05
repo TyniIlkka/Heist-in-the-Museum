@@ -68,10 +68,10 @@ namespace ProjectThief
                         m_bCanUse = false;
                         PlayEffect();
 
-                        if (!m_lLight.IsActive)
-                            m_lLight.Activated();
+                        if (!m_lLight.LightIsActive)
+                            m_lLight.LightActivated();
                         else
-                            m_lLight.ResetLight();
+                            m_lLight.LightDeactivated();
                     }
                 }
                 else

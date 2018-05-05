@@ -30,7 +30,7 @@ namespace ProjectThief
                         break;
 
                     case 1:
-                        GameManager.instance.usedlevers[2] = false;
+                        GameManager.instance.usedlevers[2] = false;                        
                         break;
 
                     case 2:
@@ -59,7 +59,7 @@ namespace ProjectThief
                         break;
 
                     case 3:
-                        GameManager.instance.usedlevers[4] = false;
+                        GameManager.instance.usedlevers[4] = false;                        
                         break;
 
                     case 4:

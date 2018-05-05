@@ -8,7 +8,7 @@ namespace ProjectThief
 {
     public class LevelController : MonoBehaviour
     {
-        private MouseController m_mcController;
+        private MouseController _mouseController;
 
         [SerializeField, Header("Hud items")]
         private GameObject m_goEndBackground;
@@ -27,7 +27,7 @@ namespace ProjectThief
         [SerializeField, Tooltip("Main Camera")]
         private CameraFollow m_sCameraScript;
         [SerializeField]
-        private Inventory m_sInventory;
+        private Inventory _inventory;
         [SerializeField]
         private MenuControls m_sMenuControlscript;
         [SerializeField, Tooltip("Initial Spawn location"), Header("Other")]
@@ -55,49 +55,50 @@ namespace ProjectThief
         [SerializeField, Tooltip("Info text 3")]
         private string _info3;
 
-        private Vector3 m_v3SpawnPosition;        
-        private Quaternion m_qSpawnRotation;
-        private bool m_bJustCleared;
-        private bool m_bIsCleared;
-        private bool m_bPaused;
+        private Vector3 _spawnPosition;        
+        private Quaternion _spawnRotation;
+        private bool _justCleared;
+        private bool isCleared;
+        private bool _paused;
         private bool _timeStopped;
         private float _delay = 0;
         private bool _infoToShow;
 
-        public bool JustCleared { get { return m_bJustCleared; } }
+        public bool JustCleared { get { return _justCleared; } }
         public int ListPos { get { return m_iPos; } }
-        public bool Cleared { get { return m_bIsCleared; } set { m_bIsCleared = value; } }
-        public Inventory Inventory { get { return m_sInventory; } }
+        public bool Cleared { get { return isCleared; } set { isCleared = value; } }
+        public Inventory Inventory { get { return _inventory; } }
         public RoomReset RoomReset { get { return m_sRoomReset; } }
-        public bool Paused { get { return m_bPaused; } set { m_bPaused = value; } }
+        public bool Paused { get { return _paused; } set { _paused = value; } }
 
         private void Awake()
         {
-            if (m_sInventory == null)
-                m_sInventory = FindObjectOfType<Inventory>();
+            if (_inventory == null)
+                _inventory = FindObjectOfType<Inventory>();
             if (m_sRoomReset == null)
-                m_sRoomReset = GetComponent<RoomReset>();
+                m_sRoomReset = GetComponent<RoomReset>();            
 
             if (m_bCanBeCleared)
             {
                 if (GameManager.instance.clearedRooms[m_iPos])
-                    m_bIsCleared = true;
+                    isCleared = true;
             }
             else
             {
-                m_bIsCleared = true;
+                isCleared = true;
             }
 
             _infoToShow = false;
-            m_bPaused = false;
-            m_bJustCleared = false;            
+            _paused = false;
+            _justCleared = false;            
             m_sCameraScript.Distance = m_fDist;
             m_sCameraScript.HorizontalAngle = m_fHorizontalAngle;
             m_sCameraScript.VerticalAngle = m_fVerticalAngle;
 
             GameManager.instance.levelController = this;
             GameManager.instance.inTransit = false;
-            m_mcController = GameManager.instance.mouseController;
+            _mouseController = GameManager.instance.mouseController;
+            
             GameManager.instance.player = SpawnPlayer();               
 
             if (!GameManager.instance.infoShown)
@@ -115,6 +116,7 @@ namespace ProjectThief
             GameManager.instance.fadeIn = false;
 
             ShowInfo();
+            _inventory.LoadInventory();
 
             if (_infoToShow)
             {
@@ -136,13 +138,13 @@ namespace ProjectThief
             {
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
-                    if (!m_bPaused)                   
+                    if (!_paused)                   
                         m_sMenuControlscript.Pause();
                     else
                         m_sMenuControlscript.Continue();
                 }
 
-                if (!m_bIsCleared && m_bCanBeCleared)
+                if (!isCleared && m_bCanBeCleared)
                     CheckKeyItems();
             }
 
@@ -156,7 +158,7 @@ namespace ProjectThief
         {
             if (EventSystem.current.IsPointerOverGameObject())
             {                
-                m_mcController.DefaultCursor();
+                _mouseController.DefaultCursor();
                 //GameManager.instance.canMove = false;
                 GameManager.instance.mouseOverUI = true;
             }
@@ -183,10 +185,10 @@ namespace ProjectThief
                 }
             }
 
-            if (result && !m_bJustCleared)
+            if (result && !_justCleared)
             {
-                m_bJustCleared = true;
-                m_bIsCleared = true;
+                _justCleared = true;
+                isCleared = true;
                 GameManager.instance.clearedRooms[m_iPos] = true;
                 GameManager.instance.currentPhase++;
             }
@@ -255,19 +257,19 @@ namespace ProjectThief
 
             if (!GameManager.instance.firstSpawn)
             {
-                m_v3SpawnPosition = SpawnPosition();
-                m_qSpawnRotation = SpawnRotation();
+                _spawnPosition = SpawnPosition();
+                _spawnRotation = SpawnRotation();
 
-                return Instantiate(player, m_v3SpawnPosition, m_qSpawnRotation);
+                return Instantiate(player, _spawnPosition, _spawnRotation);
             }
 
             else
             {
-                m_v3SpawnPosition = m_tInitialSpawn.position;
-                m_qSpawnRotation = m_tInitialSpawn.rotation;
+                _spawnPosition = m_tInitialSpawn.position;
+                _spawnRotation = m_tInitialSpawn.rotation;
                 GameManager.instance.firstSpawn = false;
 
-                return Instantiate(player, m_v3SpawnPosition, m_qSpawnRotation);
+                return Instantiate(player, _spawnPosition, _spawnRotation);
             }
         } 
         
@@ -398,10 +400,6 @@ namespace ProjectThief
                 {
                     case 1:
                         GameManager.instance.infoText = _info1;
-                        _infoToShow = true;
-                        break;
-                    case 4:
-                        GameManager.instance.infoText = _info2;
                         _infoToShow = true;
                         break;
                 }

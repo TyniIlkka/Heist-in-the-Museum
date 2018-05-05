@@ -29,6 +29,10 @@ namespace ProjectThief
         private float _openRotation = 140;
         [SerializeField, Tooltip("Move to point")]
         private Transform _moveToPos;
+        [SerializeField, Tooltip("Inspect text")]
+        private string _inspectText = "The case is shut with a [metallic] lock. One of the vault keys seems to be inside";
+        [SerializeField, Tooltip("Info text")]
+        private string _infoText;
          
         private Animator _animator;        
         private bool _used;
@@ -54,7 +58,6 @@ namespace ProjectThief
                 _animator.enabled = false;
                 _doorObject.transform.localEulerAngles = new Vector3(_doorObject.transform.localEulerAngles.x,
                     _doorObject.transform.localEulerAngles.y, _openRotation);
-                Debug.Log("Door rotation " + _doorObject.transform.localEulerAngles);
                 _lock.SetActive(false);
                 _vaultKeyItem.gameObject.SetActive(false);
             }
@@ -68,7 +71,6 @@ namespace ProjectThief
             {
                 _doorObject.transform.localEulerAngles = new Vector3(_doorObject.transform.localEulerAngles.x,
                     _doorObject.transform.localEulerAngles.y, _openRotation);
-                Debug.Log("Door rotation " + _doorObject.transform.localEulerAngles);
             }
         }
 
@@ -101,8 +103,10 @@ namespace ProjectThief
                     else
                     {
                         GetMouseController.InspectCursor();
-
-                        //GameManager.instance.player.GetComponent<GridPlayer>().FindPath(MoveToPos);
+                        if (Input.GetButtonDown("Fire1"))
+                        {
+                            InspectText();
+                        }
                     }
                 }
             }
@@ -116,6 +120,31 @@ namespace ProjectThief
             _vaultKeyItem.gameObject.SetActive(false);
             GameManager.instance.keyItems[_keyPos].Collected = true;
             GameManager.instance.openedVitrines[_boolListPos] = true;
+
+            if (GameManager.instance.keyItems[GameManager.instance.keyItems.Count - 1].Collected)
+            {
+                GameManager.instance.infoText = _infoText;
+                UpdateInfo();
+            }
+        }
+
+        private void InspectText()
+        {
+            GameManager.instance.infoText = _inspectText;
+            UpdateInfo();
+        }
+
+        private void UpdateInfo()
+        {
+            if (!GameManager.instance.infoFadeIn)
+            {
+                GameManager.instance.infoFadeIn = true;
+                GameManager.instance.infoFadeInStart = true;
+            }
+            else
+            {
+                GameManager.instance.resetInfoTimer = true;
+            }
         }
     }
 }
