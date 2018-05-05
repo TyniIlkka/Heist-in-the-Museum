@@ -115,7 +115,7 @@ namespace ProjectThief
             }
 
             if (GameManager.instance.fadeInStart)
-            {
+            {                
                 _start = Time.time;
                 GameManager.instance.fadeInStart = false;
 
@@ -191,6 +191,7 @@ namespace ProjectThief
             float progress = Time.time - _infoStart;
             _infoText.color = Color.Lerp(_infoText.color, new Vector4(_rText, _gText, _bText, 1), progress / _infoDuration);
             _textBg.color = Color.Lerp(_textBg.color, new Vector4(_rInfo, _gInfo, _bInfo, 1), progress / _infoDuration);
+            Debug.Log("Fade in");
         }
 
         private void FadeOutInfo()
@@ -198,6 +199,7 @@ namespace ProjectThief
             float progress = Time.time - _infoStart;
             _infoText.color = Color.Lerp(_infoText.color, new Vector4(_rText, _gText, _bText, 0), progress / _infoDuration);
             _textBg.color = Color.Lerp(_textBg.color, new Vector4(_rInfo, _gInfo, _bInfo, 0), progress / _infoDuration);
+            Debug.Log("Fade out");
         }
 
         private void FadeIn()

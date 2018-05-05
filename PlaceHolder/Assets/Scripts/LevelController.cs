@@ -54,6 +54,7 @@ namespace ProjectThief
         private bool m_bJustCleared;
         private bool m_bIsCleared;
         private bool m_bPaused;
+        private bool _timeStopped;
         private float _delay = 0;
 
         public bool JustCleared { get { return m_bJustCleared; } }
@@ -101,6 +102,7 @@ namespace ProjectThief
             }
 
             Time.timeScale = 1;
+            _timeStopped = false;
             GameManager.instance.fadeInStart = true;
             GameManager.instance.fadeIn = false;
             Debug.Log("fade out");
@@ -181,8 +183,11 @@ namespace ProjectThief
         /// </summary>
         public void PlayerFound()
         {
-            GameManager.instance.canMove = false;
-            Time.timeScale = 0f;
+            if (!_timeStopped)
+                Time.timeScale = 0f;
+
+            GameManager.instance.canMove = false;            
+            _timeStopped = true;
             m_goEndBackground.SetActive(true);
             m_goDefeat.SetActive(true);            
         }
@@ -193,8 +198,11 @@ namespace ProjectThief
         /// </summary>
         public void PlayerEscaped()
         {
+            if (!_timeStopped)
+                Time.timeScale = 0f;
+
             GameManager.instance.canMove = false;
-            Time.timeScale = 0f;
+            _timeStopped = true;
             m_goEndBackground.SetActive(true);
             m_goVictory.SetActive(true);
         }
