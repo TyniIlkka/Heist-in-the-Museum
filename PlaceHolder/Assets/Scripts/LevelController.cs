@@ -48,6 +48,12 @@ namespace ProjectThief
         private float m_fHorizontalAngle = 0;
         [SerializeField, Tooltip("Camera's vertical angle in room")]
         private float m_fVerticalAngle = 35;
+        [SerializeField, Tooltip("Info text 1"), Header("Info texts")]
+        private string _info1;
+        [SerializeField, Tooltip("Info text 2")]
+        private string _info2;
+        [SerializeField, Tooltip("Info text 3")]
+        private string _info3;
 
         private Vector3 m_v3SpawnPosition;        
         private Quaternion m_qSpawnRotation;
@@ -56,6 +62,7 @@ namespace ProjectThief
         private bool m_bPaused;
         private bool _timeStopped;
         private float _delay = 0;
+        private bool _infoToShow;
 
         public bool JustCleared { get { return m_bJustCleared; } }
         public int ListPos { get { return m_iPos; } }
@@ -81,6 +88,7 @@ namespace ProjectThief
                 m_bIsCleared = true;
             }
 
+            _infoToShow = false;
             m_bPaused = false;
             m_bJustCleared = false;            
             m_sCameraScript.Distance = m_fDist;
@@ -105,7 +113,14 @@ namespace ProjectThief
             _timeStopped = false;
             GameManager.instance.fadeInStart = true;
             GameManager.instance.fadeIn = false;
-            Debug.Log("fade out");
+
+            ShowInfo();
+
+            if (_infoToShow)
+            {
+                GameManager.instance.infoFadeIn = true;
+                GameManager.instance.infoFadeInStart = true;
+            }
         }
 
         // Update is called once per frame
@@ -345,5 +360,52 @@ namespace ProjectThief
 
             return result;
         }
+
+        private void ShowInfo()
+        {
+            string currentScene = GameStateController.CurrentState.SceneName;
+            int currenPhase = GameManager.instance.currentPhase;
+            if (currentScene == "Tutorial")
+            {
+                switch (currenPhase)
+                {
+                    case 0:
+                        GameManager.instance.infoText = _info1;
+                        break;
+                }
+            }
+            else if (currentScene == "Lobby")
+            {
+                switch (currenPhase)
+                {
+                    case 0:
+                        GameManager.instance.infoText = _info1;
+                        _infoToShow = true;
+                        break;
+                    case 1:
+                        GameManager.instance.infoText = _info2;
+                        _infoToShow = true;
+                        break;
+                    case 2:
+                        GameManager.instance.infoText = _info3;
+                        _infoToShow = true;
+                        break;
+                }
+            }
+            else if (currentScene == "Room1")
+            {
+                switch (currenPhase)
+                {
+                    case 1:
+                        GameManager.instance.infoText = _info1;
+                        _infoToShow = true;
+                        break;
+                    case 4:
+                        GameManager.instance.infoText = _info2;
+                        _infoToShow = true;
+                        break;
+                }
+            }
+        }        
     }
 }

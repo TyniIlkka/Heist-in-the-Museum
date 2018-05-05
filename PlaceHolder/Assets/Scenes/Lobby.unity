@@ -796,48 +796,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4400727936452504, guid: cad93c9a32ae19d499951de0f315c13f,
     type: 2}
   m_PrefabInternal: {fileID: 126310218}
---- !u!1001 &127353555
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4954650975904970, guid: c23671f839676cd418e8338c14a0af47, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -0.49
-      objectReference: {fileID: 0}
-    - target: {fileID: 4954650975904970, guid: c23671f839676cd418e8338c14a0af47, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.05000023
-      objectReference: {fileID: 0}
-    - target: {fileID: 4954650975904970, guid: c23671f839676cd418e8338c14a0af47, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 5.39
-      objectReference: {fileID: 0}
-    - target: {fileID: 4954650975904970, guid: c23671f839676cd418e8338c14a0af47, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4954650975904970, guid: c23671f839676cd418e8338c14a0af47, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4954650975904970, guid: c23671f839676cd418e8338c14a0af47, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4954650975904970, guid: c23671f839676cd418e8338c14a0af47, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4954650975904970, guid: c23671f839676cd418e8338c14a0af47, type: 2}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: c23671f839676cd418e8338c14a0af47, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &137784662
 GameObject:
   m_ObjectHideFlags: 0
@@ -2510,12 +2468,12 @@ Prefab:
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 590
+      value: 552
       objectReference: {fileID: 0}
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 332
+      value: 310.5
       objectReference: {fileID: 0}
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
@@ -3145,34 +3103,6 @@ BoxCollider:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 4530414f67e167b40a4b2226e8fae481, type: 3}
   m_PrefabInternal: {fileID: 359677505}
---- !u!1 &360972715
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 127353555}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 360972716}
-  m_Layer: 0
-  m_Name: Missing Prefab
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &360972716
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 127353555}
-  m_GameObject: {fileID: 360972715}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &366941442 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4006759624255078, guid: b26d263bb5d594d46aca1a83d7e44b09,
@@ -7072,7 +7002,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4784123105020768, guid: e3e2bae3a3711d048b9d0a7444d65638, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1355885438179374, guid: e3e2bae3a3711d048b9d0a7444d65638, type: 2}
       propertyPath: m_Name
@@ -12377,6 +12307,22 @@ Prefab:
       propertyPath: m_goEndBackground
       value: 
       objectReference: {fileID: 312220032}
+    - target: {fileID: 114982444803844292, guid: 5ded4a7572476c348b84d678d9242b92,
+        type: 2}
+      propertyPath: _info1
+      value: The vault is located inside Curator's Office. I can use the heist plan
+        to help me navigate in the museum.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114982444803844292, guid: 5ded4a7572476c348b84d678d9242b92,
+        type: 2}
+      propertyPath: _info2
+      value: I should get all four parts to open the vault.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114982444803844292, guid: 5ded4a7572476c348b84d678d9242b92,
+        type: 2}
+      propertyPath: _info3
+      value: I can distract the guards with sounds.
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ded4a7572476c348b84d678d9242b92, type: 2}
   m_IsPrefabParent: 0
@@ -13038,7 +12984,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4139419558867146, guid: cbd0dd1d3ea1d214590f199713e90ea3, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cbd0dd1d3ea1d214590f199713e90ea3, type: 2}
