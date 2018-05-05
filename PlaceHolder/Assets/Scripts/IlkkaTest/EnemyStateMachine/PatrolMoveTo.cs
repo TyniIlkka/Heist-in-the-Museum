@@ -49,7 +49,11 @@ namespace ProjectThief.AI
                 
                 if (Mover.MoverPath.Count > 0)
                 {
-                    MoveMethod();
+                    if (GameManager.instance.canMove)
+                    {
+                        MoveMethod();
+                    }
+                    
                     if (Mover.MoverPath.Count == 1)
                     {
                         ready = true;
