@@ -15,6 +15,7 @@ namespace ProjectThief
         public AudioManager audioManager;
         public LevelController levelController;        
         public bool canMove;
+        public bool guardsCanMove;
         public bool infoShown;
         public bool firstSpawn;
         public bool mouseOverUI;
@@ -25,6 +26,7 @@ namespace ProjectThief
         public bool infoFadeIn;
         public bool infoFadeInStart;
         public bool initialMenu;
+        public string infoText;
         public Transform spawnPoint;
         public Transform initialSpawn;
         public GameStateBase previousState;
@@ -40,6 +42,7 @@ namespace ProjectThief
         public bool[] usedlevers;        
         public bool[] openedVitrines;
         public bool[] clearedRooms;
+        public bool[] infoTextShown;
         [SerializeField] List<Guard> guards;
         #endregion
         [Header("Debug variables")]
@@ -64,6 +67,7 @@ namespace ProjectThief
             clearedRooms = new bool[5];
             canContinue = false;
             initialMenu = true;
+            infoTextShown = new bool[7];
         }         
 
         public void ResetGame()
@@ -82,6 +86,8 @@ namespace ProjectThief
                     clearedRooms[i] = false;
                     usedlevers[i] = false;
                 }
+                if (i < infoTextShown.Length)
+                    infoTextShown[i] = false;
             }
 
             inventory.Clear();

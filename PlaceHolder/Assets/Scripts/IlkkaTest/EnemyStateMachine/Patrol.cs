@@ -52,12 +52,14 @@ namespace ProjectThief.AI {
 
                 // 2. Are we close enough the current waypoint?
                 //   2.1 If yes, get the next waypoint
-
-                Owner.CurrentWaypoint = GetWaypoint();
-                // 3. Move towards the current waypoint
-                Owner.Move(Owner.transform.forward);
-                // 4. Rotate towards the current waypoint
-                Owner.Turn(Owner.CurrentWaypoint.Position);
+                if (GameManager.instance.canMove)
+                {
+                    Owner.CurrentWaypoint = GetWaypoint();
+                    // 3. Move towards the current waypoint
+                    Owner.Move(Owner.transform.forward);
+                    // 4. Rotate towards the current waypoint
+                    Owner.Turn(Owner.CurrentWaypoint.Position);
+                }
             }
         }
 
