@@ -6,9 +6,9 @@ namespace ProjectThief
     public class FOVClose : MonoBehaviour
     {
         [SerializeField]
-        private float m_fViewRad;
+        private float _viewRad;
         [SerializeField]
-        private float m_fViewAngle = 360f;
+        private float _viewAngle = 360f;
         [SerializeField]
         private LayerMask m_lmObstacleMask;
         [SerializeField]
@@ -21,23 +21,28 @@ namespace ProjectThief
         private int m_iEdgeResolveIters = 6;
         [SerializeField, Tooltip("Light distance mult")]
         private float m_fMult = 2;
+        [SerializeField, Tooltip("Lerp Duration")]
+        private float _duration = 1f;
 
-        private Mesh m_mViewMesh;
-        private float distanceToPlayer;
+        private Mesh _viewMesh;
+        private float _distanceToPlayer;
+        private float _targetRad;
+        private float _startTime;
+        private bool _lerpToRad;
 
         public Player m_pPlayerObject;
         private Guard guard;
 
-        public float ViewRad { get { return m_fViewRad; } }
-        public float ViewAngle { get { return m_fViewAngle; } }
+        public float ViewRad { get { return _viewRad; } }
+        public float ViewAngle { get { return _viewAngle; } }
 
         private void Awake()
         {
             Init();
 
-            m_mViewMesh = new Mesh();
-            m_mViewMesh.name = "View Mesh";
-            m_mfViewMeshFilter.mesh = m_mViewMesh;
+            _viewMesh = new Mesh();
+            _viewMesh.name = "View Mesh";
+            m_mfViewMeshFilter.mesh = _viewMesh;
         }
 
         private void Init()
@@ -45,8 +50,9 @@ namespace ProjectThief
             guard = GetComponentInParent<Guard>();
             if (guard != null)
             {
-                m_fViewRad = GetComponentInParent<Guard>().MinDetectionRange;
-                m_fViewAngle = 360f;
+                _viewRad = GetComponentInParent<Guard>().MinDetectionRange;
+                _targetRad = _viewRad;
+                _viewAngle = 360f;
                 m_pPlayerObject = GetComponentInParent<Guard>().Thief;
 
             }
@@ -60,7 +66,24 @@ namespace ProjectThief
         {
             if (guard != null)
             {
-                m_fViewRad = guard.MinDetectionRange;
+                if (_targetRad != guard.MinDetectionRange)
+                {
+                    _targetRad = guard.MinDetectionRange;
+                    _lerpToRad = true;
+                    _startTime = Time.time;
+                }
+
+                if (_lerpToRad)
+                {
+                    float progress = Time.time - _startTime;
+                    _viewRad = Mathf.Lerp(_viewRad, _targetRad, progress / _duration);
+
+                    if (_viewRad == _targetRad)
+                    {
+                        _targetRad = _viewRad;
+                        _lerpToRad = false;
+                    }
+                }
             }
             else
             {
@@ -72,7 +95,6 @@ namespace ProjectThief
         private void LateUpdate()
         {
             CheckRadius();
-            Init();
             DrawFieldOfView();
             if (CanSeePlayer())
             {
@@ -82,15 +104,15 @@ namespace ProjectThief
 
         private void DrawFieldOfView()
         {
-            int rayCount = Mathf.RoundToInt(m_fViewAngle * m_fMeshResolution);
-            float rayAngleSize = m_fViewAngle / rayCount;
+            int rayCount = Mathf.RoundToInt(_viewAngle * m_fMeshResolution);
+            float rayAngleSize = _viewAngle / rayCount;
 
             List<Vector3> viewPoints = new List<Vector3>();
             ViewCastinfo oldViewCast = new ViewCastinfo();
 
             for (int i = 0; i <= rayCount; i++)
             {
-                float angle = transform.eulerAngles.y - m_fViewAngle / 2 + rayAngleSize * i;
+                float angle = transform.eulerAngles.y - _viewAngle / 2 + rayAngleSize * i;
                 ViewCastinfo newViewCast = ViewCast(angle);
 
                 if (i > 0)
@@ -130,11 +152,11 @@ namespace ProjectThief
                 }
             }
 
-            m_mViewMesh.Clear();
+            _viewMesh.Clear();
 
-            m_mViewMesh.vertices = vertices;
-            m_mViewMesh.triangles = triangles;
-            m_mViewMesh.RecalculateNormals();
+            _viewMesh.vertices = vertices;
+            _viewMesh.triangles = triangles;
+            _viewMesh.RecalculateNormals();
         }
 
         EdgeInfo FindEdge(ViewCastinfo minViewCast, ViewCastinfo maxViewCast)
@@ -171,11 +193,11 @@ namespace ProjectThief
             Vector3 dir = DirFromAngle(globalAngle, true);
             RaycastHit hit;
 
-            if (Physics.Raycast(transform.position, dir, out hit, m_fViewRad, m_lmObstacleMask))
+            if (Physics.Raycast(transform.position, dir, out hit, _viewRad, m_lmObstacleMask))
                 return new ViewCastinfo(true, hit.point, hit.distance, globalAngle);
 
             else
-                return new ViewCastinfo(false, transform.position + dir * m_fViewRad, hit.distance, globalAngle);
+                return new ViewCastinfo(false, transform.position + dir * _viewRad, hit.distance, globalAngle);
         }
 
         public Vector3 DirFromAngle(float angleInDeg, bool globalAngle)
@@ -220,14 +242,14 @@ namespace ProjectThief
         {
 
             //Close range detection
-            distanceToPlayer = (transform.position - m_pPlayerObject.transform.position).sqrMagnitude;
+            _distanceToPlayer = (transform.position - m_pPlayerObject.transform.position).sqrMagnitude;
             
-            if ((distanceToPlayer <= m_fViewRad * m_fViewRad))
+            if ((_distanceToPlayer <= _viewRad * _viewRad))
             {
                 Vector3 rayDirection = (m_pPlayerObject.transform.position) - transform.position;
                 RaycastHit hit;
                 rayDirection += Vector3.up;
-                if (Physics.Raycast(transform.position, rayDirection.normalized, out hit, m_fViewRad))
+                if (Physics.Raycast(transform.position, rayDirection.normalized, out hit, _viewRad))
                 {
                     if (hit.collider.gameObject.GetComponent<Player>() != null)
                     {
