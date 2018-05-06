@@ -3991,12 +3991,12 @@ Prefab:
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 552
+      value: 579.5
       objectReference: {fileID: 0}
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 310.5
+      value: 326
       objectReference: {fileID: 0}
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
@@ -4832,6 +4832,11 @@ Prefab:
       propertyPath: _obstacleAnim
       value: 
       objectReference: {fileID: 1996093860}
+    - target: {fileID: 114834111104811342, guid: 4372865de1196774e976b6b15a14a254,
+        type: 2}
+      propertyPath: _inspectText
+      value: '"A red mechanism."#"It looks like it is missing a part."'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4372865de1196774e976b6b15a14a254, type: 2}
   m_IsPrefabParent: 0
@@ -5032,6 +5037,12 @@ Prefab:
         type: 2}
       propertyPath: trigger
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114440937410009216, guid: 01e1532fab9046849892d5316a2cf7c5,
+        type: 2}
+      propertyPath: _inspectText
+      value: '"The case is shut with a silver lock."#"One of the vault keys seems
+        to be inside."'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 01e1532fab9046849892d5316a2cf7c5, type: 2}
