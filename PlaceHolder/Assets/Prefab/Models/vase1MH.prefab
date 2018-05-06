@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33528336661950368}
   - component: {fileID: 23128726418467146}
   - component: {fileID: 95425129191673464}
+  - component: {fileID: 65184779867966588}
   m_Layer: 9
   m_Name: vase1MH
   m_TagString: Obstacles
@@ -84,6 +85,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1004582812102046}
   m_Mesh: {fileID: 4300000, guid: 79492189cd28fca4d8b3f26f8d12d457, type: 3}
+--- !u!65 &65184779867966588
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1004582812102046}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.674978, y: 0.4733681, z: 0.57097715}
+  m_Center: {x: 0, y: 0, z: 0.28547457}
 --- !u!95 &95425129191673464
 Animator:
   serializedVersion: 3
