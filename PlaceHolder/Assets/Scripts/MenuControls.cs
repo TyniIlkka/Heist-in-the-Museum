@@ -1,11 +1,14 @@
 ﻿using UnityEngine.UI;
 using UnityEngine;
 using ProjectThief.States;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace ProjectThief
 {
     public class MenuControls : MonoBehaviour
-    {        
+    {
+        #region SerializeField variables
         [SerializeField, Header("Audio sliders")]
         private Slider _sfxVol;
         [SerializeField]
@@ -25,9 +28,7 @@ namespace ProjectThief
         [SerializeField, Header("Fade In/Out")]
         private RawImage _fadeScreen;
         [SerializeField, Tooltip("Fade in/ out effect duration")]
-        private float _duration = 2;
-
-        #region Pause controls
+        private float _duration = 2;        
         [SerializeField, Header("Pause menu")]
         private GameObject _pauseMenu;
         [SerializeField]
@@ -39,12 +40,9 @@ namespace ProjectThief
         [SerializeField]
         private GameObject _menuConfirm;
         [SerializeField]
-        private GameObject _exitConfirm;
-        #endregion
-
+        private GameObject _exitConfirm;        
         [SerializeField, Header("Info screen")]
         private GameObject _infoBg;
-
         [SerializeField, Header("Info text")]
         private RawImage _textBg;
         [SerializeField]
@@ -53,7 +51,15 @@ namespace ProjectThief
         private float _delay = 5f;
         [SerializeField, Tooltip("Info fade effect duration")]
         private float _infoDuration = 2f;
+        [SerializeField, Tooltip("Delay between text")]
+        private float _textDelay = 1f;
+        [SerializeField, Tooltip("Line end char")]
+        private char _endchar = '#';
+        [SerializeField, Tooltip("Delay between characters")]
+        private float _charDelay = 0.05f;
+        #endregion
 
+        #region Private variables
         private AudioManager _audioManager;
         private float _r, _g, _b;
         private float _start, _infoStart;
@@ -63,12 +69,20 @@ namespace ProjectThief
         private float _rInfo, _gInfo, _bInfo;
         private float _rText, _gText, _bText;
         private bool _infoVisible;
+        private List<string> _lines;
+        private bool _lastTextShown;
+        private float _textTime;
+        private int _linePos = 0;
+        private bool _allCharsPrinted;
+        #endregion
 
+        #region Awake & Update
         private void Awake()
         {
             _audioManager = GameManager.instance.audioManager;
             _newGame = false;
             _returnMenu = false;
+            _lines = new List<string>();
 
             _sfxVol.value = (int)(_audioManager.SfxVol * 100);
             _musicVol.value = (int)(_audioManager.MusicVol * 100);
@@ -155,7 +169,7 @@ namespace ProjectThief
                     {
                         _textBg.color = new Vector4(_rInfo, _gInfo, _bInfo, 0);
                         _infoVisible = true;
-                        _infoText.text = GameManager.instance.infoText;
+                        CheckString();
                     }
                     else
                         _textBg.color = new Vector4(_rInfo, _gInfo, _bInfo, 1);
@@ -163,7 +177,7 @@ namespace ProjectThief
 
                 if (_textBg != null)
                 {
-                    if (_infoVisible && _textBg.color.a == 1)
+                    if (_infoVisible && _textBg.color.a == 1 && _lastTextShown && _allCharsPrinted)
                         InfoTimer();
 
                     if (_infoVisible && _textBg.color.a != 1)
@@ -171,28 +185,110 @@ namespace ProjectThief
 
                     if (!_infoVisible && _textBg.color.a != 0)
                         FadeOutInfo();
+
+                    if (!_lastTextShown && _allCharsPrinted)
+                        UpdateText();
                 }
             }
         }
+        #endregion
+
+        #region Text Handling
+        private void CheckString()
+        {
+            _lines.Clear();
+            _lines = new List<string>();
+            string line = GameManager.instance.infoText + _endchar;
+            string text = "";
+
+            for (int i = 0; i < line.Length; i++)
+            {
+                if (line[i] != _endchar)
+                {
+                    text += line[i];
+                }
+                else
+                {
+                    _lines.Add(text);
+                }
+            }
+
+            _allCharsPrinted = false;
+            StartCoroutine(PrintChar(_lines[_linePos]));            
+
+            if ((_lines.Count - 1) > _linePos)
+            {
+                _lastTextShown = false;
+                _linePos++;
+            }
+            else
+            {
+                _linePos = 0;
+                _lastTextShown = true;
+            }
+        }
+
+        private void UpdateText()
+        {
+            _textTime += Time.deltaTime;
+            if (_textTime >= _textDelay)
+            {
+                _textTime = 0;
+                _allCharsPrinted = false;
+                StartCoroutine(PrintChar(_lines[_linePos]));
+
+                if ((_lines.Count - 1) > _linePos)
+                    _linePos++;
+                else
+                {
+                    _linePos = 0;
+                    _lastTextShown = true;
+                }
+                
+            }
+        }
+
+        private IEnumerator PrintChar(string line)
+        {
+            _infoText.text = string.Empty;
+
+            for (int i = 0; i < line.Length; i++)
+            {
+                _infoText.text += line[i];
+                
+                if (i == line.Length - 1)
+                {
+                    _allCharsPrinted = true;
+                }
+
+                yield return new WaitForSeconds(_charDelay);
+            }
+        }      
 
         private void InfoTimer()
-        {
+        {            
             _timePassed += Time.deltaTime;
-
             if (_timePassed >= _delay)
             {
                 _timePassed = 0;
                 _infoVisible = false;
                 _infoStart = Time.time;
             }
+            if (GameManager.instance.resetInfoTimer)
+            {
+                _timePassed = 0;
+                _infoText.text = GameManager.instance.infoText;
+                GameManager.instance.resetInfoTimer = false;
+            }
         }
+        #endregion
 
+        #region Fade In/Out effect
         private void FadeInInfo()
         {
             float progress = Time.time - _infoStart;
             _infoText.color = Color.Lerp(_infoText.color, new Vector4(_rText, _gText, _bText, 1), progress / _infoDuration);
             _textBg.color = Color.Lerp(_textBg.color, new Vector4(_rInfo, _gInfo, _bInfo, 1), progress / _infoDuration);
-            Debug.Log("Fade in");
         }
 
         private void FadeOutInfo()
@@ -200,7 +296,6 @@ namespace ProjectThief
             float progress = Time.time - _infoStart;
             _infoText.color = Color.Lerp(_infoText.color, new Vector4(_rText, _gText, _bText, 0), progress / _infoDuration);
             _textBg.color = Color.Lerp(_textBg.color, new Vector4(_rInfo, _gInfo, _bInfo, 0), progress / _infoDuration);
-            Debug.Log("Fade out");
         }
 
         private void FadeIn()
@@ -214,7 +309,9 @@ namespace ProjectThief
             float progress = Time.time - _start;
             _fadeScreen.color = Color.Lerp(_fadeScreen.color, new Vector4(_r, _g, _b, 0), progress / _duration);
         }
+        #endregion
 
+        #region Buttons & Sliders
         public void NewGame()
         {
             GameManager.instance.fadeIn = true;
@@ -354,5 +451,6 @@ namespace ProjectThief
             GameStateController.PerformTransition(
                 GameManager.instance.continueState.StateType);
         }
+        #endregion
     }
 }

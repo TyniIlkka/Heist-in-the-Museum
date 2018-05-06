@@ -25,6 +25,7 @@ namespace ProjectThief
         public bool fadeInStart;
         public bool infoFadeIn;
         public bool infoFadeInStart;
+        public bool resetInfoTimer;
         public bool initialMenu;
         public string infoText;
         public Transform spawnPoint;
@@ -38,7 +39,8 @@ namespace ProjectThief
         [Header("Lists")]
         public List<Item> refItems;
         public List<Item> keyItems;
-        public List<Item> inventory;                
+        public List<Item> inventory;
+        public List<Item> savedInventory;
         public bool[] usedlevers;        
         public bool[] openedVitrines;
         public bool[] clearedRooms;
@@ -92,6 +94,17 @@ namespace ProjectThief
 
             inventory.Clear();
             currentPhase = 0;
-        }            
+        }   
+        
+        public void SaveInventory(List<Item> inventory)
+        {
+            savedInventory.Clear();
+
+            foreach (Item item in inventory)
+            {
+                Item savedItem = refItems[item.RefPos];
+                savedInventory.Add(savedItem);
+            }
+        }
     }
 }

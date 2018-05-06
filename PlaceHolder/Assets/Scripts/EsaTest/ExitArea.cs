@@ -7,6 +7,8 @@ namespace ProjectThief
     {       
         [SerializeField, Tooltip("Move to point")]
         private Transform _moveToPoint;
+        [SerializeField, Tooltip("Inspect text")]
+        private string _inspectText = "I might be able to escape through this window later";
 
         public Vector3 MoveToPos { get { return _moveToPoint.position; } }
 
@@ -23,7 +25,7 @@ namespace ProjectThief
             {
                 if (GameManager.instance.refItems[_lastItem].Collected)
                 {
-                    
+
                     if (IsInteractable)
                     {
                         GetMouseController.EnterCursor();
@@ -38,14 +40,34 @@ namespace ProjectThief
                     {
                         GetMouseController.InspectCursor();
 
-                        if (Input.GetButtonDown("Fire1"))                        
+                        if (Input.GetButtonDown("Fire1") && GameManager.instance.mouseMovemet)
                             GameManager.instance.player.GetComponent<GridPlayer>().FindPath(MoveToPos);
-                        
+
                     }
                 }
-                else                
+                else
+                {
                     GetMouseController.InspectCursor();
-                
+                    if (Input.GetButtonDown("Fire1"))
+                    {
+                        InspectText();
+                    }
+                }                
+            }
+        }
+
+        private void InspectText()
+        {
+            GameManager.instance.infoText = _inspectText;
+
+            if (!GameManager.instance.infoFadeIn)
+            {
+                GameManager.instance.infoFadeIn = true;
+                GameManager.instance.infoFadeInStart = true;
+            }
+            else
+            {
+                GameManager.instance.resetInfoTimer = true;
             }
         }
     }

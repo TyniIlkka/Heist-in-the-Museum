@@ -12,18 +12,18 @@ namespace ProjectThief
         [SerializeField]
         private Texture m_tEmpty = null; 
 
-        private List<Item> m_lInventoryItems;        
+        private List<Item> _inventoryItems;        
 
         // testing remove when not needed.
         public float delay;
         private bool start; 
         private float time;
 
-        public List<Item> InventoryItems { get { return m_lInventoryItems; } }
+        public List<Item> InventoryItems { get { return _inventoryItems; } }
 
         private void Start()
         {
-            m_lInventoryItems = GameManager.instance.inventory;                       
+            _inventoryItems = GameManager.instance.inventory;                       
             UpdateInventory();
         }
 
@@ -34,7 +34,7 @@ namespace ProjectThief
         {            
             Item newItem = GameManager.instance.refItems[item.RefPos];
             newItem.Collected = true;
-            m_lInventoryItems.Add(newItem);
+            _inventoryItems.Add(newItem);
             UpdateInventory();
         }
 
@@ -44,7 +44,7 @@ namespace ProjectThief
         public void RemoveItem(Item item)
         {
             Item removeItem = GameManager.instance.refItems[item.RefPos];
-            m_lInventoryItems.Remove(removeItem);            
+            _inventoryItems.Remove(removeItem);            
             m_lSlots[item.Slot].GetComponent<RawImage>().texture = m_tEmpty;        
             time = delay;
             start = true;            
@@ -57,14 +57,14 @@ namespace ProjectThief
         {            
             for (int i = 0; i < m_lSlots.Count; i++)
             {                
-                if (i >= m_lInventoryItems.Count)
+                if (i >= _inventoryItems.Count)
                 {                    
                     m_lSlots[i].GetComponent<RawImage>().texture = m_tEmpty;                    
                 }
                 else
                 {
-                    m_lSlots[i].GetComponent<RawImage>().texture = m_lInventoryItems[i].ItemImage;
-                    m_lInventoryItems[i].Slot = i;
+                    m_lSlots[i].GetComponent<RawImage>().texture = _inventoryItems[i].ItemImage;
+                    _inventoryItems[i].Slot = i;
                 }
             }            
         }
@@ -83,6 +83,26 @@ namespace ProjectThief
                 {
                     time -= Time.deltaTime;
                 }
+            }
+        }
+
+        public void SaveInventory()
+        {
+            GameManager.instance.SaveInventory(_inventoryItems);
+        }
+
+        public void LoadInventory()
+        {
+            if (_inventoryItems == null)
+            {
+                _inventoryItems = GameManager.instance.inventory;
+                _inventoryItems.Clear();
+            }
+
+            foreach (Item item in GameManager.instance.savedInventory)
+            {
+                Item loadedItem = GameManager.instance.refItems[item.RefPos];
+                _inventoryItems.Add(loadedItem);
             }
         }
     }

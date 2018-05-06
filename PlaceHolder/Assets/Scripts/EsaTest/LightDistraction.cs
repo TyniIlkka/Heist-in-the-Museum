@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ProjectThief
 {
-    public class LightDistraction : MonoBehaviour
+    public class LightDistraction : ObjectBase
     {
         [SerializeField, Tooltip("Light's light source")]
         private GameObject m_goLight;
@@ -16,12 +16,14 @@ namespace ProjectThief
         private Material m_mLitMaterial;
         [SerializeField, Tooltip("Light")]
         private GameObject m_goLightObject;
-        
+        [SerializeField, Tooltip("Inspect Text")]
+        private string _inspectText = "That lamp might get the guard's attention";
+
         private bool m_bIsActive;
         Guard guard;
         Collider[] objects;
 
-        public bool IsActive { get { return m_bIsActive; } set { m_bIsActive = value; } }        
+        public bool LightIsActive { get { return m_bIsActive; } set { m_bIsActive = value; } }        
 
         private void OnDrawGizmos()
         {
@@ -29,7 +31,7 @@ namespace ProjectThief
             Gizmos.DrawWireSphere(transform.position, m_fRange);
         }
 
-        public void Activated()
+        public void LightActivated()
         {            
             m_goLight.SetActive(true);
             m_bIsActive = true;
@@ -49,7 +51,7 @@ namespace ProjectThief
             }
         }
 
-        public void ResetLight()
+        public void LightDeactivated()
         {
             m_goLight.SetActive(false);
             m_bIsActive = false;
@@ -62,6 +64,33 @@ namespace ProjectThief
                 if (guard != null)
                 {
                     guard.Distract(this, false);
+                }
+            }
+        }
+
+        private void InspectText()
+        {
+            GameManager.instance.infoText = _inspectText;
+
+            if (!GameManager.instance.infoFadeIn)
+            {
+                GameManager.instance.infoFadeIn = true;
+                GameManager.instance.infoFadeInStart = true;
+            }
+            else
+            {
+                GameManager.instance.resetInfoTimer = true;
+            }
+        }
+
+        protected override void Activated()
+        {
+            if (IsActive)
+            {
+                GetMouseController.InspectCursor();
+                if (Input.GetButtonDown("Fire1"))
+                {
+                    InspectText();
                 }
             }
         }

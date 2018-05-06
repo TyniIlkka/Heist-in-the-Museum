@@ -69,6 +69,10 @@ ModelImporter:
     7400002: metarigAction
     7400004: ThiefIdle
     7400006: ThiefWalk
+    7400008: ThiefWalkFast
+    7400010: ThiefIdleFast
+    7400012: ThiefSneakOn
+    7400014: ThiefSneakOff
     9500000: //RootNode
     13700000: Body
     13700002: Body_001
@@ -82,22 +86,32 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Eyes
-    second: {fileID: 2100000, guid: 1038ad2795958a641bf5751b058a8259, type: 2}
+    second: {fileID: 2100000, guid: 4810cb1ce5ce2d34091d3d206a21039f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Hood
-    second: {fileID: 2100000, guid: d36baf20213ddb1499299df24603ab84, type: 2}
+    second: {fileID: 2100000, guid: 4810cb1ce5ce2d34091d3d206a21039f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Mask
-    second: {fileID: 2100000, guid: 53dd0931ec9c8f34b99195ef6e195f24, type: 2}
+    second: {fileID: 2100000, guid: 4810cb1ce5ce2d34091d3d206a21039f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Shirt
     second: {fileID: 2100000, guid: b84060cd957afc4409e22aff2b6c8dc1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shirt__jacket_png
+    second: {fileID: 2100000, guid: 88268035884d9d948bf2f2f4b3bd8cab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ThiefPants__pants_png
+    second: {fileID: 2100000, guid: 283bc1545a8fd5b4fb8f3fbf2c24ea84, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -128,7 +142,7 @@ ModelImporter:
       name: Default Take
       takeName: Default Take
       firstFrame: -1
-      lastFrame: 149
+      lastFrame: 360
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -220,6 +234,118 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: ThiefWalkFast
+      takeName: Default Take
+      firstFrame: 300
+      lastFrame: 360
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: ThiefIdleFast
+      takeName: Default Take
+      firstFrame: 180
+      lastFrame: 240
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: ThiefSneakOn
+      takeName: Default Take
+      firstFrame: 250
+      lastFrame: 260
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: ThiefSneakOff
+      takeName: Default Take
+      firstFrame: 270
+      lastFrame: 280
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
