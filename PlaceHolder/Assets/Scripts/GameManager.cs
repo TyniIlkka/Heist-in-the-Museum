@@ -27,6 +27,8 @@ namespace ProjectThief
         public bool infoFadeInStart;
         public bool resetInfoTimer;
         public bool initialMenu;
+        public bool infoBoxVisible;
+        public bool newText;
         public string infoText;
         public Transform spawnPoint;
         public Transform initialSpawn;

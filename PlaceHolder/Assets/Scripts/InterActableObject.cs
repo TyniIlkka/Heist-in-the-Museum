@@ -30,7 +30,7 @@ namespace ProjectThief
         [SerializeField, Tooltip("Move to point")]
         private Transform _moveToPos;
         [SerializeField, Tooltip("Inspect text")]
-        private string _inspectText = "The case is shut with a [metallic] lock. One of the vault keys seems to be inside";
+        private string _inspectText = @"""The case is shut with a [metallic] lock.""#""One of the vault keys seems to be inside.""";
         [SerializeField, Tooltip("Info text")]
         private string _infoText;
          
@@ -136,7 +136,7 @@ namespace ProjectThief
 
         private void UpdateInfo()
         {
-            if (!GameManager.instance.infoFadeIn)
+            if (!GameManager.instance.infoBoxVisible)
             {
                 GameManager.instance.infoFadeIn = true;
                 GameManager.instance.infoFadeInStart = true;
@@ -144,6 +144,7 @@ namespace ProjectThief
             else
             {
                 GameManager.instance.resetInfoTimer = true;
+                GameManager.instance.newText = true;
             }
         }
     }

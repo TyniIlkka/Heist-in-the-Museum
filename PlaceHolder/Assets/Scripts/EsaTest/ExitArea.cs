@@ -8,7 +8,7 @@ namespace ProjectThief
         [SerializeField, Tooltip("Move to point")]
         private Transform _moveToPoint;
         [SerializeField, Tooltip("Inspect text")]
-        private string _inspectText = "I might be able to escape through this window later";
+        private string _inspectText = @"""I might be able to escape through this window later.""";
 
         public Vector3 MoveToPos { get { return _moveToPoint.position; } }
 
@@ -60,7 +60,7 @@ namespace ProjectThief
         {
             GameManager.instance.infoText = _inspectText;
 
-            if (!GameManager.instance.infoFadeIn)
+            if (!GameManager.instance.infoBoxVisible)
             {
                 GameManager.instance.infoFadeIn = true;
                 GameManager.instance.infoFadeInStart = true;
@@ -68,6 +68,7 @@ namespace ProjectThief
             else
             {
                 GameManager.instance.resetInfoTimer = true;
+                GameManager.instance.newText = true;
             }
         }
     }

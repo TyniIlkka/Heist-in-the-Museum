@@ -17,7 +17,7 @@ namespace ProjectThief
         [SerializeField, Tooltip("Light")]
         private GameObject m_goLightObject;
         [SerializeField, Tooltip("Inspect Text")]
-        private string _inspectText = "That lamp might get the guard's attention";
+        private string _inspectText = @"""That lamp might get the guard's attention.""";
 
         private bool m_bIsActive;
         Guard guard;
@@ -72,7 +72,7 @@ namespace ProjectThief
         {
             GameManager.instance.infoText = _inspectText;
 
-            if (!GameManager.instance.infoFadeIn)
+            if (!GameManager.instance.infoBoxVisible)
             {
                 GameManager.instance.infoFadeIn = true;
                 GameManager.instance.infoFadeInStart = true;
@@ -80,6 +80,7 @@ namespace ProjectThief
             else
             {
                 GameManager.instance.resetInfoTimer = true;
+                GameManager.instance.newText = true;
             }
         }
 
