@@ -456,7 +456,7 @@ namespace ProjectThief
         public void ReturnMenuVictory()
         {
             _pauseMenu.SetActive(false);
-            GameManager.instance.canContinue = true;
+            GameManager.instance.canContinue = false;
             Time.timeScale = 1f;
             _returnMenu = true;
             GameManager.instance.fadeIn = true;
