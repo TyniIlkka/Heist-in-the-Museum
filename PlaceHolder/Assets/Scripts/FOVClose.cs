@@ -30,7 +30,7 @@ namespace ProjectThief
         private float _startTime;
         private bool _lerpToRad;
 
-        public Player m_pPlayerObject;
+        public Player _playerObject;
         private Guard guard;
 
         public float ViewRad { get { return _viewRad; } }
@@ -53,8 +53,6 @@ namespace ProjectThief
                 _viewRad = GetComponentInParent<Guard>().MinDetectionRange;
                 _targetRad = _viewRad;
                 _viewAngle = 360f;
-                m_pPlayerObject = GetComponentInParent<Guard>().Thief;
-
             }
             else
             {
@@ -92,8 +90,17 @@ namespace ProjectThief
             
         }
 
+        private void CheckComponents()
+        {
+            if (guard == null)
+                guard = GetComponentInParent<Guard>();
+            if (_playerObject == null)
+                _playerObject = GetComponentInParent<Guard>().Thief;            
+        }
+
         private void LateUpdate()
         {
+            CheckComponents();
             CheckRadius();
             DrawFieldOfView();
             if (CanSeePlayer())
@@ -242,11 +249,11 @@ namespace ProjectThief
         {
 
             //Close range detection
-            _distanceToPlayer = (transform.position - m_pPlayerObject.transform.position).sqrMagnitude;
+            _distanceToPlayer = (transform.position - _playerObject.transform.position).sqrMagnitude;
             
             if ((_distanceToPlayer <= _viewRad * _viewRad))
             {
-                Vector3 rayDirection = (m_pPlayerObject.transform.position) - transform.position;
+                Vector3 rayDirection = (_playerObject.transform.position) - transform.position;
                 RaycastHit hit;
                 rayDirection += Vector3.up;
                 if (Physics.Raycast(transform.position, rayDirection.normalized, out hit, _viewRad))
