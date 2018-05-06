@@ -67,10 +67,12 @@ namespace ProjectThief
                         if (player.Speed > _moveSpeedSneak)
                         {
                             particleSystem.transform.localScale = new Vector3(3, 3, 3);
+                            //_playerAnimator.SetBool("Walk", true);
                         }
                         else
                         {
                             particleSystem.transform.localScale = new Vector3(1, 1, 1);
+                            //_playerAnimator.SetBool("Walk", false);
                         }
                         _movement = transform.forward + transform.right;
                         _movement *= player.Speed;
