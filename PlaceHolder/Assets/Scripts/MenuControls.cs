@@ -102,6 +102,11 @@ namespace ProjectThief
                 _rText = _infoText.color.r;
                 _gText = _infoText.color.g;
                 _bText = _infoText.color.b;
+
+                _infoText.color = new Vector4(_rText, _gText, _bText, 0);
+                _textBg.color = new Vector4(_rInfo, _bInfo, _gInfo, 0);
+                GameManager.instance.infoBoxVisible = false;
+                GameManager.instance.infoFadeInStart = false;
             }
 
             if (GameStateController.CurrentState.SceneName == "MainMenu")
