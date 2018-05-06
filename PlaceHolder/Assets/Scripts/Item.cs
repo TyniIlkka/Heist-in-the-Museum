@@ -20,6 +20,8 @@ namespace ProjectThief
         private Material _defaultMat;
         [SerializeField, Tooltip("Highlight material")]
         private Material _highlightMat;
+        [SerializeField, Tooltip("Info text")]
+        private string _inspectText;
 
         private bool _collected;
         private int _slotPosition;
@@ -69,7 +71,7 @@ namespace ProjectThief
                         if (_refPos == 13 && !_collected)
                         {
                             GameManager.instance.currentPhase++;
-                            Debug.Log("Target collected phase increased, Current phase: " + GameManager.instance.currentPhase);
+                            InspectText();
                         }
 
                         _collected = true;
@@ -81,6 +83,22 @@ namespace ProjectThief
                 }
                 else                
                     GetMouseController.InspectCursor();                    
+            }
+        }
+
+        private void InspectText()
+        {
+            GameManager.instance.infoText = _inspectText;
+
+            if (!GameManager.instance.infoBoxVisible)
+            {
+                GameManager.instance.infoFadeIn = true;
+                GameManager.instance.infoFadeInStart = true;
+            }
+            else
+            {
+                GameManager.instance.resetInfoTimer = true;
+                GameManager.instance.newText = true;
             }
         }
     }

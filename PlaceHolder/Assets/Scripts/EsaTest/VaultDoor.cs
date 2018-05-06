@@ -15,7 +15,7 @@ namespace ProjectThief
         [SerializeField, Tooltip("Vault key parts")]
         private List<Item> _keyParts;
         [SerializeField, Tooltip("Inspect text")]
-        private string _inspectText = "The treasure is stored behind this door";
+        private string _inspectText = @"""The treasure is stored behind this door.""";
 
         [SerializeField]
         private DynamicMapUpdate _pathUpdater;
@@ -111,7 +111,7 @@ namespace ProjectThief
         {
             GameManager.instance.infoText = _inspectText;
 
-            if (!GameManager.instance.infoFadeIn)
+            if (!GameManager.instance.infoBoxVisible)
             {
                 GameManager.instance.infoFadeIn = true;
                 GameManager.instance.infoFadeInStart = true;
@@ -119,6 +119,7 @@ namespace ProjectThief
             else
             {
                 GameManager.instance.resetInfoTimer = true;
+                GameManager.instance.newText = true;
             }
         }
     }

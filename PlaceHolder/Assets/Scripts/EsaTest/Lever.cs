@@ -24,7 +24,7 @@ namespace ProjectThief
         [SerializeField, Tooltip("Move to point")]
         private Transform _moveToPos;
         [SerializeField, Tooltip("Inspect text")]
-        private string _inspectText = "A[colour] mechanism.It looks like it is missing a part";
+        private string _inspectText = @"""A[colour] mechanism.""#""It looks like it is missing a part.""";
 
         private Animator _leverAnimator;
         private bool _used;
@@ -134,7 +134,7 @@ namespace ProjectThief
         {
             GameManager.instance.infoText = _inspectText;
 
-            if (!GameManager.instance.infoFadeIn)
+            if (!GameManager.instance.infoBoxVisible)
             {
                 GameManager.instance.infoFadeIn = true;
                 GameManager.instance.infoFadeInStart = true;
@@ -142,6 +142,7 @@ namespace ProjectThief
             else
             {
                 GameManager.instance.resetInfoTimer = true;
+                GameManager.instance.newText = true;
             }
         }
     }    

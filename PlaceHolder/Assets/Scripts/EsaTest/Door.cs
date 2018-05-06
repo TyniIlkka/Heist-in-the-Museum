@@ -25,7 +25,7 @@ namespace ProjectThief
         [SerializeField, Tooltip("Move to point")]
         private Transform _moveToPoint;
         [SerializeField, Tooltip("Inspect info")]
-        private string _inspectText = "The door is blocked by bars. I wonder if there is a way to get through.";
+        private string _inspectText = @"""The door is blocked by bars.""#""I wonder if there is a way to get through.""";
 
         private bool _isBlocked;
         private bool _opened;
@@ -162,15 +162,15 @@ namespace ProjectThief
         {
             GameManager.instance.infoText = _inspectText;            
 
-            if (!GameManager.instance.infoFadeIn)
+            if (!GameManager.instance.infoBoxVisible)
             {
                 GameManager.instance.infoFadeIn = true;
                 GameManager.instance.infoFadeInStart = true;
-                Debug.Log("open info");
             }
             else
             {
                 GameManager.instance.resetInfoTimer = true;
+                GameManager.instance.newText = true;
             }
         }
     }

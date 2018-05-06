@@ -48,15 +48,15 @@ namespace ProjectThief
         [SerializeField]
         private Text _infoText;
         [SerializeField, Tooltip("Text hide delay")]
-        private float _delay = 5f;
+        private float _delay = 2f;
         [SerializeField, Tooltip("Info fade effect duration")]
         private float _infoDuration = 2f;
         [SerializeField, Tooltip("Delay between text")]
-        private float _textDelay = 1f;
+        private float _textDelay = 0.5f;
         [SerializeField, Tooltip("Line end char")]
         private char _endchar = '#';
         [SerializeField, Tooltip("Delay between characters")]
-        private float _charDelay = 0.05f;
+        private float _charDelay = 0.025f;
         #endregion
 
         #region Private variables
@@ -68,7 +68,6 @@ namespace ProjectThief
         private float _timePassed;
         private float _rInfo, _gInfo, _bInfo;
         private float _rText, _gText, _bText;
-        private bool _infoVisible;
         private List<string> _lines;
         private bool _lastTextShown;
         private float _textTime;
@@ -128,6 +127,7 @@ namespace ProjectThief
                     _continueButton.gameObject.SetActive(false);
             }
 
+            // Fade in out effect
             if (GameManager.instance.fadeInStart)
             {                
                 _start = Time.time;
@@ -145,7 +145,7 @@ namespace ProjectThief
             if (!GameManager.instance.fadeIn && _fadeScreen.color.a != 0)            
                 FadeOut();
             
-
+            // Transition
             if (_newGame && _fadeScreen.color.a == 1)
             {
                 _newGame = false;
@@ -158,6 +158,7 @@ namespace ProjectThief
                 GameStateController.PerformTransition(_menuState);
             }
 
+            // Info Text
             if (GameStateController.CurrentState.SceneName != "MainMenu")
             {
                 if (GameManager.instance.infoFadeInStart && _fadeScreen.color.a == 0)
@@ -168,7 +169,7 @@ namespace ProjectThief
                     if (GameManager.instance.infoFadeIn)
                     {
                         _textBg.color = new Vector4(_rInfo, _gInfo, _bInfo, 0);
-                        _infoVisible = true;
+                        GameManager.instance.infoBoxVisible = true;
                         CheckString();
                     }
                     else
@@ -177,17 +178,24 @@ namespace ProjectThief
 
                 if (_textBg != null)
                 {
-                    if (_infoVisible && _textBg.color.a == 1 && _lastTextShown && _allCharsPrinted)
+                    if (GameManager.instance.infoBoxVisible &&
+                        _textBg.color.a == 1 && _lastTextShown && _allCharsPrinted)
                         InfoTimer();
 
-                    if (_infoVisible && _textBg.color.a != 1)
+                    if (GameManager.instance.infoBoxVisible && _textBg.color.a != 1)
                         FadeInInfo();
 
-                    if (!_infoVisible && _textBg.color.a != 0)
+                    if (!GameManager.instance.infoBoxVisible && _textBg.color.a != 0)
                         FadeOutInfo();
 
                     if (!_lastTextShown && _allCharsPrinted)
                         UpdateText();
+
+                    if (GameManager.instance.newText)
+                    {
+                        GameManager.instance.newText = false;
+                        CheckString();
+                    }
                 }
             }
         }
@@ -196,6 +204,7 @@ namespace ProjectThief
         #region Text Handling
         private void CheckString()
         {
+            Debug.Log("checking string");
             _lines.Clear();
             _lines = new List<string>();
             string line = GameManager.instance.infoText + _endchar;
@@ -210,6 +219,7 @@ namespace ProjectThief
                 else
                 {
                     _lines.Add(text);
+                    text = "";
                 }
             }
 
@@ -250,7 +260,7 @@ namespace ProjectThief
 
         private IEnumerator PrintChar(string line)
         {
-            _infoText.text = string.Empty;
+            _infoText.text = string.Empty;            
 
             for (int i = 0; i < line.Length; i++)
             {
@@ -271,7 +281,7 @@ namespace ProjectThief
             if (_timePassed >= _delay)
             {
                 _timePassed = 0;
-                _infoVisible = false;
+                GameManager.instance.infoBoxVisible = false;
                 _infoStart = Time.time;
             }
             if (GameManager.instance.resetInfoTimer)
