@@ -95,6 +95,7 @@ namespace ProjectThief
             }
 
             inventory.Clear();
+            savedInventory.Clear();
             currentPhase = 0;
         }   
         
