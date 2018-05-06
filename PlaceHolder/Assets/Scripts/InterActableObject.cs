@@ -100,7 +100,7 @@ namespace ProjectThief
                             _animator.SetBool("Open", true);
                         }
                     }
-                    else
+                    else if (!_used)
                     {
                         GetMouseController.InspectCursor();
                         if (Input.GetButtonDown("Fire1"))

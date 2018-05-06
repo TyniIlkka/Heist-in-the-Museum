@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33188368460983846}
   - component: {fileID: 23112275543123560}
   - component: {fileID: 95190563392296698}
+  - component: {fileID: 65690772383697882}
   m_Layer: 0
   m_Name: vase5
   m_TagString: Untagged
@@ -84,6 +85,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1378054401731444}
   m_Mesh: {fileID: 4300000, guid: 7cef01ee56adff84f8af2cede9289467, type: 3}
+--- !u!65 &65690772383697882
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1378054401731444}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5541581, y: 0.5265061, z: 0.7295652}
+  m_Center: {x: -0.013826028, y: -0.0000000119324435, z: 0.36535358}
 --- !u!95 &95190563392296698
 Animator:
   serializedVersion: 3

@@ -57,6 +57,8 @@ namespace ProjectThief
         private char _endchar = '#';
         [SerializeField, Tooltip("Delay between characters")]
         private float _charDelay = 0.025f;
+        [SerializeField, Tooltip("Info text is permanent")]
+        private bool _permanent;
         #endregion
 
         #region Private variables
@@ -179,7 +181,7 @@ namespace ProjectThief
                 if (_textBg != null)
                 {
                     if (GameManager.instance.infoBoxVisible &&
-                        _textBg.color.a == 1 && _lastTextShown && _allCharsPrinted)
+                        _textBg.color.a == 1 && _lastTextShown && _allCharsPrinted && !_permanent)
                         InfoTimer();
 
                     if (GameManager.instance.infoBoxVisible && _textBg.color.a != 1)
