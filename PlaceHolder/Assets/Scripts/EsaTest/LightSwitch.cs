@@ -74,15 +74,8 @@ namespace ProjectThief
                             m_lLight.LightDeactivated();
                     }
                 }
-                else
-                {
+                else                
                     GetMouseController.InspectCursor();
-
-                    //if (Input.GetButtonDown("Fire1"))
-                    //{
-                    //    GameManager.instance.player.GetComponent<GridPlayer>().FindPath(MoveToPos);
-                    //}
-                }
             }            
         }
     }

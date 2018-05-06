@@ -129,15 +129,8 @@ namespace ProjectThief
                         DistractionActive();
                     }
                 }
-                else
-                {
-                    GetMouseController.InspectCursor();                    
-
-                    if (Input.GetButtonDown("Fire1"))
-                    {
-                        GameManager.instance.player.GetComponent<GridPlayer>().FindPath(MoveToPos);
-                    }
-                }
+                else                
+                    GetMouseController.InspectCursor();                
             }
         }
     }
