@@ -75,6 +75,8 @@ namespace ProjectThief
         private float _textTime;
         private int _linePos = 0;
         private bool _allCharsPrinted;
+        private bool _coroutineRunning;
+        private Coroutine _runningCoroutine;
         #endregion
 
         #region Awake & Update
@@ -230,8 +232,16 @@ namespace ProjectThief
                 }
             }
 
+            if (_coroutineRunning)
+            {
+                StopCoroutine(_runningCoroutine);
+                Debug.Log("Coroutine stopped");
+                _coroutineRunning = false;
+                _infoText.text = "";
+            }
+
             _allCharsPrinted = false;
-            StartCoroutine(PrintChar(_lines[_linePos]));            
+            _runningCoroutine = StartCoroutine(PrintChar(_lines[_linePos]));            
 
             if ((_lines.Count - 1) > _linePos)
             {
@@ -246,13 +256,14 @@ namespace ProjectThief
         }
 
         private void UpdateText()
-        {
+        {            
             _textTime += Time.deltaTime;
             if (_textTime >= _textDelay)
             {
+                Debug.Log("Next Line");
                 _textTime = 0;
                 _allCharsPrinted = false;
-                StartCoroutine(PrintChar(_lines[_linePos]));
+                _runningCoroutine = StartCoroutine(PrintChar(_lines[_linePos]));
 
                 if ((_lines.Count - 1) > _linePos)
                     _linePos++;
@@ -260,22 +271,26 @@ namespace ProjectThief
                 {
                     _linePos = 0;
                     _lastTextShown = true;
-                }
-                
+                }                
             }
+            if (!_coroutineRunning)
+                _textTime = 0;
         }
 
         private IEnumerator PrintChar(string line)
         {
-            _infoText.text = string.Empty;            
+            _infoText.text = string.Empty;
+            _coroutineRunning = true;
+            Debug.Log("Coroutine running");
 
             for (int i = 0; i < line.Length; i++)
             {
-                _infoText.text += line[i];
+                _infoText.text += line[i];                
                 
                 if (i == line.Length - 1)
                 {
                     _allCharsPrinted = true;
+                    yield break;
                 }
 
                 yield return new WaitForSeconds(_charDelay);
