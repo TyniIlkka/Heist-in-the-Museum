@@ -25,6 +25,10 @@ namespace ProjectThief
         private GameObject _menuView2;
         [SerializeField, Tooltip("Continue button")]
         private Button _continueButton;
+        [SerializeField, Tooltip("Navigation area")]
+        private GameObject _navi;
+        [SerializeField, Tooltip("Credits screen")]
+        private GameObject _credits;
         [SerializeField, Header("Fade In/Out")]
         private RawImage _fadeScreen;
         [SerializeField, Tooltip("Fade in/ out effect duration")]
@@ -482,6 +486,18 @@ namespace ProjectThief
         {
             GameStateController.PerformTransition(
                 GameManager.instance.continueState.StateType);
+        }
+
+        public void Credits()
+        {
+            _navi.SetActive(false);
+            _credits.SetActive(true);
+        }
+
+        public void CreditsBack()
+        {
+            _navi.SetActive(true);
+            _credits.SetActive(false);
         }
         #endregion
     }
