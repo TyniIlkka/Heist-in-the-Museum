@@ -52,7 +52,7 @@ namespace ProjectThief
             {
                 _viewRad = GetComponentInParent<Guard>().MinDetectionRange;
                 _targetRad = _viewRad;
-                _viewAngle = 360f;
+                _viewAngle = 360f - GetComponent<FieldOfView>().ViewAngle;
             }
             else
             {
@@ -198,6 +198,7 @@ namespace ProjectThief
         ViewCastinfo ViewCast(float globalAngle)
         {
             Vector3 dir = DirFromAngle(globalAngle, true);
+            dir = -dir;
             RaycastHit hit;
 
             if (Physics.Raycast(transform.position, dir, out hit, _viewRad, m_lmObstacleMask))
