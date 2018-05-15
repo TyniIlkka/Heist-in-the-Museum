@@ -16,9 +16,14 @@ namespace ProjectThief
         private float m_fCooldown = 0.3f;
         [SerializeField, Tooltip("Move to point")]
         private Transform _moveToPoint;
+        [SerializeField, Tooltip("Has tutorial effect")]
+        private bool _tutorialEffect;
+        [SerializeField, Tooltip("Phase where to activate")]
+        private int _activePhase;
 
         private float m_fTimePassed;
-        private bool m_bCanUse;  
+        private bool m_bCanUse;
+        private ParticleSystem _particleSystem;
         
         public Vector3 MoveToPos { get { return _moveToPoint.position; } }
 
@@ -29,6 +34,15 @@ namespace ProjectThief
 
             m_aoSource.volume = PlayVolume;
             m_bCanUse = true;
+
+            if (_particleSystem == null && _tutorialEffect)
+            {
+                _particleSystem = GetComponent<ParticleSystem>();
+
+                if (GameManager.instance.currentPhase == _activePhase &&
+                    !GameManager.instance.tutorialeffects[0])
+                    _particleSystem.Play();
+            }
         }
 
         protected override void Update()
@@ -67,6 +81,12 @@ namespace ProjectThief
                     {
                         m_bCanUse = false;
                         PlayEffect();
+
+                        if (_tutorialEffect && _particleSystem.isPlaying)
+                        {
+                            _particleSystem.Stop();
+                            GameManager.instance.tutorialeffects[0] = true;
+                        }
 
                         if (!m_lLight.LightIsActive)
                             m_lLight.LightActivated();
