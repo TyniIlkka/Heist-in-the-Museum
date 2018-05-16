@@ -63,11 +63,18 @@ namespace ProjectThief
         private float _charDelay = 0.025f;
         [SerializeField, Tooltip("Info text is permanent")]
         private bool _permanent;
+        [SerializeField, Tooltip("New message highlight")]
+        private RawImage _highlight;
+        [SerializeField, Tooltip("Highlight effect duration")]
+        private float _highlightDuration = 1f;
+        [SerializeField, Tooltip("How many times highlight flashes")]
+        private int _times = 2;
         #endregion
 
         #region Private variables
         private AudioManager _audioManager;
         private float _r, _g, _b;
+        private float _hR, _hG, _hB;
         private float _start, _infoStart;
         private bool _newGame;
         private bool _returnMenu;
@@ -77,9 +84,12 @@ namespace ProjectThief
         private List<string> _lines;
         private bool _lastTextShown;
         private float _textTime;
+        private float _highlightTime;
         private int _linePos = 0;
+        private int _flashes;
         private bool _allCharsPrinted;
         private bool _coroutineRunning;
+        private bool _highlightStarted;
         private Coroutine _runningCoroutine;
         #endregion
 
@@ -109,6 +119,11 @@ namespace ProjectThief
                 _gText = _infoText.color.g;
                 _bText = _infoText.color.b;
 
+                _hR = _highlight.color.r;
+                _hG = _highlight.color.g;
+                _hB = _highlight.color.b;
+
+                _highlight.color = new Vector4(_hR, _hG, _hB, 0);
                 _infoText.color = new Vector4(_rText, _gText, _bText, 0);
                 _textBg.color = new Vector4(_rInfo, _bInfo, _gInfo, 0);
                 GameManager.instance.infoBoxVisible = false;
@@ -161,6 +176,9 @@ namespace ProjectThief
             // Transition
             if (_newGame && _fadeScreen.color.a == 1)
             {
+                if (_newGame)
+                    AudioManager.instance.PlayTrack(1);
+
                 _newGame = false;
                 GameManager.instance.previousState = GameStateController.CurrentState;
                 GameStateController.PerformTransition(_nextState);
@@ -169,6 +187,7 @@ namespace ProjectThief
             {
                 _returnMenu = false;
                 GameStateController.PerformTransition(_menuState);
+                AudioManager.instance.PlayTrack(0);
             }
 
             // Info Text
@@ -176,11 +195,16 @@ namespace ProjectThief
             {
                 if (GameManager.instance.infoFadeInStart && _fadeScreen.color.a == 0)
                 {
-                    _infoStart = Time.time;
+                    _infoStart = Time.time;                    
                     GameManager.instance.infoFadeInStart = false;
 
                     if (GameManager.instance.infoFadeIn)
                     {
+                        _highlightTime = Time.time;
+                        _highlight.color = new Vector4(_hR, _hG, _hB, 1);
+                        _flashes = 0;
+                        _highlightStarted = true;
+
                         _textBg.color = new Vector4(_rInfo, _gInfo, _bInfo, 0);
                         GameManager.instance.infoBoxVisible = true;
                         CheckString();
@@ -207,7 +231,33 @@ namespace ProjectThief
                     if (GameManager.instance.newText)
                     {
                         GameManager.instance.newText = false;
+
+                        _highlightTime = Time.time;
+                        _highlight.color = new Vector4(_hR, _hG, _hB, 1);
+                        _flashes = 0;
+                        _highlightStarted = true;
+
                         CheckString();
+                    }
+
+                    if (_highlightStarted)
+                    {
+                        HighlightFadeOut();
+
+                        if (_highlight.color.a == 0 && _flashes < _times)
+                        {
+                            _flashes++;
+                            if (_flashes < _times)
+                            {
+                                _highlightTime = Time.time;
+                                _highlight.color = new Vector4(_hR, _hG, _hB, 1);
+                            }
+                        }
+
+                        if (_highlight.color.a == 0 && _flashes == _times)
+                        {
+                            _highlightStarted = false;
+                        }
                     }
                 }
             }
@@ -220,6 +270,7 @@ namespace ProjectThief
             Debug.Log("checking string");
             _lines.Clear();
             _lines = new List<string>();
+            _linePos = 0;
             string line = GameManager.instance.infoText + _endchar;
             string text = "";
 
@@ -345,6 +396,12 @@ namespace ProjectThief
             float progress = Time.time - _start;
             _fadeScreen.color = Color.Lerp(_fadeScreen.color, new Vector4(_r, _g, _b, 0), progress / _duration);
         }
+
+        private void HighlightFadeOut()
+        {
+            float progress = Time.time - _highlightTime;
+            _highlight.color = Color.Lerp(_highlight.color, new Vector4(_hR, _hG, _hB, 0), progress / _highlightDuration);
+        }
         #endregion
 
         #region Buttons & Sliders
@@ -356,6 +413,7 @@ namespace ProjectThief
             GameManager.instance.firstSpawn = true;
             GameManager.instance.infoShown = false;
             _newGame = true;
+            
         }
 
         public void Options()
@@ -439,7 +497,7 @@ namespace ProjectThief
             Time.timeScale = 1f;
             _returnMenu = true;
             GameManager.instance.fadeIn = true;
-            GameManager.instance.fadeInStart = true;
+            GameManager.instance.fadeInStart = true;            
         }
 
         public void MenuNo()

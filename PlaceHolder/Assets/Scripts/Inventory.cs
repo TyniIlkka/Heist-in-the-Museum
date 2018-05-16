@@ -7,17 +7,27 @@ namespace ProjectThief
 {
     public class Inventory : MonoBehaviour
     {
-        [SerializeField]
-        private List<RawImage> m_lSlots;
-        [SerializeField]
-        private Texture m_tEmpty = null; 
+        [SerializeField, Tooltip("Item slots")]
+        private List<RawImage> _slots;
+        [SerializeField, Tooltip("Slots highlights")]
+        private List<RawImage> _highlights;
+        [SerializeField, Tooltip("Empty slot texture")]
+        private Texture _emptySlot = null;
+        [SerializeField, Tooltip("Fadeout effect duration")]
+        private float _duration = 1f;
+        [SerializeField, Tooltip("How many highlight flashes")]
+        private int _times = 2;
 
-        private List<Item> _inventoryItems;        
-
-        // testing remove when not needed.
-        public float delay;
-        private bool start; 
-        private float time;
+        private List<Item> _inventoryItems; 
+        private int _slot;
+        private bool _itemRemoved;
+        private bool _itemAdded;
+        private bool _effectStarted;
+        private RawImage _highlightImage;
+        private float _r, _g, _b;
+        private float _startTime;
+        private int _done;
+        private int _usedSlots;
 
         public List<Item> InventoryItems { get { return _inventoryItems; } }
 
@@ -34,7 +44,9 @@ namespace ProjectThief
         {            
             Item newItem = GameManager.instance.refItems[item.RefPos];
             newItem.Collected = true;
+            _slot = _usedSlots;
             _inventoryItems.Add(newItem);
+            _itemAdded = true;
             UpdateInventory();
         }
 
@@ -44,46 +56,81 @@ namespace ProjectThief
         public void RemoveItem(Item item)
         {
             Item removeItem = GameManager.instance.refItems[item.RefPos];
-            _inventoryItems.Remove(removeItem);            
-            m_lSlots[item.Slot].GetComponent<RawImage>().texture = m_tEmpty;        
-            time = delay;
-            start = true;            
+            _inventoryItems.Remove(removeItem);
+            _slot = item.Slot;
+            _slots[_slot].GetComponent<RawImage>().texture = _emptySlot;
+            _itemRemoved = true;
         }
 
         /// <summary>
         /// Updates Displayed Inventory.
         /// </summary>
         public void UpdateInventory()
-        {            
-            for (int i = 0; i < m_lSlots.Count; i++)
+        {
+            _usedSlots = 0;
+            for (int i = 0; i < _slots.Count; i++)
             {                
                 if (i >= _inventoryItems.Count)
                 {                    
-                    m_lSlots[i].GetComponent<RawImage>().texture = m_tEmpty;                    
+                    _slots[i].GetComponent<RawImage>().texture = _emptySlot;                    
                 }
                 else
                 {
-                    m_lSlots[i].GetComponent<RawImage>().texture = _inventoryItems[i].ItemImage;
+                    _slots[i].GetComponent<RawImage>().texture = _inventoryItems[i].ItemImage;
                     _inventoryItems[i].Slot = i;
+                    _usedSlots++;
                 }
             }            
-        }
+        }        
 
         // Update method for testing delay.
         private void Update()
         {
-            if (start)
+            if (!_effectStarted && (_itemAdded || _itemRemoved))
             {
-                if (time <= 0)
-                {
-                    start = false;
-                    UpdateInventory();
-                }
-                else
-                {
-                    time -= Time.deltaTime;
-                }
+                _effectStarted = true;
+                _highlightImage = _highlights[_slot].GetComponent<RawImage>();
+                _r = _highlightImage.color.r;
+                _g = _highlightImage.color.g;
+                _b = _highlightImage.color.b;
+                _startTime = Time.time;
+                _highlightImage.color = new Vector4(_r, _g, _b, 1);
+                _done = 0;
             }
+
+            if (_effectStarted)
+            {
+                SlotHighlight();
+
+                if (_highlightImage.color.a == 0 && _done < _times)
+                {
+                    _done++;
+
+                    if (_done < _times)
+                    {
+                        _startTime = Time.time;
+                        _highlightImage.color = new Vector4(_r, _g, _b, 1);
+                    }
+                }
+
+                if (_highlightImage.color.a == 0 && _done == _times)
+                {
+                    _effectStarted = false;
+                    if (_itemAdded)
+                        _itemAdded = false;
+                    if (_itemRemoved)
+                    {
+                        _itemRemoved = false;
+                        UpdateInventory();
+                    }                    
+                }           
+            }
+        }
+
+        private void SlotHighlight()
+        {
+            float progress = Time.time - _startTime;
+            _highlightImage.color = Color.Lerp(_highlightImage.color, new Vector4(_r, _g, _b, 0), progress / _duration);
         }
 
         public void SaveInventory()

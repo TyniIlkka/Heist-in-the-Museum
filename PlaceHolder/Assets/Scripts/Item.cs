@@ -22,6 +22,8 @@ namespace ProjectThief
         private Material _highlightMat;
         [SerializeField, Tooltip("Info text")]
         private string _inspectText;
+        [SerializeField, Tooltip("Highlight particle effect object")]
+        private ParticleSystem _particleSystem;
 
         private bool _collected;
         private int _slotPosition;
@@ -43,19 +45,31 @@ namespace ProjectThief
             }
 
             if (_meshRenderer == null && _hasHighlight)
-                _meshRenderer = GetComponent<MeshRenderer>();
+                _meshRenderer = GetComponentInChildren<MeshRenderer>();
+
+            if (_particleSystem == null && _hasHighlight)
+            {
+                _particleSystem = GetComponentInChildren<ParticleSystem>();
+                _particleSystem.Stop();
+            }            
         }
 
         public void HighLightItem()
         {
             if (_hasHighlight)
+            {
                 _meshRenderer.material = _highlightMat;
+                _particleSystem.Play();
+            }
         }
 
         public void DeHighLight()
         {
-            if (_hasHighlight)            
+            if (_hasHighlight)
+            {
                 _meshRenderer.material = _defaultMat;
+                _particleSystem.Stop();
+            }
         }
 
         protected override void Activated()

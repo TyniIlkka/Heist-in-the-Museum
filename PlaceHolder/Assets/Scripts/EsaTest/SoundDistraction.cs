@@ -19,12 +19,17 @@ namespace ProjectThief
         private bool _hasIdle;
         [SerializeField, Tooltip("Move to point")]
         private Transform _moveToPoint;
+        [SerializeField, Tooltip("Has tutorial effect")]
+        private bool _tutorialEffect;
+        [SerializeField, Tooltip("Phase where to activate")]
+        private int _activePhase;
 
-        private float m_fDistractTime;
-        private float m_fTime;
-        private bool m_bActive;
+        private float _distractTime;
+        private float _time;
+        private bool _active;
+        private ParticleSystem _particleSystem;
 
-        public float DistractionTime { get { return m_fDistractTime - m_fTime; } }
+        public float DistractionTime { get { return _distractTime - _time; } }
         public Vector3 MoveToPos { get { return _moveToPoint.position; } }        
 
         Collider[] objects;        
@@ -36,10 +41,19 @@ namespace ProjectThief
             _source = GetComponent<AudioSource>(); 
             _source.volume = PlayVolume;
             _source.loop = true;
-            m_fDistractTime = _soundClip.length;
+            _distractTime = _soundClip.length;
 
             if (_hasIdle)
                 PlayAudio(_idle, true);
+
+            if (_particleSystem == null && _tutorialEffect)
+            {
+                _particleSystem = GetComponent<ParticleSystem>();
+
+                if (GameManager.instance.currentPhase == _activePhase &&
+                    !GameManager.instance.tutorialeffects[1])
+                    _particleSystem.Play();
+            }
         }
         
         protected override void Update()
@@ -48,14 +62,14 @@ namespace ProjectThief
 
             _source.volume = PlayVolume;
 
-            if (m_bActive)
+            if (_active)
                 Timer();
         }
 
         private void Timer()
         {
-            m_fTime += Time.deltaTime;
-            if (m_fTime >= m_fDistractTime)            
+            _time += Time.deltaTime;
+            if (_time >= _distractTime)            
                 DistractionInactive(); 
         }
 
@@ -68,7 +82,7 @@ namespace ProjectThief
         public void DistractionActive()
         {
             PlayAudio(_soundClip, false);
-            m_bActive = true;
+            _active = true;
             objects = Physics.OverlapSphere(transform.position, _range);
 
             if (objects.Length > 0)
@@ -97,7 +111,7 @@ namespace ProjectThief
                 if (guard != null)
                 {
                     guard.Distract(this, false);
-                    m_bActive = false;
+                    _active = false;
                 }
             }
             Debug.Log("Distraction inactive");
@@ -127,6 +141,11 @@ namespace ProjectThief
                     if (Input.GetButtonDown("Fire1"))
                     {
                         DistractionActive();
+                        if (_tutorialEffect)
+                        {
+                            _particleSystem.Stop();
+                            GameManager.instance.tutorialeffects[1] = true;
+                        }
                     }
                 }
                 else                

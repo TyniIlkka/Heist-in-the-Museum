@@ -71,6 +71,8 @@ namespace ProjectThief
             GameManager.instance.audioManager = this;
 
             Init();
+
+            Debug.Log("MusicPlayer Awake");
         }        
 
         private void Init()
@@ -163,8 +165,7 @@ namespace ProjectThief
             // The next track starts if enough time has passed
             if ((Time.time - m_fWaitStartTime) >= m_fDelay)
             {
-                Reset();
-                NextTrack();
+                Reset();                
                 Play();
             }
            

@@ -47,6 +47,7 @@ namespace ProjectThief
         public bool[] openedVitrines;
         public bool[] clearedRooms;
         public bool[] infoTextShown;
+        public bool[] tutorialeffects;
         [SerializeField] List<Guard> guards;
         #endregion
         [Header("Debug variables")]
@@ -72,6 +73,7 @@ namespace ProjectThief
             canContinue = false;
             initialMenu = true;
             infoTextShown = new bool[7];
+            tutorialeffects = new bool[2];
         }         
 
         public void ResetGame()
@@ -92,6 +94,8 @@ namespace ProjectThief
                 }
                 if (i < infoTextShown.Length)
                     infoTextShown[i] = false;
+                if (i < tutorialeffects.Length)
+                    tutorialeffects[i] = false;
             }
 
             inventory.Clear();
