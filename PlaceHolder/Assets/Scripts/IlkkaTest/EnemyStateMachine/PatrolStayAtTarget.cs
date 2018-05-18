@@ -16,6 +16,7 @@ namespace ProjectThief.AI
             State = AIStateType.PatrolStayAtTarget;
             Owner = owner;
             AddTransition(AIStateType.PatrolMoveBack);
+            AddTransition(AIStateType.CloseTurnTo);
         }
 
         public override void StateActivated()

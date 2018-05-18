@@ -39,7 +39,9 @@ namespace ProjectThief {
         public PatrolMoveBack patrolMoveBack;
         public Static guardStatic;
         public StaticTurnTo staticTurnTo;
+        public CloseTurnTo closeTurnTo;
 
+        public AIStateType lastState;
         #endregion
         
 
@@ -279,6 +281,9 @@ namespace ProjectThief {
             staticTurnTo = new StaticTurnTo(this);
             _states.Add(staticTurnTo);
 
+            closeTurnTo = new CloseTurnTo(this);
+            _states.Add(closeTurnTo);
+
             CheckCurrentState();
             CurrentState.StateActivated();
 
@@ -316,12 +321,29 @@ namespace ProjectThief {
             AIStateBase state = GetStateByType(targetState);
             if (state != null)
             {
+                lastState = CurrentState.State;
                 CurrentState.StateDeactivating();
                 CurrentState = state;
+
                 CurrentState.StateActivated();
                 result = true;
                 Debug.Log(CurrentState);
             }
+
+            return result;
+        }
+
+        public bool PerformTransitionRemember(AIStateType targetState, AIStateType lastType)
+        {
+            lastState = lastType;
+            bool result = PerformTransition(targetState);
+            return result;
+        }
+
+        public bool PerformTransitionBackToLatest()
+        {
+
+            bool result = PerformTransition(lastState);
 
             return result;
         }

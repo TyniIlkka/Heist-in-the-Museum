@@ -6,19 +6,23 @@ using ProjectThief.PathFinding;
 
 namespace ProjectThief.AI
 {
-    public class PatrolMoveTo : AIStateBase
+    public class CloseTurnTo : AIStateBase
     {
-        private IEnumerator coroutine;
-        public bool ready;
+        public float ready;
 
-        public PatrolMoveTo(Guard owner)
+        public CloseTurnTo(Guard owner)
             : base()
         {
-            State = AIStateType.PatrolMoveTo;
+            State = AIStateType.CloseTurnTo;
             Owner = owner;
-            
+
+            AddTransition(AIStateType.Patrol);
+            AddTransition(AIStateType.PatrolMoveBack);
+            AddTransition(AIStateType.PatrolMoveTo);
             AddTransition(AIStateType.PatrolStayAtTarget);
-            AddTransition(AIStateType.CloseTurnTo);
+            AddTransition(AIStateType.Static);
+            AddTransition(AIStateType.StaticTurnTo);
+
         }
 
         public override void StateActivated()
@@ -26,7 +30,7 @@ namespace ProjectThief.AI
             base.StateActivated();
             Mover = Owner.GetComponent<GuardMover>();
 
-            ready = false;
+            ready = 0f; //Reset Timer.
         }
 
         public override void StateDeactivating()
@@ -38,29 +42,12 @@ namespace ProjectThief.AI
         {
             // 1. Should we change the state?
             //   1.1 If yes, change state and return.
-
+            ready++;
             if (!ChangeState())
             {
-                //2. 
-                if (!ready)
-                {
-                    Mover.Target = Owner.TargetSound.MoveToPos;
-                    Mover.FindPath(Owner.transform.position, Owner.TargetSound.MoveToPos);
-                }
-                
-                if (Mover.MoverPath.Count > 0)
-                {
-                    if (GameManager.instance.canMove)
-                    {
-                        MoveMethod();
-                    }
-                    
-                    if (Mover.MoverPath.Count == 1)
-                    {
-                        ready = true;
-                    }
-                    
-                }
+                //2. Turn to Target
+                Owner.Turn(Owner.Thief.transform.position);
+
 
             }
         }
@@ -71,9 +58,10 @@ namespace ProjectThief.AI
         /// <returns>Bool result</returns>
         private bool ChangeState()
         {
-            if (Mover.MoverPath.Count <= 0 && ready)
+            if (ready >= 3)
             {
-                bool result = Owner.PerformTransition(AIStateType.PatrolStayAtTarget);
+                bool result = Owner.PerformTransitionBackToLatest();
+                Debug.Log(result);
                 return result;
             }
             return false;

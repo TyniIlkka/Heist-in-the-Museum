@@ -12,6 +12,7 @@ namespace ProjectThief.AI
             State = AIStateType.StaticTurnTo;
             Owner = owner;
             AddTransition(AIStateType.Static);
+            AddTransition(AIStateType.CloseTurnTo);
         }
 
         public override void StateActivated()

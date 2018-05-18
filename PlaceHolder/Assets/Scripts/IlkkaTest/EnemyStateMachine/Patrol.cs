@@ -19,6 +19,8 @@ namespace ProjectThief.AI {
             Owner = owner;
             AddTransition(AIStateType.PatrolMoveTo);
             AddTransition(AIStateType.Static);
+            AddTransition(AIStateType.CloseTurnTo);
+
             _path = path;
             _direction = direction;
             _arriveDistance = arriveDistance;

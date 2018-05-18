@@ -16,6 +16,7 @@ namespace ProjectThief.AI
             Owner = owner;
             AddTransition(AIStateType.StaticTurnTo);
             AddTransition(AIStateType.Patrol);
+            AddTransition(AIStateType.CloseTurnTo);
             m_eDirection = currentDirection;
 
         }
@@ -34,6 +35,7 @@ namespace ProjectThief.AI
             {
                 m_eDirection = Owner.CurrentDirection;
                 // 2. Stay on place.
+
                 switch (m_eDirection)
                 {
                     case MyDirections.North:
@@ -45,6 +47,7 @@ namespace ProjectThief.AI
                         Owner.Direction = new Vector3(1f, 0f, 1f);
                         break;
                     case MyDirections.East:
+                        Owner.transform.rotation = Quaternion.Lerp(Owner.transform.rotation, Quaternion.Euler(1f,0f,0f), Time.deltaTime *Owner.TurnSpeed);
                         Owner.transform.forward = new Vector3(1f, 0f, 0f);
                         Owner.Direction = new Vector3(1f, 0f, 0f);
                         break;
