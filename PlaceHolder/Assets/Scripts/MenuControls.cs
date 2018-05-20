@@ -27,12 +27,24 @@ namespace ProjectThief
         private Button _continueButton;
         [SerializeField, Tooltip("Navigation area")]
         private GameObject _navi;
-        [SerializeField, Tooltip("Credits screen")]
-        private GameObject _credits;
+        [SerializeField, Tooltip("Menu background")]
+        private GameObject _background;
         [SerializeField, Header("Fade In/Out")]
         private RawImage _fadeScreen;
         [SerializeField, Tooltip("Fade in/ out effect duration")]
-        private float _duration = 2;        
+        private float _duration = 2;
+        [SerializeField, Tooltip("Main credits screen"), Header("Credits")]
+        private GameObject _credits;
+        [SerializeField, Tooltip("Part 1 credits screen")]
+        private RawImage _creditsPart1;
+        [SerializeField, Tooltip("Credits part 1 button")]
+        private Image _moveToPart2;
+        [SerializeField, Tooltip("Part2 credits scree")]
+        private RawImage _creditsPart2;
+        [SerializeField, Tooltip("Credits part 2 button")]
+        private Image _moveToPart1;
+        [SerializeField, Tooltip("Credits fade effect duration")]
+        private float _creditsDuration;
         [SerializeField, Header("Pause menu")]
         private GameObject _pauseMenu;
         [SerializeField]
@@ -76,20 +88,28 @@ namespace ProjectThief
         private float _r, _g, _b;
         private float _hR, _hG, _hB;
         private float _start, _infoStart;
-        private bool _newGame;
-        private bool _returnMenu;
         private float _timePassed;
         private float _rInfo, _gInfo, _bInfo;
         private float _rText, _gText, _bText;
-        private List<string> _lines;
-        private bool _lastTextShown;
+        private float _cred1R, _cred1G, _cred1B;
+        private float _cred2R, _cred2G, _cred2B;
+        private float _credB1R, _credB1G, _credB1B;
+        private float _credB2R, _credB2G, _credB2B;
         private float _textTime;
         private float _highlightTime;
+        private float _creditsTime;
+        private List<string> _lines;
         private int _linePos = 0;
         private int _flashes;
+        private bool _lastTextShown;
+        private bool _newGame;
+        private bool _returnMenu;
         private bool _allCharsPrinted;
         private bool _coroutineRunning;
         private bool _highlightStarted;
+        private bool _creditPage1;
+        private bool _creditsFadeStart;
+        private bool _creditsFade;
         private Coroutine _runningCoroutine;
         #endregion
 
@@ -142,6 +162,20 @@ namespace ProjectThief
                 }
 
                 GameManager.instance.initialMenu = false;
+
+                _cred1R = _creditsPart1.color.r;
+                _cred2R = _creditsPart2.color.r;
+                _cred1G = _creditsPart1.color.g;
+                _cred2G = _creditsPart2.color.g;
+                _cred1B = _creditsPart1.color.b;
+                _cred2B = _creditsPart2.color.b;
+
+                _credB1R = _moveToPart1.color.r;
+                _credB2R = _moveToPart2.color.r;
+                _credB1G = _moveToPart1.color.g;
+                _credB2G = _moveToPart2.color.g;
+                _credB1B = _moveToPart1.color.b;
+                _credB2B = _moveToPart2.color.b;
             }
         }
 
@@ -153,6 +187,36 @@ namespace ProjectThief
                     _continueButton.gameObject.SetActive(true);
                 else
                     _continueButton.gameObject.SetActive(false);
+
+                if (_creditsFadeStart)
+                {
+                    _creditsTime = Time.time;
+                    _creditsFade = true;
+                    _creditsFadeStart = false;
+                }
+
+                if (_creditPage1 && _creditsFade)
+                {
+                    CreditsFade2();
+                }
+                else if (!_creditPage1 && _creditsFade)
+                {
+                    CreditsFade1();
+                }
+
+                if (_creditsFade)
+                {
+                    if (!_creditPage1 && _creditsPart1.color.a == 1)
+                    {
+                        _creditPage1 = true;
+                        _creditsFade = false;
+                    }
+                    else if (_creditPage1 && _creditsPart2.color.a == 1)
+                    {
+                        _creditPage1 = false;
+                        _creditsFade = false;
+                    }
+                }
             }
 
             // Fade in out effect
@@ -402,6 +466,24 @@ namespace ProjectThief
             float progress = Time.time - _highlightTime;
             _highlight.color = Color.Lerp(_highlight.color, new Vector4(_hR, _hG, _hB, 0), progress / _highlightDuration);
         }
+
+        private void CreditsFade1()
+        {
+            float progress = Time.time - _creditsTime;
+            _creditsPart1.color = Color.Lerp(_creditsPart1.color, new Vector4(_cred1R, _cred1G, _cred1B, 1), progress / _creditsDuration);
+            _creditsPart2.color = Color.Lerp(_creditsPart2.color, new Vector4(_cred2R, _cred2G, _cred2B, 0), progress / _creditsDuration);
+            _moveToPart1.color = Color.Lerp(_moveToPart1.color, new Vector4(_credB1R, _credB1G, _credB1B, 0), progress / _creditsDuration);
+            _moveToPart2.color = Color.Lerp(_moveToPart2.color, new Vector4(_credB2R, _credB2G, _credB2B, 1), progress / _creditsDuration);
+        }
+
+        private void CreditsFade2()
+        {
+            float progress = Time.time - _creditsTime;
+            _creditsPart1.color = Color.Lerp(_creditsPart1.color, new Vector4(_cred1R, _cred1G, _cred1B, 0), progress / _creditsDuration);
+            _creditsPart2.color = Color.Lerp(_creditsPart2.color, new Vector4(_cred2R, _cred2G, _cred2B, 1), progress / _creditsDuration);
+            _moveToPart1.color = Color.Lerp(_moveToPart1.color, new Vector4(_credB1R, _credB1G, _credB1B, 1), progress / _creditsDuration);
+            _moveToPart2.color = Color.Lerp(_moveToPart2.color, new Vector4(_credB2R, _credB2G, _credB2B, 0), progress / _creditsDuration);
+        }
         #endregion
 
         #region Buttons & Sliders
@@ -549,13 +631,34 @@ namespace ProjectThief
         public void Credits()
         {
             _navi.SetActive(false);
+            _background.SetActive(false);
             _credits.SetActive(true);
+            _creditsPart1.color = new Vector4(_cred1R, _cred1G, _cred1B, 1);
+            _moveToPart2.color = new Vector4(_credB2R, _credB2G, _credB2B, 1);
+            _creditPage1 = true;            
         }
 
         public void CreditsBack()
         {
+            _creditsPart1.color = new Vector4(_cred1R, _cred1G, _cred1B, 0);
+            _creditsPart2.color = new Vector4(_cred2R, _cred2G, _cred2B, 0);
+            _moveToPart1.color = new Vector4(_credB1R, _credB1G, _credB1B, 0);
+            _moveToPart2.color = new Vector4(_credB2R, _credB2G, _credB2B, 0);
+            _creditsFadeStart = false;
+            _creditsFade = false;
+            _credits.SetActive(false);            
+            _background.SetActive(true);
             _navi.SetActive(true);
-            _credits.SetActive(false);
+        }
+
+        public void MoveToCreditsPart2()
+        {
+            _creditsFadeStart = true;
+        }
+
+        public void MoveToCreditsPart1()
+        {
+            _creditsFadeStart = true;
         }
         #endregion
     }
