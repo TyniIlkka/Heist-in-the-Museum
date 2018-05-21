@@ -54,8 +54,12 @@ namespace ProjectThief
         private string _info2;
         [SerializeField, Tooltip("Info text 3")]
         private string _info3;
-        [SerializeField, Tooltip("Guard distract timer image")]
+        [SerializeField, Tooltip("Guard distract timer image"), Header("Other")]
         private GameObject _distractTimerImg;
+        [SerializeField, Tooltip("Audio source")]
+        private AudioSource _audioSource;
+        [SerializeField, Tooltip("End clip")]
+        private AudioClip _endClip;
 
         private Vector3 _spawnPosition;        
         private Quaternion _spawnRotation;
@@ -79,7 +83,13 @@ namespace ProjectThief
             if (_inventory == null)
                 _inventory = FindObjectOfType<Inventory>();
             if (m_sRoomReset == null)
-                m_sRoomReset = GetComponent<RoomReset>();            
+                m_sRoomReset = GetComponent<RoomReset>();
+
+            if (_audioSource == null)
+                _audioSource = GetComponent<AudioSource>();
+
+            _audioSource.volume = AudioManager.instance.SFXPlayVol;
+            _audioSource.loop = false;
 
             if (m_bCanBeCleared)
             {
@@ -163,7 +173,6 @@ namespace ProjectThief
             if (EventSystem.current.IsPointerOverGameObject())
             {                
                 _mouseController.DefaultCursor();
-                //GameManager.instance.canMove = false;
                 GameManager.instance.mouseOverUI = true;
             }
             else if (!GameManager.instance.inTransit && GameManager.instance.infoShown)
@@ -204,6 +213,7 @@ namespace ProjectThief
         /// </summary>
         public void PlayerFound()
         {
+            _audioSource.PlayOneShot(_endClip);
             if (!_timeStopped)
                 Time.timeScale = 0f;
 
