@@ -11,6 +11,23 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1940964724259218}
   m_IsPrefabParent: 1
+--- !u!1 &1059035090021250
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4064175695935828}
+  - component: {fileID: 199886153462327278}
+  - component: {fileID: 198381624555709110}
+  m_Layer: 10
+  m_Name: ParticleHighlight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1215020887879590
 GameObject:
   m_ObjectHideFlags: 0
@@ -22,8 +39,6 @@ GameObject:
   - component: {fileID: 33780121691511692}
   - component: {fileID: 136139676425870090}
   - component: {fileID: 23303589494766584}
-  - component: {fileID: 198928558013482144}
-  - component: {fileID: 199930858031674194}
   m_Layer: 10
   m_Name: Highlight
   m_TagString: Untagged
@@ -50,6 +65,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4064175695935828
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1059035090021250}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_Children: []
+  m_Father: {fileID: 4780167977134684}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4205116302283068
 Transform:
   m_ObjectHideFlags: 1
@@ -74,6 +102,7 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4205116302283068}
+  - {fileID: 4064175695935828}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 1.44, z: 0}
@@ -192,8 +221,8 @@ MonoBehaviour:
   _hasHighlight: 1
   _defaultMat: {fileID: 2100000, guid: 442c87d6b7c208b4c97463f2d9eb31b5, type: 2}
   _highlightMat: {fileID: 2100000, guid: 343f48ced2e396249b298832c7ec6135, type: 2}
-  _inspectText: 
-  _particleSystem: {fileID: 198928558013482144}
+  _inspectText: '"I found purple lever handle."'
+  _particleSystem: {fileID: 198381624555709110}
 --- !u!136 &136139676425870090
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -207,12 +236,12 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!198 &198928558013482144
+--- !u!198 &198381624555709110
 ParticleSystem:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1215020887879590}
+  m_GameObject: {fileID: 1059035090021250}
   serializedVersion: 5
   lengthInSec: 5
   simulationSpeed: 1
@@ -267,14 +296,14 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 378332845
+  randomSeed: 1699210512
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 4
+      scalar: 3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -315,7 +344,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -710,14 +739,14 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 5
     enabled: 1
-    type: 0
+    type: 2
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 0.1
     donutRadius: 0.2
-    m_Position: {x: 0, y: 0, z: 0}
-    m_Rotation: {x: 0, y: 0, z: 0}
+    m_Position: {x: 0, y: 0, z: 2.5}
+    m_Rotation: {x: -90, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
     m_Mesh: {fileID: 0}
@@ -3524,13 +3553,13 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!199 &199930858031674194
+--- !u!199 &199886153462327278
 ParticleSystemRenderer:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1215020887879590}
+  m_GameObject: {fileID: 1059035090021250}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0

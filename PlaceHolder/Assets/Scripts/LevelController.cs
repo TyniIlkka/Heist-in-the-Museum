@@ -98,6 +98,7 @@ namespace ProjectThief
             GameManager.instance.levelController = this;
             GameManager.instance.inTransit = false;
             _mouseController = GameManager.instance.mouseController;
+            _mouseController.DefaultCursor();
             
             GameManager.instance.player = SpawnPlayer();               
 

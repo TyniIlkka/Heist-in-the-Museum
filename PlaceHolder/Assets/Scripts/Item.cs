@@ -87,6 +87,8 @@ namespace ProjectThief
                             GameManager.instance.currentPhase++;
                             InspectText();
                         }
+                        else
+                            InspectText();
 
                         _collected = true;
                         _inventory.AddItem(this);
