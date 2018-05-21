@@ -102,7 +102,7 @@ namespace ProjectThief
             }
         }
 
-        private void InspectText()
+        public void InspectText()
         {
             GameManager.instance.infoText = _inspectText;
 
