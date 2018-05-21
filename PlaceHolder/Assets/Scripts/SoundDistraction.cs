@@ -36,7 +36,7 @@ namespace ProjectThief
         private GameObject _timerObject;
         private Image _timerImage;
 
-        public float DistractionTime { get { return _distractTime - _time; } }
+        public float DistractionTime { get { return _distractTime; } }
         public Vector3 MoveToPos { get { return _moveToPoint.position; } }        
 
         Collider[] objects;        
