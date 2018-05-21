@@ -89,7 +89,6 @@ namespace ProjectThief
                             _inventory.RemoveItem(_neededItem);
                             _leverHandle.SetActive(true);
                             _leverAnimator.SetBool("Activated", true);
-                            Debug.Log("Lever animator: " + _leverAnimator);
                         }
                     }
                     else

@@ -124,6 +124,8 @@ namespace ProjectThief
         public void DistractionInactive()
         {
             _timerObject.SetActive(false);
+            _time = _distractTime;
+
             foreach (Collider item in objects)
             {
                 guard = item.GetComponent<Guard>();
