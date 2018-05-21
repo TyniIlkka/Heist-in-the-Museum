@@ -36,7 +36,6 @@ namespace ProjectThief
         {
             lastPosition = transform.position;
             lastBounds = GetComponent<Renderer>().bounds;
-            UpdateMapOnce();
         }
 
         private bool CheckKeys()
@@ -83,7 +82,6 @@ namespace ProjectThief
                     if (Input.GetButtonDown("Fire1"))
                     {                            
                         AddKeyPieces();
-                        UpdateMapOnce();
                         m_aAnimator.SetBool("Open", true);
                     }
                 } 
@@ -96,15 +94,6 @@ namespace ProjectThief
                     }
                 }
             }
-        }
-
-        private void UpdateMapOnce()
-        {
-            Bounds bR = GetComponent<Renderer>().bounds;
-            Pathfinder.Instance.DynamicRaycastUpdate(lastBounds);
-            Pathfinder.Instance.DynamicRaycastUpdate(bR);
-            lastPosition = transform.position;
-            lastBounds = bR;
         }
 
         private void InspectText()
