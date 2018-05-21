@@ -583,12 +583,12 @@ Prefab:
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 579.5
+      value: 594
       objectReference: {fileID: 0}
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 326
+      value: 334
       objectReference: {fileID: 0}
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
@@ -858,6 +858,11 @@ GameObject:
 --- !u!1 &393231570 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1808227801255132, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
+    type: 2}
+  m_PrefabInternal: {fileID: 393231563}
+--- !u!1 &393231571 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1770860353585910, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
     type: 2}
   m_PrefabInternal: {fileID: 393231563}
 --- !u!1 &401216311
@@ -2725,6 +2730,11 @@ Prefab:
       propertyPath: _info1
       value: "\u201CI must find a way inside the vault.\u201D"
       objectReference: {fileID: 0}
+    - target: {fileID: 114982444803844292, guid: 5ded4a7572476c348b84d678d9242b92,
+        type: 2}
+      propertyPath: _distractTimerImg
+      value: 
+      objectReference: {fileID: 393231571}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ded4a7572476c348b84d678d9242b92, type: 2}
   m_IsPrefabParent: 0

@@ -54,6 +54,8 @@ namespace ProjectThief
         private string _info2;
         [SerializeField, Tooltip("Info text 3")]
         private string _info3;
+        [SerializeField, Tooltip("Guard distract timer image")]
+        private GameObject _distractTimerImg;
 
         private Vector3 _spawnPosition;        
         private Quaternion _spawnRotation;
@@ -70,6 +72,7 @@ namespace ProjectThief
         public Inventory Inventory { get { return _inventory; } }
         public RoomReset RoomReset { get { return m_sRoomReset; } }
         public bool Paused { get { return _paused; } set { _paused = value; } }
+        public GameObject DistractTimerImage { get { return _distractTimerImg; } set { _distractTimerImg = value; } }
 
         private void Awake()
         {
