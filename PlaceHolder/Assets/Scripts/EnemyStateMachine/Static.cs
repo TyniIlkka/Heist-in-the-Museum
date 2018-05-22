@@ -25,6 +25,7 @@ namespace ProjectThief.AI
         public override void StateActivated()
         {
             base.StateActivated();
+            m_eDirection = Owner.CurrentDirection;
         }
 
         public override void Update()
