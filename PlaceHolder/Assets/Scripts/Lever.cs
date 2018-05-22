@@ -74,15 +74,6 @@ namespace ProjectThief
             }
         }
 
-        /// <summary>
-        /// Resets lever's and obstacle's animation
-        /// </summary>
-        public void ResetLever()
-        {
-            _leverAnimator.SetBool("Activated", false);
-            _obstacleAnim.SetBool("Open", false);
-        }
-
         protected override void Activated()
         {
             if (IsActive && !_used)

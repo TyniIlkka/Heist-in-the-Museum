@@ -51,8 +51,8 @@ LightmapSettings:
     m_AlbedoBoost: 1
     m_TemporalCoherenceThreshold: 1
     m_EnvironmentLightingMode: 1
-    m_EnableBakedLightmaps: 1
-    m_EnableRealtimeLightmaps: 1
+    m_EnableBakedLightmaps: 0
+    m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
     serializedVersion: 9
     m_Resolution: 2
@@ -2576,12 +2576,12 @@ Prefab:
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 584
+      value: 594
       objectReference: {fileID: 0}
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 328.5
+      value: 334
       objectReference: {fileID: 0}
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
@@ -2813,6 +2813,11 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 312220026}
   m_Script: {fileID: 11500000, guid: a7917b55182620a41aa837b4804d86b5, type: 3}
+--- !u!1 &312220034 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1770860353585910, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
+    type: 2}
+  m_PrefabInternal: {fileID: 312220026}
 --- !u!1001 &326381478
 Prefab:
   m_ObjectHideFlags: 0
@@ -8795,15 +8800,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1659096598380416, guid: bc792b05a28b642479167391cb3c76d8, type: 2}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1988689427653852, guid: bc792b05a28b642479167391cb3c76d8, type: 2}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1608781712906472, guid: bc792b05a28b642479167391cb3c76d8, type: 2}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bc792b05a28b642479167391cb3c76d8, type: 2}
@@ -9373,7 +9378,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -587363941
+  randomSeed: 1523022459
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -14227,15 +14232,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1186556045937152, guid: 0467a912a92eef4488bb4db41b0c8a5b, type: 2}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1180289624239244, guid: 0467a912a92eef4488bb4db41b0c8a5b, type: 2}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1017662855342398, guid: 0467a912a92eef4488bb4db41b0c8a5b, type: 2}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0467a912a92eef4488bb4db41b0c8a5b, type: 2}
@@ -16369,6 +16374,11 @@ Prefab:
       propertyPath: _info3
       value: "\u201CI might be able to distract the guards with sounds.\u201D"
       objectReference: {fileID: 0}
+    - target: {fileID: 114982444803844292, guid: 5ded4a7572476c348b84d678d9242b92,
+        type: 2}
+      propertyPath: _distractTimerImg
+      value: 
+      objectReference: {fileID: 312220034}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ded4a7572476c348b84d678d9242b92, type: 2}
   m_IsPrefabParent: 0
@@ -19697,15 +19707,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1120789832253322, guid: 4406a91cea45232448098c523222cd38, type: 2}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1928777471318548, guid: 4406a91cea45232448098c523222cd38, type: 2}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1827595297182586, guid: 4406a91cea45232448098c523222cd38, type: 2}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4406a91cea45232448098c523222cd38, type: 2}

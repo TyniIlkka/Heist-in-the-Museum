@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ProjectThief
 {
@@ -23,13 +24,19 @@ namespace ProjectThief
         private bool _tutorialEffect;
         [SerializeField, Tooltip("Phase where to activate")]
         private int _activePhase;
+        [SerializeField, Tooltip("Has time out")]
+        private bool _hasTimeout;
+        [SerializeField, Tooltip("Time out time")]
+        private float _timeout = 3f;
 
         private float _distractTime;
         private float _time;
         private bool _active;
         private ParticleSystem _particleSystem;
+        private GameObject _timerObject;
+        private Image _timerImage;
 
-        public float DistractionTime { get { return _distractTime - _time; } }
+        public float DistractionTime { get { return _distractTime; } }
         public Vector3 MoveToPos { get { return _moveToPoint.position; } }        
 
         Collider[] objects;        
@@ -41,7 +48,16 @@ namespace ProjectThief
             _source = GetComponent<AudioSource>(); 
             _source.volume = PlayVolume;
             _source.loop = true;
-            _distractTime = _soundClip.length;
+
+            if (_hasTimeout)            
+                _distractTime = _timeout;
+            else
+                _distractTime = _soundClip.length;
+
+            _time = _distractTime;
+
+            _timerObject = GameManager.instance.levelController.DistractTimerImage;
+            _timerImage = _timerObject.GetComponent<Image>();
 
             if (_hasIdle)
                 PlayAudio(_idle, true);
@@ -68,8 +84,9 @@ namespace ProjectThief
 
         private void Timer()
         {
-            _time += Time.deltaTime;
-            if (_time >= _distractTime)            
+            _time -= Time.deltaTime;
+            _timerImage.fillAmount = _time / _distractTime;
+            if (_time <= 0)            
                 DistractionInactive(); 
         }
 
@@ -81,6 +98,7 @@ namespace ProjectThief
         
         public void DistractionActive()
         {
+            _timerObject.SetActive(true);
             PlayAudio(_soundClip, false);
             _active = true;
             objects = Physics.OverlapSphere(transform.position, _range);
@@ -105,6 +123,9 @@ namespace ProjectThief
 
         public void DistractionInactive()
         {
+            _timerObject.SetActive(false);
+            _time = _distractTime;
+
             foreach (Collider item in objects)
             {
                 guard = item.GetComponent<Guard>();
