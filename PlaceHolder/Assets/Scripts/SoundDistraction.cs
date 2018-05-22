@@ -27,7 +27,7 @@ namespace ProjectThief
         [SerializeField, Tooltip("Has time out")]
         private bool _hasTimeout;
         [SerializeField, Tooltip("Time out time")]
-        private float _timeout = 3f;
+        private float _timeout = 15f;
 
         private float _distractTime;
         private float _time;
@@ -125,6 +125,9 @@ namespace ProjectThief
         {
             _timerObject.SetActive(false);
             _time = _distractTime;
+
+            if (!_hasIdle)
+                _source.Stop();
 
             foreach (Collider item in objects)
             {
