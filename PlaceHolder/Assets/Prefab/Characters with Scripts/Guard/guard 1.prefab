@@ -802,7 +802,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1546448833491500}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.0700035, y: 0.049999293, z: -2.8009844}
+  m_LocalPosition: {x: -1.4760578, y: 0.049999975, z: -1.6026387}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4235743107903708}
@@ -1164,8 +1164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53cc0bed6168031448003b64e66ac8a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_fViewRad: 0
-  m_fViewAngle: 0
+  _viewRad: 0
+  _viewAngle: 360
   m_lmObstacleMask:
     serializedVersion: 2
     m_Bits: 1536
@@ -1174,8 +1174,8 @@ MonoBehaviour:
   m_fEdgeDistThreshold: 0.5
   m_iEdgeResolveIters: 6
   m_fMult: 2
-  m_pPlayerObject: {fileID: 114762870905765928, guid: cbd0dd1d3ea1d214590f199713e90ea3,
-    type: 2}
+  _duration: 1
+  _playerObject: {fileID: 0}
 --- !u!114 &114874787884004906
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1188,6 +1188,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 114762870905765928, guid: cbd0dd1d3ea1d214590f199713e90ea3, type: 2}
+  lastState: 0
+  directionList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_bMoving: 1
   m_fMovementSpeed: 2
   m_fTurnSpeed: 200

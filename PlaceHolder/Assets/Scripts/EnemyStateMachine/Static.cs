@@ -8,6 +8,7 @@ namespace ProjectThief.AI
     public class Static : AIStateBase
     {
         private MyDirections m_eDirection;
+        private int dir;
 
         public Static(Guard owner, MyDirections currentDirection)
             : base()
@@ -33,48 +34,10 @@ namespace ProjectThief.AI
 
             if (!ChangeState())
             {
-                m_eDirection = Owner.CurrentDirection;
-                // 2. Stay on place.
-
-                switch (m_eDirection)
-                {
-                    case MyDirections.North:
-                        Owner.transform.forward = new Vector3(0f, 0f, 1f);
-                        Owner.Direction = new Vector3(0f, 0f, 1f);
-                        break;
-                    case MyDirections.NorthEast:
-                        Owner.transform.forward = new Vector3(1f, 0f, 1f);
-                        Owner.Direction = new Vector3(1f, 0f, 1f);
-                        break;
-                    case MyDirections.East:
-                        Owner.transform.rotation = Quaternion.Lerp(Owner.transform.rotation, Quaternion.Euler(1f,0f,0f), Time.deltaTime *Owner.TurnSpeed);
-                        Owner.transform.forward = new Vector3(1f, 0f, 0f);
-                        Owner.Direction = new Vector3(1f, 0f, 0f);
-                        break;
-                    case MyDirections.SouthEast:
-                        Owner.transform.forward = new Vector3(1f, 0f, -1f);
-                        Owner.Direction = new Vector3(1f, 0f, -1f);
-                        break;
-                    case MyDirections.South:
-                        Owner.transform.forward = new Vector3(0f, 0f, -1f);
-                        Owner.Direction = new Vector3(0f, 0f, -1f);
-                        break;
-                    case MyDirections.SouthWest:
-                        Owner.transform.forward = new Vector3(-1f, 0f, -1f);
-                        Owner.Direction = new Vector3(-1f, 0f, -1f);
-                        break;
-                    case MyDirections.West:
-                        Owner.transform.forward = new Vector3(-1f, 0f, 0f);
-                        Owner.Direction = new Vector3(-1f, 0f, 0f);
-                        break;
-                    case MyDirections.NorthWest:
-                        Owner.transform.forward = new Vector3(-1f, 0f, 1f);
-                        Owner.Direction = new Vector3(-1f, 0f, 1f);
-                        break;
-                }
+                Vector3 target = Owner.directionList[(int)m_eDirection].position;
+                Owner.Turn(target);
             }
         }
-        
 
         private bool ChangeState()
         {

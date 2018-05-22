@@ -32,12 +32,16 @@ namespace ProjectThief.AI
 
             if (!ChangeState())
             {
-                //2. Look at target.
-                Vector3 lookToPosition = Owner.TargetSound.transform.position;
-                lookToPosition.y = 0f;
-                Owner.transform.LookAt(lookToPosition, Vector3.up);
+                if (GameManager.instance.canMove)
+                {
+                    //2. Look at target.
+                    Vector3 lookToPosition = Owner.TargetSound.transform.position;
+                    lookToPosition.y = 0f;
+                    Owner.transform.LookAt(lookToPosition, Vector3.up);
 
-                timer -= Time.deltaTime;
+                    timer -= Time.deltaTime;
+                }
+                
             }
         }
 

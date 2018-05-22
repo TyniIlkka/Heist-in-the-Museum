@@ -31,10 +31,12 @@ namespace ProjectThief.AI
             Mover = Owner.GetComponent<GuardMover>();
 
             ready = 0f; //Reset Timer.
+            Owner.TurnSpeed = Owner.TurnSpeed * 2f;
         }
 
         public override void StateDeactivating()
         {
+            Owner.TurnSpeed = Owner.TurnSpeed / 2f;
             base.StateDeactivating();
         }
 

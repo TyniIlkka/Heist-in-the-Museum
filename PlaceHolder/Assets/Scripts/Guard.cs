@@ -14,14 +14,14 @@ namespace ProjectThief {
     public enum MyDirections
     {
         Error = -1,
-        North ,
-        NorthEast,
-        East,
-        SouthEast,
-        South,
-        SouthWest,
-        West,
-        NorthWest
+        North = 0,
+        NorthEast = 1,
+        East = 2,
+        SouthEast = 3,
+        South = 4,
+        SouthWest = 5,
+        West = 6,
+        NorthWest =7
     }
 
     public class Guard : CharacterBase {
@@ -43,7 +43,10 @@ namespace ProjectThief {
 
         public AIStateType lastState;
         #endregion
-        
+        #region Direction
+        public List<Transform> directionList;
+        #endregion
+
 
         [SerializeField, Header("Patrolling or Static"), Tooltip("if True, guard is moving, otherwise static")]
         private bool m_bMoving;
