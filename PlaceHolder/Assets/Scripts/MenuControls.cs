@@ -369,10 +369,10 @@ namespace ProjectThief
         #region Text Handling
         private void CheckString()
         {
-            Debug.Log("checking string");
             _lines.Clear();
             _lines = new List<string>();
             _linePos = 0;
+
             string line = GameManager.instance.infoText + _endchar;
             string text = "";
 
@@ -392,7 +392,6 @@ namespace ProjectThief
             if (_coroutineRunning)
             {
                 StopCoroutine(_runningCoroutine);
-                Debug.Log("Coroutine stopped");
                 _coroutineRunning = false;
                 _infoText.text = "";
             }
@@ -417,7 +416,6 @@ namespace ProjectThief
             _textTime += Time.deltaTime;
             if (_textTime >= _textDelay)
             {
-                Debug.Log("Next Line");
                 _textTime = 0;
                 _allCharsPrinted = false;
                 _runningCoroutine = StartCoroutine(PrintChar(_lines[_linePos]));
@@ -438,7 +436,6 @@ namespace ProjectThief
         {
             _infoText.text = string.Empty;
             _coroutineRunning = true;
-            Debug.Log("Coroutine running");
 
             for (int i = 0; i < line.Length; i++)
             {
@@ -466,7 +463,6 @@ namespace ProjectThief
             if (GameManager.instance.resetInfoTimer)
             {
                 _timePassed = 0;
-                _infoText.text = GameManager.instance.infoText;
                 GameManager.instance.resetInfoTimer = false;
             }
         }
