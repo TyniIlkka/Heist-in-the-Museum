@@ -36,13 +36,13 @@ namespace ProjectThief
         [SerializeField, Tooltip("Main credits screen"), Header("Credits")]
         private GameObject _credits;
         [SerializeField, Tooltip("Part 1 credits screen")]
-        private RawImage _creditsPart1;
+        private GameObject _creditsPart1;
         [SerializeField, Tooltip("Credits part 1 button")]
-        private Image _moveToPart2;
-        [SerializeField, Tooltip("Part2 credits scree")]
-        private RawImage _creditsPart2;
+        private GameObject _moveToPart2;
+        [SerializeField, Tooltip("Part2 credits screen")]
+        private GameObject _creditsPart2;
         [SerializeField, Tooltip("Credits part 2 button")]
-        private Image _moveToPart1;
+        private GameObject _moveToPart1;
         [SerializeField, Tooltip("Credits fade effect duration")]
         private float _creditsDuration;
         [SerializeField, Header("Pause menu")]
@@ -111,6 +111,12 @@ namespace ProjectThief
         private bool _creditsFadeStart;
         private bool _creditsFade;
         private Coroutine _runningCoroutine;
+        private RawImage _page1Img;
+        private RawImage _page2Img;
+        private Image _button1Img;
+        private Image _button2Img;
+        private Button _button1;
+        private Button _button2;
         #endregion
 
         #region Awake & Update
@@ -163,19 +169,26 @@ namespace ProjectThief
 
                 GameManager.instance.initialMenu = false;
 
-                _cred1R = _creditsPart1.color.r;
-                _cred2R = _creditsPart2.color.r;
-                _cred1G = _creditsPart1.color.g;
-                _cred2G = _creditsPart2.color.g;
-                _cred1B = _creditsPart1.color.b;
-                _cred2B = _creditsPart2.color.b;
+                _page1Img = _creditsPart1.GetComponent<RawImage>();
+                _page2Img = _creditsPart2.GetComponent<RawImage>();
+                _button1Img = _moveToPart1.GetComponent<Image>();
+                _button2Img = _moveToPart2.GetComponent<Image>();
+                _button1 = _moveToPart1.GetComponent<Button>();
+                _button2 = _moveToPart2.GetComponent<Button>();
 
-                _credB1R = _moveToPart1.color.r;
-                _credB2R = _moveToPart2.color.r;
-                _credB1G = _moveToPart1.color.g;
-                _credB2G = _moveToPart2.color.g;
-                _credB1B = _moveToPart1.color.b;
-                _credB2B = _moveToPart2.color.b;
+                _cred1R = _page1Img.color.r;
+                _cred2R = _page2Img.color.r;
+                _cred1G = _page1Img.color.g;
+                _cred2G = _page2Img.color.g;
+                _cred1B = _page1Img.color.b;
+                _cred2B = _page2Img.color.b;
+
+                _credB1R = _button1Img.color.r;
+                _credB2R = _button2Img.color.r;
+                _credB1G = _button1Img.color.g;
+                _credB2G = _button2Img.color.g;
+                _credB1B = _button1Img.color.b;
+                _credB2B = _button2Img.color.b;
             }
         }
 
@@ -188,6 +201,7 @@ namespace ProjectThief
                 else
                     _continueButton.gameObject.SetActive(false);
 
+                // Credits fade effects
                 if (_creditsFadeStart)
                 {
                     _creditsTime = Time.time;
@@ -197,24 +211,48 @@ namespace ProjectThief
 
                 if (_creditPage1 && _creditsFade)
                 {
+                    if (!_creditsPart2.activeInHierarchy)                    
+                        _creditsPart2.SetActive(true);
+
                     CreditsFade2();
                 }
                 else if (!_creditPage1 && _creditsFade)
                 {
+                    if (!_creditsPart1.activeInHierarchy)                    
+                        _creditsPart1.SetActive(true);
+                    
+
                     CreditsFade1();
                 }
 
                 if (_creditsFade)
                 {
-                    if (!_creditPage1 && _creditsPart1.color.a == 1)
+                    if (!_creditPage1 && _page1Img.color.a >= 0.6f)
                     {
-                        _creditPage1 = true;
-                        _creditsFade = false;
+                        _button1.interactable = false;
+                        _button2.interactable = true;
+                        _button1Img.color = new Vector4(_credB1R, _credB1G, _credB1B, 0.25f);
+                        _button2Img.color = new Vector4(_credB2R, _credB2G, _credB2B, 1);
+
+                        if (!_creditPage1 && _page1Img.color.a == 1)
+                        {
+                            _creditPage1 = true;
+                            _creditsFade = false;
+                        }
+
                     }
-                    else if (_creditPage1 && _creditsPart2.color.a == 1)
+                    else if (_creditPage1 && _page2Img.color.a >= 0.6f)
                     {
-                        _creditPage1 = false;
-                        _creditsFade = false;
+                        _button1.interactable = true;
+                        _button2.interactable = false;
+                        _button1Img.color = new Vector4(_credB1R, _credB1G, _credB1B, 1);
+                        _button2Img.color = new Vector4(_credB2R, _credB2G, _credB2B, 0.25f);
+
+                        if (_creditPage1 && _page2Img.color.a == 1)
+                        {
+                            _creditPage1 = false;
+                            _creditsFade = false;
+                        }
                     }
                 }
             }
@@ -470,19 +508,15 @@ namespace ProjectThief
         private void CreditsFade1()
         {
             float progress = Time.time - _creditsTime;
-            _creditsPart1.color = Color.Lerp(_creditsPart1.color, new Vector4(_cred1R, _cred1G, _cred1B, 1), progress / _creditsDuration);
-            _creditsPart2.color = Color.Lerp(_creditsPart2.color, new Vector4(_cred2R, _cred2G, _cred2B, 0), progress / _creditsDuration);
-            _moveToPart1.color = Color.Lerp(_moveToPart1.color, new Vector4(_credB1R, _credB1G, _credB1B, 0), progress / _creditsDuration);
-            _moveToPart2.color = Color.Lerp(_moveToPart2.color, new Vector4(_credB2R, _credB2G, _credB2B, 1), progress / _creditsDuration);
+            _page1Img.color = Color.Lerp(_page1Img.color, new Vector4(_cred1R, _cred1G, _cred1B, 1), progress / _creditsDuration);
+            _page2Img.color = Color.Lerp(_page2Img.color, new Vector4(_cred2R, _cred2G, _cred2B, 0), progress / _creditsDuration);
         }
 
         private void CreditsFade2()
         {
             float progress = Time.time - _creditsTime;
-            _creditsPart1.color = Color.Lerp(_creditsPart1.color, new Vector4(_cred1R, _cred1G, _cred1B, 0), progress / _creditsDuration);
-            _creditsPart2.color = Color.Lerp(_creditsPart2.color, new Vector4(_cred2R, _cred2G, _cred2B, 1), progress / _creditsDuration);
-            _moveToPart1.color = Color.Lerp(_moveToPart1.color, new Vector4(_credB1R, _credB1G, _credB1B, 1), progress / _creditsDuration);
-            _moveToPart2.color = Color.Lerp(_moveToPart2.color, new Vector4(_credB2R, _credB2G, _credB2B, 0), progress / _creditsDuration);
+            _page1Img.color = Color.Lerp(_page1Img.color, new Vector4(_cred1R, _cred1G, _cred1B, 0), progress / _creditsDuration);
+            _page2Img.color = Color.Lerp(_page2Img.color, new Vector4(_cred2R, _cred2G, _cred2B, 1), progress / _creditsDuration);
         }
         #endregion
 
@@ -633,17 +667,23 @@ namespace ProjectThief
             _navi.SetActive(false);
             _background.SetActive(false);
             _credits.SetActive(true);
-            _creditsPart1.color = new Vector4(_cred1R, _cred1G, _cred1B, 1);
-            _moveToPart2.color = new Vector4(_credB2R, _credB2G, _credB2B, 1);
+            _page1Img.color = new Vector4(_cred1R, _cred1G, _cred1B, 1);
+            _button1.interactable = false;
+            _button2.interactable = true;
+            _button2Img.color = new Vector4(_credB2R, _credB2G, _credB2B, 1);
+            _button1Img.color = new Vector4(_credB1R, _credB1G, _credB1B, 0.25f);
+            _creditsPart2.SetActive(false);
             _creditPage1 = true;            
         }
 
         public void CreditsBack()
         {
-            _creditsPart1.color = new Vector4(_cred1R, _cred1G, _cred1B, 0);
-            _creditsPart2.color = new Vector4(_cred2R, _cred2G, _cred2B, 0);
-            _moveToPart1.color = new Vector4(_credB1R, _credB1G, _credB1B, 0);
-            _moveToPart2.color = new Vector4(_credB2R, _credB2G, _credB2B, 0);
+            _page1Img.color = new Vector4(_cred1R, _cred1G, _cred1B, 0);
+            _page2Img.color = new Vector4(_cred2R, _cred2G, _cred2B, 0);
+            _button1Img.color = new Vector4(_credB1R, _credB1G, _credB1B, 0);
+            _button2Img.color = new Vector4(_credB2R, _credB2G, _credB2B, 0);
+            _button1.interactable = false;
+            _button2.interactable = false;
             _creditsFadeStart = false;
             _creditsFade = false;
             _credits.SetActive(false);            
