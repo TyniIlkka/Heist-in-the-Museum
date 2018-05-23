@@ -3,6 +3,7 @@ using UnityEngine;
 using ProjectThief.States;
 using System.Collections.Generic;
 using System.Collections;
+using System.Text;
 
 namespace ProjectThief
 {
@@ -99,6 +100,7 @@ namespace ProjectThief
         private float _highlightTime;
         private float _creditsTime;
         private List<string> _lines;
+        private List<int> _lineLength;
         private int _linePos = 0;
         private int _flashes;
         private bool _lastTextShown;
@@ -126,6 +128,7 @@ namespace ProjectThief
             _newGame = false;
             _returnMenu = false;
             _lines = new List<string>();
+            _lineLength = new List<int>();
 
             _sfxVol.value = (int)(_audioManager.SfxVol * 100);
             _musicVol.value = (int)(_audioManager.MusicVol * 100);
@@ -370,8 +373,11 @@ namespace ProjectThief
         private void CheckString()
         {
             _lines.Clear();
+            _lineLength.Clear();
             _lines = new List<string>();
+            _lineLength = new List<int>();
             _linePos = 0;
+            int charCount = 0;
 
             string line = GameManager.instance.infoText + _endchar;
             string text = "";
@@ -381,11 +387,14 @@ namespace ProjectThief
                 if (line[i] != _endchar)
                 {
                     text += line[i];
+                    charCount++;
                 }
                 else
                 {
                     _lines.Add(text);
                     text = "";
+                    _lineLength.Add(charCount);
+                    charCount = 0;
                 }
             }
 
@@ -397,6 +406,7 @@ namespace ProjectThief
             }
 
             _allCharsPrinted = false;
+            EmptyString(_lineLength[_linePos]);
             _runningCoroutine = StartCoroutine(PrintChar(_lines[_linePos]));            
 
             if ((_lines.Count - 1) > _linePos)
@@ -411,6 +421,18 @@ namespace ProjectThief
             }
         }
 
+        private void EmptyString(int charCount)
+        {
+            string emptyString = "";
+
+            for (int i = 0; i < charCount; i++)
+            {
+                emptyString += " ";
+            }
+
+            _infoText.text = emptyString;
+        }
+
         private void UpdateText()
         {            
             _textTime += Time.deltaTime;
@@ -418,6 +440,7 @@ namespace ProjectThief
             {
                 _textTime = 0;
                 _allCharsPrinted = false;
+                EmptyString(_lineLength[_linePos]);
                 _runningCoroutine = StartCoroutine(PrintChar(_lines[_linePos]));
 
                 if ((_lines.Count - 1) > _linePos)
@@ -434,13 +457,14 @@ namespace ProjectThief
 
         private IEnumerator PrintChar(string line)
         {
-            _infoText.text = string.Empty;
             _coroutineRunning = true;
+            StringBuilder displayText = new StringBuilder(_infoText.text);
 
             for (int i = 0; i < line.Length; i++)
             {
-                _infoText.text += line[i];                
-                
+                displayText[i] = line[i];
+                _infoText.text = displayText.ToString();
+
                 if (i == line.Length - 1)
                 {
                     _allCharsPrinted = true;

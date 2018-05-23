@@ -179,8 +179,6 @@ namespace ProjectThief
 
         protected override void Activated()
         {
-            Debug.Log("vault");
-
             if (IsActive)
             { 
                 if (IsInteractable && CheckKeys())
