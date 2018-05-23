@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using ProjectThief.AI;
 
 namespace ProjectThief
 {
@@ -105,7 +106,11 @@ namespace ProjectThief
             DrawFieldOfView();
             if (CanSeePlayer())
             {
-                GameManager.instance.levelController.PlayerFound();
+                Debug.Log("CanSeeClose");
+                guard.PerformTransition(AIStateType.CloseTurnTo);
+                Debug.Log(guard.PerformTransition(AIStateType.CloseTurnTo));
+
+                //GameManager.instance.levelController.PlayerFound();
             }
         }
 

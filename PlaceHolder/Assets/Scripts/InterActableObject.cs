@@ -117,6 +117,7 @@ namespace ProjectThief
         public void TakeItem()
         {
             _inventory.AddItem(_vaultKeyItem);
+            _vaultKeyItem.InspectText();
             _vaultKeyItem.gameObject.SetActive(false);
             GameManager.instance.keyItems[_keyPos].Collected = true;
             GameManager.instance.openedVitrines[_boolListPos] = true;

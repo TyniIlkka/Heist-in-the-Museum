@@ -3,6 +3,7 @@ using UnityEngine;
 using ProjectThief.States;
 using System.Collections.Generic;
 using System.Collections;
+using System.Text;
 
 namespace ProjectThief
 {
@@ -27,12 +28,24 @@ namespace ProjectThief
         private Button _continueButton;
         [SerializeField, Tooltip("Navigation area")]
         private GameObject _navi;
-        [SerializeField, Tooltip("Credits screen")]
-        private GameObject _credits;
+        [SerializeField, Tooltip("Menu background")]
+        private GameObject _background;
         [SerializeField, Header("Fade In/Out")]
         private RawImage _fadeScreen;
         [SerializeField, Tooltip("Fade in/ out effect duration")]
-        private float _duration = 2;        
+        private float _duration = 2;
+        [SerializeField, Tooltip("Main credits screen"), Header("Credits")]
+        private GameObject _credits;
+        [SerializeField, Tooltip("Part 1 credits screen")]
+        private GameObject _creditsPart1;
+        [SerializeField, Tooltip("Credits part 1 button")]
+        private GameObject _moveToPart2;
+        [SerializeField, Tooltip("Part2 credits screen")]
+        private GameObject _creditsPart2;
+        [SerializeField, Tooltip("Credits part 2 button")]
+        private GameObject _moveToPart1;
+        [SerializeField, Tooltip("Credits fade effect duration")]
+        private float _creditsDuration;
         [SerializeField, Header("Pause menu")]
         private GameObject _pauseMenu;
         [SerializeField]
@@ -76,21 +89,36 @@ namespace ProjectThief
         private float _r, _g, _b;
         private float _hR, _hG, _hB;
         private float _start, _infoStart;
-        private bool _newGame;
-        private bool _returnMenu;
         private float _timePassed;
         private float _rInfo, _gInfo, _bInfo;
         private float _rText, _gText, _bText;
-        private List<string> _lines;
-        private bool _lastTextShown;
+        private float _cred1R, _cred1G, _cred1B;
+        private float _cred2R, _cred2G, _cred2B;
+        private float _credB1R, _credB1G, _credB1B;
+        private float _credB2R, _credB2G, _credB2B;
         private float _textTime;
         private float _highlightTime;
+        private float _creditsTime;
+        private List<string> _lines;
+        private List<int> _lineLength;
         private int _linePos = 0;
         private int _flashes;
+        private bool _lastTextShown;
+        private bool _newGame;
+        private bool _returnMenu;
         private bool _allCharsPrinted;
         private bool _coroutineRunning;
         private bool _highlightStarted;
+        private bool _creditPage1;
+        private bool _creditsFadeStart;
+        private bool _creditsFade;
         private Coroutine _runningCoroutine;
+        private RawImage _page1Img;
+        private RawImage _page2Img;
+        private Image _button1Img;
+        private Image _button2Img;
+        private Button _button1;
+        private Button _button2;
         #endregion
 
         #region Awake & Update
@@ -100,6 +128,7 @@ namespace ProjectThief
             _newGame = false;
             _returnMenu = false;
             _lines = new List<string>();
+            _lineLength = new List<int>();
 
             _sfxVol.value = (int)(_audioManager.SfxVol * 100);
             _musicVol.value = (int)(_audioManager.MusicVol * 100);
@@ -142,6 +171,27 @@ namespace ProjectThief
                 }
 
                 GameManager.instance.initialMenu = false;
+
+                _page1Img = _creditsPart1.GetComponent<RawImage>();
+                _page2Img = _creditsPart2.GetComponent<RawImage>();
+                _button1Img = _moveToPart1.GetComponent<Image>();
+                _button2Img = _moveToPart2.GetComponent<Image>();
+                _button1 = _moveToPart1.GetComponent<Button>();
+                _button2 = _moveToPart2.GetComponent<Button>();
+
+                _cred1R = _page1Img.color.r;
+                _cred2R = _page2Img.color.r;
+                _cred1G = _page1Img.color.g;
+                _cred2G = _page2Img.color.g;
+                _cred1B = _page1Img.color.b;
+                _cred2B = _page2Img.color.b;
+
+                _credB1R = _button1Img.color.r;
+                _credB2R = _button2Img.color.r;
+                _credB1G = _button1Img.color.g;
+                _credB2G = _button2Img.color.g;
+                _credB1B = _button1Img.color.b;
+                _credB2B = _button2Img.color.b;
             }
         }
 
@@ -153,6 +203,61 @@ namespace ProjectThief
                     _continueButton.gameObject.SetActive(true);
                 else
                     _continueButton.gameObject.SetActive(false);
+
+                // Credits fade effects
+                if (_creditsFadeStart)
+                {
+                    _creditsTime = Time.time;
+                    _creditsFade = true;
+                    _creditsFadeStart = false;
+                }
+
+                if (_creditPage1 && _creditsFade)
+                {
+                    if (!_creditsPart2.activeInHierarchy)                    
+                        _creditsPart2.SetActive(true);
+
+                    CreditsFade2();
+                }
+                else if (!_creditPage1 && _creditsFade)
+                {
+                    if (!_creditsPart1.activeInHierarchy)                    
+                        _creditsPart1.SetActive(true);
+                    
+
+                    CreditsFade1();
+                }
+
+                if (_creditsFade)
+                {
+                    if (!_creditPage1 && _page1Img.color.a >= 0.6f)
+                    {
+                        _button1.interactable = false;
+                        _button2.interactable = true;
+                        _button1Img.color = new Vector4(_credB1R, _credB1G, _credB1B, 0.25f);
+                        _button2Img.color = new Vector4(_credB2R, _credB2G, _credB2B, 1);
+
+                        if (!_creditPage1 && _page1Img.color.a == 1)
+                        {
+                            _creditPage1 = true;
+                            _creditsFade = false;
+                        }
+
+                    }
+                    else if (_creditPage1 && _page2Img.color.a >= 0.6f)
+                    {
+                        _button1.interactable = true;
+                        _button2.interactable = false;
+                        _button1Img.color = new Vector4(_credB1R, _credB1G, _credB1B, 1);
+                        _button2Img.color = new Vector4(_credB2R, _credB2G, _credB2B, 0.25f);
+
+                        if (_creditPage1 && _page2Img.color.a == 1)
+                        {
+                            _creditPage1 = false;
+                            _creditsFade = false;
+                        }
+                    }
+                }
             }
 
             // Fade in out effect
@@ -267,10 +372,13 @@ namespace ProjectThief
         #region Text Handling
         private void CheckString()
         {
-            Debug.Log("checking string");
             _lines.Clear();
+            _lineLength.Clear();
             _lines = new List<string>();
+            _lineLength = new List<int>();
             _linePos = 0;
+            int charCount = 0;
+
             string line = GameManager.instance.infoText + _endchar;
             string text = "";
 
@@ -279,23 +387,26 @@ namespace ProjectThief
                 if (line[i] != _endchar)
                 {
                     text += line[i];
+                    charCount++;
                 }
                 else
                 {
                     _lines.Add(text);
                     text = "";
+                    _lineLength.Add(charCount);
+                    charCount = 0;
                 }
             }
 
             if (_coroutineRunning)
             {
                 StopCoroutine(_runningCoroutine);
-                Debug.Log("Coroutine stopped");
                 _coroutineRunning = false;
                 _infoText.text = "";
             }
 
             _allCharsPrinted = false;
+            EmptyString(_lineLength[_linePos]);
             _runningCoroutine = StartCoroutine(PrintChar(_lines[_linePos]));            
 
             if ((_lines.Count - 1) > _linePos)
@@ -310,14 +421,26 @@ namespace ProjectThief
             }
         }
 
+        private void EmptyString(int charCount)
+        {
+            string emptyString = "";
+
+            for (int i = 0; i < charCount; i++)
+            {
+                emptyString += " ";
+            }
+
+            _infoText.text = emptyString;
+        }
+
         private void UpdateText()
         {            
             _textTime += Time.deltaTime;
             if (_textTime >= _textDelay)
             {
-                Debug.Log("Next Line");
                 _textTime = 0;
                 _allCharsPrinted = false;
+                EmptyString(_lineLength[_linePos]);
                 _runningCoroutine = StartCoroutine(PrintChar(_lines[_linePos]));
 
                 if ((_lines.Count - 1) > _linePos)
@@ -334,14 +457,14 @@ namespace ProjectThief
 
         private IEnumerator PrintChar(string line)
         {
-            _infoText.text = string.Empty;
             _coroutineRunning = true;
-            Debug.Log("Coroutine running");
+            StringBuilder displayText = new StringBuilder(_infoText.text);
 
             for (int i = 0; i < line.Length; i++)
             {
-                _infoText.text += line[i];                
-                
+                displayText[i] = line[i];
+                _infoText.text = displayText.ToString();
+
                 if (i == line.Length - 1)
                 {
                     _allCharsPrinted = true;
@@ -364,7 +487,6 @@ namespace ProjectThief
             if (GameManager.instance.resetInfoTimer)
             {
                 _timePassed = 0;
-                _infoText.text = GameManager.instance.infoText;
                 GameManager.instance.resetInfoTimer = false;
             }
         }
@@ -401,6 +523,20 @@ namespace ProjectThief
         {
             float progress = Time.time - _highlightTime;
             _highlight.color = Color.Lerp(_highlight.color, new Vector4(_hR, _hG, _hB, 0), progress / _highlightDuration);
+        }
+
+        private void CreditsFade1()
+        {
+            float progress = Time.time - _creditsTime;
+            _page1Img.color = Color.Lerp(_page1Img.color, new Vector4(_cred1R, _cred1G, _cred1B, 1), progress / _creditsDuration);
+            _page2Img.color = Color.Lerp(_page2Img.color, new Vector4(_cred2R, _cred2G, _cred2B, 0), progress / _creditsDuration);
+        }
+
+        private void CreditsFade2()
+        {
+            float progress = Time.time - _creditsTime;
+            _page1Img.color = Color.Lerp(_page1Img.color, new Vector4(_cred1R, _cred1G, _cred1B, 0), progress / _creditsDuration);
+            _page2Img.color = Color.Lerp(_page2Img.color, new Vector4(_cred2R, _cred2G, _cred2B, 1), progress / _creditsDuration);
         }
         #endregion
 
@@ -549,13 +685,40 @@ namespace ProjectThief
         public void Credits()
         {
             _navi.SetActive(false);
+            _background.SetActive(false);
             _credits.SetActive(true);
+            _page1Img.color = new Vector4(_cred1R, _cred1G, _cred1B, 1);
+            _button1.interactable = false;
+            _button2.interactable = true;
+            _button2Img.color = new Vector4(_credB2R, _credB2G, _credB2B, 1);
+            _button1Img.color = new Vector4(_credB1R, _credB1G, _credB1B, 0.25f);
+            _creditsPart2.SetActive(false);
+            _creditPage1 = true;            
         }
 
         public void CreditsBack()
         {
+            _page1Img.color = new Vector4(_cred1R, _cred1G, _cred1B, 0);
+            _page2Img.color = new Vector4(_cred2R, _cred2G, _cred2B, 0);
+            _button1Img.color = new Vector4(_credB1R, _credB1G, _credB1B, 0);
+            _button2Img.color = new Vector4(_credB2R, _credB2G, _credB2B, 0);
+            _button1.interactable = false;
+            _button2.interactable = false;
+            _creditsFadeStart = false;
+            _creditsFade = false;
+            _credits.SetActive(false);            
+            _background.SetActive(true);
             _navi.SetActive(true);
-            _credits.SetActive(false);
+        }
+
+        public void MoveToCreditsPart2()
+        {
+            _creditsFadeStart = true;
+        }
+
+        public void MoveToCreditsPart1()
+        {
+            _creditsFadeStart = true;
         }
         #endregion
     }
