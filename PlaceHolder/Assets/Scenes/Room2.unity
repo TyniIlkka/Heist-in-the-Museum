@@ -2570,12 +2570,12 @@ Prefab:
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 602.5
+      value: 599
       objectReference: {fileID: 0}
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 339
+      value: 337
       objectReference: {fileID: 0}
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
@@ -6492,13 +6492,13 @@ Transform:
   - {fileID: 1501491890}
   - {fileID: 1243377414}
   - {fileID: 142345561}
+  - {fileID: 1655548424}
   - {fileID: 1178733826}
   - {fileID: 730435025}
+  - {fileID: 2133784132}
   - {fileID: 131865724}
   - {fileID: 162768708}
   - {fileID: 2070017435}
-  - {fileID: 1655548424}
-  - {fileID: 2133784132}
   - {fileID: 1831917893}
   - {fileID: 1602398377}
   m_Father: {fileID: 310028340}
@@ -8446,6 +8446,16 @@ Prefab:
     - target: {fileID: 1596401348304492, guid: e705f089d3b0d4b43bcf67c441245a20, type: 2}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 114746328152431116, guid: e705f089d3b0d4b43bcf67c441245a20,
+        type: 2}
+      propertyPath: _timeout
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114746328152431116, guid: e705f089d3b0d4b43bcf67c441245a20,
+        type: 2}
+      propertyPath: _hasTimeout
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e705f089d3b0d4b43bcf67c441245a20, type: 2}
