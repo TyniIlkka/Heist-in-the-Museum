@@ -69,6 +69,8 @@ namespace ProjectThief
         private bool _timeStopped;
         private float _delay = 0;
         private bool _infoToShow;
+        private bool _caught;
+        private bool _escaped;
 
         public bool JustCleared { get { return _justCleared; } }
         public int ListPos { get { return m_iPos; } }
@@ -103,7 +105,9 @@ namespace ProjectThief
 
             _infoToShow = false;
             _paused = false;
-            _justCleared = false;            
+            _justCleared = false;
+            _caught = false;
+            _escaped = false;
             m_sCameraScript.Distance = m_fDist;
             m_sCameraScript.HorizontalAngle = m_fHorizontalAngle;
             m_sCameraScript.VerticalAngle = m_fVerticalAngle;
@@ -213,14 +217,18 @@ namespace ProjectThief
         /// </summary>
         public void PlayerFound()
         {
-            _audioSource.PlayOneShot(_endClip);
-            if (!_timeStopped)
-                Time.timeScale = 0f;
+            if (!_caught)
+            {
+                _caught = true;
+                _audioSource.PlayOneShot(_endClip);
+                if (!_timeStopped)
+                    Time.timeScale = 0f;
 
-            GameManager.instance.canMove = false;            
-            _timeStopped = true;
-            m_goEndBackground.SetActive(true);
-            m_goDefeat.SetActive(true);            
+                GameManager.instance.canMove = false;
+                _timeStopped = true;
+                m_goEndBackground.SetActive(true);
+                m_goDefeat.SetActive(true);
+            }      
         }
 
         /// <summary>
@@ -229,13 +237,17 @@ namespace ProjectThief
         /// </summary>
         public void PlayerEscaped()
         {
-            if (!_timeStopped)
-                Time.timeScale = 0f;
+            if (!_escaped)
+            {
+                _escaped = true;
+                if (!_timeStopped)
+                    Time.timeScale = 0f;
 
-            GameManager.instance.canMove = false;
-            _timeStopped = true;
-            m_goEndBackground.SetActive(true);
-            m_goVictory.SetActive(true);
+                GameManager.instance.canMove = false;
+                _timeStopped = true;
+                m_goEndBackground.SetActive(true);
+                m_goVictory.SetActive(true);
+            }
         }
         
         private void Intro()
