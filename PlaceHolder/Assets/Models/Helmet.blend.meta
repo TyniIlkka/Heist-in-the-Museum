@@ -1,40 +1,41 @@
 fileFormatVersion: 2
-guid: eac95dd706eeffd47b021ea9a9c467fb
-timeCreated: 1525626315
+guid: da570b7675c0e1747974d56e6dfc2c45
+timeCreated: 1527140588
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: Hold
-    100002: Sword
-    100004: //RootNode
-    400000: Hold
-    400002: Sword
-    400004: //RootNode
-    2300000: Hold
-    2300002: Sword
-    3300000: Hold
-    3300002: Sword
-    4300000: Hold
-    4300002: Sword
+    100000: //RootNode
+    100002: HelmetBase
+    100004: HelmetClassic
+    100006: HelmetSparta
+    400000: //RootNode
+    400002: HelmetBase
+    400004: HelmetClassic
+    400006: HelmetSparta
+    2100000: Harja
+    2300000: HelmetBase
+    2300002: HelmetClassic
+    2300004: HelmetSparta
+    3300000: HelmetBase
+    3300002: HelmetClassic
+    3300004: HelmetSparta
+    4300000: HelmetSparta
+    4300002: HelmetBase
+    4300004: HelmetClassic
     7400000: Default Take
     9500000: //RootNode
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Handle
-    second: {fileID: 2100000, guid: 4fc49da20f013d145a258cdb4b812cd4, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Leather
+      name: Harja
     second: {fileID: 2100000, guid: 01507e3895c3ff747a85973ce490ba34, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Metal
-    second: {fileID: 2100000, guid: 019b31e9dc28f2e42a62f470a1fc0532, type: 2}
+      name: Material
+    second: {fileID: 2100000, guid: 4fc49da20f013d145a258cdb4b812cd4, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
