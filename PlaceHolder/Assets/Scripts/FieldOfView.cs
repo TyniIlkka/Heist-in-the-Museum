@@ -70,7 +70,7 @@ namespace ProjectThief
         {
             Init();
             DrawFieldOfView();
-            if (CanSeePlayer())
+            if (CanSeePlayer() && GameManager.instance.canMove)
             {
                 GameManager.instance.levelController.PlayerFound();
             }
