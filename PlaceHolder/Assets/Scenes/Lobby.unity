@@ -5656,7 +5656,16 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 0.10517244
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1261694047763822, guid: 5d35175e1750ef8458370651446750fc, type: 2}
+      propertyPath: m_TagString
+      value: Obstacles
+      objectReference: {fileID: 0}
+    - target: {fileID: 1261694047763822, guid: 5d35175e1750ef8458370651446750fc, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 95668185871547768, guid: 5d35175e1750ef8458370651446750fc, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 5d35175e1750ef8458370651446750fc, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &611366653 stripped
@@ -5664,6 +5673,23 @@ Transform:
   m_PrefabParentObject: {fileID: 4030155491569490, guid: 5d35175e1750ef8458370651446750fc,
     type: 2}
   m_PrefabInternal: {fileID: 611366652}
+--- !u!1 &611366654 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1261694047763822, guid: 5d35175e1750ef8458370651446750fc,
+    type: 2}
+  m_PrefabInternal: {fileID: 611366652}
+--- !u!65 &611366655
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 611366654}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11.516757, y: 7.775775, z: 28.526226}
+  m_Center: {x: 1.8356625, y: -0.11255649, z: 12.524064}
 --- !u!1001 &632311106
 Prefab:
   m_ObjectHideFlags: 0
@@ -6027,7 +6053,56 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1.500001
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1695700450606468, guid: a04296cf694a32342850ad22512cb515, type: 2}
+      propertyPath: m_TagString
+      value: Obstacles
+      objectReference: {fileID: 0}
+    - target: {fileID: 1562214254123790, guid: a04296cf694a32342850ad22512cb515, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695700450606468, guid: a04296cf694a32342850ad22512cb515, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305262177465028, guid: a04296cf694a32342850ad22512cb515, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695027316586112, guid: a04296cf694a32342850ad22512cb515, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1628490231462306, guid: a04296cf694a32342850ad22512cb515, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431391656793110, guid: a04296cf694a32342850ad22512cb515, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1708577603321476, guid: a04296cf694a32342850ad22512cb515, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1721256329364374, guid: a04296cf694a32342850ad22512cb515, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844179519680162, guid: a04296cf694a32342850ad22512cb515, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558755208665110, guid: a04296cf694a32342850ad22512cb515, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1803865362277486, guid: a04296cf694a32342850ad22512cb515, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 95954164784786304, guid: a04296cf694a32342850ad22512cb515, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: a04296cf694a32342850ad22512cb515, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &704041421 stripped
@@ -6035,6 +6110,23 @@ Transform:
   m_PrefabParentObject: {fileID: 4638756083770940, guid: a04296cf694a32342850ad22512cb515,
     type: 2}
   m_PrefabInternal: {fileID: 704041420}
+--- !u!1 &704041422 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1695700450606468, guid: a04296cf694a32342850ad22512cb515,
+    type: 2}
+  m_PrefabInternal: {fileID: 704041420}
+--- !u!65 &704041423
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 704041422}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.799012, y: 2.3514316, z: 1.5643594}
+  m_Center: {x: -0.052872144, y: 0.67571545, z: 0.0012159736}
 --- !u!1001 &711535521
 Prefab:
   m_ObjectHideFlags: 0
@@ -7620,7 +7712,16 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1139813725025986, guid: e5839035ea7db004c8bd8b626a46d4e6, type: 2}
+      propertyPath: m_TagString
+      value: Obstacles
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139813725025986, guid: e5839035ea7db004c8bd8b626a46d4e6, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 95511957886422432, guid: e5839035ea7db004c8bd8b626a46d4e6, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: e5839035ea7db004c8bd8b626a46d4e6, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &890882066 stripped
@@ -7628,6 +7729,23 @@ Transform:
   m_PrefabParentObject: {fileID: 4234532270062778, guid: e5839035ea7db004c8bd8b626a46d4e6,
     type: 2}
   m_PrefabInternal: {fileID: 890882065}
+--- !u!1 &890882067 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1139813725025986, guid: e5839035ea7db004c8bd8b626a46d4e6,
+    type: 2}
+  m_PrefabInternal: {fileID: 890882065}
+--- !u!65 &890882068
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 890882067}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8164404, y: 0.8354058, z: 2.720252}
+  m_Center: {x: 0, y: 0.009482224, z: 1.1802988}
 --- !u!1001 &951264191
 Prefab:
   m_ObjectHideFlags: 0
