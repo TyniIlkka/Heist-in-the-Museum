@@ -163,6 +163,17 @@ namespace ProjectThief
 
                         break;
 
+                    case 2:
+                        i = 9; j = 11;
+                        //-----Guard Room 1 phase 1 static-----//
+                        SpawnGuard(staticPoints[j].transform.position, Quaternion.identity, s, j, false, 0);
+
+                        //-----Guard Room 1 phase 1 patrol-----//
+                        SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.Euler(-1, 0, 0), i, s, true, 0);
+
+                        break;
+
+
                     case 3:
                         i = 10; j = 11;
                         //-----Guard Room 1 phase 3 PingPong-----//
@@ -186,6 +197,19 @@ namespace ProjectThief
 
                         break;
 
+                    case 5:
+                        i = 12; j = 13;
+                        //-----Guard Room 1 phase 4 static-----//
+                        SpawnGuard(staticPoints[i].transform.position, Quaternion.identity, s, i, false, 0);
+
+                        //-----Guard Room 1 phase 4 static-----//
+                        SpawnGuard(staticPoints[j].transform.position, Quaternion.identity, s, j, false, 0);
+
+                        //-----Guard Room 1 phase 4 patrol-----//
+                        SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.Euler(0, 0, 1), i, s, true, 0);
+
+                        break;
+
                     default:
                         Debug.Log("Not valid Phase for current Room!");
                         break;
@@ -197,19 +221,6 @@ namespace ProjectThief
                 // TODO Room 2 scenarios
                 switch (m_iCurrentPhase)
                 {
-                    case 2:
-                        i = 13; j = 14;
-
-                        //-----Guard Room 2 East Patrol-----//
-                        SpawnGuard(pathList[i].Waypoints[0].Position, Quaternion.Euler(0,0,-1) , i, s, true, 0);
-                        //-----Guard Room 2 West Patrol-----//
-                        SpawnGuard(pathList[j].Waypoints[0].Position, Quaternion.Euler(0, 0, -1), j, s, true, 0);
-
-                        //-----Guard Room 2 Static-----//
-                        SpawnGuard(staticPoints[j].transform.position, Quaternion.identity, s, j, false, 0);
-
-                        break;
-
                     default:
                         i = 13; j = 14;
 
@@ -220,7 +231,6 @@ namespace ProjectThief
 
                         //-----Guard Room 2 Static-----//
                         SpawnGuard(staticPoints[j].transform.position, Quaternion.identity, s, j, false, 0);
-                        Debug.Log("Not valid Phase for current Room!");
                         break;
                 }
             }
