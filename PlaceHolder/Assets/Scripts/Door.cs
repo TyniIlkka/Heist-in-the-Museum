@@ -24,6 +24,8 @@ namespace ProjectThief
         private float _useDelay = 2f;
         [SerializeField, Tooltip("Inspect info")]
         private string _inspectText = @"""The door is blocked by bars.""#""I wonder if there is a way to get through.""";
+        [SerializeField, Tooltip("Room 1 phase 3 text")]
+        private string _infoText = @"""I better not go back yet as guard sound's to be right behind the door.""";
 
         private bool _isBlocked;
         private bool _opened;
@@ -45,8 +47,17 @@ namespace ProjectThief
 
             if (_isOpen)
             {
-                _isBlocked = false;                
-                _obstacle.SetActive(false);
+                if (GameStateController.CurrentState.SceneName == "Room1"
+                    && GameManager.instance.currentPhase == 3)
+                {
+                    _isBlocked = true;
+                    _obstacle.SetActive(false);
+                }
+                else
+                {
+                    _isBlocked = false;
+                    _obstacle.SetActive(false);
+                }
             }
             else
             {               
@@ -128,9 +139,10 @@ namespace ProjectThief
                 else
                 {
                     GetMouseController.InspectCursor();
-                    if (Input.GetButtonDown("Fire1") && !_isOpen)
+                    if (Input.GetButtonDown("Fire1") && _isBlocked)
                     {
                         InspectText();
+                        Debug.Log("inspect door");
                     }
                 }
             }
@@ -148,7 +160,17 @@ namespace ProjectThief
 
         private void InspectText()
         {
-            GameManager.instance.infoText = _inspectText;            
+            if (GameStateController.CurrentState.SceneName == "Room1"
+                    && GameManager.instance.currentPhase == 3)
+            {
+                GameManager.instance.infoText = _infoText;
+                Debug.Log("Room 1 text");
+            }
+            else
+            {
+                GameManager.instance.infoText = _inspectText;
+                Debug.Log("Default text");
+            }          
 
             if (!GameManager.instance.infoBoxVisible)
             {
