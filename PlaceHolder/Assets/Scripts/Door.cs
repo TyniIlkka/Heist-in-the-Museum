@@ -22,8 +22,6 @@ namespace ProjectThief
         private AudioSource _audioSource;
         [SerializeField, Tooltip("Delay before door can be used")]
         private float _useDelay = 2f;
-        [SerializeField, Tooltip("Move to point")]
-        private Transform _moveToPoint;
         [SerializeField, Tooltip("Inspect info")]
         private string _inspectText = @"""The door is blocked by bars.""#""I wonder if there is a way to get through.""";
 
@@ -36,7 +34,6 @@ namespace ProjectThief
         public Transform SpawnPoint { get { return _spawnPoint; } }
         public bool Open { set { _isOpen = value; } }
         public bool Blocked { set { _isBlocked = value; } }  
-        public Vector3 MoveToPos { get { return _moveToPoint.position; } }
 
         private void Awake()
         {

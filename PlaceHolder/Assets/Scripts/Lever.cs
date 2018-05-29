@@ -21,17 +21,11 @@ namespace ProjectThief
         private int _boolListPos;
         [SerializeField, Tooltip("Levers used rotation")]
         private float _leverUsedRotation = -238;
-        [SerializeField, Tooltip("Move to point")]
-        private Transform _moveToPos;
         [SerializeField, Tooltip("Inspect text")]
         private string _inspectText = @"""A[colour] mechanism.""#""It looks like it is missing a part.""";
 
         private Animator _leverAnimator;
         private bool _used;
-
-        public Vector3 MoveToPos { get { return _moveToPos.position; } }
-
-        public bool trigger;
 
         private void Awake()
         {
@@ -67,7 +61,7 @@ namespace ProjectThief
         {
             base.Update();
 
-            if (GameManager.instance.usedlevers[_boolListPos] && trigger)
+            if (GameManager.instance.usedlevers[_boolListPos])
             {
                 _leverHandle.transform.localEulerAngles = new Vector3(_leverUsedRotation,
                     _leverHandle.transform.localEulerAngles.y, _leverHandle.transform.localEulerAngles.z);
@@ -88,6 +82,7 @@ namespace ProjectThief
                             _used = true;
                             _inventory.RemoveItem(_neededItem);
                             _leverHandle.SetActive(true);
+                            GameManager.instance.usedlevers[_boolListPos] = true;
                             _leverAnimator.SetBool("Activated", true);
                         }
                     }
@@ -108,8 +103,7 @@ namespace ProjectThief
             _obstacleAnim.SetBool("Open", true);
             _door.ObstacleSound();
             _door.Open = false;
-            _door.Blocked = false;
-            GameManager.instance.usedlevers[_boolListPos] = true;            
+            _door.Blocked = false;          
         }
 
         private void InspectText()

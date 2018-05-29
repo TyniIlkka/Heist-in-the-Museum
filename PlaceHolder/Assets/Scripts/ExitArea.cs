@@ -4,13 +4,9 @@ using UnityEngine;
 namespace ProjectThief
 {
     public class ExitArea : ObjectBase
-    {       
-        [SerializeField, Tooltip("Move to point")]
-        private Transform _moveToPoint;
+    {    
         [SerializeField, Tooltip("Inspect text")]
-        private string _inspectText = @"""I might be able to escape through this window later.""";
-
-        public Vector3 MoveToPos { get { return _moveToPoint.position; } }
+        private string _inspectText = @"""I might be able to escape through this window later.""";        
 
         private int _lastItem;
 

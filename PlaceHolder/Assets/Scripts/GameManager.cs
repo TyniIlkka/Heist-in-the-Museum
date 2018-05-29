@@ -50,8 +50,6 @@ namespace ProjectThief
         public bool[] tutorialeffects;
         [SerializeField] List<Guard> guards;
         #endregion
-        [Header("Debug variables")]
-        public bool mouseMovemet;
 
         private void Awake()
         {

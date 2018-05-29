@@ -14,18 +14,16 @@ namespace ProjectThief
         private AudioClip m_acUseSFX;
         [SerializeField, Tooltip("Cooldown time")]
         private float m_fCooldown = 0.3f;
-        [SerializeField, Tooltip("Move to point")]
-        private Transform _moveToPoint;
         [SerializeField, Tooltip("Has tutorial effect")]
         private bool _tutorialEffect;
         [SerializeField, Tooltip("Phase where to activate")]
         private int _activePhase;
+        [SerializeField, Tooltip("Inspect text")]
+        private string _inspectText = @"""I might able to distract guards with lights that are connected to this switch""";
 
         private float m_fTimePassed;
         private bool m_bCanUse;
         private ParticleSystem _particleSystem;
-        
-        public Vector3 MoveToPos { get { return _moveToPoint.position; } }
 
         private void Awake()
         {
@@ -94,9 +92,31 @@ namespace ProjectThief
                             m_lLight.LightDeactivated();
                     }
                 }
-                else                
+                else
+                {
                     GetMouseController.InspectCursor();
+                    if (Input.GetButtonDown("Fire1"))
+                    {
+                        InspectText();
+                    }
+                }
             }            
+        }
+
+        private void InspectText()
+        {
+            GameManager.instance.infoText = _inspectText;
+
+            if (!GameManager.instance.infoBoxVisible)
+            {
+                GameManager.instance.infoFadeIn = true;
+                GameManager.instance.infoFadeInStart = true;
+            }
+            else
+            {
+                GameManager.instance.resetInfoTimer = true;
+                GameManager.instance.newText = true;
+            }
         }
     }
 }
