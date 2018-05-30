@@ -94,7 +94,10 @@ namespace ProjectThief
                         break;
 
                     case 3:
-                        i = 5; j = 2;
+                        i = 5; j = 2; k = 4; 
+                        //-----Guard Left Door-----//
+                        SpawnGuard(staticPoints[k].transform.position, Quaternion.identity, s, k, false, 180f);
+
                         //-----Guard Spawn EastDoor-----//
                         SpawnGuard(staticPoints[i].transform.position, Quaternion.Euler(0,0,0), s, i, false, 180f);
 
@@ -108,8 +111,6 @@ namespace ProjectThief
                         Debug.Log("Case3 Lobby Guards spawned");
                         break;
 
-
-                    ////////////-------Bugi!!-------/////
                     case 4:
                         i = 6; j = 7;
                         //-----Guard T and Tutorial Door Path-----//
