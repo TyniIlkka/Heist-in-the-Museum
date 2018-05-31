@@ -26,6 +26,8 @@ namespace ProjectThief
         private float _delay = 3f;
         [SerializeField, Tooltip("Fade amount"), Range(0, 1)]
         private float _fade = 0.5f;
+        [SerializeField, Tooltip("Vault door open rotation")]
+        private Vector3 _openRotation = new Vector3(-90, 0, -90);
 
         [SerializeField]
         private DynamicMapUpdate _pathUpdater;
@@ -52,7 +54,16 @@ namespace ProjectThief
             _g = _aHighlights[0].material.color.g;
             _b = _aHighlights[0].material.color.b;
 
-            _time = _delay;
+            _time = _delay;            
+
+            if (GameManager.instance.vaultDoorOpen)
+            {
+                _wall.SetActive(false);
+                m_aAnimator.enabled = false;
+                transform.localEulerAngles = _openRotation;
+            }
+
+            Debug.Log("door: " + transform.gameObject + " rotation: " + transform.localEulerAngles);
         }
 
         private void Start()
@@ -188,6 +199,7 @@ namespace ProjectThief
                     {                            
                         AddKeyPieces();
                         m_aAnimator.SetBool("Open", true);
+                        GameManager.instance.vaultDoorOpen = true;
                     }
                 } 
                 else

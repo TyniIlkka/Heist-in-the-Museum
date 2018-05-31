@@ -57,17 +57,6 @@ namespace ProjectThief
             }
         }
 
-        protected override void Update()
-        {
-            base.Update();
-
-            if (GameManager.instance.usedlevers[_boolListPos])
-            {
-                _leverHandle.transform.localEulerAngles = new Vector3(_leverUsedRotation,
-                    _leverHandle.transform.localEulerAngles.y, _leverHandle.transform.localEulerAngles.z);
-            }
-        }
-
         protected override void Activated()
         {
             if (IsActive && !_used)

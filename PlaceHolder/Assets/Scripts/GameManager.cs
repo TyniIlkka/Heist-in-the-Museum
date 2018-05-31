@@ -29,6 +29,7 @@ namespace ProjectThief
         public bool initialMenu;
         public bool infoBoxVisible;
         public bool newText;
+        public bool vaultDoorOpen;
         public string infoText;
         public Transform spawnPoint;
         public Transform initialSpawn;
@@ -96,6 +97,7 @@ namespace ProjectThief
                     tutorialeffects[i] = false;
             }
 
+            vaultDoorOpen = false;
             inventory.Clear();
             savedInventory.Clear();
             currentPhase = 0;
