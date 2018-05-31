@@ -1,111 +1,148 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectThief
 {
-    public class FieldOfView : MonoBehaviour
+    public class DetectionVisualization : MonoBehaviour
     {
         [SerializeField]
-        private float m_fViewRad;
+        private float _maxViewRad;
         [SerializeField]
-        private float m_fViewAngle;        
+        private float _viewAngle;
         [SerializeField]
-        private LayerMask m_lmObstacleMask;
+        private LayerMask _obstacleMask;
         [SerializeField]
-        private float m_fMeshResolution = 5;
+        private float _meshResolution = 5;
         [SerializeField]
-        private MeshFilter m_mfViewMeshFilter;
+        private MeshFilter _meshFilter;
         [SerializeField]
-        private float m_fEdgeDistThreshold = 0.5f;
+        private float _edgeDistThreshold = 0.5f;
         [SerializeField]
-        private int m_iEdgeResolveIters = 6;
-        [SerializeField, Tooltip("Light distance mult")]
-        private float m_fMult = 2;
-        [SerializeField, Tooltip("Flashlight")]
-        private Light m_lLight;
-        [SerializeField, Tooltip("Detection visualization script")]
-        private DetectionVisualization _detVis;
+        private int _edgeResolveIters = 6;
+        [SerializeField, Tooltip("Lerp Duration")]
+        private float _duration = 2f;
 
-        private Mesh m_mViewMesh;
+        private Mesh _mesh;
+        private float _viewRad = 0;
+        private float _startTime;
+        private bool _detectStart;
+        private bool _detectActive;
+        private bool _detectStarted;
+        private bool _detectEnded;
         private bool _playerFound;
 
-        public Player m_pPlayerObject;
+        public Player _player;
 
-
-        public float ViewRad { get { return m_fViewRad; } }
-        public float ViewAngle { get { return m_fViewAngle; } }
+        public float ViewRad { get { return _maxViewRad; } }
+        public float ViewAngle { get { return _viewAngle; } }
 
         private void Awake()
         {
-            Init(); 
+            Init();
 
-            m_mViewMesh = new Mesh();
-            m_mViewMesh.name = "View Mesh";
-            m_mfViewMeshFilter.mesh = m_mViewMesh;
-
-            if (_detVis == null)
-                _detVis = GetComponent<DetectionVisualization>();
-        }               
+            _mesh = new Mesh();
+            _mesh.name = "View Mesh";
+            _meshFilter.mesh = _mesh;
+        }
 
         private void Init()
         {
             if (GetComponentInParent<Guard>() != null)
             {
-                m_fViewRad = GetComponentInParent<Guard>().DetectionRange;
-                m_fViewAngle = GetComponentInParent<Guard>().FieldOfView;
-                m_pPlayerObject = GetComponentInParent<Guard>().Thief;
+                _maxViewRad = GetComponentInParent<Guard>().DetectionRange;
+                _viewAngle = GetComponentInParent<Guard>().FieldOfView;
+                _player = GetComponentInParent<Guard>().Thief;
 
             }
             else
             {
                 Debug.LogError("ERROR: Guard not found.");
             }
+        }
 
-            if (m_lLight != null)
+        public void DetectionActivated()
+        {
+            if (!_detectStarted)
             {
-                m_lLight.range = m_fViewRad * m_fMult;
-                m_lLight.spotAngle = m_fViewAngle;
+                _startTime = Time.time;
+                _detectStart = true;
+                _detectActive = true;
+                _detectStarted = true;
+                _detectEnded = false;
+            }
+        }
+
+        public void DetectionDeactivated()
+        {
+            if (!_detectEnded)
+            {
+                _startTime = Time.time;
+                _detectStart = false;
+                _detectActive = true;
+                _detectEnded = true;
+                _detectStarted = false;
+            }
+        }
+
+        private void DetectDistLerp()
+        {
+            if (GetComponentInParent<Guard>() != null)
+            {
+                if (_detectStart)
+                {
+                    float progress = Time.time - _startTime;
+                    _viewRad = Mathf.Lerp(_viewRad, _maxViewRad, progress / _duration);                    
+                }
+                else if (!_detectStart && _viewRad != 0)
+                {
+                    float progress = Time.time - _startTime;
+                    _viewRad = Mathf.Lerp(_viewRad, 0, progress / (_duration / 2));
+
+                    if (_viewRad == 0)
+                        _detectActive = false;
+                }
             }
             else
             {
-                Debug.LogError("ERROR: Light not found.");
+                Debug.LogError("ERROR: Guard not found.");
             }
         }
 
         private void Update()
         {
             Init();
-            DrawFieldOfView();
-
-            if (CanSeePlayer() && GameManager.instance.canMove)
-                _detVis.DetectionActivated();
-
-            else if (!CanSeePlayer() && _playerFound)
+            if (_detectActive && !_playerFound)
             {
-                _detVis.DetectionDeactivated();
-                _playerFound = false;
+                DetectDistLerp();
+                DrawFieldOfView();
+                if (CanSeePlayer() && GameManager.instance.canMove)
+                {
+                    _playerFound = true;
+                    GameManager.instance.levelController.PlayerFound();
+                }
             }
         }
 
         private void DrawFieldOfView()
         {
-            int rayCount = Mathf.RoundToInt(m_fViewAngle * m_fMeshResolution);
-            float rayAngleSize = m_fViewAngle / rayCount;
+            int rayCount = Mathf.RoundToInt(_viewAngle * _meshResolution);
+            float rayAngleSize = _viewAngle / rayCount;
 
             List<Vector3> viewPoints = new List<Vector3>();
             ViewCastinfo oldViewCast = new ViewCastinfo();
 
             for (int i = 0; i <= rayCount; i++)
             {
-                float angle = transform.eulerAngles.y - m_fViewAngle / 2 + rayAngleSize * i;
+                float angle = transform.eulerAngles.y - _viewAngle / 2 + rayAngleSize * i;
                 ViewCastinfo newViewCast = ViewCast(angle);
 
                 if (i > 0)
                 {
-                    bool edgeDistThresholdExeeded = 
-                        Mathf.Abs(oldViewCast.dist - newViewCast.dist) > m_fEdgeDistThreshold;
+                    bool edgeDistThresholdExeeded =
+                        Mathf.Abs(oldViewCast.dist - newViewCast.dist) > _edgeDistThreshold;
 
-                    if (oldViewCast.hit != newViewCast.hit || 
+                    if (oldViewCast.hit != newViewCast.hit ||
                         (oldViewCast.hit && newViewCast.hit && edgeDistThresholdExeeded))
                     {
                         EdgeInfo edge = FindEdge(oldViewCast, newViewCast);
@@ -125,9 +162,9 @@ namespace ProjectThief
             int[] triangles = new int[(vertexCount - 2) * 3];
 
             vertices[0] = Vector3.zero;
-            for (int i = 0; i < vertexCount -1; i++)
-            { 
-                vertices[i + 1] = transform.InverseTransformPoint(viewPoints[i]);                
+            for (int i = 0; i < vertexCount - 1; i++)
+            {
+                vertices[i + 1] = transform.InverseTransformPoint(viewPoints[i]);
 
                 if (i < vertexCount - 2)
                 {
@@ -137,11 +174,11 @@ namespace ProjectThief
                 }
             }
 
-            m_mViewMesh.Clear();
+            _mesh.Clear();
 
-            m_mViewMesh.vertices = vertices;
-            m_mViewMesh.triangles = triangles;
-            m_mViewMesh.RecalculateNormals();
+            _mesh.vertices = vertices;
+            _mesh.triangles = triangles;
+            _mesh.RecalculateNormals();
         }
 
         EdgeInfo FindEdge(ViewCastinfo minViewCast, ViewCastinfo maxViewCast)
@@ -151,13 +188,13 @@ namespace ProjectThief
             Vector3 minPoint = Vector3.zero;
             Vector3 maxPoint = Vector3.zero;
 
-            for (int i = 0; i < m_iEdgeResolveIters; i++)
+            for (int i = 0; i < _edgeResolveIters; i++)
             {
                 float angle = (minAngle + maxAngle) / 2;
                 ViewCastinfo newViewCast = ViewCast(angle);
 
-                bool edgeDistThresholdExeeded = 
-                    Mathf.Abs(minViewCast.dist - newViewCast.dist) > m_fEdgeDistThreshold;
+                bool edgeDistThresholdExeeded =
+                    Mathf.Abs(minViewCast.dist - newViewCast.dist) > _edgeDistThreshold;
                 if (newViewCast.hit == minViewCast.hit && !edgeDistThresholdExeeded)
                 {
                     minAngle = angle;
@@ -173,19 +210,19 @@ namespace ProjectThief
             return new EdgeInfo(minPoint, maxPoint);
         }
 
-        ViewCastinfo ViewCast (float globalAngle)
+        ViewCastinfo ViewCast(float globalAngle)
         {
             Vector3 dir = DirFromAngle(globalAngle, true);
-            RaycastHit hit;                      
+            RaycastHit hit;
 
-            if (Physics.Raycast(transform.position, dir, out hit, m_fViewRad, m_lmObstacleMask))
+            if (Physics.Raycast(transform.position, dir, out hit, _viewRad, _obstacleMask))
                 return new ViewCastinfo(true, hit.point, hit.distance, globalAngle);
 
             else
-                return new ViewCastinfo(false, transform.position + dir * m_fViewRad, hit.distance, globalAngle);
+                return new ViewCastinfo(false, transform.position + dir * _viewRad, hit.distance, globalAngle);
         }
 
-        public Vector3 DirFromAngle (float angleInDeg, bool globalAngle)
+        public Vector3 DirFromAngle(float angleInDeg, bool globalAngle)
         {
             if (!globalAngle)
                 angleInDeg += transform.eulerAngles.y;
@@ -225,20 +262,20 @@ namespace ProjectThief
 
         public bool CanSeePlayer()
         {
-            
-            Vector3 rayDirection = (m_pPlayerObject.transform.position) - transform.position;
+
+            Vector3 rayDirection = (_player.transform.position) - transform.position;
             float angle = Vector3.Angle(rayDirection, transform.forward);
-            if (angle < m_fViewAngle * 0.5)
+            if (angle < _viewAngle * 0.5)
             {
                 RaycastHit hit;
                 rayDirection += Vector3.up;
-                if (Physics.Raycast(transform.position, rayDirection.normalized, out hit, m_fViewRad))
+                if (Physics.Raycast(transform.position, rayDirection.normalized, out hit, _viewRad))
                 {
                     //Debug.DrawRay(transform.position, rayDirection.normalized);
                     //Debug.Log(hit.collider.gameObject);
                     if (hit.collider.gameObject.GetComponent<Player>() != null)
                     {
-                        _playerFound = true;
+
                         Debug.Log(hit.collider.gameObject);
                         return true;
                     }
