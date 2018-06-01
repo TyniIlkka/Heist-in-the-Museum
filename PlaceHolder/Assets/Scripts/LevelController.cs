@@ -401,6 +401,7 @@ namespace ProjectThief
                 switch (currenPhase)
                 {
                     case 0:
+                        GameManager.instance.showInfoFlashes = true;
                         GameManager.instance.infoText = _info1;
                         break;
                     case 1:
@@ -424,8 +425,7 @@ namespace ProjectThief
         }
 
         private void DisplayText()
-        {
-
+        { 
             if (!GameManager.instance.infoBoxVisible)
             {
                 GameManager.instance.infoFadeIn = true;

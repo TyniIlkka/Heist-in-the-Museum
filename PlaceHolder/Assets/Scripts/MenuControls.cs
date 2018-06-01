@@ -309,10 +309,13 @@ namespace ProjectThief
 
                     if (GameManager.instance.infoFadeIn)
                     {
-                        _highlightTime = Time.time;
-                        _highlight.color = new Vector4(_hR, _hG, _hB, 1);
-                        _flashes = 0;
-                        _highlightStarted = true;
+                        if (GameManager.instance.showInfoFlashes)
+                        {
+                            _highlightTime = Time.time;
+                            _highlight.color = new Vector4(_hR, _hG, _hB, 1);
+                            _flashes = 0;
+                            _highlightStarted = true;
+                        }
 
                         _textBg.color = new Vector4(_rInfo, _gInfo, _bInfo, 0);
                         GameManager.instance.infoBoxVisible = true;
@@ -341,15 +344,18 @@ namespace ProjectThief
                     {
                         GameManager.instance.newText = false;
 
-                        _highlightTime = Time.time;
-                        _highlight.color = new Vector4(_hR, _hG, _hB, 1);
-                        _flashes = 0;
-                        _highlightStarted = true;
+                        if (GameManager.instance.showInfoFlashes)
+                        {
+                            _highlightTime = Time.time;
+                            _highlight.color = new Vector4(_hR, _hG, _hB, 1);
+                            _flashes = 0;
+                            _highlightStarted = true;
+                        }
 
                         CheckString();
                     }
 
-                    if (_highlightStarted)
+                    if (_highlightStarted && GameManager.instance.showInfoFlashes)
                     {
                         HighlightFadeOut();
 
@@ -366,6 +372,7 @@ namespace ProjectThief
                         if (_highlight.color.a == 0 && _flashes == _times)
                         {
                             _highlightStarted = false;
+                            GameManager.instance.showInfoFlashes = false;
                         }
                     }
                 }
