@@ -134,13 +134,7 @@ namespace ProjectThief
             GameManager.instance.fadeIn = false;
 
             ShowInfo();
-            _inventory.LoadInventory();
-
-            if (_infoToShow)
-            {
-                GameManager.instance.infoFadeIn = true;
-                GameManager.instance.infoFadeInStart = true;
-            }
+            _inventory.LoadInventory();            
         }
 
         // Update is called once per frame
@@ -389,7 +383,7 @@ namespace ProjectThief
             return result;
         }
 
-        private void ShowInfo()
+        public void ShowInfo()
         {
             string currentScene = GameStateController.CurrentState.SceneName;
             int currenPhase = GameManager.instance.currentPhase;
@@ -408,15 +402,12 @@ namespace ProjectThief
                 {
                     case 0:
                         GameManager.instance.infoText = _info1;
-                        _infoToShow = true;
                         break;
                     case 1:
                         GameManager.instance.infoText = _info2;
-                        _infoToShow = true;
                         break;
                     case 2:
                         GameManager.instance.infoText = _info3;
-                        _infoToShow = true;
                         break;
                 }
             }
@@ -426,10 +417,25 @@ namespace ProjectThief
                 {
                     case 1:
                         GameManager.instance.infoText = _info1;
-                        _infoToShow = true;
                         break;
                 }
             }
-        }        
+            DisplayText();
+        }
+
+        private void DisplayText()
+        {
+
+            if (!GameManager.instance.infoBoxVisible)
+            {
+                GameManager.instance.infoFadeIn = true;
+                GameManager.instance.infoFadeInStart = true;
+            }
+            else
+            {
+                GameManager.instance.resetInfoTimer = true;
+                GameManager.instance.newText = true;
+            }
+        }
     }
 }

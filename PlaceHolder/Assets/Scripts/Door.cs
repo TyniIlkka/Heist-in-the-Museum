@@ -26,6 +26,8 @@ namespace ProjectThief
         private string _inspectText = @"""The door is blocked by bars.""#""I wonder if there is a way to get through.""";
         [SerializeField, Tooltip("Room 1 phase 3 text")]
         private string _infoText = @"""I better not go back yet as guard sound's to be right behind the door.""";
+        [SerializeField, Tooltip("Info to display when player hasn't collected all the items in the room")]
+        private string _collectInfo = @"""There is still some items I need to get.""";
 
         private bool _isBlocked;
         private bool _opened;
@@ -138,11 +140,11 @@ namespace ProjectThief
                 }
                 else
                 {
+                    Debug.Log("Inspect " + _isBlocked);
                     GetMouseController.InspectCursor();
-                    if (Input.GetButtonDown("Fire1") && _isBlocked)
+                    if (Input.GetButtonDown("Fire1"))
                     {
                         InspectText();
-                        Debug.Log("inspect door");
                     }
                 }
             }
@@ -164,12 +166,22 @@ namespace ProjectThief
                     && GameManager.instance.currentPhase == 3)
             {
                 GameManager.instance.infoText = _infoText;
-                Debug.Log("Room 1 text");
             }
             else
             {
-                GameManager.instance.infoText = _inspectText;
-                Debug.Log("Default text");
+                Debug.Log("Other text");
+                Debug.Log("Cleared: " + _levelController.Cleared);
+                if (!_levelController.Cleared)
+                {
+                    GameManager.instance.infoText = _collectInfo;
+                    Debug.Log("Collect info");
+                }
+
+                else
+                {
+                    Debug.Log("Inspect info");
+                    GameManager.instance.infoText = _inspectText;
+                }
             }          
 
             if (!GameManager.instance.infoBoxVisible)

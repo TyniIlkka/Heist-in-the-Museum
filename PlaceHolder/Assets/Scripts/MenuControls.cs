@@ -616,6 +616,7 @@ namespace ProjectThief
             _menuConfirm.SetActive(false);
             _exitConfirm.SetActive(false);
             GameManager.instance.canMove = true;
+            GameManager.instance.levelController.ShowInfo();
             Time.timeScale = 1f;
         }
 
