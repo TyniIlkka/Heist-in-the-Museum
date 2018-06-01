@@ -57,7 +57,9 @@ namespace ProjectThief
         [SerializeField]
         private GameObject _menuConfirm;
         [SerializeField]
-        private GameObject _exitConfirm;        
+        private GameObject _exitConfirm;
+        [SerializeField, Tooltip("Player position markers")]
+        private List<GameObject> _playerPos;
         [SerializeField, Header("Info screen")]
         private GameObject _infoBg;
         [SerializeField, Header("Info text")]
@@ -157,6 +159,8 @@ namespace ProjectThief
                 _textBg.color = new Vector4(_rInfo, _bInfo, _gInfo, 0);
                 GameManager.instance.infoBoxVisible = false;
                 GameManager.instance.infoFadeInStart = false;
+
+                ShowPlayerPos();
             }
 
             if (GameStateController.CurrentState.SceneName == "MainMenu")
@@ -367,6 +371,29 @@ namespace ProjectThief
                 }
             }
         }
+
+        private void ShowPlayerPos()
+        {
+            int pos = 0;
+
+            if (GameStateController.CurrentState.SceneName == "Tutorial")
+                pos = 0;
+            else if (GameStateController.CurrentState.SceneName == "Lobby")
+                pos = 1;
+            else if (GameStateController.CurrentState.SceneName == "RoomVault")
+                pos = 2;
+            else if (GameStateController.CurrentState.SceneName == "Room1")
+                pos = 3;
+            else if (GameStateController.CurrentState.SceneName == "Room2")
+                pos = 4;
+            else if (GameStateController.CurrentState.SceneName == "Room3")
+                pos = 5;
+            else
+                Debug.LogError("State not found");
+
+            _playerPos[pos].SetActive(true);
+        }
+
         #endregion
 
         #region Text Handling
