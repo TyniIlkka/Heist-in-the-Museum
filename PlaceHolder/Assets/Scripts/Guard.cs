@@ -50,6 +50,8 @@ namespace ProjectThief {
 
         [SerializeField, Header("Patrolling or Static"), Tooltip("if True, guard is moving, otherwise static")]
         private bool m_bMoving;
+        [SerializeField, Tooltip("Player move speed halfpoint")]
+        private float _midPoint = 1.5f;
 
 
         #region Moving, turning, pathfinding
@@ -176,11 +178,11 @@ namespace ProjectThief {
         {
             get
             {
-                if (Thief.Speed > 2f)
+                if (Thief.Speed > _midPoint)
                 {
                     return m_fMinDetectionRangeWalk;
                 }
-                else if (Thief.Speed <= 2f )
+                else if (Thief.Speed <= _midPoint)
                 {
                     return m_fMinDetectionRangeSneak;
                 }
