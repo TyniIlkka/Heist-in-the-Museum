@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4808390426992988}
   - component: {fileID: 33640490081627402}
-  - component: {fileID: 136200660754236018}
   - component: {fileID: 23326790361502082}
   m_Layer: 10
   m_Name: Highlight
@@ -41,7 +40,7 @@ GameObject:
   - component: {fileID: 23259534485879026}
   - component: {fileID: 114620377678367772}
   - component: {fileID: 65528241931853184}
-  m_Layer: 10
+  m_Layer: 17
   m_Name: LeverHandleGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,19 +222,6 @@ MonoBehaviour:
   _highlightMat: {fileID: 2100000, guid: 343f48ced2e396249b298832c7ec6135, type: 2}
   _inspectText: '"I found green lever handle."'
   _particleSystem: {fileID: 198427620551792006}
---- !u!136 &136200660754236018
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1855146216892044}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198427620551792006
 ParticleSystem:
   m_ObjectHideFlags: 1

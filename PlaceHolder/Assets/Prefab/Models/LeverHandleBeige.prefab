@@ -37,7 +37,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4961838222543420}
   - component: {fileID: 33756496462249138}
-  - component: {fileID: 136937686992319930}
   - component: {fileID: 23192517821833278}
   m_Layer: 10
   m_Name: Highlight
@@ -58,7 +57,7 @@ GameObject:
   - component: {fileID: 23025529982367396}
   - component: {fileID: 114868823079148236}
   - component: {fileID: 65902193365857598}
-  m_Layer: 10
+  m_Layer: 17
   m_Name: LeverHandleBeige
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,19 +222,6 @@ MonoBehaviour:
   _highlightMat: {fileID: 2100000, guid: 343f48ced2e396249b298832c7ec6135, type: 2}
   _inspectText: '"I found beige lever handle."'
   _particleSystem: {fileID: 198675445951057390}
---- !u!136 &136937686992319930
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1515419017851648}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198675445951057390
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -4834,8 +4834,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 0.999998, z: 2.2267528}
+  m_Center: {x: 0, y: -0.000000030821038, z: 0.61337745}
 --- !u!33 &1054585054
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6396,7 +6396,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4937276829886916, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -6.637361
+      value: -6.811
       objectReference: {fileID: 0}
     - target: {fileID: 4937276829886916, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
       propertyPath: m_LocalPosition.y
@@ -6404,7 +6404,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4937276829886916, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 1.88
+      value: 1.688
       objectReference: {fileID: 0}
     - target: {fileID: 4937276829886916, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
       propertyPath: m_LocalRotation.x
@@ -6424,19 +6424,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4937276829886916, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
       propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4937276829886916, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -45
-      objectReference: {fileID: 0}
-    - target: {fileID: 1958293464553922, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 1246364898612646, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7d6fb06d9ac5e3443a879d7c67c872be, type: 2}
@@ -8453,44 +8441,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 4129752302231134, guid: e705f089d3b0d4b43bcf67c441245a20, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -30
-      objectReference: {fileID: 0}
-    - target: {fileID: 1647481619469436, guid: e705f089d3b0d4b43bcf67c441245a20, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 1986157949047050, guid: e705f089d3b0d4b43bcf67c441245a20, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 1120671518966458, guid: e705f089d3b0d4b43bcf67c441245a20, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 1505623490290048, guid: e705f089d3b0d4b43bcf67c441245a20, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 1443749519879044, guid: e705f089d3b0d4b43bcf67c441245a20, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 1596401348304492, guid: e705f089d3b0d4b43bcf67c441245a20, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 114746328152431116, guid: e705f089d3b0d4b43bcf67c441245a20,
-        type: 2}
-      propertyPath: _timeout
-      value: 7.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114746328152431116, guid: e705f089d3b0d4b43bcf67c441245a20,
-        type: 2}
-      propertyPath: _hasTimeout
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e705f089d3b0d4b43bcf67c441245a20, type: 2}
   m_IsPrefabParent: 0
@@ -10071,8 +10021,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 0.9999945, z: 1.305742}
+  m_Center: {x: 0, y: -0.000000007681986, z: 0.15288119}
 --- !u!33 &1982627596
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -957,9 +957,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _activationDist: 10
   _interactDist: 3
-  mask:
+  _mask:
     serializedVersion: 2
-    m_Bits: 33792
+    m_Bits: 164864
+  _obstacles:
+    serializedVersion: 2
+    m_Bits: 66048
   objects: []
 --- !u!114 &114762870905765928
 MonoBehaviour:
@@ -987,7 +990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa592096c3d51a74dbab159c64d68820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeedWalk: 2
+  _moveSpeedWalk: 1.7
   _moveSpeedSneak: 1
   _gravity: 20
   _playerTransform: {fileID: 4844173488189920}
