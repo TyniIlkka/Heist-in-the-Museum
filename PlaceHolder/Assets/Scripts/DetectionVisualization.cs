@@ -20,8 +20,10 @@ namespace ProjectThief
         private float _edgeDistThreshold = 0.5f;
         [SerializeField]
         private int _edgeResolveIters = 6;
-        [SerializeField, Tooltip("Lerp Duration")]
-        private float _duration = 2f;
+        [SerializeField, Tooltip("Lerp duration")]
+        private float _duration = 3f;
+        [SerializeField, Tooltip("Lerp reset duration")]
+        private float _resetDuration = 0.5f;
 
         private Mesh _mesh;
         private float _viewRad = 0;
@@ -97,7 +99,7 @@ namespace ProjectThief
                 else if (!_detectStart && _viewRad != 0)
                 {
                     float progress = Time.time - _startTime;
-                    _viewRad = Mathf.Lerp(_viewRad, 0, progress / (_duration / 2));
+                    _viewRad = Mathf.Lerp(_viewRad, 0, progress / _resetDuration);
 
                     if (_viewRad == 0)
                         _detectActive = false;

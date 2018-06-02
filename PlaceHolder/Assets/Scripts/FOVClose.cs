@@ -22,7 +22,7 @@ namespace ProjectThief
         private int m_iEdgeResolveIters = 6;
         [SerializeField, Tooltip("Light distance mult")]
         private float m_fMult = 2;
-        [SerializeField, Tooltip("Lerp Duration")]
+        [SerializeField, Tooltip("Lerp duration")]
         private float _duration = 1f;
 
         private Mesh _viewMesh;
