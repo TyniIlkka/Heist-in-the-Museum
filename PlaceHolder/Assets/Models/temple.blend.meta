@@ -23,6 +23,19 @@ ModelImporter:
     2100002: Ground__walltextureBeige_png
     2100004: unnamed
     2100006: Painting
+    2100008: Pillars
+    2100010: FrameDecord__walltextureBeige_png
+    2100012: Decord__walltextureBeige_png
+    2100014: Header__walltextureBeige_png
+    2100016: Roof__walltextureBeige_png
+    2100018: Gold__walltextureBeige_png
+    2100020: Roof__Rooftexture_png
+    2100022: Pillars__TemplePillarsTexture_png
+    2100024: Header
+    2100026: Decord
+    2100028: Decord__TempleTexture_png
+    2100030: Header__TempleHeader_png
+    2100032: Decord__TempleHeader_png
     2300000: //RootNode
     2300002: Cube
     2300004: Cube_001
@@ -49,7 +62,27 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Decord__TempleHeader_png
+    second: {fileID: 2100000, guid: 09aec32b76902ef4e96d26722c2494d1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Decord__TempleTexture_png
+    second: {fileID: 2100000, guid: 09aec32b76902ef4e96d26722c2494d1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Decord__walltextureBeige_png
+    second: {fileID: 2100000, guid: 09aec32b76902ef4e96d26722c2494d1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: FrameDecord__vase1_png
+    second: {fileID: 2100000, guid: 2aa2ab7bbde68514e956dc743604ae68, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrameDecord__walltextureBeige_png
     second: {fileID: 2100000, guid: 2aa2ab7bbde68514e956dc743604ae68, type: 2}
   - first:
       type: UnityEngine:Material
@@ -59,18 +92,48 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Gold__walltextureBeige_png
+    second: {fileID: 2100000, guid: f9473c77b62af784d8ca1f08a2319636, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Ground__walltextureBeige_png
     second: {fileID: 2100000, guid: 2663badea04ba72478a61e93ce51233d, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Header__TempleHeader_png
+    second: {fileID: 2100000, guid: a648ad29cd741254da44fc5b9dc15131, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Header__walltextureBeige_png
+    second: {fileID: 2100000, guid: a648ad29cd741254da44fc5b9dc15131, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Painting
-    second: {fileID: 2100000, guid: 837da636d8795a844bda116b587f8957, type: 2}
+    second: {fileID: 2100000, guid: ad1dfc1b4a74d984da435639fb09b718, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Painting__walltextureBeige_png
-    second: {fileID: 2100000, guid: 837da636d8795a844bda116b587f8957, type: 2}
+    second: {fileID: 2100000, guid: ad1dfc1b4a74d984da435639fb09b718, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pillars
+    second: {fileID: 2100000, guid: 65f5d12c694d59f45b45de620d6ad332, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pillars__TemplePillarsTexture_png
+    second: {fileID: 2100000, guid: 65f5d12c694d59f45b45de620d6ad332, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Roof__Rooftexture_png
+    second: {fileID: 2100000, guid: 0cf3fc82958a6804d917c7d74c8b7c80, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
