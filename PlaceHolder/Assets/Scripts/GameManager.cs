@@ -31,6 +31,7 @@ namespace ProjectThief
         public bool newText;
         public bool vaultDoorOpen;
         public bool showInfoFlashes;
+        public bool playMessageSfx;
         public string infoText;
         public Transform spawnPoint;
         public Transform initialSpawn;

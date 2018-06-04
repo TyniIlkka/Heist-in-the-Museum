@@ -494,6 +494,12 @@ namespace ProjectThief
             _coroutineRunning = true;
             StringBuilder displayText = new StringBuilder(_infoText.text);
 
+            if (GameManager.instance.playMessageSfx)
+            {
+                AudioManager.instance.PlayMessageSfx();
+                GameManager.instance.playMessageSfx = false;
+            }
+
             for (int i = 0; i < line.Length; i++)
             {
                 displayText[i] = line[i];

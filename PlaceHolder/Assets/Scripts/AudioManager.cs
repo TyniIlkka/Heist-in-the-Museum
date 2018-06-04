@@ -11,14 +11,21 @@ namespace ProjectThief
 
         [SerializeField, Tooltip("List of tracks")]
         private List<AudioClip> m_lTracks;
+        [SerializeField, Tooltip("Message sfx")]
+        private AudioClip _messageSfx;
+        [SerializeField, Tooltip("Item pickup sfx")]
+        private AudioClip _itemPickup;
         [SerializeField, Tooltip("Time between tracks")]
         private float m_fDelay;
         [SerializeField, Range(0, 1), Tooltip("Playback progress")]
         private float m_fProgress;
         [SerializeField, Tooltip("Pause playback")]
         private bool m_bPause;
+        [SerializeField, Tooltip("Sfx source")]
+        private AudioSource _SfxSource;
+        [SerializeField, Tooltip("Music source")]
+        private AudioSource _audioSource;
 
-        private AudioSource m_asAudioSource;
         private int m_iCurrentTrack = 0;
         private float m_fOldProgress;
         private float m_fWaitStartTime;
@@ -71,21 +78,16 @@ namespace ProjectThief
             GameManager.instance.audioManager = this;
 
             Init();
-
-            Debug.Log("MusicPlayer Awake");
         }        
 
         private void Init()
         {
-            m_asAudioSource = GetComponent<AudioSource>();
-
-            // TODO Load volume from save file?
-            // Else use default value.
             m_fMasterVol = m_fDefaultVol;
             m_fAudioVol = m_fDefaultVol;
             m_fSfxVol = m_fDefaultVol;
 
-            m_asAudioSource.volume = MusicPlayVol;
+            _audioSource.volume = MusicPlayVol;
+            _SfxSource.volume = SFXPlayVol;
 
             if (m_fDelay < 0)
                 m_fDelay = 0;
@@ -93,9 +95,8 @@ namespace ProjectThief
         
         private void Update()
         {            
-            if (m_asAudioSource.isPlaying)            
-                UpdateWhenPlaying();
-            
+            if (_audioSource.isPlaying)            
+                UpdateWhenPlaying();            
             
             else if (!m_bPause)
                 UpdateWhenNotPlaying();
@@ -104,7 +105,8 @@ namespace ProjectThief
                 UpdateBetweenTracks();
             
 
-            m_asAudioSource.volume = MusicPlayVol;            
+            _audioSource.volume = MusicPlayVol;
+            _SfxSource.volume = SFXPlayVol;
         }
 
         /// <summary>
@@ -122,7 +124,7 @@ namespace ProjectThief
             // The playback progresses normally
             if (m_fProgress == m_fOldProgress)
             {
-                m_fProgress = m_asAudioSource.time / m_lTracks[m_iCurrentTrack].length;
+                m_fProgress = _audioSource.time / m_lTracks[m_iCurrentTrack].length;
                 m_fOldProgress = m_fProgress;
             }
             // If the playback progress has been changed in the
@@ -145,7 +147,7 @@ namespace ProjectThief
 
                 // If the track had ended to a
                 // fade-out, it's restarted
-                if (!m_asAudioSource.isPlaying)
+                if (!_audioSource.isPlaying)
                 {
                     Play();
                 }
@@ -177,7 +179,7 @@ namespace ProjectThief
         /// <param name="progress">the value of the progress bar</param>
         private void SetProgress(float progress)
         {
-            m_asAudioSource.time = progress * m_lTracks[m_iCurrentTrack].length;
+            _audioSource.time = progress * m_lTracks[m_iCurrentTrack].length;
             m_fOldProgress = progress;
         }
 
@@ -203,8 +205,8 @@ namespace ProjectThief
                 }
 
                 m_iCurrentTrack = trackNum;
-                m_asAudioSource.clip = m_lTracks[m_iCurrentTrack];
-                m_asAudioSource.Play();
+                _audioSource.clip = m_lTracks[m_iCurrentTrack];
+                _audioSource.Play();
             }
         }
 
@@ -213,7 +215,7 @@ namespace ProjectThief
         /// </summary>
         public void Stop()
         {
-            m_asAudioSource.Stop();
+            _audioSource.Stop();
             m_bPause = true;
             Reset();
         }
@@ -223,7 +225,7 @@ namespace ProjectThief
         /// </summary>
         private void Reset()
         {
-            m_asAudioSource.time = 0;
+            _audioSource.time = 0;
             m_fProgress = 0;
             m_fOldProgress = 0;
         }
@@ -243,7 +245,7 @@ namespace ProjectThief
         /// </summary>
         public void Pause()
         {
-            m_asAudioSource.Pause();
+            _audioSource.Pause();
             m_bPause = true;
         }
 
@@ -252,7 +254,7 @@ namespace ProjectThief
         /// </summary>
         public void Unpause()
         {
-            m_asAudioSource.UnPause();
+            _audioSource.UnPause();
             m_bPause = false;
         }
 
@@ -284,6 +286,21 @@ namespace ProjectThief
                     m_iCurrentTrack = m_lTracks.Count - 1;
                 }
             }
+        }
+
+        public void PlaySfx(AudioClip clip)
+        {
+            _SfxSource.PlayOneShot(clip);
+        }
+
+        public void PlayItemSfx()
+        {
+            _SfxSource.PlayOneShot(_itemPickup);
+        }
+
+        public void PlayMessageSfx()
+        {
+            _SfxSource.PlayOneShot(_messageSfx);
         }
     }
 }

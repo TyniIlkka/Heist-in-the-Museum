@@ -118,6 +118,7 @@ namespace ProjectThief
         {
             _inventory.AddItem(_vaultKeyItem);
             _vaultKeyItem.InspectText();
+            AudioManager.instance.PlayItemSfx();
             _vaultKeyItem.gameObject.SetActive(false);
             GameManager.instance.keyItems[_keyPos].Collected = true;
             GameManager.instance.openedVitrines[_boolListPos] = true;

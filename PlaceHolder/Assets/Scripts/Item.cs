@@ -92,6 +92,7 @@ namespace ProjectThief
 
                         _collected = true;
                         _inventory.AddItem(this);
+                        AudioManager.instance.PlayItemSfx();
                         gameObject.SetActive(false);
                         GameManager.instance.refItems[RefPos].Collected = true;
                         GetMouseController.DefaultCursor();

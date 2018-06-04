@@ -98,6 +98,7 @@ namespace ProjectThief
         private void InspectText()
         {
             GameManager.instance.infoText = _inspectText;
+            GameManager.instance.playMessageSfx = true;
 
             if (!GameManager.instance.infoBoxVisible)
             {

@@ -56,8 +56,6 @@ namespace ProjectThief
         private string _info3;
         [SerializeField, Tooltip("Guard distract timer image"), Header("Other")]
         private GameObject _distractTimerImg;
-        [SerializeField, Tooltip("Audio source")]
-        private AudioSource _audioSource;
         [SerializeField, Tooltip("End clip")]
         private AudioClip _endClip;
 
@@ -85,13 +83,7 @@ namespace ProjectThief
             if (_inventory == null)
                 _inventory = FindObjectOfType<Inventory>();
             if (m_sRoomReset == null)
-                m_sRoomReset = GetComponent<RoomReset>();
-
-            if (_audioSource == null)
-                _audioSource = GetComponent<AudioSource>();
-
-            _audioSource.volume = AudioManager.instance.SFXPlayVol;
-            _audioSource.loop = false;
+                m_sRoomReset = GetComponent<RoomReset>();            
 
             if (m_bCanBeCleared)
             {
@@ -214,7 +206,7 @@ namespace ProjectThief
             if (!_caught)
             {
                 _caught = true;
-                _audioSource.PlayOneShot(_endClip);
+                AudioManager.instance.PlaySfx(_endClip);
                 if (!_timeStopped)
                     Time.timeScale = 0f;
 
@@ -425,7 +417,9 @@ namespace ProjectThief
         }
 
         private void DisplayText()
-        { 
+        {
+            GameManager.instance.playMessageSfx = true;
+
             if (!GameManager.instance.infoBoxVisible)
             {
                 GameManager.instance.infoFadeIn = true;

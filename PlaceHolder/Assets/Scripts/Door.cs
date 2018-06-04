@@ -182,7 +182,9 @@ namespace ProjectThief
                     Debug.Log("Inspect info");
                     GameManager.instance.infoText = _inspectText;
                 }
-            }          
+            }
+
+            GameManager.instance.playMessageSfx = true;
 
             if (!GameManager.instance.infoBoxVisible)
             {
