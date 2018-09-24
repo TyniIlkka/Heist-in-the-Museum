@@ -22,7 +22,6 @@ namespace ProjectThief.AI
             AddTransition(AIStateType.PatrolStayAtTarget);
             AddTransition(AIStateType.Static);
             AddTransition(AIStateType.StaticTurnTo);
-
         }
 
         public override void StateActivated()
@@ -49,8 +48,6 @@ namespace ProjectThief.AI
             {
                 //2. Turn to Target
                 Owner.Turn(Owner.Thief.transform.position);
-
-
             }
         }
 
@@ -68,7 +65,5 @@ namespace ProjectThief.AI
             }
             return false;
         }
-
-
     }
 }

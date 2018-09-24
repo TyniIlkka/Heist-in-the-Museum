@@ -31,7 +31,6 @@ namespace ProjectThief
 
         public Player m_pPlayerObject;
 
-
         public float ViewRad { get { return m_fViewRad; } }
         public float ViewAngle { get { return m_fViewAngle; } }
 

@@ -7,9 +7,9 @@ namespace ProjectThief
     public class PlayerFoV : MonoBehaviour
     {
         [SerializeField]
-        private float m_fViewRad;
+        private float _viewRad;
         [SerializeField]
-        private float m_fViewAngle = 360;
+        private float _viewAngle = 360;
         [SerializeField]
         private LayerMask m_lmObstacleMask;
         [SerializeField]
@@ -20,11 +20,18 @@ namespace ProjectThief
         private float m_fEdgeDistThreshold = 0.5f;
         [SerializeField]
         private int m_iEdgeResolveIters = 6;
+        [SerializeField]
+        private float _duration = 1;
 
+        private Player _player;
         private Mesh m_mViewMesh;
+        private float _startRad;
+        private float _targetRad;
+        private bool _lerpToRad;
+        private float _startTime;
 
-        public float ViewRad { get { return m_fViewRad; } }
-        public float ViewAngle { get { return m_fViewAngle; } }
+        public float ViewRad { get { return _viewRad; } }
+        public float ViewAngle { get { return _viewAngle; } }
 
         private void Awake()
         {
@@ -39,20 +46,45 @@ namespace ProjectThief
         {
             if (GetComponentInParent<Player>() != null)
             {
-                m_fViewRad = GetComponentInParent<Player>().DetectRange;
-
+                _player = GetComponentInParent<Player>();
+                _viewRad = _player.DetectRange;
+                _targetRad = _viewRad;
             }
             else
             {
                 Debug.LogError("ERROR: Player not found.");
             }
-
-
         }
 
         private void Update()
         {
-            
+            CheckRadius();
+        }
+
+        private void CheckRadius()
+        {
+            if (_player)
+            {
+                if (_targetRad != _player.DetectRange)
+                {
+                    _lerpToRad = true;
+                    _targetRad = _player.DetectRange;
+                    _startRad = _viewRad;
+                    _startTime = Time.time;
+                }
+
+                if (_lerpToRad)
+                {
+                    float progress = Time.time - _startTime;
+                    _viewRad = Mathf.Lerp(_startRad, _targetRad, progress / _duration);
+
+                    if (_viewRad == _targetRad)
+                    {
+                        _targetRad = _viewRad;
+                        _lerpToRad = false;
+                    }
+                }
+            }
         }
 
         private void LateUpdate()
@@ -63,15 +95,15 @@ namespace ProjectThief
 
         private void DrawFieldOfView()
         {
-            int rayCount = Mathf.RoundToInt(m_fViewAngle * m_fMeshResolution);
-            float rayAngleSize = m_fViewAngle / rayCount;
+            int rayCount = Mathf.RoundToInt(_viewAngle * m_fMeshResolution);
+            float rayAngleSize = _viewAngle / rayCount;
 
             List<Vector3> viewPoints = new List<Vector3>();
             ViewCastinfo oldViewCast = new ViewCastinfo();
 
             for (int i = 0; i <= rayCount; i++)
             {
-                float angle = transform.eulerAngles.y - m_fViewAngle / 2 + rayAngleSize * i;
+                float angle = transform.eulerAngles.y - _viewAngle / 2 + rayAngleSize * i;
                 ViewCastinfo newViewCast = ViewCast(angle);
 
                 if (i > 0)
@@ -152,11 +184,11 @@ namespace ProjectThief
             Vector3 dir = DirFromAngle(globalAngle, true);
             RaycastHit hit;
 
-            if (Physics.Raycast(transform.position, dir, out hit, m_fViewRad, m_lmObstacleMask))
+            if (Physics.Raycast(transform.position, dir, out hit, _viewRad, m_lmObstacleMask))
                 return new ViewCastinfo(true, hit.point, hit.distance, globalAngle);
 
             else
-                return new ViewCastinfo(false, transform.position + dir * m_fViewRad, hit.distance, globalAngle);
+                return new ViewCastinfo(false, transform.position + dir * _viewRad, hit.distance, globalAngle);
         }
 
         public Vector3 DirFromAngle(float angleInDeg, bool globalAngle)
@@ -198,4 +230,3 @@ namespace ProjectThief
         }
     }
 }
-

@@ -27,6 +27,7 @@ namespace ProjectThief
 
         private Mesh _mesh;
         private float _viewRad = 0;
+        private float _endViewRad;
         private float _startTime;
         private bool _detectStart;
         private bool _detectActive;
@@ -94,12 +95,13 @@ namespace ProjectThief
                 if (_detectStart)
                 {
                     float progress = Time.time - _startTime;
-                    _viewRad = Mathf.Lerp(_viewRad, _maxViewRad, progress / _duration);                    
+                    _viewRad = Mathf.Lerp(0, _maxViewRad, progress / _duration);
+                    _endViewRad = _viewRad;
                 }
                 else if (!_detectStart && _viewRad != 0)
                 {
                     float progress = Time.time - _startTime;
-                    _viewRad = Mathf.Lerp(_viewRad, 0, progress / _resetDuration);
+                    _viewRad = Mathf.Lerp(_endViewRad, 0, progress / _resetDuration);
 
                     if (_viewRad == 0)
                         _detectActive = false;

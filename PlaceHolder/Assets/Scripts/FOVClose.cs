@@ -28,6 +28,7 @@ namespace ProjectThief
         private Mesh _viewMesh;
         private float _distanceToPlayer;
         private float _targetRad;
+        private float _startRad;
         private float _startTime;
         private bool _lerpToRad;
 
@@ -68,6 +69,7 @@ namespace ProjectThief
                 if (_targetRad != guard.MinDetectionRange)
                 {
                     _targetRad = guard.MinDetectionRange;
+                    _startRad = _viewRad;
                     _lerpToRad = true;
                     _startTime = Time.time;
                 }
@@ -75,7 +77,7 @@ namespace ProjectThief
                 if (_lerpToRad)
                 {
                     float progress = Time.time - _startTime;
-                    _viewRad = Mathf.Lerp(_viewRad, _targetRad, progress / _duration);
+                    _viewRad = Mathf.Lerp(_startRad, _targetRad, progress / _duration);
 
                     if (_viewRad == _targetRad)
                     {
@@ -87,8 +89,7 @@ namespace ProjectThief
             else
             {
                 Debug.LogError("ERROR: Guard not found.");
-            }
-            
+            }            
         }
 
         private void CheckComponents()

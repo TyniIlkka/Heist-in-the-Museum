@@ -12,7 +12,7 @@ namespace ProjectThief
 
         public float speed;
 
-        public float walkRange;
+        public float walkRange = 0;
         public float sneakRange;
 
         public Animator AnimationPlayer { get { return m_aPlayerAnimator; } }
@@ -35,23 +35,12 @@ namespace ProjectThief
                     return 0f;
                 }
             }
-            set
-            {
-
-            }
         }
 
         public float Speed
         {
-            get
-            {
-                return speed;
-            }
-            set
-            {
-                speed = value;
-            }
-            
+            get { return speed; }
+            set { speed = value; }            
         }
 
         public override void Init()
