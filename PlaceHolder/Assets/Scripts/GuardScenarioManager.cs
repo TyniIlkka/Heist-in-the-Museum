@@ -19,8 +19,7 @@ namespace ProjectThief
         [SerializeField, Tooltip("Patrol routes")]
         private List<PathPoints> pathList;
         [SerializeField, Tooltip("Potition where guard is placed.")]
-        private List<StaticPosition> staticPoints;
-        
+        private List<StaticPosition> staticPoints;  
 
         private int m_iCurrentPhase;
 

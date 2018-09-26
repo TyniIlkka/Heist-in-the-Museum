@@ -58,6 +58,8 @@ namespace ProjectThief
         private GameObject _distractTimerImg;
         [SerializeField, Tooltip("End clip")]
         private AudioClip _endClip;
+        [SerializeField, Tooltip("Guard path visualizations")]
+        private List<GameObject> _pathVisualizations;
 
         private Vector3 _spawnPosition;        
         private Quaternion _spawnRotation;
@@ -126,7 +128,8 @@ namespace ProjectThief
             GameManager.instance.fadeIn = false;
 
             ShowInfo();
-            _inventory.LoadInventory();            
+            _inventory.LoadInventory();
+            ActivatePathVisualizations();
         }
 
         // Update is called once per frame
@@ -430,6 +433,67 @@ namespace ProjectThief
                 GameManager.instance.resetInfoTimer = true;
                 GameManager.instance.newText = true;
             }
+        }
+
+        private void ActivatePathVisualizations()
+        {
+            string currentScene = GameStateController.CurrentState.SceneName;
+            int currentPhase = GameManager.instance.currentPhase;
+
+            if (currentScene == "Lobby")
+            {
+                switch (currentPhase)
+                {
+                    case 0:
+                        _pathVisualizations[0].SetActive(true);
+                        break;
+                    case 1:
+                        _pathVisualizations[1].SetActive(true);
+                        break;
+                    case 2:
+                        _pathVisualizations[2].SetActive(true);
+                        _pathVisualizations[3].SetActive(true);
+                        break;
+                    case 3:
+                        _pathVisualizations[4].SetActive(true);
+                        break;
+                    case 4:
+                        _pathVisualizations[5].SetActive(true);
+                        _pathVisualizations[6].SetActive(true);
+                        break;
+                    case 5:
+                        _pathVisualizations[7].SetActive(true);
+                        break;
+                }
+            }
+            else if (currentScene == "Room1")
+            {
+                switch (currentPhase)
+                {
+                    case 1:
+                        _pathVisualizations[0].SetActive(true);
+                        break;
+                    case 3:
+                        _pathVisualizations[1].SetActive(true);
+                        _pathVisualizations[2].SetActive(true);
+                        break;
+                    case 4:
+                        _pathVisualizations[3].SetActive(true);
+                        break;
+                }
+            }
+            else if (currentScene == "Room2")
+            {
+                switch (currentPhase)
+                {
+                    default:
+                        _pathVisualizations[0].SetActive(true);
+                        _pathVisualizations[1].SetActive(true);
+                        break;
+                }
+            }
+            else
+                Debug.Log("No path visualizations for current scene.");
         }
     }
 }

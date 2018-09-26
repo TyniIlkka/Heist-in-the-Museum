@@ -5366,12 +5366,12 @@ Prefab:
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 599
+      value: 597.5
       objectReference: {fileID: 0}
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 337
+      value: 336
       objectReference: {fileID: 0}
     - target: {fileID: 224810652047666312, guid: 9bbdc1e3cab3e8647bffc8ba6ff42177,
         type: 2}
@@ -8311,6 +8311,11 @@ Prefab:
       propertyPath: m_lKeyItems.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114982444803844292, guid: 5ded4a7572476c348b84d678d9242b92,
+        type: 2}
+      propertyPath: _pathVisualizations.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4943085576204660, guid: 5ded4a7572476c348b84d678d9242b92, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -8441,6 +8446,16 @@ Prefab:
       propertyPath: _distractTimerImg
       value: 
       objectReference: {fileID: 667765015}
+    - target: {fileID: 114982444803844292, guid: 5ded4a7572476c348b84d678d9242b92,
+        type: 2}
+      propertyPath: _pathVisualizations.Array.data[0]
+      value: 
+      objectReference: {fileID: 1044967364}
+    - target: {fileID: 114982444803844292, guid: 5ded4a7572476c348b84d678d9242b92,
+        type: 2}
+      propertyPath: _pathVisualizations.Array.data[1]
+      value: 
+      objectReference: {fileID: 1153497954}
     m_RemovedComponents:
     - {fileID: 82689564997519810, guid: 5ded4a7572476c348b84d678d9242b92, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 5ded4a7572476c348b84d678d9242b92, type: 2}

@@ -9,39 +9,12 @@ namespace ProjectThief
     {
         private Animator m_aPlayerAnimator;
         public List<Vector3> Path = new List<Vector3>();
-
-        public float speed;
-
-        public float walkRange = 0;
-        public float sneakRange;
-
-        public Animator AnimationPlayer { get { return m_aPlayerAnimator; } }
         
+        public Animator AnimationPlayer { get { return m_aPlayerAnimator; } }        
 
-        public float DetectRange
-        {
-            get
-            {
-                if (Speed > 2f)
-                {
-                    return walkRange;
-                }
-                else if ( 0f < Speed && Speed < 2f)
-                {
-                    return sneakRange;
-                }
-                else
-                {
-                    return 0f;
-                }
-            }
-        }
+        public bool Sneaking { get; set; }        
 
-        public float Speed
-        {
-            get { return speed; }
-            set { speed = value; }            
-        }
+        public float Speed { get; set; }
 
         public override void Init()
         {

@@ -105,10 +105,12 @@ namespace ProjectThief
             {
                 player.Speed = _moveSpeedSneak;
                 particleSystem.transform.localScale = new Vector3(1, 1, 1);
+                player.Sneaking = true;
             }
             else
             {
                 player.Speed = _moveSpeedWalk;
+                player.Sneaking = false;
             }
         }
 
