@@ -76,7 +76,6 @@ namespace ProjectThief
         {
             if (IsActive)
             {
-
                 if (IsInteractable)
                 {
                     GetMouseController.InteractCursor();

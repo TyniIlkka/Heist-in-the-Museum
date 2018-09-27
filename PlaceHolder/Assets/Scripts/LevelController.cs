@@ -457,13 +457,14 @@ namespace ProjectThief
                         break;
                     case 3:
                         _pathVisualizations[4].SetActive(true);
-                        // TODO Add missing path visualization
+                        _pathVisualizations[1].SetActive(true);
                         break;
                     case 4:
                         _pathVisualizations[5].SetActive(true);
                         _pathVisualizations[6].SetActive(true);
                         break;
                     case 5:
+                        _pathVisualizations[6].SetActive(true);
                         _pathVisualizations[7].SetActive(true);
                         break;
                 }

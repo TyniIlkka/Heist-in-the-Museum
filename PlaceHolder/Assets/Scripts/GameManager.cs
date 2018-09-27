@@ -112,6 +112,7 @@ namespace ProjectThief
             foreach (Item item in inventory)
             {
                 Item savedItem = refItems[item.RefPos];
+                Debug.Log("Saved item: " + savedItem);
                 savedInventory.Add(savedItem);
             }
         }

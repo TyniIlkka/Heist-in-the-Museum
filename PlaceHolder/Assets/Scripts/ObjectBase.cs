@@ -9,9 +9,14 @@ namespace ProjectThief
         private float _volume;
 
         protected abstract void Activated();
+
         protected virtual void Update()
         {
-            _volume = AudioManager.instance.SFXPlayVol;
+            _volume = AudioManager.instance.SFXPlayVol;            
+        }
+
+        protected virtual void LateUpdate()
+        {
             MouseCheck();
         }
 
@@ -21,6 +26,7 @@ namespace ProjectThief
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Debug.DrawRay(ray.origin, ray.direction * 100, Color.yellow);
             RaycastHit hit;
+
             if (Physics.Raycast(ray, out hit, 20, hitLayers) && !GameManager.instance.mouseOverUI)
             {
                 if (hit.collider != null && hit.collider.GetComponent<ObjectBase>() != null)
@@ -28,15 +34,11 @@ namespace ProjectThief
                     ObjectBase hitObject = hit.collider.GetComponent<ObjectBase>();
                     hitObject.Activated();
                 }
-                else
-                {
-                    GetMouseController.DefaultCursor();
-                }
+                else                
+                    GetMouseController.DefaultCursor();                
             }
-            else
-            {
-                GetMouseController.DefaultCursor();
-            }
+            else            
+                GetMouseController.DefaultCursor();            
         }
 
         public MouseController GetMouseController { get { return GameManager.instance.mouseController; } }

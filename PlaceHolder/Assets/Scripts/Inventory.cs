@@ -149,6 +149,7 @@ namespace ProjectThief
             foreach (Item item in GameManager.instance.savedInventory)
             {
                 Item loadedItem = GameManager.instance.refItems[item.RefPos];
+                Debug.Log("Loaded item: " + loadedItem);
                 _inventoryItems.Add(loadedItem);
             }
         }
