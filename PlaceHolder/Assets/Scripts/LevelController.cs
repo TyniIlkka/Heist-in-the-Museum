@@ -193,6 +193,7 @@ namespace ProjectThief
 
             if (result && !_justCleared)
             {
+                Debug.Log("Room: " + GameStateController.CurrentState.SceneName + " is cleared.");
                 _justCleared = true;
                 isCleared = true;
                 GameManager.instance.clearedRooms[m_iPos] = true;
@@ -456,6 +457,7 @@ namespace ProjectThief
                         break;
                     case 3:
                         _pathVisualizations[4].SetActive(true);
+                        // TODO Add missing path visualization
                         break;
                     case 4:
                         _pathVisualizations[5].SetActive(true);
