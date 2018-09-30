@@ -29,7 +29,6 @@ namespace ProjectThief
         private Mesh m_mViewMesh;
         private float _startRad;
         private float _targetRad;
-        private bool _lerpToRad;
         private bool _initDone;
         private float _startTime;
 
@@ -66,38 +65,27 @@ namespace ProjectThief
         {
             if (_player)
             {
-                if (!_lerpToRad)
+                if (_player.Sneaking && _targetRad != _range)
                 {
-                    if (_player.Sneaking && _targetRad != _range)
-                    {
-                        Debug.Log("Sneaking");
-                        _lerpToRad = true;
-                        _targetRad = _range;
-                        _startRad = _viewRad;
-                        _startTime = Time.time;
-                    }
-                    else if (!_player.Sneaking && _targetRad != 0)
-                    {
-                        Debug.Log("Walking");
-                        _lerpToRad = true;
-                        _targetRad = 0;
-                        _startRad = _viewRad;
-                        _startTime = Time.time;
-                    }
+                    _targetRad = _range;
+                    _startRad = _viewRad;
+                    _startTime = Time.time;
+                }
+                else if (!_player.Sneaking && _targetRad != 0)
+                {
+                    _targetRad = 0;
+                    _startRad = _viewRad;
+                    _startTime = Time.time;
                 }
 
-                if (_lerpToRad)
+                if (_viewRad != _targetRad)
                 {
                     float progress = Time.time - _startTime;
                     _viewRad = Mathf.Lerp(_startRad, _targetRad, progress / _duration);
 
                     if (_viewRad == _targetRad)
-                    {
-                        Debug.Log("Target range reached: " + _targetRad);
                         _targetRad = _viewRad;
-                        _lerpToRad = false;
-                    }
-                }
+                }                          
             }
         }
 
