@@ -113,12 +113,10 @@ namespace ProjectThief
                         if (guard.Moving)
                         {
                             guard.Distract(this, true);
-                        }
-                        
+                        }                        
                     }
                 }
             }
-            Debug.Log("Distraction active");
         }
 
         public void DistractionInactive()
@@ -138,7 +136,6 @@ namespace ProjectThief
                     _active = false;
                 }
             }
-            Debug.Log("Distraction inactive");
         }
 
         public void PlayAudio(AudioClip clip, bool isIdle)

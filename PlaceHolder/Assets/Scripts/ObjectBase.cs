@@ -31,7 +31,6 @@ namespace ProjectThief
             {
                 if (hit.collider != null && hit.collider.GetComponent<ObjectBase>() != null)
                 {
-                    //Debug.Log("Object that was hit: " + hit.collider.gameObject.name);
                     ObjectBase hitObject = hit.collider.GetComponent<ObjectBase>();
                     hitObject.Activated();
                 }

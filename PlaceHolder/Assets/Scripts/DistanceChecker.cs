@@ -26,31 +26,27 @@ namespace ProjectThief
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(transform.position, _interactDist);
         }
-
-        // Call this only when player moves?
-
-        private void Update()
+        
+        private void LateUpdate()
         {
             GetObjectsInRange();
             CheckDistance();
         }
 
         private void GetObjectsInRange()
-        {
-            
+        {            
             objects = Physics.OverlapSphere(transform.position, _activationDist, mask);
             
             if (objects.Length > 0)
             {
                 for (int i = 0; i < objects.Length; i++)
                 {
-
-                    // TODO Check if object is in currently active room.
                     if (objects[i].GetComponent<ObjectBase>() != null &&
                         !_objects.Contains(objects[i].GetComponent<ObjectBase>()))
                     {
                         objects[i].GetComponent<ObjectBase>().IsActive = true;
                         _objects.Add(objects[i].GetComponent<ObjectBase>());
+                        Debug.Log("Object: " + objects[i].name + " is active");
 
                         if (objects[i].GetComponent<Item>() != null)
                             objects[i].GetComponent<Item>().HighLightItem();
