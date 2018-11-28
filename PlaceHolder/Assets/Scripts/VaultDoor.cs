@@ -61,7 +61,10 @@ namespace ProjectThief
                 _wall.SetActive(false);
                 m_aAnimator.enabled = false;
                 transform.localEulerAngles = _openRotation;
+                CheckDistance = false;
             }
+            else
+                CheckDistance = true;
 
             Debug.Log("door: " + transform.gameObject + " rotation: " + transform.localEulerAngles);
         }
@@ -200,6 +203,7 @@ namespace ProjectThief
                         AddKeyPieces();
                         m_aAnimator.SetBool("Open", true);
                         GameManager.instance.vaultDoorOpen = true;
+                        CheckDistance = false;
                     }
                 } 
                 else

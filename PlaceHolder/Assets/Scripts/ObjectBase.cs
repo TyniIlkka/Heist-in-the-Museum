@@ -31,7 +31,6 @@ namespace ProjectThief
             {
                 if (hit.collider != null && hit.collider.GetComponent<ObjectBase>() != null)
                 {
-                    //Debug.Log("Object that was hit: " + hit.collider.gameObject.name);
                     ObjectBase hitObject = hit.collider.GetComponent<ObjectBase>();
                     hitObject.Activated();
                 }
@@ -44,7 +43,8 @@ namespace ProjectThief
 
         public MouseController GetMouseController { get { return GameManager.instance.mouseController; } }
         public bool IsActive { get; set; }
-        public bool IsInteractable { get; set; }          
+        public bool IsInteractable { get; set; }  
+        public bool CheckDistance { get; set; }
         public float PlayVolume { get { return _volume; } }
     }
 }

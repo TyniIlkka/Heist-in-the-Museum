@@ -48,6 +48,7 @@ namespace ProjectThief
             _source = GetComponent<AudioSource>(); 
             _source.volume = PlayVolume;
             _source.loop = true;
+            CheckDistance = true;
 
             if (_hasTimeout)            
                 _distractTime = _timeout;

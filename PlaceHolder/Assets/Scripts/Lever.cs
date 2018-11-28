@@ -49,11 +49,13 @@ namespace ProjectThief
                     _leverHandle.transform.localEulerAngles.y, _leverHandle.transform.localEulerAngles.z);                
                 _door.Open = true;
                 _door.Blocked = false;
+                CheckDistance = false;
             } 
             else
             {
                 _leverHandle.SetActive(false);
                 _isBroken = true;
+                CheckDistance = true;
             }
         }
 
@@ -73,6 +75,7 @@ namespace ProjectThief
                             _leverHandle.SetActive(true);
                             GameManager.instance.usedlevers[_boolListPos] = true;
                             _leverAnimator.SetBool("Activated", true);
+                            CheckDistance = false;
                         }
                     }
                     else

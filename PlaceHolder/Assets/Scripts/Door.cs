@@ -43,6 +43,7 @@ namespace ProjectThief
         {
             _canBeUsed = false;
             _timePassed = 0;
+            CheckDistance = true;
 
             if (_audioSource == null)
                 _audioSource = GetComponent<AudioSource>();
@@ -122,7 +123,6 @@ namespace ProjectThief
                             {
                                 if (Input.GetButtonDown("Fire1") && !_opened)
                                 {
-
                                     DoorOpenSound();                                    
                                     UpdateBooleans();
                                 }
@@ -140,12 +140,9 @@ namespace ProjectThief
                 }
                 else
                 {
-                    Debug.Log("Inspect " + _isBlocked);
                     GetMouseController.InspectCursor();
-                    if (Input.GetButtonDown("Fire1"))
-                    {
-                        InspectText();
-                    }
+                    if (Input.GetButtonDown("Fire1"))                    
+                        InspectText();                    
                 }
             }
         }
@@ -163,25 +160,14 @@ namespace ProjectThief
         private void InspectText()
         {
             if (GameStateController.CurrentState.SceneName == "Room1"
-                    && GameManager.instance.currentPhase == 3)
-            {
-                GameManager.instance.infoText = _infoText;
-            }
+                    && GameManager.instance.currentPhase == 3)            
+                GameManager.instance.infoText = _infoText;            
             else
             {
-                Debug.Log("Other text");
-                Debug.Log("Cleared: " + _levelController.Cleared);
-                if (!_levelController.Cleared)
-                {
-                    GameManager.instance.infoText = _collectInfo;
-                    Debug.Log("Collect info");
-                }
-
-                else
-                {
-                    Debug.Log("Inspect info");
-                    GameManager.instance.infoText = _inspectText;
-                }
+                if (!_levelController.Cleared)                
+                    GameManager.instance.infoText = _collectInfo;    
+                else                
+                    GameManager.instance.infoText = _inspectText;                
             }
 
             GameManager.instance.playMessageSfx = true;

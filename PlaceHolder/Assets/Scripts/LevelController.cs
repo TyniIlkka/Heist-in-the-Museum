@@ -60,25 +60,25 @@ namespace ProjectThief
         private AudioClip _endClip;
         [SerializeField, Tooltip("Guard path visualizations")]
         private List<GameObject> _pathVisualizations;
+        [SerializeField, Tooltip("Interactable objects in level")]
+        private List<ObjectBase> _interactableObjects;
 
         private Vector3 _spawnPosition;        
         private Quaternion _spawnRotation;
-        private bool _justCleared;
-        private bool isCleared;
-        private bool _paused;
         private bool _timeStopped;
         private float _delay = 0;
         private bool _infoToShow;
         private bool _caught;
         private bool _escaped;
 
-        public bool JustCleared { get { return _justCleared; } }
+        public bool JustCleared { get; private set; }
         public int ListPos { get { return m_iPos; } }
-        public bool Cleared { get { return isCleared; } set { isCleared = value; } }
+        public bool Cleared { get; set; }
         public Inventory Inventory { get { return _inventory; } }
         public RoomReset RoomReset { get { return m_sRoomReset; } }
-        public bool Paused { get { return _paused; } set { _paused = value; } }
+        public bool Paused { get; set; }
         public GameObject DistractTimerImage { get { return _distractTimerImg; } set { _distractTimerImg = value; } }
+        public List<ObjectBase> InteractableObjects { get { return _interactableObjects; } } 
 
         private void Awake()
         {
@@ -90,16 +90,16 @@ namespace ProjectThief
             if (m_bCanBeCleared)
             {
                 if (GameManager.instance.clearedRooms[m_iPos])
-                    isCleared = true;
+                    Cleared = true;
             }
             else
             {
-                isCleared = true;
+                Cleared = true;
             }
 
             _infoToShow = false;
-            _paused = false;
-            _justCleared = false;
+            Paused = false;
+            JustCleared = false;
             _caught = false;
             _escaped = false;
             m_sCameraScript.Distance = m_fDist;
@@ -145,13 +145,13 @@ namespace ProjectThief
             {
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
-                    if (!_paused)                   
+                    if (!Paused)                   
                         m_sMenuControlscript.Pause();
                     else
                         m_sMenuControlscript.Continue();
                 }
 
-                if (!isCleared && m_bCanBeCleared)
+                if (!Cleared && m_bCanBeCleared)
                     CheckKeyItems();
             }
 
@@ -191,11 +191,11 @@ namespace ProjectThief
                 }
             }
 
-            if (result && !_justCleared)
+            if (result && !JustCleared)
             {
                 Debug.Log("Room: " + GameStateController.CurrentState.SceneName + " is cleared.");
-                _justCleared = true;
-                isCleared = true;
+                JustCleared = true;
+                Cleared = true;
                 GameManager.instance.clearedRooms[m_iPos] = true;
                 GameManager.instance.currentPhase++;
             }

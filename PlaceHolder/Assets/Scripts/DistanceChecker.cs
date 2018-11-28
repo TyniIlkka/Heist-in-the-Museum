@@ -15,9 +15,6 @@ namespace ProjectThief
         private LayerMask mask;
 
         private List<ObjectBase> _objects = new List<ObjectBase>();
-        private List<ObjectBase> _toBeRemoved = new List<ObjectBase>();
-
-        public Collider[] objects;
 
         private void OnDrawGizmos()
         {
@@ -27,36 +24,14 @@ namespace ProjectThief
             Gizmos.DrawWireSphere(transform.position, _interactDist);
         }
 
-        // Call this only when player moves?
+        private void Awake()
+        {
+            _objects = GameManager.instance.levelController.InteractableObjects;
+        }
 
         private void Update()
         {
-            GetObjectsInRange();
             CheckDistance();
-        }
-
-        private void GetObjectsInRange()
-        {
-            
-            objects = Physics.OverlapSphere(transform.position, _activationDist, mask);
-            
-            if (objects.Length > 0)
-            {
-                for (int i = 0; i < objects.Length; i++)
-                {
-
-                    // TODO Check if object is in currently active room.
-                    if (objects[i].GetComponent<ObjectBase>() != null &&
-                        !_objects.Contains(objects[i].GetComponent<ObjectBase>()))
-                    {
-                        objects[i].GetComponent<ObjectBase>().IsActive = true;
-                        _objects.Add(objects[i].GetComponent<ObjectBase>());
-
-                        if (objects[i].GetComponent<Item>() != null)
-                            objects[i].GetComponent<Item>().HighLightItem();
-                    }                    
-                }
-            }
         }
 
         private void CheckDistance()
@@ -66,42 +41,25 @@ namespace ProjectThief
                 for (int i = 0; i < _objects.Count; i++)
                 {
                     ObjectBase obj = _objects[i];
-                    
-                    if (Vector3.Distance(transform.position, obj.transform.position) <= _interactDist)
-                    {
-                        obj.IsInteractable = true;
-                    }
-                    if (Vector3.Distance(transform.position, obj.transform.position) > _interactDist)
-                    {
-                        obj.IsInteractable = false;
-                    }
-                    if (Vector3.Distance(transform.position, obj.transform.position) > _activationDist)
-                    {
-                        obj.IsActive = false;
 
-                        if (obj.GetComponent<Item>() != null)
-                            obj.GetComponent<Item>().DeHighLight();
+                    if (obj.CheckDistance)
+                    {
+                        float distance = Vector3.Distance(transform.position, obj.transform.position);
 
-                        _toBeRemoved.Add(obj);                       
+                        if (distance <= _activationDist)
+                        {
+                            obj.IsActive = true;
+
+                            if (distance <= _interactDist)
+                                obj.IsInteractable = true;
+                            else
+                                obj.IsInteractable = false;
+                        }
+                        else
+                            obj.IsActive = false;
                     }
                 }
-
-                if (_toBeRemoved.Count > 10)
-                {
-                    RemoveItems();
-                }
             }
-        }
-
-        private void RemoveItems()
-        {
-            for (int i = 0; i < _toBeRemoved.Count; i++)
-            {
-                ObjectBase item = _toBeRemoved[i];
-                _objects.Remove(item);
-            }
-
-            _toBeRemoved.Clear();
         }
     }
 }

@@ -23,14 +23,11 @@ namespace ProjectThief
         [SerializeField, Tooltip("Info text")]
         private string _inspectText;
         [SerializeField, Tooltip("Highlight particle effect object")]
-        private ParticleSystem _particleSystem;
-
-        private bool _collected;
-        private int _slotPosition;
+        private ParticleSystem _particleSystem;        
 
         public Texture ItemImage { get { return _itemIcon; } }        
-        public bool Collected { get { return _collected; } set { _collected = value; } }         
-        public int Slot { get { return _slotPosition; } set { _slotPosition = value; } }         
+        public bool Collected { get; set; }         
+        public int Slot { get; set; }         
         public int RefPos { get { return _refPos; } }
 
         private void Awake()
@@ -40,9 +37,12 @@ namespace ProjectThief
 
             if (GameManager.instance.refItems[RefPos].Collected)
             {
-                _collected = true;
+                Collected = true;
                 gameObject.SetActive(false);
+                CheckDistance = false;
             }
+            else
+                CheckDistance = true;
 
             if (_meshRenderer == null && _hasHighlight)
                 _meshRenderer = GetComponentInChildren<MeshRenderer>();
@@ -81,7 +81,7 @@ namespace ProjectThief
                     GetMouseController.InteractCursor();
                     if (Input.GetButtonDown("Fire1"))
                     {
-                        if (_refPos == 13 && !_collected)
+                        if (_refPos == 13 && !Collected)
                         {
                             GameManager.instance.currentPhase++;
                             InspectText();
@@ -89,12 +89,13 @@ namespace ProjectThief
                         else
                             InspectText();
 
-                        _collected = true;
+                        Collected = true;
                         _inventory.AddItem(this);
                         AudioManager.instance.PlayItemSfx();
                         gameObject.SetActive(false);
                         GameManager.instance.refItems[RefPos].Collected = true;
                         GetMouseController.DefaultCursor();
+                        CheckDistance = false;
                     }
                 }
                 else                

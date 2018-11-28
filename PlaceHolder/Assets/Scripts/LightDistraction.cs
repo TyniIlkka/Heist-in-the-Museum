@@ -31,6 +31,11 @@ namespace ProjectThief
             Gizmos.DrawWireSphere(transform.position, m_fRange);
         }
 
+        private void Awake()
+        {
+            CheckDistance = true;
+        }
+
         public void LightActivated()
         {            
             m_goLight.SetActive(true);

@@ -60,7 +60,10 @@ namespace ProjectThief
                     _doorObject.transform.localEulerAngles.y, _openRotation);
                 _lock.SetActive(false);
                 _vaultKeyItem.gameObject.SetActive(false);
+                CheckDistance = false;
             }
+            else
+                CheckDistance = true;
         }
 
         protected override void Update()
@@ -98,6 +101,7 @@ namespace ProjectThief
                             _lock.SetActive(false);
                             PlayAudio(_openingEffect);
                             _animator.SetBool("Open", true);
+                            CheckDistance = false;
                         }
                     }
                     else if (!_used)

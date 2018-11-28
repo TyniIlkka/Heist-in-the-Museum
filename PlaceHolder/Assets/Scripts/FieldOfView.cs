@@ -238,7 +238,6 @@ namespace ProjectThief
                     if (hit.collider.gameObject.GetComponent<Player>() != null)
                     {
                         _playerFound = true;
-                        Debug.Log(hit.collider.gameObject);
                         return true;
                     }
                 }

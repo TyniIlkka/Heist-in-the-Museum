@@ -32,6 +32,7 @@ namespace ProjectThief
 
             m_aoSource.volume = PlayVolume;
             m_bCanUse = true;
+            CheckDistance = true;
 
             if (_particleSystem == null && _tutorialEffect)
             {

@@ -13,6 +13,7 @@ namespace ProjectThief
         private void Awake()
         {
             _lastItem = GameManager.instance.refItems.Count - 1;
+            CheckDistance = true;
         }
 
         protected override void Activated()
